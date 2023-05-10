@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "63fd32ecec740d3c9c7a271ee1d28bd3",
+    "content-hash": "f6496cfb5bfa1a8d7a4d0366f0b1a082",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -2107,6 +2107,34 @@
             },
             "abandoned": "Symfony",
             "time": "2023-02-24T14:57:12+00:00"
+        },
+        {
+            "name": "siemendev/checkout",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "../../packages/checkout",
+                "reference": "bd5bdefada4c6b1c81fc6806b3aacc4054e851e6"
+            },
+            "require": {
+                "php": ">=8.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Siemendev\\Checkout\\": "src/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Patrick Siemen",
+                    "email": "post@patrick-siemen.de"
+                }
+            ],
+            "description": "checkout abstraction",
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "symfony/asset",
@@ -9544,8 +9572,10 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
-    "stability-flags": [],
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "siemendev/checkout": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

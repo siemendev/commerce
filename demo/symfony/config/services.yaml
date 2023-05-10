@@ -22,3 +22,40 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    Siemendev\Checkout\Checkout:
+        arguments:
+            $stepMachine: '@Siemendev\Checkout\Step\StepMachine'
+            $quoteGenerator: '@Siemendev\Checkout\Quote\QuoteGenerator'
+
+    Siemendev\Checkout\Step\StepMachine:
+        arguments:
+            $steps:
+                - '@Siemendev\Checkout\Step\Cart\CartStep'
+                - '@Siemendev\Checkout\Step\Address\Billing\BillingAddressStep'
+                - '@Siemendev\Checkout\Step\Address\Delivery\DeliveryAddressStep'
+                - '@App\Commerce\Step\AgeVerificationStep'
+#                - '@Siemendev\Checkout\Step\PaymentStep'
+                - '@Siemendev\Checkout\Step\Summary\SummaryStep'
+
+    Siemendev\Checkout\Step\Cart\CartStep:
+        arguments:
+            $availabilityResolver: '@Siemendev\Checkout\Availability\AvailabilityResolver'
+    Siemendev\Checkout\Step\Address\Delivery\DeliveryAddressStep: ~
+    Siemendev\Checkout\Step\Address\Billing\BillingAddressStep: ~
+    Siemendev\Checkout\Step\Summary\SummaryStep: ~
+
+    Siemendev\Checkout\Quote\QuoteGenerator:
+        arguments:
+            $priceResolver: '@Siemendev\Checkout\Pricing\PriceResolver'
+            $availabilityResolver: '@Siemendev\Checkout\Availability\AvailabilityResolver'
+
+    Siemendev\Checkout\Pricing\PriceResolver:
+        arguments:
+            $providers:
+                - '@App\Commerce\Provider\PriceProvider'
+
+    Siemendev\Checkout\Availability\AvailabilityResolver:
+        arguments:
+            $providers:
+                - '@App\Commerce\Provider\AvailabilityProvider'

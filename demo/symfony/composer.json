@@ -1,7 +1,6 @@
 {
     "type": "project",
     "license": "proprietary",
-    "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
         "php": ">=8.1",
@@ -41,7 +40,8 @@
         "symfony/web-link": "6.2.*",
         "symfony/yaml": "6.2.*",
         "twig/extra-bundle": "^2.12|^3.0",
-        "twig/twig": "^2.12|^3.0"
+        "twig/twig": "^2.12|^3.0",
+        "siemendev/checkout": "dev-main"
     },
     "config": {
         "allow-plugins": {
@@ -61,6 +61,7 @@
             "App\\Tests\\": "tests/"
         }
     },
+    "minimum-stability": "dev",
     "replace": {
         "symfony/polyfill-ctype": "*",
         "symfony/polyfill-iconv": "*",
@@ -100,5 +101,11 @@
         "symfony/phpunit-bridge": "^6.2",
         "symfony/stopwatch": "6.2.*",
         "symfony/web-profiler-bundle": "6.2.*"
-    }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../packages/checkout"
+        }
+    ]
 }

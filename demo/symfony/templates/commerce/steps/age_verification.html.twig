@@ -1,0 +1,8 @@
+{% extends 'commerce/checkout.html.twig' %}
+{% block content %}
+    <h1>Age verification</h1>
+    <form method="post">
+        <input id="age_verification" type="checkbox" name="age_verification"{% if verified %} checked{% endif %}> <label for="age_verification">Hereby I ensure that I am at least 18 years old.</label><br>
+        <input type="submit" value="Continue">
+    </form>
+{% endblock %}

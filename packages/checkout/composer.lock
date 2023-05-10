@@ -1,0 +1,46 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "82922a7369ff8e0f3ace9e8059421562",
+    "packages": [
+        {
+            "name": "siemendev/product",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "../product",
+                "reference": "9bfad42a734fe78df8086df296d63ccffa925edf"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Siemendev\\Checkout\\": "src/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Patrick Siemen",
+                    "email": "post@patrick-siemen.de"
+                }
+            ],
+            "description": "product abstraction",
+            "transport-options": {
+                "relative": true
+            }
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "siemendev/product": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
+}

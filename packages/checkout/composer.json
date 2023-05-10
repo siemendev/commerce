@@ -1,0 +1,25 @@
+{
+    "name": "siemendev/checkout",
+    "description": "checkout abstraction",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Siemendev\\Checkout\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Patrick Siemen",
+            "email": "post@patrick-siemen.de"
+        }
+    ],
+    "require": {
+        "php": ">=8.1"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../product"
+        }
+    ]
+}

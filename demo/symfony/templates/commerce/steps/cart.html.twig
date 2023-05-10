@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h1>Cart</h1>
+    {% if error is defined %}
+        <p>Error: {{ error }}</p>
+    {% endif %}
+    {% if quote.items %}
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Unit price</th>
+            <th>Total price</th>
+        </tr>
+        {% for item in quote.items %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ item.data.name }}</td>
+            <td>{{ item.data.quantity }}</td>
+            <td>{{ item.unitPrice }} {{ quote.currency }}</td>
+            <td>{{ item.totalPrice }} {{ quote.currency }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+    {% if error is not defined %}
+    <p>
+        <a href="{{ continue }}">Continue to check out</a>
+    </p>
+    {% endif %}
+{% endblock %}

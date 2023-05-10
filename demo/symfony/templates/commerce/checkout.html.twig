@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div style="width: 500px; display: flex; justify-content: space-between">
+        {% for step in steps %}
+        <div style="">
+            {% if step.url is defined %}
+                <a href="{{ step.url }}">{{ step.id }}</a>
+            {% else %}
+                <span>{{ step.id }}</span>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    <div>
+        {% block content %}
+
+        {% endblock %}
+    </div>
+{% endblock %}

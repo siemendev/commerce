@@ -1,0 +1,24 @@
+{% extends 'commerce/checkout.html.twig' %}
+{% block content %}
+    <h1>Summary</h1>
+    {% if quote.items %}
+        <table>
+            <tr>
+                <th>#</th>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Unit price</th>
+                <th>Total price</th>
+            </tr>
+            {% for item in quote.items %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ item.data.name }}</td>
+                    <td>{{ item.data.quantity }}</td>
+                    <td>{{ item.unitPrice }} {{ quote.currency }}</td>
+                    <td>{{ item.totalPrice }} {{ quote.currency }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'commerce/checkout.html.twig' %}
+{% block content %}
+    <h1>Billing address</h1>
+    {% if message %}
+        <p>Error: {{ message }}</p>
+    {% endif %}
+    <form method="post">
+        <input name="address_line1" type="text" placeholder="Address Line 1" value="{{ address.addressLine1 }}"><br>
+        <input name="address_line2" type="text" placeholder="Address Line 2" value="{{ address.addressLine2 }}"><br>
+        <input name="postal_code" type="text" placeholder="Postal code" value="{{ address.postalCode }}">
+        <input name="city" type="text" placeholder="City" value="{{ address.city }}"><br>
+        <input name="state" type="text" placeholder="State" value="{{ address.state }}"><br>
+        <input name="country" type="text" placeholder="Country" value="{{ address.country }}"><br>
+        {# todo find out if delivery is an option #}
+        <input name="useForDelivery" type="checkbox"> Use same address for the delivery<br>
+        <input type="submit" value="Continue">
+    </form>
+{% endblock %}
