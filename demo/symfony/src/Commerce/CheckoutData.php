@@ -4,9 +4,9 @@ namespace App\Commerce;
 
 use App\Commerce\Step\AgeVerifiableCheckoutData;
 use App\Commerce\Step\AgeVerifiableCheckoutDataInterface;
-use Siemendev\Checkout\Data\CheckoutData as VendorCheckoutData;
+use Siemendev\Checkout\Data\GenericCheckoutData;
 
-class CheckoutData extends VendorCheckoutData implements AgeVerifiableCheckoutDataInterface
+class CheckoutData extends GenericCheckoutData implements AgeVerifiableCheckoutDataInterface
 {
     use AgeVerifiableCheckoutData;
 }
