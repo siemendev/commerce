@@ -2,8 +2,10 @@
 
 namespace Siemendev\Checkout;
 
+use Siemendev\Checkout\Quote\Action\RemoveProductQuoteAction;
+use Siemendev\Checkout\Quote\Action\RemoveSubscriptionQuoteAction;
 use Siemendev\Checkout\Quote\Quote;
-use Siemendev\Checkout\Quote\QuoteGeneratorInterface;
+use Siemendev\Checkout\Quote\Builder\QuoteBuilderInterface;
 use Siemendev\Checkout\Step\Exception\AssignedValidationException;
 use Siemendev\Checkout\Step\StepInterface;
 use Siemendev\Checkout\Step\StepMachineInterface;
@@ -16,7 +18,7 @@ class Checkout implements CheckoutInterface
 {
     public function __construct(
         private readonly StepMachineInterface $stepMachine,
-        private readonly QuoteGeneratorInterface $quoteGenerator,
+        private readonly QuoteBuilderInterface $quoteBuilder,
     ) {
     }
 
@@ -49,6 +51,6 @@ class Checkout implements CheckoutInterface
 
     public function getQuote(CheckoutSessionInterface $session): Quote
     {
-        return $this->quoteGenerator->getQuote($session);
+        return $this->quoteBuilder->getQuote($session);
     }
 }

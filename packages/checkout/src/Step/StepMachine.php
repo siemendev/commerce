@@ -93,7 +93,7 @@ class StepMachine implements StepMachineInterface
         $requiredSteps = array_unique(array_merge(...array_map(
             static fn (ItemInterface $item) => $item->requiresSteps(),
             array_filter(
-                $session->getItems(),
+                $session->getProducts(),
                 static fn (ItemInterface $item) => !empty($item->requiresSteps())
             )
         )));

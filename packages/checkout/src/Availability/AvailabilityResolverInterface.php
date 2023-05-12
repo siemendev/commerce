@@ -13,6 +13,4 @@ interface AvailabilityResolverInterface
      * @throws AvailabilityProviderNotFoundException
      */
     public function isAvailable(ItemInterface $item): bool;
-
-    // todo implement cached method isAvailableCached for not-realtime use cases (outside the checkout process)
 }

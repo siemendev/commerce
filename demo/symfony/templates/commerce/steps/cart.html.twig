@@ -4,7 +4,8 @@
     {% if error is defined %}
         <p>Error: {{ error }}</p>
     {% endif %}
-    {% if quote.items %}
+    {% if quote.products %}
+        <h2>Products</h2>
     <table>
         <tr>
             <th>#</th>
@@ -13,16 +14,35 @@
             <th>Unit price</th>
             <th>Total price</th>
         </tr>
-        {% for item in quote.items %}
+        {% for product in quote.products %}
         <tr>
             <td>{{ loop.index }}</td>
-            <td>{{ item.data.name }}</td>
-            <td>{{ item.data.quantity }}</td>
-            <td>{{ item.unitPrice }} {{ quote.currency }}</td>
-            <td>{{ item.totalPrice }} {{ quote.currency }}</td>
+            <td>{{ product.product.name }}</td>
+            <td>{{ product.product.quantity }}</td>
+            <td>{{ product.price.unitPrice }} {{ product.price.currency }}</td>
+            <td>{{ product.price.totalPrice }} {{ product.price.currency }}</td>
         </tr>
         {% endfor %}
     </table>
+    {% endif %}
+    {% if quote.subscriptions %}
+        <h2>Subscriptions</h2>
+        <table>
+            <tr>
+                <th>#</th>
+                <th>Item</th>
+                <th>Price</th>
+                <th>Interval</th>
+            </tr>
+            {% for subscription in quote.subscriptions %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ subscription.subscription.name }}</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+            {% endfor %}
+        </table>
     {% endif %}
     {% if error is not defined %}
     <p>

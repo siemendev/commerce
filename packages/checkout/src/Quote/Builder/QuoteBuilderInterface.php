@@ -1,16 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace Siemendev\Checkout\Quote;
+namespace Siemendev\Checkout\Quote\Builder;
 
 use Siemendev\Checkout\Availability\AvailabilityProviderNotFoundException;
-use Siemendev\Checkout\Availability\AvailabilityResolver;
-use Siemendev\Checkout\Availability\AvailabilityResolverInterface;
 use Siemendev\Checkout\CheckoutSessionInterface;
 use Siemendev\Checkout\Pricing\PriceProviderNotFoundException;
-use Siemendev\Checkout\Pricing\PriceResolver;
-use Siemendev\Checkout\Pricing\PriceResolverInterface;
+use Siemendev\Checkout\Quote\Quote;
 
-interface QuoteGeneratorInterface
+interface QuoteBuilderInterface
 {
     /**
      * @throws PriceProviderNotFoundException

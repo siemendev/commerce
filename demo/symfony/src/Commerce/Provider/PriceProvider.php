@@ -2,26 +2,33 @@
 
 namespace App\Commerce\Provider;
 
-use Siemendev\Checkout\Item\ItemInterface;
-use Siemendev\Checkout\Item\QuantifiableItemInterface;
-use Siemendev\Checkout\Pricing\Provider\PriceProviderInterface;
+use Siemendev\Checkout\Item\Product\ProductInterface;
+use Siemendev\Checkout\Item\Subscription\SubscriptionInterface;
+use Siemendev\Checkout\Pricing\Product\ProductPrice;
+use Siemendev\Checkout\Pricing\Product\ProductPriceInterface;
+use Siemendev\Checkout\Pricing\Product\Provider\ProductPriceProviderInterface;
+use Siemendev\Checkout\Pricing\Subscription\SubscriptionPrice;
+use Siemendev\Checkout\Pricing\Subscription\SubscriptionPriceInterface;
+use Siemendev\Checkout\Pricing\Subscription\Provider\SubscriptionPriceProviderInterface;
 
-class PriceProvider implements PriceProviderInterface
+class PriceProvider implements ProductPriceProviderInterface, SubscriptionPriceProviderInterface
 {
-    public function eligible(ItemInterface $item, string $currency): bool
+    public function eligible(ProductInterface|SubscriptionInterface $item): bool
     {
         return true;
     }
 
-    public function getItemTotalPrice(ItemInterface $item, string $currency): int
+    public function getProductPrice(ProductInterface $product): ProductPriceInterface
     {
-        $quantity = $item instanceof QuantifiableItemInterface ? $item->getQuantity() : 1;
-
-        return $this->getItemUnitPrice($item, $currency) * $quantity;
+        return (new ProductPrice())
+            ->setCurrency('EUR')
+            ->setUnitPrice(1000)
+            ->setTotalPrice(2000)
+        ;
     }
 
-    public function getItemUnitPrice(ItemInterface $item, string $currency): int
+    public function getSubscriptionPrice(SubscriptionInterface $subscription): SubscriptionPriceInterface
     {
-        return 1000;
+        return (new SubscriptionPrice());
     }
 }

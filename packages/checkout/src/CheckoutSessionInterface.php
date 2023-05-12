@@ -2,19 +2,22 @@
 
 namespace Siemendev\Checkout;
 
-use Siemendev\Checkout\Item\ItemInterface;
+use Siemendev\Checkout\Item\Product\ProductInterface;
+use Siemendev\Checkout\Item\Subscription\SubscriptionInterface;
 
 interface CheckoutSessionInterface
 {
     /**
-     * Get the currency of the current checkout session. Has to be a valid 3-digit ISO 4217 currency code.
+     * Get the products of the current checkout session.
+     *
+     * @return array<ProductInterface>
      */
-    public function getCurrency(): string;
+    public function getProducts(): array;
 
     /**
-     * Get the items of the current checkout session.
+     * Get the subscriptions of the current checkout session.
      *
-     * @return array<ItemInterface>
+     * @return array<SubscriptionInterface>
      */
-    public function getItems(): array;
+    public function getSubscriptions(): array;
 }

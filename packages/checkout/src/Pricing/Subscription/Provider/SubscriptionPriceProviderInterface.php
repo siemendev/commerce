@@ -1,15 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace Siemendev\Checkout\Pricing;
+namespace Siemendev\Checkout\Pricing\Subscription\Provider;
 
-use Siemendev\Checkout\Item\Product\ProductInterface;
 use Siemendev\Checkout\Item\Subscription\SubscriptionInterface;
-use Siemendev\Checkout\Pricing\Product\ProductPriceInterface;
 use Siemendev\Checkout\Pricing\Subscription\SubscriptionPriceInterface;
 
-interface PriceResolverInterface
+interface SubscriptionPriceProviderInterface
 {
-    public function getProductPrice(ProductInterface $product): ProductPriceInterface;
+    public function eligible(SubscriptionInterface $subscription): bool;
 
     public function getSubscriptionPrice(SubscriptionInterface $subscription): SubscriptionPriceInterface;
 }

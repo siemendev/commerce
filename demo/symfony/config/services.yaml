@@ -26,7 +26,7 @@ services:
     Siemendev\Checkout\Checkout:
         arguments:
             $stepMachine: '@Siemendev\Checkout\Step\StepMachine'
-            $quoteGenerator: '@Siemendev\Checkout\Quote\QuoteGenerator'
+            $quoteBuilder: '@Siemendev\Checkout\Quote\Builder\QuoteBuilder'
 
     Siemendev\Checkout\Step\StepMachine:
         arguments:
@@ -45,15 +45,15 @@ services:
     Siemendev\Checkout\Step\Address\Billing\BillingAddressStep: ~
     Siemendev\Checkout\Step\Summary\SummaryStep: ~
 
-    Siemendev\Checkout\Quote\QuoteGenerator:
+    Siemendev\Checkout\Quote\Builder\QuoteBuilder:
         arguments:
-            $priceResolver: '@Siemendev\Checkout\Pricing\PriceResolver'
             $availabilityResolver: '@Siemendev\Checkout\Availability\AvailabilityResolver'
+            $priceResolver: '@Siemendev\Checkout\Pricing\PriceResolver'
 
     Siemendev\Checkout\Pricing\PriceResolver:
         arguments:
-            $providers:
-                - '@App\Commerce\Provider\PriceProvider'
+            $productPriceProviders: ['@App\Commerce\Provider\PriceProvider']
+            $subscriptionPriceProviders: ['@App\Commerce\Provider\PriceProvider']
 
     Siemendev\Checkout\Availability\AvailabilityResolver:
         arguments:

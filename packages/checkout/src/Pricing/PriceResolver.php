@@ -2,42 +2,58 @@
 
 namespace Siemendev\Checkout\Pricing;
 
-use Siemendev\Checkout\Item\ItemInterface;
-use Siemendev\Checkout\Pricing\Provider\PriceProviderInterface;
+use Siemendev\Checkout\Item\Product\ProductInterface;
+use Siemendev\Checkout\Item\Subscription\SubscriptionInterface;
+use Siemendev\Checkout\Pricing\Product\ProductPriceInterface;
+use Siemendev\Checkout\Pricing\Product\Provider\ProductPriceProviderInterface;
+use Siemendev\Checkout\Pricing\Subscription\SubscriptionPriceInterface;
+use Siemendev\Checkout\Pricing\Subscription\Provider\SubscriptionPriceProviderInterface;
 
 class PriceResolver implements PriceResolverInterface
 {
-    /** @param  array<PriceProviderInterface> $providers */
-    public function __construct(private array $providers = [])
-    {
+    /**
+     * @param array<ProductPriceProviderInterface> $productPriceProviders
+     * @param array<SubscriptionPriceProviderInterface> $subscriptionPriceProviders
+     */
+    public function __construct(
+        private array $productPriceProviders = [],
+        private array $subscriptionPriceProviders = [],
+    ) {
     }
 
-    public function addPriceProvider(PriceProviderInterface $provider): static
+    public function addProductPriceProvider(ProductPriceProviderInterface $provider): static
     {
-        $this->providers[] = $provider;
+        $this->productPriceProviders[] = $provider;
 
         return $this;
     }
 
-    public function getItemUnitPrice(ItemInterface $item, string $currency): int
+    public function addSubscriptionPriceProvider(SubscriptionPriceProviderInterface $provider): static
     {
-        foreach ($this->providers as $priceProvider) {
-            if ($priceProvider->eligible($item, $currency)) {
-                return $priceProvider->getItemUnitPrice($item, $currency);
-            }
-        }
+        $this->subscriptionPriceProviders[] = $provider;
 
-        throw new PriceProviderNotFoundException($item, $currency, $this->providers);
+        return $this;
     }
 
-    public function getItemTotalPrice(ItemInterface $item, string $currency): int
+    public function getProductPrice(ProductInterface $product): ProductPriceInterface
     {
-        foreach ($this->providers as $priceProvider) {
-            if ($priceProvider->eligible($item, $currency)) {
-                return $priceProvider->getItemTotalPrice($item, $currency);
+        foreach ($this->productPriceProviders as $priceProvider) {
+            if ($priceProvider->eligible($product)) {
+                return $priceProvider->getProductPrice($product);
             }
         }
 
-        throw new PriceProviderNotFoundException($item, $currency, $this->providers);
+        throw new PriceProviderNotFoundException($product, $this->productPriceProviders);
+    }
+
+    public function getSubscriptionPrice(SubscriptionInterface $subscription): SubscriptionPriceInterface
+    {
+        foreach ($this->subscriptionPriceProviders as $priceProvider) {
+            if ($priceProvider->eligible($subscription)) {
+                return $priceProvider->getSubscriptionPrice($subscription);
+            }
+        }
+
+        throw new PriceProviderNotFoundException($subscription, $this->subscriptionPriceProviders);
     }
 }

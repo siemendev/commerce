@@ -2,7 +2,7 @@
 
 namespace App\Controller\Cart;
 
-use App\Commerce\Item;
+use App\Commerce\Product;
 use App\Commerce\Step\AgeVerificationStep;
 use App\Controller\AbstractCheckoutController;
 use Siemendev\Checkout\Step\Address\Delivery\DeliveryAddressStep;

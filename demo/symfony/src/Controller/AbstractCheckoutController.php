@@ -31,9 +31,7 @@ abstract class AbstractCheckoutController extends AbstractController
             return $checkoutSession;
         }
 
-        return $this->saveCheckoutSession(
-            (new CheckoutSession())->setCurrency('EUR')
-        );
+        return $this->saveCheckoutSession(new CheckoutSession());
     }
 
     public function saveCheckoutSession(CheckoutSessionInterface $checkoutSession): CheckoutSession

@@ -4,7 +4,10 @@ namespace App\Commerce;
 
 use App\Commerce\Step\AgeVerifiableCheckoutSession;
 use App\Commerce\Step\AgeVerifiableCheckoutSessionInterface;
+use InvalidArgumentException;
 use Siemendev\Checkout\CheckoutSessionInterface;
+use Siemendev\Checkout\Item\Product\ProductInterface;
+use Siemendev\Checkout\Item\Subscription\SubscriptionInterface;
 use Siemendev\Checkout\Step\Address\Billing\BillingAddressableCheckoutSession;
 use Siemendev\Checkout\Step\Address\Billing\BillingAddressableCheckoutSessionInterface;
 use Siemendev\Checkout\Step\Address\Delivery\DeliveryAddressableCheckoutSession;
@@ -16,39 +19,63 @@ class CheckoutSession implements CheckoutSessionInterface, DeliveryAddressableCh
     use BillingAddressableCheckoutSession;
     use AgeVerifiableCheckoutSession;
 
-    /** @var array<Item> */
-    private array $items = [];
+    /** @var array<Product> */
+    private array $products = [];
 
-    private string $currency;
+    /** @var array<Subscription> */
+    private array $subscriptions = [];
 
-    public function setItems(array $items): CheckoutSession
+    /** @param array<Product> $products */
+    public function setProducts(array $products): CheckoutSession
     {
-        $this->items = $items;
+        $this->products = [];
+
+        foreach ($products as $product) {
+            if (!$product instanceof ProductInterface) {
+                throw new InvalidArgumentException(sprintf('Given product of type "%s" does not implement "%s".', $product::class, ProductInterface::class));
+            }
+            $this->addProduct($product);
+        }
 
         return $this;
     }
 
-    public function addItem(Item $item): CheckoutSession
+    public function addProduct(Product $product): CheckoutSession
     {
-        $this->items[] = $item;
+        $this->products[] = $product;
 
         return $this;
     }
 
-    public function setCurrency(string $currency): CheckoutSession
+    public function getProducts(): array
     {
-        $this->currency = $currency;
+        return $this->products;
+    }
+
+    /** @param array<Subscription> $subscriptions */
+    public function setSubscriptions(array $subscriptions): static
+    {
+        $this->subscriptions = [];
+
+        foreach ($subscriptions as $subscription) {
+            if (!$subscription instanceof SubscriptionInterface) {
+                throw new InvalidArgumentException(sprintf('Given product of type "%s" does not implement "%s".', $subscription::class, SubscriptionInterface::class));
+            }
+            $this->addSubscription($subscription);
+        }
 
         return $this;
     }
 
-    public function getCurrency(): string
+    public function addSubscription(Subscription $subscription): static
     {
-        return $this->currency;
+        $this->subscriptions[] = $subscription;
+
+        return $this;
     }
 
-    public function getItems(): array
+    public function getSubscriptions(): array
     {
-        return $this->items;
+        return $this->subscriptions;
     }
 }

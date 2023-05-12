@@ -2,34 +2,53 @@
 
 namespace Siemendev\Checkout\Quote;
 
+use Siemendev\Checkout\Quote\Action\QuoteActionInterface;
+use Siemendev\Checkout\Quote\Product\ProductQuoteInterface;
+use Siemendev\Checkout\Quote\Subscription\SubscriptionQuoteInterface;
+
 class Quote implements QuoteInterface
 {
-    private string $currency;
+    /** @var array<ProductQuoteInterface> */
+    private array $products = [];
 
-    /** @var array<QuoteItemInterface> */
-    private array $items = [];
+    /** @var array<SubscriptionQuoteInterface> */
+    private array $subscriptions = [];
 
-    public function getCurrency(): string
+    /** @var array<QuoteActionInterface> */
+    private array $actions = [];
+
+    public function getProducts(): array
     {
-        return $this->currency;
+        return $this->products;
     }
 
-    public function setCurrency(string $currency): static
+    public function addProduct(ProductQuoteInterface $product): static
     {
-        $this->currency = $currency;
+        $this->products[] = $product;
 
         return $this;
     }
 
-    /** @return array<QuoteItemInterface> */
-    public function getItems(): array
+    public function getSubscriptions(): array
     {
-        return $this->items;
+        return $this->subscriptions;
     }
 
-    public function addItem(QuoteItemInterface $item): static
+    public function addSubscription(SubscriptionQuoteInterface $subscription): static
     {
-        $this->items[] = $item;
+        $this->subscriptions[] = $subscription;
+
+        return $this;
+    }
+
+    public function getActions(): array
+    {
+        return $this->actions;
+    }
+
+    public function addAction(QuoteActionInterface $action): static
+    {
+        $this->actions[] = $action;
 
         return $this;
     }

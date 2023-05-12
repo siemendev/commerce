@@ -2,8 +2,9 @@
 
 namespace App\Controller\Cart;
 
-use App\Commerce\Item;
+use App\Commerce\Product;
 use App\Commerce\Step\AgeVerificationStep;
+use App\Commerce\Subscription;
 use App\Controller\AbstractCheckoutController;
 use Siemendev\Checkout\Step\Address\Delivery\DeliveryAddressStep;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,21 +16,22 @@ class FillController extends AbstractCheckoutController
 {
     public function __invoke(): Response
     {
-        $item1 = new Item();
-        $item1->name = 'Test 1';
-        $item1->id = 'test-1';
-        $item1->quantity = 2;
-        $item1->requiresSteps = [DeliveryAddressStep::stepIdentifier()];
-
-        $item2 = new Item();
-        $item2->name = 'Test 2';
-        $item2->id = 'test-2';
-        $item2->quantity = 1;
-        $item2->requiresSteps = [AgeVerificationStep::stepIdentifier()];
-
-        $this->getCheckoutSession()->setItems([$item1, $item2]);
-
-        $this->saveCheckoutSession($this->getCheckoutSession());
+        $this->saveCheckoutSession(
+            $this->getCheckoutSession()
+                ->setProducts([
+                    (new Product())
+                        ->setQuantity(2)
+                        ->addRequiredStep(DeliveryAddressStep::stepIdentifier())
+                        ->setName('Test Product One')
+                        ->setId('test-product-1'),
+                ])
+                ->setSubscriptions([
+                    (new Subscription())
+                        ->addRequiredStep(AgeVerificationStep::stepIdentifier())
+                        ->setName('Test Subscription One')
+                        ->setId('test-subscription-1'),
+                ])
+        );
 
         return $this->redirectToRoute('checkout_cart');
     }

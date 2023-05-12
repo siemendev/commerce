@@ -33,11 +33,11 @@ class CartStep implements StepInterface
      */
     public function validate(CheckoutSessionInterface $session): void
     {
-        if (empty($session->getItems())) {
+        if (empty($session->getProducts())) {
             throw new EmptyCartValidationException();
         }
 
-        foreach ($session->getItems() as $item) {
+        foreach ($session->getProducts() as $item) {
             if (!$this->availabilityResolver->isAvailable($item)) {
                 throw new ItemNoLongerAvailableValidationException($item);
             }
