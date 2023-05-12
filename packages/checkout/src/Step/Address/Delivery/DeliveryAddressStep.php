@@ -3,7 +3,7 @@
 namespace Siemendev\Checkout\Step\Address\Delivery;
 
 use LogicException;
-use Siemendev\Checkout\CheckoutSessionInterface;
+use Siemendev\Checkout\Data\CheckoutDataInterface;
 use Siemendev\Checkout\Step\StepInterface;
 
 class DeliveryAddressStep implements StepInterface
@@ -18,21 +18,21 @@ class DeliveryAddressStep implements StepInterface
         return false;
     }
 
-    public function validate(CheckoutSessionInterface $session): void
+    public function validate(CheckoutDataInterface $data): void
     {
-        if (!$session instanceof DeliveryAddressableCheckoutSessionInterface) {
+        if (!$data instanceof DeliveryAddressableCheckoutDataInterface) {
             throw new LogicException(sprintf(
                 '%s requires %s to implement %s',
                 $this::class,
-                $session::class,
-                DeliveryAddressableCheckoutSessionInterface::class,
+                $data::class,
+                DeliveryAddressableCheckoutDataInterface::class,
             ));
         }
 
-        if (!$session->getDeliveryAddress()) {
+        if (!$data->getDeliveryAddress()) {
             throw new DeliveryAddressNotSetException();
         }
 
-        $session->getDeliveryAddress()?->validate();
+        $data->getDeliveryAddress()?->validate();
     }
 }

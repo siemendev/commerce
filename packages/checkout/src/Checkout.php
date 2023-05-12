@@ -2,8 +2,7 @@
 
 namespace Siemendev\Checkout;
 
-use Siemendev\Checkout\Quote\Action\RemoveProductQuoteAction;
-use Siemendev\Checkout\Quote\Action\RemoveSubscriptionQuoteAction;
+use Siemendev\Checkout\Data\CheckoutDataInterface;
 use Siemendev\Checkout\Quote\Quote;
 use Siemendev\Checkout\Quote\Builder\QuoteBuilderInterface;
 use Siemendev\Checkout\Step\Exception\AssignedValidationException;
@@ -22,21 +21,21 @@ class Checkout implements CheckoutInterface
     ) {
     }
 
-    public function getCurrentStep(CheckoutSessionInterface $session): StepInterface
+    public function getCurrentStep(CheckoutDataInterface $data): StepInterface
     {
-        return $this->stepMachine->getCurrentStep($session);
+        return $this->stepMachine->getCurrentStep($data);
     }
 
-    public function getRequiredSteps(CheckoutSessionInterface $session): array
+    public function getRequiredSteps(CheckoutDataInterface $data): array
     {
-        return $this->stepMachine->getRequiredSteps($session);
+        return $this->stepMachine->getRequiredSteps($data);
     }
 
-    public function isStepAllowed(CheckoutSessionInterface $session, string $stepIdentifier): bool
+    public function isStepAllowed(CheckoutDataInterface $data, string $stepIdentifier): bool
     {
         // todo something does not work currently, the invalid steps are still displaying a link
         try {
-            $this->stepMachine->validateStep($session, $stepIdentifier);
+            $this->stepMachine->validateStep($data, $stepIdentifier);
         } catch (AssignedValidationException $exception) {
             return $exception->step::stepIdentifier() === $stepIdentifier;
         }
@@ -44,13 +43,13 @@ class Checkout implements CheckoutInterface
         return true;
     }
 
-    public function validateStep(CheckoutSessionInterface $session, string $stepIdentifier): void
+    public function validateStep(CheckoutDataInterface $data, string $stepIdentifier): void
     {
-        $this->stepMachine->validateStep($session, $stepIdentifier);
+        $this->stepMachine->validateStep($data, $stepIdentifier);
     }
 
-    public function getQuote(CheckoutSessionInterface $session): Quote
+    public function getQuoteByCheckoutData(CheckoutDataInterface $data): Quote
     {
-        return $this->quoteBuilder->getQuote($session);
+        return $this->quoteBuilder->getQuoteByCheckoutData($data);
     }
 }

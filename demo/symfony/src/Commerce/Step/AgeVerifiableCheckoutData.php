@@ -2,13 +2,13 @@
 
 namespace App\Commerce\Step;
 
-use App\Commerce\CheckoutSession;
+use App\Commerce\CheckoutData;
 
-trait AgeVerifiableCheckoutSession
+trait AgeVerifiableCheckoutData
 {
     private bool $ageVerified = false;
 
-    public function setAgeVerified(bool $ageVerified): CheckoutSession
+    public function setAgeVerified(bool $ageVerified): CheckoutData
     {
         $this->ageVerified = $ageVerified;
 

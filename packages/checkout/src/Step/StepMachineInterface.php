@@ -2,7 +2,7 @@
 
 namespace Siemendev\Checkout\Step;
 
-use Siemendev\Checkout\CheckoutSessionInterface;
+use Siemendev\Checkout\Data\CheckoutDataInterface;
 use Siemendev\Checkout\Step\Exception\AssignedValidationException;
 
 interface StepMachineInterface
@@ -12,19 +12,19 @@ interface StepMachineInterface
     /**
      * @throws AssignedValidationException
      */
-    public function validate(CheckoutSessionInterface $session): void;
+    public function validate(CheckoutDataInterface $data): void;
 
     /**
      * @throws AssignedValidationException
      */
-    public function validateStep(CheckoutSessionInterface $session, string $stepIdentifier): void;
+    public function validateStep(CheckoutDataInterface $checkoutData, string $stepIdentifier): void;
 
-    public function getCurrentStep(CheckoutSessionInterface $session): StepInterface;
+    public function getCurrentStep(CheckoutDataInterface $data): StepInterface;
 
-    public function isStepAllowed(CheckoutSessionInterface $session, string $stepIdentifier): bool;
+    public function isStepAllowed(CheckoutDataInterface $data, string $stepIdentifier): bool;
 
     /**
      * @return array<StepInterface>
      */
-    public function getRequiredSteps(CheckoutSessionInterface $session): array;
+    public function getRequiredSteps(CheckoutDataInterface $data): array;
 }

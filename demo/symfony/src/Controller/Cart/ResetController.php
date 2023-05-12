@@ -15,7 +15,7 @@ class ResetController extends AbstractCheckoutController
 {
     public function __invoke(Request $request): Response
     {
-        $request->getSession()->remove('checkout_session');
+        $request->getSession()->remove('checkout_data');
 
         return $this->redirectToRoute('checkout_cart');
     }

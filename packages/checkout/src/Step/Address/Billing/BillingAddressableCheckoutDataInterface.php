@@ -4,7 +4,7 @@ namespace Siemendev\Checkout\Step\Address\Billing;
 
 use Siemendev\Checkout\Step\Address\AddressInterface;
 
-interface BillingAddressableCheckoutSessionInterface
+interface BillingAddressableCheckoutDataInterface
 {
     public function getBillingAddress(): ?AddressInterface;
 }

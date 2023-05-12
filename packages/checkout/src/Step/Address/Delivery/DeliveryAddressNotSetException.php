@@ -8,6 +8,6 @@ class DeliveryAddressNotSetException extends ValidationException
 {
     public function __construct()
     {
-        parent::__construct('Delivery address is not set in the checkout session.');
+        parent::__construct('Delivery address is not set in the checkout data.');
     }
 }

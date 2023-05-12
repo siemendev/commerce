@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
-use App\Commerce\CheckoutSession;
+use App\Commerce\CheckoutData;
 use Siemendev\Checkout\Checkout;
-use Siemendev\Checkout\CheckoutSessionInterface;
+use Siemendev\Checkout\Data\CheckoutDataInterface;
 use Siemendev\Checkout\Step\StepInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -23,22 +23,22 @@ abstract class AbstractCheckoutController extends AbstractController
         return $this->checkout;
     }
 
-    public function getCheckoutSession(): CheckoutSession
+    public function getCheckoutData(): CheckoutData
     {
-        $checkoutSession = $this->requestStack->getMainRequest()?->getSession()->get('checkout_session');
+        $checkoutData = $this->requestStack->getMainRequest()?->getSession()->get('checkout_data');
 
-        if ($checkoutSession instanceof CheckoutSession) {
-            return $checkoutSession;
+        if ($checkoutData instanceof CheckoutData) {
+            return $checkoutData;
         }
 
-        return $this->saveCheckoutSession(new CheckoutSession());
+        return $this->saveCheckoutData(new CheckoutData());
     }
 
-    public function saveCheckoutSession(CheckoutSessionInterface $checkoutSession): CheckoutSession
+    public function saveCheckoutData(CheckoutDataInterface $checkoutData): CheckoutData
     {
-        $this->requestStack->getMainRequest()?->getSession()->set('checkout_session', $checkoutSession);
+        $this->requestStack->getMainRequest()?->getSession()->set('checkout_data', $checkoutData);
 
-        return $checkoutSession;
+        return $checkoutData;
     }
 
     protected function redirectToCurrentStep(): RedirectResponse
@@ -48,7 +48,7 @@ abstract class AbstractCheckoutController extends AbstractController
 
     protected function getCurrentStepUrl(): string
     {
-        return $this->getStepUrl($this->getCheckout()->getCurrentStep($this->getCheckoutSession())::stepIdentifier());
+        return $this->getStepUrl($this->getCheckout()->getCurrentStep($this->getCheckoutData())::stepIdentifier());
     }
 
     protected function getStepUrl(string $stepIdentifier): string
@@ -64,9 +64,9 @@ abstract class AbstractCheckoutController extends AbstractController
         return array_map(
             fn (StepInterface $step): array => [
                 'id' => $step::stepIdentifier(),
-                'url' => $this->getCheckout()->isStepAllowed($this->getCheckoutSession(), $step::stepIdentifier()) ? $this->getStepUrl($step::stepIdentifier()) : null
+                'url' => $this->getCheckout()->isStepAllowed($this->getCheckoutData(), $step::stepIdentifier()) ? $this->getStepUrl($step::stepIdentifier()) : null
             ],
-            $this->getCheckout()->getRequiredSteps($this->getCheckoutSession())
+            $this->getCheckout()->getRequiredSteps($this->getCheckoutData())
         );
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Siemendev\Checkout\Step\Summary;
 
-use Siemendev\Checkout\CheckoutSessionInterface;
+use Siemendev\Checkout\Data\CheckoutDataInterface;
 use Siemendev\Checkout\Step\StepInterface;
 
 class SummaryStep implements StepInterface
@@ -19,7 +19,7 @@ class SummaryStep implements StepInterface
         return true;
     }
 
-    public function validate(CheckoutSessionInterface $session): void
+    public function validate(CheckoutDataInterface $data): void
     {
         // summary step is always valid
     }

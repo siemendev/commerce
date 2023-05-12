@@ -14,11 +14,11 @@ class OverviewController extends AbstractCheckoutController
     public function __invoke(): Response
     {
         $data = [
-            'quote' => $this->getCheckout()->getQuote($this->getCheckoutSession()),
+            'quote' => $this->getCheckout()->getQuoteByCheckoutData($this->getCheckoutData()),
             'continue' => $this->getCurrentStepUrl(),
         ];
         try {
-            $this->getCheckout()->validateStep($this->getCheckoutSession(), CartStep::STEP_IDENTIFIER);
+            $this->getCheckout()->validateStep($this->getCheckoutData(), CartStep::STEP_IDENTIFIER);
         } catch (AssignedValidationException $e) {
             if ($e->step::stepIdentifier() === CartStep::STEP_IDENTIFIER) {
                 $data['error'] = $e->getMessage();

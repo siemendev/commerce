@@ -4,7 +4,7 @@ namespace Siemendev\Checkout\Step\Address\Billing;
 
 use Siemendev\Checkout\Step\Address\AddressInterface;
 
-trait BillingAddressableCheckoutSession
+trait BillingAddressableCheckoutData
 {
     private ?AddressInterface $billingAddress = null;
 

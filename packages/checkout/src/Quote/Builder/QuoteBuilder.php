@@ -4,7 +4,7 @@ namespace Siemendev\Checkout\Quote\Builder;
 
 use Siemendev\Checkout\Availability\AvailabilityProviderNotFoundException;
 use Siemendev\Checkout\Availability\AvailabilityResolverInterface;
-use Siemendev\Checkout\CheckoutSessionInterface;
+use Siemendev\Checkout\Data\CheckoutDataInterface;
 use Siemendev\Checkout\Pricing\PriceProviderNotFoundException;
 use Siemendev\Checkout\Pricing\PriceResolverInterface;
 use Siemendev\Checkout\Quote\Action\RemoveProductQuoteAction;
@@ -21,15 +21,11 @@ class QuoteBuilder implements QuoteBuilderInterface
     ) {
     }
 
-    /**
-     * @throws PriceProviderNotFoundException
-     * @throws AvailabilityProviderNotFoundException
-     */
-    public function getQuote(CheckoutSessionInterface $session): Quote
+    public function getQuoteByCheckoutData(CheckoutDataInterface $data): Quote
     {
         $quote = new Quote();
 
-        foreach ($session->getProducts() as $product) {
+        foreach ($data->getCart()->getProducts() as $product) {
             if (!$this->availabilityResolver->isAvailable($product)) {
                 $quote->addAction(
                     new RemoveProductQuoteAction($product, RemoveProductQuoteAction::REASON_UNAVAILABLE)
@@ -43,7 +39,7 @@ class QuoteBuilder implements QuoteBuilderInterface
             );
         }
 
-        foreach ($session->getSubscriptions() as $subscription) {
+        foreach ($data->getCart()->getSubscriptions() as $subscription) {
             if (!$this->availabilityResolver->isAvailable($subscription)) {
                 $quote->addAction(
                     new RemoveSubscriptionQuoteAction($subscription, RemoveSubscriptionQuoteAction::REASON_UNAVAILABLE)

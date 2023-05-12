@@ -4,7 +4,7 @@ namespace Siemendev\Checkout\Step\Address\Delivery;
 
 use Siemendev\Checkout\Step\Address\AddressInterface;
 
-trait DeliveryAddressableCheckoutSession
+trait DeliveryAddressableCheckoutData
 {
     private ?AddressInterface $deliveryAddress = null;
 

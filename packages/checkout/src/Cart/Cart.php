@@ -1,24 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace App\Commerce;
+namespace Siemendev\Checkout\Cart;
 
-use App\Commerce\Step\AgeVerifiableCheckoutSession;
-use App\Commerce\Step\AgeVerifiableCheckoutSessionInterface;
+use App\Commerce\Product;
+use App\Commerce\Subscription;
 use InvalidArgumentException;
-use Siemendev\Checkout\CheckoutSessionInterface;
 use Siemendev\Checkout\Item\Product\ProductInterface;
 use Siemendev\Checkout\Item\Subscription\SubscriptionInterface;
-use Siemendev\Checkout\Step\Address\Billing\BillingAddressableCheckoutSession;
-use Siemendev\Checkout\Step\Address\Billing\BillingAddressableCheckoutSessionInterface;
-use Siemendev\Checkout\Step\Address\Delivery\DeliveryAddressableCheckoutSession;
-use Siemendev\Checkout\Step\Address\Delivery\DeliveryAddressableCheckoutSessionInterface;
 
-class CheckoutSession implements CheckoutSessionInterface, DeliveryAddressableCheckoutSessionInterface, BillingAddressableCheckoutSessionInterface, AgeVerifiableCheckoutSessionInterface
+class Cart implements CartInterface
 {
-    use DeliveryAddressableCheckoutSession;
-    use BillingAddressableCheckoutSession;
-    use AgeVerifiableCheckoutSession;
-
     /** @var array<Product> */
     private array $products = [];
 
@@ -26,7 +17,7 @@ class CheckoutSession implements CheckoutSessionInterface, DeliveryAddressableCh
     private array $subscriptions = [];
 
     /** @param array<Product> $products */
-    public function setProducts(array $products): CheckoutSession
+    public function setProducts(array $products): static
     {
         $this->products = [];
 
@@ -40,7 +31,7 @@ class CheckoutSession implements CheckoutSessionInterface, DeliveryAddressableCh
         return $this;
     }
 
-    public function addProduct(Product $product): CheckoutSession
+    public function addProduct(Product $product): static
     {
         $this->products[] = $product;
 
@@ -77,5 +68,18 @@ class CheckoutSession implements CheckoutSessionInterface, DeliveryAddressableCh
     public function getSubscriptions(): array
     {
         return $this->subscriptions;
+    }
+
+    public function getItems(): array
+    {
+        return array_merge(
+            $this->getProducts(),
+            $this->getSubscriptions(),
+        );
+    }
+
+    public function isEmpty(): bool
+    {
+        return 0 === count($this->getItems());
     }
 }

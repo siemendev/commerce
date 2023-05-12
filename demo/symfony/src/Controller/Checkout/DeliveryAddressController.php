@@ -15,14 +15,14 @@ class DeliveryAddressController extends AbstractCheckoutController
 {
     public function __invoke(Request $request): Response
     {
-        if (!$this->getCheckout()->isStepAllowed($this->getCheckoutSession(), DeliveryAddressStep::stepIdentifier())) {
+        if (!$this->getCheckout()->isStepAllowed($this->getCheckoutData(), DeliveryAddressStep::stepIdentifier())) {
             return $this->redirectToCurrentStep();
         }
 
         /** @var Address $address */
-        $address = $this->getCheckoutSession()->getDeliveryAddress();
+        $address = $this->getCheckoutData()->getDeliveryAddress();
         if (!$address) {
-            $this->getCheckoutSession()->setDeliveryAddress($address = new Address());
+            $this->getCheckoutData()->setDeliveryAddress($address = new Address());
         }
 
         if ($addressLine1 = $request->request->get('address_line1')) {
@@ -57,7 +57,7 @@ class DeliveryAddressController extends AbstractCheckoutController
         return $this->render('commerce/steps/delivery_address.html.twig', [
             'message' => $message ?? null,
             'address' => $address,
-            'session' => $this->getCheckoutSession(),
+            'session' => $this->getCheckoutData(),
             'steps' => $this->getStepsData(),
         ]);
     }

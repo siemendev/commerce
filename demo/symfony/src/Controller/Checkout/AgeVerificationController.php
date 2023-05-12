@@ -13,18 +13,18 @@ class AgeVerificationController extends AbstractCheckoutController
 {
     public function __invoke(Request $request): Response
     {
-        if (!$this->getCheckout()->isStepAllowed($this->getCheckoutSession(), AgeVerificationStep::stepIdentifier())) {
+        if (!$this->getCheckout()->isStepAllowed($this->getCheckoutData(), AgeVerificationStep::stepIdentifier())) {
             return $this->redirectToCurrentStep();
         }
 
         if ($request->getMethod() === 'POST') {
-            $this->getCheckoutSession()->setAgeVerified($request->request->has('age_verification'));
+            $this->getCheckoutData()->setAgeVerified($request->request->has('age_verification'));
 
             return $this->redirectToCurrentStep();
         }
 
         return $this->render('commerce/steps/age_verification.html.twig', [
-            'verified' => $this->getCheckoutSession()->isAgeVerified(),
+            'verified' => $this->getCheckoutData()->isAgeVerified(),
             'steps' => $this->getStepsData(),
         ]);
     }

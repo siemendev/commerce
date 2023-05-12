@@ -3,7 +3,7 @@
 namespace App\Commerce\Step;
 
 use LogicException;
-use Siemendev\Checkout\CheckoutSessionInterface;
+use Siemendev\Checkout\Data\CheckoutDataInterface;
 use Siemendev\Checkout\Step\StepInterface;
 
 class AgeVerificationStep implements StepInterface
@@ -18,18 +18,18 @@ class AgeVerificationStep implements StepInterface
         return false;
     }
 
-    public function validate(CheckoutSessionInterface $session): void
+    public function validate(CheckoutDataInterface $data): void
     {
-        if (!$session instanceof AgeVerifiableCheckoutSessionInterface) {
+        if (!$data instanceof AgeVerifiableCheckoutDataInterface) {
             throw new LogicException(sprintf(
                 '%s requires %s to implement %s',
                 $this::class,
-                $session::class,
-                AgeVerifiableCheckoutSessionInterface::class,
+                $data::class,
+                AgeVerifiableCheckoutDataInterface::class,
             ));
         }
 
-        if (!$session->isAgeVerified()) {
+        if (!$data->isAgeVerified()) {
             throw new AgeNotVerifiedException();
         }
     }

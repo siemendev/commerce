@@ -3,7 +3,7 @@
 namespace Siemendev\Checkout\Step;
 
 use LogicException;
-use Siemendev\Checkout\CheckoutSessionInterface;
+use Siemendev\Checkout\Data\CheckoutDataInterface;
 use Siemendev\Checkout\Item\ItemInterface;
 use Siemendev\Checkout\Step\Exception\PreviousStepValidationException;
 use Siemendev\Checkout\Step\Exception\StepNotFoundException;
@@ -30,22 +30,22 @@ class StepMachine implements StepMachineInterface
         return $this;
     }
 
-    public function validate(CheckoutSessionInterface $session): void
+    public function validate(CheckoutDataInterface $data): void
     {
-        foreach ($this->getRequiredSteps($session) as $step) {
+        foreach ($this->getRequiredSteps($data) as $step) {
             try {
-                $step->validate($session);
+                $step->validate($data);
             } catch (ValidationException $e) {
                 throw new AssignedValidationException($e, $step);
             }
         }
     }
 
-    public function validateStep(CheckoutSessionInterface $session, string $stepIdentifier): void
+    public function validateStep(CheckoutDataInterface $checkoutData, string $stepIdentifier): void
     {
-        foreach ($this->getRequiredSteps($session) as $step) {
+        foreach ($this->getRequiredSteps($checkoutData) as $step) {
             try {
-                $step->validate($session);
+                $step->validate($checkoutData);
             } catch (ValidationException $e) {
                 throw new AssignedValidationException($e, $step);
             }
@@ -56,11 +56,11 @@ class StepMachine implements StepMachineInterface
         }
     }
 
-    public function getCurrentStep(CheckoutSessionInterface $session): StepInterface
+    public function getCurrentStep(CheckoutDataInterface $data): StepInterface
     {
-        foreach ($this->getRequiredSteps($session) as $step) {
+        foreach ($this->getRequiredSteps($data) as $step) {
             try {
-                $step->validate($session);
+                $step->validate($data);
             } catch (ValidationException) {
                 return $step;
             }
@@ -69,11 +69,11 @@ class StepMachine implements StepMachineInterface
         return $this->getSummaryStep();
     }
 
-    public function isStepAllowed(CheckoutSessionInterface $session, string $stepIdentifier): bool
+    public function isStepAllowed(CheckoutDataInterface $data, string $stepIdentifier): bool
     {
         $steps = array_map(
             static fn (StepInterface $step) => $step::stepIdentifier(),
-            $this->getRequiredSteps($session),
+            $this->getRequiredSteps($data),
         );
 
         if (!in_array($stepIdentifier, $steps, true)) {
@@ -81,19 +81,19 @@ class StepMachine implements StepMachineInterface
         }
 
         $requestedStepIndex = array_search($stepIdentifier, $steps,true);
-        $allowedStepIndex = array_search($this->getCurrentStep($session)::stepIdentifier(), $steps, true);
+        $allowedStepIndex = array_search($this->getCurrentStep($data)::stepIdentifier(), $steps, true);
 
         return $requestedStepIndex <= $allowedStepIndex;
     }
 
     // todo subject for performance optimization
-    public function getRequiredSteps(CheckoutSessionInterface $session): array
+    public function getRequiredSteps(CheckoutDataInterface $data): array
     {
         // first get all steps that are required by items
         $requiredSteps = array_unique(array_merge(...array_map(
             static fn (ItemInterface $item) => $item->requiresSteps(),
             array_filter(
-                $session->getProducts(),
+                $data->getCart()->getItems(),
                 static fn (ItemInterface $item) => !empty($item->requiresSteps())
             )
         )));

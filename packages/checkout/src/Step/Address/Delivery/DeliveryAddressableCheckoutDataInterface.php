@@ -4,7 +4,7 @@ namespace Siemendev\Checkout\Step\Address\Delivery;
 
 use Siemendev\Checkout\Step\Address\AddressInterface;
 
-interface DeliveryAddressableCheckoutSessionInterface
+interface DeliveryAddressableCheckoutDataInterface
 {
     public function getDeliveryAddress(): ?AddressInterface;
 }

@@ -2,7 +2,7 @@
 
 namespace App\Commerce\Step;
 
-interface AgeVerifiableCheckoutSessionInterface
+interface AgeVerifiableCheckoutDataInterface
 {
     public function isAgeVerified(): bool;
 }

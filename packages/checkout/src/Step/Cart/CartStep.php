@@ -5,7 +5,7 @@ namespace Siemendev\Checkout\Step\Cart;
 use Siemendev\Checkout\Availability\AvailabilityProviderNotFoundException;
 use Siemendev\Checkout\Availability\AvailabilityResolverInterface;
 use Siemendev\Checkout\Availability\Exception\ItemNoLongerAvailableValidationException;
-use Siemendev\Checkout\CheckoutSessionInterface;
+use Siemendev\Checkout\Data\CheckoutDataInterface;
 use Siemendev\Checkout\Step\StepInterface;
 
 class CartStep implements StepInterface
@@ -31,13 +31,13 @@ class CartStep implements StepInterface
      * @inheritDoc
      * @throws AvailabilityProviderNotFoundException
      */
-    public function validate(CheckoutSessionInterface $session): void
+    public function validate(CheckoutDataInterface $data): void
     {
-        if (empty($session->getProducts())) {
+        if ($data->getCart()->isEmpty()) {
             throw new EmptyCartValidationException();
         }
 
-        foreach ($session->getProducts() as $item) {
+        foreach ($data->getCart()->getItems() as $item) {
             if (!$this->availabilityResolver->isAvailable($item)) {
                 throw new ItemNoLongerAvailableValidationException($item);
             }

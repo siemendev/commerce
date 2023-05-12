@@ -16,22 +16,23 @@ class FillController extends AbstractCheckoutController
 {
     public function __invoke(): Response
     {
-        $this->saveCheckoutSession(
-            $this->getCheckoutSession()
-                ->setProducts([
-                    (new Product())
-                        ->setQuantity(2)
-                        ->addRequiredStep(DeliveryAddressStep::stepIdentifier())
-                        ->setName('Test Product One')
-                        ->setId('test-product-1'),
-                ])
-                ->setSubscriptions([
-                    (new Subscription())
-                        ->addRequiredStep(AgeVerificationStep::stepIdentifier())
-                        ->setName('Test Subscription One')
-                        ->setId('test-subscription-1'),
-                ])
-        );
+        $this->getCheckoutData()->getCart()
+            ->setProducts([
+                (new Product())
+                    ->setQuantity(2)
+//                    ->addRequiredStep(DeliveryAddressStep::stepIdentifier())
+                    ->setName('Test Product One')
+                    ->setId('test-product-1'),
+            ])
+            ->setSubscriptions([
+                (new Subscription())
+                    ->addRequiredStep(AgeVerificationStep::stepIdentifier())
+                    ->setName('Test Subscription One')
+                    ->setId('test-subscription-1'),
+            ])
+        ;
+
+        $this->saveCheckoutData($this->getCheckoutData());
 
         return $this->redirectToRoute('checkout_cart');
     }

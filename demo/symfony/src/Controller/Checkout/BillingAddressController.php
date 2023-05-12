@@ -15,13 +15,13 @@ class BillingAddressController extends AbstractCheckoutController
 {
     public function __invoke(Request $request): Response
     {
-        if (!$this->getCheckout()->isStepAllowed($this->getCheckoutSession(), BillingAddressStep::stepIdentifier())) {
+        if (!$this->getCheckout()->isStepAllowed($this->getCheckoutData(), BillingAddressStep::stepIdentifier())) {
             return $this->redirectToCurrentStep();
         }
 
-        $address = $this->getCheckoutSession()->getBillingAddress();
+        $address = $this->getCheckoutData()->getBillingAddress();
         if (!$address) {
-            $this->getCheckoutSession()->setBillingAddress($address = new Address());
+            $this->getCheckoutData()->setBillingAddress($address = new Address());
         }
         /** @var Address $address */
 
@@ -45,7 +45,7 @@ class BillingAddressController extends AbstractCheckoutController
         }
 
         if ($request->request->get('useForDelivery') && $address->isValid()) {
-            $this->getCheckoutSession()->setDeliveryAddress($address);
+            $this->getCheckoutData()->setDeliveryAddress($address);
         }
 
         if ('POST' === $request->getMethod()) {
@@ -61,7 +61,7 @@ class BillingAddressController extends AbstractCheckoutController
         return $this->render('commerce/steps/billing_address.html.twig', [
             'message' => $message ?? null,
             'address' => $address,
-            'session' => $this->getCheckoutSession(),
+            'session' => $this->getCheckoutData(),
             'steps' => $this->getStepsData(),
         ]);
     }
