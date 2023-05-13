@@ -43,4 +43,9 @@ class CartStep implements StepInterface
             }
         }
     }
+
+    public function requiresCheckoutData(): array
+    {
+        return [CheckoutDataInterface::class];
+    }
 }

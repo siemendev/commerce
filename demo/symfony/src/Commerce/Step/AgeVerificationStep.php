@@ -33,4 +33,9 @@ class AgeVerificationStep implements StepInterface
             throw new AgeNotVerifiedException();
         }
     }
+
+    public function requiresCheckoutData(): array
+    {
+        return [AgeVerifiableCheckoutDataInterface::class];
+    }
 }

@@ -5,11 +5,11 @@ namespace Siemendev\Checkout\Item;
 interface ItemInterface
 {
     /**
-     * returns an array of step identifiers that are required for this item.
-     * @see \Siemendev\Checkout\Step\StepInterface::stepIdentifier()
-     * @return array<string>
+     * Returns a list of interface names that are required to be implemented in the checkout data
+     *
+     * @return array<class-string>
      */
-    public function requiresSteps(): array;
+    public function requiredCheckoutDataInterfaces(): array;
 
     /**
      * returns a unique identifier for this item

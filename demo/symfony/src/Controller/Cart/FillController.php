@@ -3,9 +3,11 @@
 namespace App\Controller\Cart;
 
 use App\Commerce\Product;
+use App\Commerce\Step\AgeVerifiableCheckoutDataInterface;
 use App\Commerce\Step\AgeVerificationStep;
 use App\Commerce\Subscription;
 use App\Controller\AbstractCheckoutController;
+use Siemendev\Checkout\Step\Delivery\DeliverableCheckoutDataInterface;
 use Siemendev\Checkout\Step\Address\Delivery\DeliveryAddressStep;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,13 +22,13 @@ class FillController extends AbstractCheckoutController
             ->setProducts([
                 (new Product())
                     ->setQuantity(2)
-//                    ->addRequiredStep(DeliveryAddressStep::stepIdentifier())
+                    ->addRequiredCheckoutDataInterface(DeliverableCheckoutDataInterface::class)
                     ->setName('Test Product One')
                     ->setId('test-product-1'),
             ])
             ->setSubscriptions([
                 (new Subscription())
-                    ->addRequiredStep(AgeVerificationStep::stepIdentifier())
+                    ->addRequiredCheckoutDataInterface(AgeVerifiableCheckoutDataInterface::class)
                     ->setName('Test Subscription One')
                     ->setId('test-subscription-1'),
             ])

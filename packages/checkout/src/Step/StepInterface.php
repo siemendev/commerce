@@ -12,6 +12,13 @@ interface StepInterface
     public static function isRequired(): bool;
 
     /**
+     * Returns a list of interface names that are required to be implemented in the checkout data
+     *
+     * @return array<class-string>
+     */
+    public function requiresCheckoutData(): array;
+
+    /**
      * @throws ValidationException
      */
     public function validate(CheckoutDataInterface $data): void;

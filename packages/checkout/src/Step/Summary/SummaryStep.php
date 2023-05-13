@@ -24,4 +24,8 @@ class SummaryStep implements StepInterface
         // summary step is always valid
     }
 
+    public function requiresCheckoutData(): array
+    {
+        return [CheckoutDataInterface::class];
+    }
 }

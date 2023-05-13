@@ -21,19 +21,15 @@ class BillingAddressStep implements StepInterface
 
     public function validate(CheckoutDataInterface $data): void
     {
-        if (!$data instanceof BillingAddressableCheckoutDataInterface) {
-            throw new LogicException(sprintf(
-                '%s requires %s to implement %s',
-                $this::class,
-                $data::class,
-                BillingAddressableCheckoutDataInterface::class,
-            ));
-        }
-
         if (!$data->getBillingAddress()) {
             throw new BillingAddressNotSetException();
         }
 
-        $data->getBillingAddress()?->validate();
+        $data->getBillingAddress()->validate();
+    }
+
+    public function requiresCheckoutData(): array
+    {
+        return [BillingAddressableCheckoutDataInterface::class];
     }
 }

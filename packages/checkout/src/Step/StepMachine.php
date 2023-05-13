@@ -86,30 +86,40 @@ class StepMachine implements StepMachineInterface
         return $requestedStepIndex <= $allowedStepIndex;
     }
 
-    // todo subject for performance optimization
     public function getRequiredSteps(CheckoutDataInterface $data): array
     {
-        // first get all steps that are required by items
-        $requiredSteps = array_unique(array_merge(...array_map(
-            static fn (ItemInterface $item) => $item->requiresSteps(),
-            array_filter(
-                $data->getCart()->getItems(),
-                static fn (ItemInterface $item) => !empty($item->requiresSteps())
-            )
-        )));
+        $requiredCheckoutDataInterfaces = [];
 
-        // check if a required step is not in $this->steps
-        foreach ($requiredSteps as $requiredStep) {
-            if (!in_array($requiredStep, array_map(static fn (StepInterface $step) => $step::stepIdentifier(), $this->steps), true)) {
-                throw new LogicException(sprintf('Required step "%s" not found', $requiredStep));
+        foreach ($data->getCart()->getItems() as $item) {
+            foreach ($item->requiredCheckoutDataInterfaces() as $requiredCheckoutDataInterface) {
+                if (in_array($requiredCheckoutDataInterface, $requiredCheckoutDataInterfaces, true)) {
+                    continue;
+                }
+                if (!$data instanceof $requiredCheckoutDataInterface) {
+                    throw new LogicException(sprintf('Item "%s" (%s) requires your "%s" to implement "%s" not found', $item->getItemIdentifier(), $item::class, $data::class, $requiredCheckoutDataInterface));
+                }
+                $requiredCheckoutDataInterfaces[] = $requiredCheckoutDataInterface;
             }
         }
 
-        // then filter out all steps that are not required or which classname is not in $requiredSteps
-        return array_values(array_filter(
-            $this->steps,
-            static fn (StepInterface $step) => $step::isRequired() || in_array($step::stepIdentifier(), $requiredSteps, true)
-        ));
+        $steps = [];
+        foreach ($this->steps as $step) {
+            if (in_array($step, $steps, true)) {
+                continue;
+            }
+            if ($step::isRequired()) {
+                $steps[] = $step;
+                continue;
+            }
+            foreach ($step->requiresCheckoutData() as $requiredCheckoutData) {
+                if (in_array($requiredCheckoutData, $requiredCheckoutDataInterfaces, true)) {
+                    $steps[] = $step;
+                    continue 2;
+                }
+            }
+        }
+
+        return $steps;
     }
 
     private function getSummaryStep(): SummaryStep

@@ -2,12 +2,12 @@
 
 namespace App\Commerce;
 
-use Siemendev\Checkout\Item\RequiredSteps;
+use Siemendev\Checkout\Item\RequiredCheckoutData;
 use Siemendev\Checkout\Item\Subscription\SubscriptionInterface;
 
 class Subscription implements SubscriptionInterface
 {
-    use RequiredSteps;
+    use RequiredCheckoutData;
 
     private string $id;
 

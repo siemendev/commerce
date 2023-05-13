@@ -4,11 +4,11 @@ namespace Siemendev\Checkout\Data;
 
 use Siemendev\Checkout\Step\Address\Billing\BillingAddressableCheckoutData;
 use Siemendev\Checkout\Step\Address\Billing\BillingAddressableCheckoutDataInterface;
-use Siemendev\Checkout\Step\Address\Delivery\DeliveryAddressableCheckoutData;
-use Siemendev\Checkout\Step\Address\Delivery\DeliveryAddressableCheckoutDataInterface;
+use Siemendev\Checkout\Step\Delivery\DeliverableCheckoutData;
+use Siemendev\Checkout\Step\Delivery\DeliverableCheckoutDataInterface;
 
-class GenericCheckoutData extends AbstractCheckoutData implements DeliveryAddressableCheckoutDataInterface, BillingAddressableCheckoutDataInterface
+class GenericCheckoutData extends AbstractCheckoutData implements DeliverableCheckoutDataInterface, BillingAddressableCheckoutDataInterface
 {
-    use DeliveryAddressableCheckoutData;
+    use DeliverableCheckoutData;
     use BillingAddressableCheckoutData;
 }

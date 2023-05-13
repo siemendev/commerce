@@ -3,13 +3,13 @@
 namespace App\Commerce;
 
 use Siemendev\Checkout\Item\Quantifiable;
-use Siemendev\Checkout\Item\RequiredSteps;
+use Siemendev\Checkout\Item\RequiredCheckoutData;
 use Siemendev\Checkout\Item\Product\ProductInterface;
 use Siemendev\Checkout\Item\QuantifiableItemInterface;
 
 class Product implements ProductInterface, QuantifiableItemInterface
 {
-    use RequiredSteps, Quantifiable;
+    use RequiredCheckoutData, Quantifiable;
 
     private string $id;
 
