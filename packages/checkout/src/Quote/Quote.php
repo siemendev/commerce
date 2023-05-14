@@ -4,46 +4,19 @@ namespace Siemendev\Checkout\Quote;
 
 use Siemendev\Checkout\Quote\Action\QuoteActionInterface;
 use Siemendev\Checkout\Quote\AdditionalCost\QuoteAdditionalCostInterface;
-use Siemendev\Checkout\Quote\Product\ProductQuoteInterface;
-use Siemendev\Checkout\Quote\Subscription\SubscriptionQuoteInterface;
+use Siemendev\Checkout\Quote\Trait\WithProducts;
+use Siemendev\Checkout\Quote\Trait\WithSubscriptions;
 
 class Quote implements QuoteInterface
 {
-    /** @var array<ProductQuoteInterface> */
-    private array $products = [];
-
-    /** @var array<SubscriptionQuoteInterface> */
-    private array $subscriptions = [];
+    use WithProducts;
+    use WithSubscriptions;
 
     /** @var array<QuoteActionInterface> */
     private array $actions = [];
 
     /** @var array<QuoteAdditionalCostInterface> */
     private array $additionalCosts = [];
-
-    public function getProducts(): array
-    {
-        return $this->products;
-    }
-
-    public function addProduct(ProductQuoteInterface $product): static
-    {
-        $this->products[] = $product;
-
-        return $this;
-    }
-
-    public function getSubscriptions(): array
-    {
-        return $this->subscriptions;
-    }
-
-    public function addSubscription(SubscriptionQuoteInterface $subscription): static
-    {
-        $this->subscriptions[] = $subscription;
-
-        return $this;
-    }
 
     public function getActions(): array
     {

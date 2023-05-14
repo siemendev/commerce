@@ -17,12 +17,20 @@
                 <td>{{ product.price.totalPrice / 100 }} {{ product.price.currency }}</td>
             </tr>
         {% endfor %}
+        <tr>
+            <td colspan="4">Sub total</td>
+            <td>{{ quote.subTotalNet / 100 }}</td>
+        </tr>
         {% for additional_cost in quote.additionalCosts %}
             <tr>
                 <td colspan="4">{{ additional_cost.label }}</td>
                 <td>{{ additional_cost.amount / 100 }} {{ additional_cost.currency }}</td>
             </tr>
         {% endfor %}
+        <tr>
+            <td colspan="4">Total</td>
+            <td>{{ quote.totalNet / 100 }}</td>
+        </tr>
     </table>
 {% endif %}
 {% if quote.subscriptions %}

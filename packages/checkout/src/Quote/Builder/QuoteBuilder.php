@@ -34,7 +34,11 @@ class QuoteBuilder implements QuoteBuilderInterface
                 continue;
             }
             foreach ($additionalCostProvider->getAdditionalCosts($data) as $additionalCost) {
-                $quote->addAdditionalCost($additionalCost);
+                $quote
+                    ->addAdditionalCost($additionalCost)
+                    ->setTotalNet($quote->getTotalNet() + $additionalCost->getAmount())
+                    // todo implement tax calculation (setTotalGross)
+                ;
             }
         }
 
@@ -52,11 +56,19 @@ class QuoteBuilder implements QuoteBuilderInterface
                 );
                 continue;
             }
-            $quote->addProduct(
-                (new ProductQuote())
-                    ->setProduct($product)
-                    ->setPrice($this->priceResolver->getProductPrice($product))
-            );
+
+            $price = $this->priceResolver->getProductPrice($product);
+
+            $quote
+                ->addProduct(
+                    (new ProductQuote())
+                        ->setProduct($product)
+                        ->setPrice($price)
+                )
+                ->setSubTotalNet($quote->getSubTotalNet() + $price->getTotalPrice())
+                ->setTotalNet($quote->getTotalNet() + $price->getTotalPrice())
+                // todo implement tax calculation (setSubTotalGross)
+            ;
         }
 
         foreach ($cart->getSubscriptions() as $subscription) {

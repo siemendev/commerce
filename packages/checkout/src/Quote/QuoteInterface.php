@@ -20,4 +20,12 @@ interface QuoteInterface
 
     /** @return array<QuoteAdditionalCostInterface> */
     public function getAdditionalCosts(): array;
+
+    public function getSubTotalNet(): int;
+
+    public function getSubTotalGross(): int;
+
+    public function getTotalNet(): int;
+
+    public function getTotalGross(): int;
 }
