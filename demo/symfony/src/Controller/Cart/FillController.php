@@ -4,12 +4,10 @@ namespace App\Controller\Cart;
 
 use App\Commerce\Product;
 use App\Commerce\Step\AgeVerifiableCheckoutDataInterface;
-use App\Commerce\Step\AgeVerificationStep;
 use App\Commerce\Subscription;
 use App\Controller\AbstractCheckoutController;
+use Siemendev\Checkout\GiftCard\GiftCard;
 use Siemendev\Checkout\Step\Delivery\DeliverableCheckoutDataInterface;
-use Siemendev\Checkout\Step\Address\Delivery\DeliveryAddressStep;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -33,6 +31,12 @@ class FillController extends AbstractCheckoutController
                     ->setId('test-subscription-1'),
             ])
         ;
+        $this->getCheckoutData()->addGiftCard(
+            (new GiftCard())
+                ->setIdentifier('test-gift-card-1')
+                ->setValue(1500)
+                ->setCurrency('EUR')
+        );
 
         $this->saveCheckoutData($this->getCheckoutData());
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f6496cfb5bfa1a8d7a4d0366f0b1a082",
+    "content-hash": "fff952eb4d7bb5d672c4624e5d86f11f",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -2114,7 +2114,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/checkout",
-                "reference": "bd5bdefada4c6b1c81fc6806b3aacc4054e851e6"
+                "reference": "ca3398d34f2d4373210f4bab3d208e090ca08388"
             },
             "require": {
                 "php": ">=8.1"
@@ -2132,6 +2132,35 @@
                 }
             ],
             "description": "checkout abstraction",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "siemendev/checkout-gift-card",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "../../packages/gift-card",
+                "reference": "b5b9b947ec19deb7fe3bf5300f2f28a5528f822d"
+            },
+            "require": {
+                "php": ">=8.1",
+                "siemendev/checkout": "dev-main"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Siemendev\\Checkout\\GiftCard\\": "src/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Patrick Siemen",
+                    "email": "post@patrick-siemen.de"
+                }
+            ],
+            "description": "checkout gift card implementation",
             "transport-options": {
                 "relative": true
             }

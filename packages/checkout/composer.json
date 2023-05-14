@@ -15,11 +15,5 @@
     ],
     "require": {
         "php": ">=8.1"
-    },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "../product"
-        }
-    ]
+    }
 }

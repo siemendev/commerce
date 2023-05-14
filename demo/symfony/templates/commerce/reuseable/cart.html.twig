@@ -1,0 +1,46 @@
+{% if quote.products %}
+    <h2>Products</h2>
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Unit price</th>
+            <th>Total price</th>
+        </tr>
+        {% for product in quote.products %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ product.product.name }}</td>
+                <td>{{ product.product.quantity }}</td>
+                <td>{{ product.price.unitPrice / 100 }} {{ product.price.currency }}</td>
+                <td>{{ product.price.totalPrice / 100 }} {{ product.price.currency }}</td>
+            </tr>
+        {% endfor %}
+        {% for additional_cost in quote.additionalCosts %}
+            <tr>
+                <td colspan="4">{{ additional_cost.label }}</td>
+                <td>{{ additional_cost.amount / 100 }} {{ additional_cost.currency }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}
+{% if quote.subscriptions %}
+    <h2>Subscriptions</h2>
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Item</th>
+            <th>Price</th>
+            <th>Interval</th>
+        </tr>
+        {% for subscription in quote.subscriptions %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ subscription.subscription.name }}</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}

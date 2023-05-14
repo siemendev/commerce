@@ -49,6 +49,10 @@ services:
         arguments:
             $availabilityResolver: '@Siemendev\Checkout\Availability\AvailabilityResolver'
             $priceResolver: '@Siemendev\Checkout\Pricing\PriceResolver'
+            $additionalCostProviders:
+                - '@Siemendev\Checkout\GiftCard\Quote\GiftCardAdditionalCostProvider'
+
+    Siemendev\Checkout\GiftCard\Quote\GiftCardAdditionalCostProvider: ~
 
     Siemendev\Checkout\Pricing\PriceResolver:
         arguments:

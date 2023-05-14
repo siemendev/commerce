@@ -1,0 +1,27 @@
+{
+    "name": "siemendev/checkout-gift-card",
+    "description": "checkout gift card implementation",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Siemendev\\Checkout\\GiftCard\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Patrick Siemen",
+            "email": "post@patrick-siemen.de"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=8.1",
+        "siemendev/checkout": "dev-main"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../checkout"
+        }
+    ]
+}

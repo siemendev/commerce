@@ -3,6 +3,7 @@
 namespace Siemendev\Checkout\Quote;
 
 use Siemendev\Checkout\Quote\Action\QuoteActionInterface;
+use Siemendev\Checkout\Quote\AdditionalCost\QuoteAdditionalCostInterface;
 use Siemendev\Checkout\Quote\Product\ProductQuoteInterface;
 use Siemendev\Checkout\Quote\Subscription\SubscriptionQuoteInterface;
 
@@ -16,4 +17,7 @@ interface QuoteInterface
 
     /** @return array<QuoteActionInterface> */
     public function getActions(): array;
+
+    /** @return array<QuoteAdditionalCostInterface> */
+    public function getAdditionalCosts(): array;
 }

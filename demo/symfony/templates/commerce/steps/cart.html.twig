@@ -4,46 +4,7 @@
     {% if error is defined %}
         <p>Error: {{ error }}</p>
     {% endif %}
-    {% if quote.products %}
-        <h2>Products</h2>
-    <table>
-        <tr>
-            <th>#</th>
-            <th>Item</th>
-            <th>Quantity</th>
-            <th>Unit price</th>
-            <th>Total price</th>
-        </tr>
-        {% for product in quote.products %}
-        <tr>
-            <td>{{ loop.index }}</td>
-            <td>{{ product.product.name }}</td>
-            <td>{{ product.product.quantity }}</td>
-            <td>{{ product.price.unitPrice }} {{ product.price.currency }}</td>
-            <td>{{ product.price.totalPrice }} {{ product.price.currency }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-    {% endif %}
-    {% if quote.subscriptions %}
-        <h2>Subscriptions</h2>
-        <table>
-            <tr>
-                <th>#</th>
-                <th>Item</th>
-                <th>Price</th>
-                <th>Interval</th>
-            </tr>
-            {% for subscription in quote.subscriptions %}
-                <tr>
-                    <td>{{ loop.index }}</td>
-                    <td>{{ subscription.subscription.name }}</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-            {% endfor %}
-        </table>
-    {% endif %}
+    {% include 'commerce/reuseable/cart.html.twig' with { 'quote': quote } only %}
     {% if error is not defined %}
     <p>
         <a href="{{ continue }}">Continue to check out</a>
