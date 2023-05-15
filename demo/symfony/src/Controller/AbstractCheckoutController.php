@@ -10,6 +10,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
 
+/**
+ * FYI this is the worst possible implementation and should not be viewed as a best practice.
+ * Please implement a proper service architecture for handling the checkout data in your application.
+ */
 abstract class AbstractCheckoutController extends AbstractController
 {
     public function __construct(
