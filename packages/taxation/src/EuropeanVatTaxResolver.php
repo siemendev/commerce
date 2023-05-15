@@ -6,7 +6,7 @@ use Mpociot\VatCalculator\VatCalculator;
 use Siemendev\Checkout\Data\CheckoutDataInterface;
 use Siemendev\Checkout\Item\ItemInterface;
 
-class EuropeanVatEuropeanVatTaxResolver implements EuropeanVatTaxResolverInterface
+class EuropeanVatTaxResolver implements EuropeanVatTaxResolverInterface
 {
     public function __construct(private readonly ?string $businessCountryCode = null)
     {
