@@ -41,7 +41,7 @@ class DeliveryAddressController extends AbstractCheckoutController
             $address->setState($state);
         }
         if ($country = $request->request->get('country')) {
-            $address->setCountry($country);
+            $address->setCountryCode($country);
         }
 
         if ('POST' === $request->getMethod()) {

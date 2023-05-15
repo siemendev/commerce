@@ -2,34 +2,44 @@
     <h2>Products</h2>
     <table>
         <tr>
-            <th>#</th>
+            <th></th>
             <th>Item</th>
-            <th>Quantity</th>
-            <th>Unit price</th>
-            <th>Total price</th>
+            <th>Vat Rate</th>
+            <th>Unit price (net)</th>
+            <th>Unit price (gross)</th>
+            <th>Total price (net)</th>
+            <th>Total price (gross)</th>
         </tr>
         {% for product in quote.products %}
             <tr>
-                <td>{{ loop.index }}</td>
+                <td>{{ product.product.quantity }}x</td>
                 <td>{{ product.product.name }}</td>
-                <td>{{ product.product.quantity }}</td>
-                <td>{{ product.price.unitPrice / 100 }} {{ product.price.currency }}</td>
-                <td>{{ product.price.totalPrice / 100 }} {{ product.price.currency }}</td>
+                <td>{{ product.price.vatRate }}%</td>
+                <td>{{ product.price.unitPriceNet / 100 }} {{ product.price.currency }}</td>
+                <td>{{ product.price.unitPriceGross / 100 }} {{ product.price.currency }}</td>
+                <td>{{ product.price.totalPriceNet / 100 }} {{ product.price.currency }}</td>
+                <td>{{ product.price.totalPriceGross / 100 }} {{ product.price.currency }}</td>
             </tr>
         {% endfor %}
         <tr>
+            <td>&nbsp;</td>
             <td colspan="4">Sub total</td>
             <td>{{ quote.subTotalNet / 100 }}</td>
+            <td>{{ quote.subTotalGross / 100 }}</td>
         </tr>
         {% for additional_cost in quote.additionalCosts %}
             <tr>
+                <td>&nbsp;</td>
                 <td colspan="4">{{ additional_cost.label }}</td>
-                <td>{{ additional_cost.amount / 100 }} {{ additional_cost.currency }}</td>
+                <td>{{ additional_cost.amountNet / 100 }} {{ additional_cost.currency }}</td>
+                <td>{{ additional_cost.amountGross / 100 }} {{ additional_cost.currency }}</td>
             </tr>
         {% endfor %}
         <tr>
+            <td>&nbsp;</td>
             <td colspan="4">Total</td>
             <td>{{ quote.totalNet / 100 }}</td>
+            <td>{{ quote.totalGross / 100 }}</td>
         </tr>
     </table>
 {% endif %}

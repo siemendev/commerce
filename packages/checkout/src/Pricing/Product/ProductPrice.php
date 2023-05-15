@@ -6,9 +6,55 @@ class ProductPrice implements ProductPriceInterface
 {
     private string $currency;
 
-    private int $unitPrice;
+    private float $vatRate;
 
-    private int $totalPrice;
+    private int $unitPriceNet;
+
+    private int $unitPriceGross;
+
+    private int $totalPriceNet;
+
+    private int $totalPriceGross;
+
+    public function createFromGrossPrice(int $grossPrice, float $vatRate, string $currency, int $quantity): static
+    {
+        $netPrice = (int) round($grossPrice / (100 + $vatRate) * 100);
+
+        return (new static())
+            ->setCurrency($currency)
+            ->setVatRate($vatRate)
+            ->setUnitPriceNet($netPrice)
+            ->setUnitPriceGross($grossPrice)
+            ->setTotalPriceNet($netPrice * $quantity)
+            ->setTotalPriceGross($grossPrice * $quantity)
+        ;
+    }
+
+    public static function createFromNetPrice(int $netPrice, float $vatRate, string $currency, int $quantity): static
+    {
+        $grossPrice = (int) round($netPrice + $netPrice / 100 * $vatRate);
+
+        return (new static())
+            ->setCurrency($currency)
+            ->setVatRate($vatRate)
+            ->setUnitPriceNet($netPrice)
+            ->setUnitPriceGross($grossPrice)
+            ->setTotalPriceNet($netPrice * $quantity)
+            ->setTotalPriceGross($grossPrice * $quantity)
+        ;
+    }
+
+    public function getVatRate(): float
+    {
+        return $this->vatRate;
+    }
+
+    public function setVatRate(float $vatRate): static
+    {
+        $this->vatRate = $vatRate;
+
+        return $this;
+    }
 
     public function getCurrency(): string
     {
@@ -22,26 +68,50 @@ class ProductPrice implements ProductPriceInterface
         return $this;
     }
 
-    public function getUnitPrice(): int
+    public function getUnitPriceNet(): int
     {
-        return $this->unitPrice;
+        return $this->unitPriceNet;
     }
 
-    public function setUnitPrice(int $int): static
+    public function setUnitPriceNet(int $int): static
     {
-        $this->unitPrice = $int;
+        $this->unitPriceNet = $int;
 
         return $this;
     }
 
-    public function getTotalPrice(): int
+    public function getTotalPriceNet(): int
     {
-        return $this->totalPrice;
+        return $this->totalPriceNet;
     }
 
-    public function setTotalPrice(int $int): static
+    public function setTotalPriceNet(int $int): static
     {
-        $this->totalPrice = $int;
+        $this->totalPriceNet = $int;
+
+        return $this;
+    }
+
+    public function getUnitPriceGross(): int
+    {
+        return $this->unitPriceGross;
+    }
+
+    public function setUnitPriceGross(int $unitPriceGross): static
+    {
+        $this->unitPriceGross = $unitPriceGross;
+
+        return $this;
+    }
+
+    public function getTotalPriceGross(): int
+    {
+        return $this->totalPriceGross;
+    }
+
+    public function setTotalPriceGross(int $totalPriceGross): static
+    {
+        $this->totalPriceGross = $totalPriceGross;
 
         return $this;
     }

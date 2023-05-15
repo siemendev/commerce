@@ -8,7 +8,13 @@ interface ProductPriceInterface extends PriceInterface
 {
     public function getCurrency(): string;
 
-    public function getUnitPrice(): int;
+    public function getVatRate(): float;
 
-    public function getTotalPrice(): int;
+    public function getUnitPriceNet(): int;
+
+    public function getUnitPriceGross(): int;
+
+    public function getTotalPriceNet(): int;
+
+    public function getTotalPriceGross(): int;
 }

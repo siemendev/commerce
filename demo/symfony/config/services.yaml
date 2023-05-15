@@ -47,8 +47,20 @@ services:
 
     Siemendev\Checkout\Quote\Builder\QuoteBuilder:
         arguments:
+            $quotePartBuilders:
+                - '@Siemendev\Checkout\Quote\Builder\Part\ProductsQuotePartBuilder'
+                - '@Siemendev\Checkout\Quote\Builder\Part\SubscriptionsQuotePartBuilder'
+                - '@Siemendev\Checkout\Quote\Builder\Part\AdditionalCostsQuotePartBuilder'
+    Siemendev\Checkout\Quote\Builder\Part\ProductsQuotePartBuilder:
+        arguments:
             $availabilityResolver: '@Siemendev\Checkout\Availability\AvailabilityResolver'
             $priceResolver: '@Siemendev\Checkout\Pricing\PriceResolver'
+    Siemendev\Checkout\Quote\Builder\Part\SubscriptionsQuotePartBuilder:
+        arguments:
+            $availabilityResolver: '@Siemendev\Checkout\Availability\AvailabilityResolver'
+            $priceResolver: '@Siemendev\Checkout\Pricing\PriceResolver'
+    Siemendev\Checkout\Quote\Builder\Part\AdditionalCostsQuotePartBuilder:
+        arguments:
             $additionalCostProviders:
                 - '@Siemendev\Checkout\GiftCard\Quote\GiftCardAdditionalCostProvider'
 
@@ -63,3 +75,10 @@ services:
         arguments:
             $providers:
                 - '@App\Commerce\Provider\AvailabilityProvider'
+
+    App\Commerce\Provider\PriceProvider:
+        arguments:
+            $taxResolver: '@Siemendev\Checkout\Taxation\EuropeanVatTaxResolver'
+    Siemendev\Checkout\Taxation\EuropeanVatTaxResolver:
+        arguments:
+            $businessCountryCode: 'DE'

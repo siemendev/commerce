@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Commerce\CheckoutData;
 use Siemendev\Checkout\Checkout;
-use Siemendev\Checkout\Data\CheckoutDataInterface;
+use Siemendev\Checkout\Step\Address\Address;
 use Siemendev\Checkout\Step\StepInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -35,10 +35,15 @@ abstract class AbstractCheckoutController extends AbstractController
             return $checkoutData;
         }
 
-        return $this->saveCheckoutData(new CheckoutData());
+        return $this->saveCheckoutData((new CheckoutData())
+            ->setBillingAddress(
+                (new Address())
+                    ->setCountryCode('FR')
+            )
+        );
     }
 
-    public function saveCheckoutData(CheckoutDataInterface $checkoutData): CheckoutData
+    public function saveCheckoutData(CheckoutData $checkoutData): CheckoutData
     {
         $this->requestStack->getMainRequest()?->getSession()->set('checkout_data', $checkoutData);
 
@@ -50,9 +55,14 @@ abstract class AbstractCheckoutController extends AbstractController
         return $this->redirect($this->getCurrentStepUrl());
     }
 
+    protected function getCurrentStepIdentifier(): string
+    {
+        return $this->getCheckout()->getCurrentStep($this->getCheckoutData())::stepIdentifier();
+    }
+
     protected function getCurrentStepUrl(): string
     {
-        return $this->getStepUrl($this->getCheckout()->getCurrentStep($this->getCheckoutData())::stepIdentifier());
+        return $this->getStepUrl($this->getCurrentStepIdentifier());
     }
 
     protected function getStepUrl(string $stepIdentifier): string

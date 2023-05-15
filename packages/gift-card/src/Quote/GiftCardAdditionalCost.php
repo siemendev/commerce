@@ -21,9 +21,14 @@ class GiftCardAdditionalCost implements QuoteAdditionalCostInterface
         return $this;
     }
 
-    public function getAmount(): int
+    public function getAmountNet(): int
     {
         return $this->value * -1;
+    }
+
+    public function getAmountGross(): int
+    {
+        return $this->getAmountNet();
     }
 
     public function setCurrency(string $currency): static

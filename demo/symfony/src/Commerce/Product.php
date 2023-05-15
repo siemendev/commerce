@@ -6,10 +6,12 @@ use Siemendev\Checkout\Item\Quantifiable;
 use Siemendev\Checkout\Item\RequiredCheckoutData;
 use Siemendev\Checkout\Item\Product\ProductInterface;
 use Siemendev\Checkout\Item\QuantifiableItemInterface;
+use Siemendev\Checkout\Taxation\VatTyped;
+use Siemendev\Checkout\Taxation\VatTypedItemInterface;
 
-class Product implements ProductInterface, QuantifiableItemInterface
+class Product implements ProductInterface, VatTypedItemInterface
 {
-    use RequiredCheckoutData, Quantifiable;
+    use RequiredCheckoutData, Quantifiable, VatTyped;
 
     private string $id;
 

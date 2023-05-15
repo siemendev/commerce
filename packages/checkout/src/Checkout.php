@@ -50,6 +50,6 @@ class Checkout implements CheckoutInterface
 
     public function getQuoteByCheckoutData(CheckoutDataInterface $data): Quote
     {
-        return $this->quoteBuilder->getQuoteByCheckoutData($data);
+        return $this->quoteBuilder->getQuote($data);
     }
 }

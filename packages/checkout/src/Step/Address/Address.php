@@ -11,7 +11,8 @@ class Address implements AddressInterface
     private string $city = '';
     private ?string $state = null;
     private string $postalCode = '';
-    private string $country = '';
+    private string $countryCode = '';
+    private bool $company = false;
 
     public function getAddressLine1(): string {
         return $this->addressLine1;
@@ -63,12 +64,22 @@ class Address implements AddressInterface
         return $this;
     }
 
-    public function getCountry(): string {
-        return $this->country;
+    public function getCountryCode(): string {
+        return $this->countryCode;
     }
 
-    public function setCountry(string $country): static {
-        $this->country = $country;
+    public function setCountryCode(string $countryCode): static {
+        $this->countryCode = $countryCode;
+
+        return $this;
+    }
+
+    public function isCompany(): bool {
+        return $this->company;
+    }
+
+    public function setCompany(bool $company): static {
+        $this->company = $company;
 
         return $this;
     }
@@ -83,7 +94,7 @@ class Address implements AddressInterface
         if (empty($this->city)) {
             throw new ValidationException('City is required');
         }
-        if (empty($this->country)) {
+        if (empty($this->countryCode)) {
             throw new ValidationException('Country is required');
         }
     }

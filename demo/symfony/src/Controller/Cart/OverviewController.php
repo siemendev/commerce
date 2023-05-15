@@ -16,6 +16,7 @@ class OverviewController extends AbstractCheckoutController
         $data = [
             'quote' => $this->getCheckout()->getQuoteByCheckoutData($this->getCheckoutData()),
             'continue' => $this->getCurrentStepUrl(),
+            'step_name' => $this->getCurrentStepIdentifier()
         ];
         try {
             $this->getCheckout()->validateStep($this->getCheckoutData(), CartStep::STEP_IDENTIFIER);

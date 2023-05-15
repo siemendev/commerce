@@ -6,7 +6,9 @@ interface QuoteAdditionalCostInterface
 {
     public function getLabel(): string;
 
-    public function getAmount(): int;
+    public function getAmountNet(): int;
+
+    public function getAmountGross(): int;
 
     public function getCurrency(): string;
 }

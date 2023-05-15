@@ -15,4 +15,6 @@ interface ItemInterface
      * returns a unique identifier for this item
      */
     public function getItemIdentifier(): string;
+
+    public function getQuantity(): int;
 }

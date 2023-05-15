@@ -41,7 +41,7 @@ class BillingAddressController extends AbstractCheckoutController
             $address->setState($state);
         }
         if ($country = $request->request->get('country')) {
-            $address->setCountry($country);
+            $address->setCountryCode($country);
         }
 
         if ($request->request->get('useForDelivery') && $address->isValid()) {

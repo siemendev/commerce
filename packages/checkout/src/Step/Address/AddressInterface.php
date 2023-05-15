@@ -12,4 +12,10 @@ interface AddressInterface
     public function validate(): void;
 
     public function isValid(): bool;
+
+    public function getCountryCode(): string;
+
+    public function getPostalCode(): string;
+
+    public function isCompany(): bool;
 }

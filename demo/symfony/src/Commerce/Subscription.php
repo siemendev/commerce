@@ -35,4 +35,9 @@ class Subscription implements SubscriptionInterface
         $this->name = $name;
         return $this;
     }
+
+    public function getQuantity(): int
+    {
+        return 1;
+    }
 }

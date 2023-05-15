@@ -7,7 +7,7 @@
     {% include 'commerce/reuseable/cart.html.twig' with { 'quote': quote } only %}
     {% if error is not defined %}
     <p>
-        <a href="{{ continue }}">Continue to check out</a>
+        <a href="{{ continue }}">Continue to #{{ step_name }}</a>
     </p>
     {% endif %}
 {% endblock %}
