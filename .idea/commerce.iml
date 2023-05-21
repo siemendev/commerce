@@ -7,6 +7,7 @@
       <excludeFolder url="file://$MODULE_DIR$/packages/gift-card/vendor/siemendev" />
       <excludeFolder url="file://$MODULE_DIR$/packages/checkout/vendor/siemendev" />
       <excludeFolder url="file://$MODULE_DIR$/packages/taxation/vendor/siemendev" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/symfony-bridge/vendor/siemendev" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -1,0 +1,20 @@
+checkout:
+  data_creator: App\Commerce\DataCreator
+  steps:
+    - checkout.steps.cart
+    - checkout.steps.billing_address
+    - checkout.steps.delivery_address
+    - App\Commerce\Step\AgeVerificationStep
+    - checkout.steps.summary
+  quote_builders:
+    - checkout.quote_builder.part.products
+    - checkout.quote_builder.part.subscriptions
+    - checkout.quote_builder.part.additional_costs
+  product_price_providers:
+    - App\Commerce\Provider\PriceProvider
+  subscription_price_providers:
+    - App\Commerce\Provider\PriceProvider
+  additional_cost_providers:
+    - Siemendev\Checkout\GiftCard\Quote\GiftCardAdditionalCostProvider
+  availability_providers:
+    - App\Commerce\Provider\AvailabilityProvider

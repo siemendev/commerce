@@ -30,6 +30,13 @@ class StepMachine implements StepMachineInterface
         return $this;
     }
 
+    public function addStep(StepInterface $step): static
+    {
+        $this->steps[] = $step;
+
+        return $this;
+    }
+
     public function validate(CheckoutDataInterface $data): void
     {
         foreach ($this->getRequiredSteps($data) as $step) {

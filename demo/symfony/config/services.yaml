@@ -23,62 +23,12 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-    Siemendev\Checkout\Checkout:
-        arguments:
-            $stepMachine: '@Siemendev\Checkout\Step\StepMachine'
-            $quoteBuilder: '@Siemendev\Checkout\Quote\Builder\QuoteBuilder'
-
-    Siemendev\Checkout\Step\StepMachine:
-        arguments:
-            $steps:
-                - '@Siemendev\Checkout\Step\Cart\CartStep'
-                - '@Siemendev\Checkout\Step\Address\Billing\BillingAddressStep'
-                - '@Siemendev\Checkout\Step\Address\Delivery\DeliveryAddressStep'
-                - '@App\Commerce\Step\AgeVerificationStep'
-#                - '@Siemendev\Checkout\Step\PaymentStep'
-                - '@Siemendev\Checkout\Step\Summary\SummaryStep'
-
-    Siemendev\Checkout\Step\Cart\CartStep:
-        arguments:
-            $availabilityResolver: '@Siemendev\Checkout\Availability\AvailabilityResolver'
-    Siemendev\Checkout\Step\Address\Delivery\DeliveryAddressStep: ~
-    Siemendev\Checkout\Step\Address\Billing\BillingAddressStep: ~
-    Siemendev\Checkout\Step\Summary\SummaryStep: ~
-
-    Siemendev\Checkout\Quote\Builder\QuoteBuilder:
-        arguments:
-            $quotePartBuilders:
-                - '@Siemendev\Checkout\Quote\Builder\Part\ProductsQuotePartBuilder'
-                - '@Siemendev\Checkout\Quote\Builder\Part\SubscriptionsQuotePartBuilder'
-                - '@Siemendev\Checkout\Quote\Builder\Part\AdditionalCostsQuotePartBuilder'
-    Siemendev\Checkout\Quote\Builder\Part\ProductsQuotePartBuilder:
-        arguments:
-            $availabilityResolver: '@Siemendev\Checkout\Availability\AvailabilityResolver'
-            $priceResolver: '@Siemendev\Checkout\Pricing\PriceResolver'
-    Siemendev\Checkout\Quote\Builder\Part\SubscriptionsQuotePartBuilder:
-        arguments:
-            $availabilityResolver: '@Siemendev\Checkout\Availability\AvailabilityResolver'
-            $priceResolver: '@Siemendev\Checkout\Pricing\PriceResolver'
-    Siemendev\Checkout\Quote\Builder\Part\AdditionalCostsQuotePartBuilder:
-        arguments:
-            $additionalCostProviders:
-                - '@Siemendev\Checkout\GiftCard\Quote\GiftCardAdditionalCostProvider'
-
     Siemendev\Checkout\GiftCard\Quote\GiftCardAdditionalCostProvider: ~
-
-    Siemendev\Checkout\Pricing\PriceResolver:
-        arguments:
-            $productPriceProviders: ['@App\Commerce\Provider\PriceProvider']
-            $subscriptionPriceProviders: ['@App\Commerce\Provider\PriceProvider']
-
-    Siemendev\Checkout\Availability\AvailabilityResolver:
-        arguments:
-            $providers:
-                - '@App\Commerce\Provider\AvailabilityProvider'
 
     App\Commerce\Provider\PriceProvider:
         arguments:
             $taxResolver: '@Siemendev\Checkout\Taxation\EuropeanVatTaxResolver'
+
     Siemendev\Checkout\Taxation\EuropeanVatTaxResolver:
         arguments:
             $businessCountryCode: 'DE'

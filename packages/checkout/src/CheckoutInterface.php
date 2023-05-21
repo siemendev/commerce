@@ -11,6 +11,9 @@ interface CheckoutInterface
 {
     public function getCurrentStep(CheckoutDataInterface $data): StepInterface;
 
+    /**
+     * @return array<StepInterface>
+     */
     public function getRequiredSteps(CheckoutDataInterface $data): array;
 
     public function isStepAllowed(CheckoutDataInterface $data, string $stepIdentifier): bool;

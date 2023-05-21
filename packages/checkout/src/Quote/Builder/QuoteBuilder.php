@@ -12,8 +12,22 @@ class QuoteBuilder implements QuoteBuilderInterface
      * @param array<QuotePartBuilderInterface> $quotePartBuilders
      */
     public function __construct(
-        private readonly array $quotePartBuilders = [],
+        private array $quotePartBuilders = [],
     ) {
+    }
+
+    public function setQuotePartBuilders(array $quotePartBuilders): static
+    {
+        $this->quotePartBuilders = $quotePartBuilders;
+
+        return $this;
+    }
+
+    public function addQuotePartBuilder(QuotePartBuilderInterface $quotePartBuilder): static
+    {
+        $this->quotePartBuilders[] = $quotePartBuilder;
+
+        return $this;
     }
 
     public function getQuote(CheckoutDataInterface $data): Quote

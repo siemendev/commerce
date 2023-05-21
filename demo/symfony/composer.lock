@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d551e1d929163d4818dca77bea254a91",
+    "content-hash": "ef884559ef1f9f429579af658352a05a",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -2242,6 +2242,36 @@
                 }
             ],
             "description": "checkout gift card implementation",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "siemendev/checkout-symfony-bridge",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "../../packages/symfony-bridge",
+                "reference": "a6e1a47642f9ae9586a90a0a536aeded81053152"
+            },
+            "require": {
+                "php": ">=8.1",
+                "siemendev/checkout": "dev-main",
+                "symfony/framework-bundle": "^5.0|^6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Siemendev\\Checkout\\SymfonyBridge\\": "src/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Patrick Siemen",
+                    "email": "post@patrick-siemen.de"
+                }
+            ],
+            "description": "checkout symfony bridge",
             "transport-options": {
                 "relative": true
             }
@@ -8057,16 +8087,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "9.6.7",
+            "version": "9.6.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "c993f0d3b0489ffc42ee2fe0bd645af1538a63b2"
+                "reference": "17d621b3aff84d0c8b62539e269e87d8d5baa76e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c993f0d3b0489ffc42ee2fe0bd645af1538a63b2",
-                "reference": "c993f0d3b0489ffc42ee2fe0bd645af1538a63b2",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/17d621b3aff84d0c8b62539e269e87d8d5baa76e",
+                "reference": "17d621b3aff84d0c8b62539e269e87d8d5baa76e",
                 "shasum": ""
             },
             "require": {
@@ -8140,7 +8170,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.6.7"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.6.8"
             },
             "funding": [
                 {
@@ -8156,7 +8186,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-04-14T08:58:40+00:00"
+            "time": "2023-05-11T05:14:45+00:00"
         },
         {
             "name": "sebastian/cli-parser",
@@ -9715,7 +9745,8 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "siemendev/checkout": 20,
-        "siemendev/checkout-gift-card": 20
+        "siemendev/checkout-gift-card": 20,
+        "siemendev/checkout-taxation": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

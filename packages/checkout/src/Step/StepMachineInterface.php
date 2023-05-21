@@ -7,8 +7,6 @@ use Siemendev\Checkout\Step\Exception\AssignedValidationException;
 
 interface StepMachineInterface
 {
-    public function setSteps(array $steps): static;
-
     /**
      * @throws AssignedValidationException
      */

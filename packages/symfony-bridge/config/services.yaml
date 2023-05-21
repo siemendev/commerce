@@ -1,0 +1,75 @@
+services:
+
+  # convenience services
+  checkout.data_manager:
+    class: 'Siemendev\Checkout\SymfonyBridge\Data\CheckoutDataManager'
+    public: true
+    arguments:
+      $requestStack: '@request_stack'
+  Siemendev\Checkout\SymfonyBridge\Data\CheckoutDataManager:
+    alias: 'checkout.data_manager'
+    public: false
+
+  checkout.data:
+    class: Siemendev\Checkout\Data\CheckoutDataInterface
+    public: true
+    shared: false
+    factory: [ '@checkout.data_manager', 'getCheckoutData' ]
+  Siemendev\Checkout\Data\CheckoutDataInterface:
+    alias: 'checkout.data'
+    public: false
+
+  # checkout services
+  Siemendev\Checkout\Checkout: '@checkout'
+  checkout:
+    class: 'Siemendev\Checkout\Checkout'
+    public: true
+    arguments:
+      $stepMachine: '@checkout.step_machine'
+      $quoteBuilder: '@checkout.quote_builder'
+  
+  checkout.step_machine:
+    public: false
+    class: 'Siemendev\Checkout\Step\StepMachine'
+  checkout.steps.cart:
+    public: false
+    class: 'Siemendev\Checkout\Step\Cart\CartStep'
+    arguments:
+      $availabilityResolver: '@checkout.availability_resolver'
+  checkout.steps.delivery_address:
+    public: false
+    class: 'Siemendev\Checkout\Step\Address\Delivery\DeliveryAddressStep'
+  checkout.steps.billing_address:
+    public: false
+    class: 'Siemendev\Checkout\Step\Address\Billing\BillingAddressStep'
+  checkout.steps.summary:
+    public: false
+    class: 'Siemendev\Checkout\Step\Summary\SummaryStep'
+  
+  checkout.quote_builder:
+    public: false
+    class: 'Siemendev\Checkout\Quote\Builder\QuoteBuilder'
+  checkout.quote_builder.part.products:
+    public: false
+    class: 'Siemendev\Checkout\Quote\Builder\Part\ProductsQuotePartBuilder'
+    arguments:
+      $availabilityResolver: '@checkout.availability_resolver'
+      $priceResolver: '@checkout.price_resolver'
+  checkout.quote_builder.part.subscriptions:
+    public: false
+    class: 'Siemendev\Checkout\Quote\Builder\Part\SubscriptionsQuotePartBuilder'
+    arguments:
+      $availabilityResolver: '@checkout.availability_resolver'
+      $priceResolver: '@checkout.price_resolver'
+
+  checkout.quote_builder.part.additional_costs:
+    public: false
+    class: 'Siemendev\Checkout\Quote\Builder\Part\AdditionalCostsQuotePartBuilder'
+  
+  checkout.price_resolver:
+    public: false
+    class: 'Siemendev\Checkout\Pricing\PriceResolver'
+  
+  checkout.availability_resolver:
+    public: false
+    class: 'Siemendev\Checkout\Availability\AvailabilityResolver'

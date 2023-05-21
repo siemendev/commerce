@@ -6,6 +6,7 @@ use Siemendev\Checkout\Step\Exception\ValidationException;
 
 class Address implements AddressInterface
 {
+    private string $name = '';
     private string $addressLine1 = '';
     private ?string $addressLine2 = null;
     private string $city = '';
@@ -13,6 +14,16 @@ class Address implements AddressInterface
     private string $postalCode = '';
     private string $countryCode = '';
     private bool $company = false;
+
+    public function getName(): string {
+        return $this->name;
+    }
+
+    public function setName(string $name): static {
+        $this->name = $name;
+
+        return $this;
+    }
 
     public function getAddressLine1(): string {
         return $this->addressLine1;
@@ -85,6 +96,9 @@ class Address implements AddressInterface
     }
 
     public function validate(): void {
+        if (empty($this->name)) {
+            throw new ValidationException('Address line 1 is required');
+        }
         if (empty($this->addressLine1)) {
             throw new ValidationException('Address line 1 is required');
         }

@@ -22,9 +22,29 @@ class PriceResolver implements PriceResolverInterface
     ) {
     }
 
+    /**
+     * @param array<ProductPriceProviderInterface> $productPriceProviders
+     */
+    public function setProductPriceProviders(array $productPriceProviders): static
+    {
+        $this->productPriceProviders = $productPriceProviders;
+
+        return $this;
+    }
+
     public function addProductPriceProvider(ProductPriceProviderInterface $provider): static
     {
         $this->productPriceProviders[] = $provider;
+
+        return $this;
+    }
+
+    /**
+     * @param array<SubscriptionPriceProviderInterface> $subscriptionPriceProviders
+     */
+    public function setSubscriptionPriceProviders(array $subscriptionPriceProviders): static
+    {
+        $this->subscriptionPriceProviders = $subscriptionPriceProviders;
 
         return $this;
     }

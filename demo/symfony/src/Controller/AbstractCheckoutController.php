@@ -4,21 +4,21 @@ namespace App\Controller;
 
 use App\Commerce\CheckoutData;
 use Siemendev\Checkout\Checkout;
-use Siemendev\Checkout\Step\Address\Address;
 use Siemendev\Checkout\Step\StepInterface;
+use Siemendev\Checkout\SymfonyBridge\Data\CheckoutDataManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * FYI this is the worst possible implementation and should not be viewed as a best practice.
  * Please implement a proper service architecture for handling the checkout data in your application.
+ * Why is this bad? -> https://en.wikipedia.org/wiki/Composition_over_inheritance
  */
 abstract class AbstractCheckoutController extends AbstractController
 {
     public function __construct(
         private readonly Checkout $checkout,
-        private readonly RequestStack $requestStack,
+        private readonly CheckoutDataManager $checkoutDataManager,
     ) {
     }
 
@@ -29,23 +29,12 @@ abstract class AbstractCheckoutController extends AbstractController
 
     public function getCheckoutData(): CheckoutData
     {
-        $checkoutData = $this->requestStack->getMainRequest()?->getSession()->get('checkout_data');
-
-        if ($checkoutData instanceof CheckoutData) {
-            return $checkoutData;
-        }
-
-        return $this->saveCheckoutData((new CheckoutData())
-            ->setBillingAddress(
-                (new Address())
-                    ->setCountryCode('FR')
-            )
-        );
+        return $this->checkoutDataManager->getCheckoutData();
     }
 
     public function saveCheckoutData(CheckoutData $checkoutData): CheckoutData
     {
-        $this->requestStack->getMainRequest()?->getSession()->set('checkout_data', $checkoutData);
+        $this->checkoutDataManager->saveCheckoutData($checkoutData);
 
         return $checkoutData;
     }
