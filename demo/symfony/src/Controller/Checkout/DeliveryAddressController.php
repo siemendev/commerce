@@ -6,6 +6,7 @@ use App\Controller\AbstractCheckoutController;
 use Siemendev\Checkout\Step\Address\Address;
 use Siemendev\Checkout\Step\Address\Delivery\DeliveryAddressStep;
 use Siemendev\Checkout\Step\Exception\ValidationException;
+use Siemendev\Checkout\Step\StepInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,6 +26,9 @@ class DeliveryAddressController extends AbstractCheckoutController
             $this->getCheckoutData()->setDeliveryAddress($address = new Address());
         }
 
+        if ($name = $request->request->get('name')) {
+            $address->setName($name);
+        }
         if ($addressLine1 = $request->request->get('address_line1')) {
             $address->setAddressLine1($addressLine1);
         }

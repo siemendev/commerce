@@ -5,7 +5,9 @@ namespace App\Controller\Checkout;
 use App\Controller\AbstractCheckoutController;
 use Siemendev\Checkout\Step\Address\Address;
 use Siemendev\Checkout\Step\Address\Billing\BillingAddressStep;
+use Siemendev\Checkout\Step\Address\Delivery\DeliveryAddressStep;
 use Siemendev\Checkout\Step\Exception\ValidationException;
+use Siemendev\Checkout\Step\StepInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,6 +27,9 @@ class BillingAddressController extends AbstractCheckoutController
         }
         /** @var Address $address */
 
+        if ($name = $request->request->get('name')) {
+            $address->setName($name);
+        }
         if ($addressLine1 = $request->request->get('address_line1')) {
             $address->setAddressLine1($addressLine1);
         }
@@ -59,6 +64,7 @@ class BillingAddressController extends AbstractCheckoutController
         }
 
         return $this->render('commerce/steps/billing_address.html.twig', [
+            'delivery_needed' => in_array(DeliveryAddressStep::stepIdentifier(), array_map(fn (StepInterface $step) => $step::stepIdentifier(), $this->getCheckout()->getRequiredSteps($this->getCheckoutData()))),
             'message' => $message ?? null,
             'address' => $address,
             'session' => $this->getCheckoutData(),
