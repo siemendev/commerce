@@ -1,8 +1,7 @@
 checkout:
   data_creator: App\Commerce\DataCreator
   steps:
-#    - App\Commerce\Step\CartStep
-    - checkout.steps.products_cart
+    - App\Commerce\Step\CartStep
     - checkout.steps.billing_address
     - checkout.steps.delivery_address
     - App\Commerce\Step\AgeVerificationStep

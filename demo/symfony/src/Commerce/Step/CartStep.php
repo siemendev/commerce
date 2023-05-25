@@ -5,13 +5,22 @@ namespace App\Commerce\Step;
 use Siemendev\Checkout\Data\CheckoutDataInterface;
 use Siemendev\Checkout\Products\Availability\Exception\AvailabilityProviderNotFoundException;
 use Siemendev\Checkout\Products\Data\ProductCheckoutDataInterface;
+use Siemendev\Checkout\Products\Step\CartStep as ProductsCartStep;
 use Siemendev\Checkout\Step\StepInterface;
 
+/**
+ * This is an example how to combine the two cart steps from the products and subscriptions packages into one.
+ */
 class CartStep implements StepInterface
 {
+    private ProductsCartStep $productsCartStep;
+
+//    private SubscriptionsCartStep $subscriptionsCartStep;
+
     public function __construct(
-        // load the cart steps for product and subscription
     ) {
+        $this->productsCartStep = new ProductsCartStep();
+//        $this->subscriptionsCartStep = new SubscriptionsCartStep();
     }
 
     public static function stepIdentifier(): string
@@ -30,14 +39,17 @@ class CartStep implements StepInterface
      */
     public function validate(CheckoutDataInterface $data): void
     {
-        // combine the two carts for product and subscription
+        $this->productsCartStep->validate($data);
+//        $this->subscriptionsCartStep->validate($data);
     }
 
     public function requiresCheckoutData(): array
     {
-        return [
-            ProductCheckoutDataInterface::class,
-//            SubscriptionCheckoutDataInterface::class,
-        ];
+//        return array_merge(
+//            $this->productsCartStep->requiresCheckoutData(),
+//            $this->subscriptionsCartStep->requiresCheckoutData(),
+//        );
+
+        return $this->productsCartStep->requiresCheckoutData();
     }
 }
