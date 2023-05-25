@@ -26,6 +26,7 @@ class AgeVerificationController extends AbstractCheckoutController
         return $this->render('commerce/steps/age_verification.html.twig', [
             'verified' => $this->getCheckoutData()->isAgeVerified(),
             'steps' => $this->getStepsData(),
+            'data' => $this->getCheckoutData(),
         ]);
     }
 }

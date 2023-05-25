@@ -20,7 +20,7 @@ class QuoteGenerator implements QuoteGeneratorInterface
 
     public function generate(CheckoutDataInterface $data): Quote
     {
-        $quote = new Quote();
+        $quote = (new Quote())->setCurrency($data->getCurrency());
 
         if (!$data instanceof ProductCheckoutDataInterface) {
             throw new LogicException(sprintf(

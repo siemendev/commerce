@@ -20,6 +20,7 @@ class SummaryController extends AbstractCheckoutController
         return $this->render('commerce/steps/summary.html.twig', [
             'steps' => $this->getStepsData(),
             'quote' => $this->getProductsQuoteGenerator()->generate($this->getCheckoutData()),
+            'data' => $this->getCheckoutData(),
         ]);
     }
 }

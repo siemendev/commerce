@@ -6,6 +6,8 @@ use Siemendev\Checkout\Products\AdditionalCost\AdditionalCostInterface;
 
 class Quote implements QuoteInterface
 {
+    private string $currency;
+
     /**
      * @var array<QuoteItemInterface>
      */
@@ -24,13 +26,25 @@ class Quote implements QuoteInterface
 
     private int $totalGross = 0;
 
+    public function getCurrency(): string
+    {
+        return $this->currency;
+    }
+
+    public function setCurrency(string $currency): static
+    {
+        $this->currency = $currency;
+
+        return $this;
+    }
+
     public function addQuoteItem(QuoteItemInterface $productQuote): static
     {
         $this->quoteItems[] = $productQuote;
-        $this->totalGross += $productQuote->getPrice()->getTotalPriceGross() * $productQuote->getQuantity();
-        $this->totalNet += $productQuote->getPrice()->getTotalPriceNet() * $productQuote->getQuantity();
-        $this->subTotalGross += $productQuote->getPrice()->getTotalPriceGross() * $productQuote->getQuantity();
-        $this->subTotalNet += $productQuote->getPrice()->getTotalPriceNet() * $productQuote->getQuantity();
+        $this->totalGross += $productQuote->getPrice()->getTotalPriceGross();
+        $this->totalNet += $productQuote->getPrice()->getTotalPriceNet();
+        $this->subTotalGross += $productQuote->getPrice()->getTotalPriceGross();
+        $this->subTotalNet += $productQuote->getPrice()->getTotalPriceNet();
 
         return $this;
     }

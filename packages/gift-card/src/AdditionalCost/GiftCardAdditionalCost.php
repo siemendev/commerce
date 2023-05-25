@@ -8,7 +8,6 @@ use Siemendev\Checkout\Products\AdditionalCost\AdditionalCostInterface;
 class GiftCardAdditionalCost implements AdditionalCostInterface
 {
     private int $value;
-    private string $currency;
 
     public function getLabel(): string
     {
@@ -30,17 +29,5 @@ class GiftCardAdditionalCost implements AdditionalCostInterface
     public function getAmountGross(): int
     {
         return $this->value * -1;
-    }
-
-    public function setCurrency(string $currency): static
-    {
-        $this->currency = $currency;
-
-        return $this;
-    }
-
-    public function getCurrency(): string
-    {
-        return $this->currency;
     }
 }

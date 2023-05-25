@@ -63,6 +63,7 @@ class DeliveryAddressController extends AbstractCheckoutController
             'address' => $address,
             'session' => $this->getCheckoutData(),
             'steps' => $this->getStepsData(),
+            'data' => $this->getCheckoutData(),
         ]);
     }
 }

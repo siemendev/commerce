@@ -16,31 +16,31 @@
                 <td>{{ item.product.quantity }}x</td>
                 <td>{{ item.product.name }}</td>
                 <td>{{ item.price.vatRate }}%</td>
-                <td>{{ item.price.unitPriceNet / 100 }} {{ item.price.currency }}</td>
-                <td>{{ item.price.unitPriceGross / 100 }} {{ item.price.currency }}</td>
-                <td>{{ item.price.totalPriceNet / 100 }} {{ item.price.currency }}</td>
-                <td>{{ item.price.totalPriceGross / 100 }} {{ item.price.currency }}</td>
+                <td>{{ (item.price.unitPriceNet / 100)|format_currency(quote.currency) }}</td>
+                <td>{{ (item.price.unitPriceGross / 100)|format_currency(quote.currency) }}</td>
+                <td>{{ (item.price.totalPriceNet / 100)|format_currency(quote.currency) }}</td>
+                <td>{{ (item.price.totalPriceGross / 100)|format_currency(quote.currency) }}</td>
             </tr>
         {% endfor %}
         <tr>
             <td>&nbsp;</td>
             <td colspan="4">Sub total</td>
-            <td>{{ quote.subTotalNet / 100 }}</td>
-            <td>{{ quote.subTotalGross / 100 }}</td>
+            <td>{{ (quote.subTotalNet / 100)|format_currency(quote.currency) }}</td>
+            <td>{{ (quote.subTotalGross / 100)|format_currency(quote.currency) }}</td>
         </tr>
         {% for additional_cost in quote.additionalCosts %}
             <tr>
                 <td>&nbsp;</td>
                 <td colspan="4">{{ additional_cost.label }}</td>
-                <td>{{ additional_cost.amountNet / 100 }} {{ additional_cost.currency }}</td>
-                <td>{{ additional_cost.amountGross / 100 }} {{ additional_cost.currency }}</td>
+                <td>{{ (additional_cost.amountNet / 100)|format_currency(quote.currency) }}</td>
+                <td>{{ (additional_cost.amountGross / 100)|format_currency(quote.currency) }}</td>
             </tr>
         {% endfor %}
         <tr>
             <td>&nbsp;</td>
             <td colspan="4">Total</td>
-            <td>{{ quote.totalNet / 100 }}</td>
-            <td>{{ quote.totalGross / 100 }}</td>
+            <td>{{ (quote.totalNet / 100)|format_currency(quote.currency) }}</td>
+            <td>{{ (quote.totalGross / 100)|format_currency(quote.currency) }}</td>
         </tr>
     </table>
 {% endif %}

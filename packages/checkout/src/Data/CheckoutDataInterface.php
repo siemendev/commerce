@@ -7,4 +7,5 @@ namespace Siemendev\Checkout\Data;
  */
 interface CheckoutDataInterface
 {
+    public function getCurrency(): string;
 }

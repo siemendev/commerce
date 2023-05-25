@@ -6,11 +6,11 @@ class GiftCard implements GiftCardInterface
 {
     private string $identifier;
 
-    private int $value;
-
     private string $currency;
 
-    private int $usedValue;
+    private int $value;
+
+    private int $usedValue = 0;
 
     public function getIdentifier(): string
     {
@@ -20,18 +20,6 @@ class GiftCard implements GiftCardInterface
     public function setIdentifier(string $identifier): static
     {
         $this->identifier = $identifier;
-
-        return $this;
-    }
-
-    public function getValue(): int
-    {
-        return $this->value;
-    }
-
-    public function setValue(int $value): static
-    {
-        $this->value = $value;
 
         return $this;
     }
@@ -48,12 +36,24 @@ class GiftCard implements GiftCardInterface
         return $this;
     }
 
+    public function getValue(): int
+    {
+        return $this->value;
+    }
+
+    public function setValue(int $value): static
+    {
+        $this->value = $value;
+
+        return $this;
+    }
+
     public function getUsedValue(): int
     {
         return $this->usedValue;
     }
 
-    public function setUsedValue(int $usedValue): static
+    public function updateUsedValue(int $usedValue): static
     {
         $this->usedValue = $usedValue;
 

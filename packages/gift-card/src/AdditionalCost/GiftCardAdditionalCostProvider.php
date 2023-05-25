@@ -24,6 +24,11 @@ class GiftCardAdditionalCostProvider implements AdditionalCostProviderInterface
         $openTotal = $quote->getTotalGross();
 
         foreach ($data->getGiftCards() as $giftCard) {
+            if ($giftCard->getCurrency() !== $data->getCurrency()) {
+                // todo add way to let user know we can't use this gift card because of currency mismatch
+                continue;
+            }
+
             // If the total is 0 or less, we don't need to add a gift card
             if ($openTotal <= 0) {
                 break;
@@ -34,11 +39,10 @@ class GiftCardAdditionalCostProvider implements AdditionalCostProviderInterface
                 $value = $openTotal;
             }
             $openTotal -= $value;
-            $giftCard->setUsedValue($value);
+            $giftCard->updateUsedValue($value);
 
             $additionalCosts[] = (new GiftCardAdditionalCost())
                 ->setGiftCardValue($value)
-                ->setCurrency($giftCard->getCurrency())
             ;
         }
 

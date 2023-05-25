@@ -4,8 +4,6 @@ namespace Siemendev\Checkout\Products\Pricing;
 
 interface PriceInterface
 {
-    public function getCurrency(): string;
-
     public function getVatRate(): float;
 
     public function getUnitPriceNet(): int;

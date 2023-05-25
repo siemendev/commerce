@@ -9,6 +9,4 @@ interface AdditionalCostInterface
     public function getAmountNet(): int;
 
     public function getAmountGross(): int;
-
-    public function getCurrency(): string;
 }

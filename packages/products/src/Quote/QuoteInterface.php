@@ -6,6 +6,8 @@ use Siemendev\Checkout\Products\AdditionalCost\AdditionalCostInterface;
 
 interface QuoteInterface
 {
+    public function getCurrency(): string;
+
     /** @return array<QuoteItemInterface> */
     public function getQuoteItems(): array;
 

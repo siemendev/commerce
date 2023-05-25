@@ -22,7 +22,10 @@ interface GiftCardInterface
     /**
      * The amount of the gift card that has actually been used (partial use of gift card).
      */
-    public function setUsedValue(int $usedValue): static;
+    public function updateUsedValue(int $usedValue): static;
 
+    /**
+     * The currency of the gift card. Only gift cards with the same currency as the order can be used.
+     */
     public function getCurrency(): string;
 }

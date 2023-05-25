@@ -26,7 +26,6 @@ class PriceProvider implements PriceProviderInterface
         return Price::createFromNetPrice(
             1000,
             $this->taxResolver->getProductTaxRate($product, $data),
-            'EUR',
             $product->getQuantity(),
         );
     }
