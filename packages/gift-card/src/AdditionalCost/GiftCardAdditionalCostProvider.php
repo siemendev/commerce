@@ -21,7 +21,7 @@ class GiftCardAdditionalCostProvider implements AdditionalCostProviderInterface
     {
         $additionalCosts = [];
 
-        $openTotal = $quote->getTotalNet();
+        $openTotal = $quote->getTotalGross();
 
         foreach ($data->getGiftCards() as $giftCard) {
             // If the total is 0 or less, we don't need to add a gift card

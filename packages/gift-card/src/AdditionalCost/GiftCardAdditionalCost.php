@@ -29,7 +29,7 @@ class GiftCardAdditionalCost implements AdditionalCostInterface
 
     public function getAmountGross(): int
     {
-        return $this->getAmountNet();
+        return $this->value * -1;
     }
 
     public function setCurrency(string $currency): static
