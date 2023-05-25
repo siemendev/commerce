@@ -10,6 +10,8 @@ class GiftCard implements GiftCardInterface
 
     private string $currency;
 
+    private int $usedValue;
+
     public function getIdentifier(): string
     {
         return $this->identifier;
@@ -42,6 +44,18 @@ class GiftCard implements GiftCardInterface
     public function setCurrency(string $currency): static
     {
         $this->currency = $currency;
+
+        return $this;
+    }
+
+    public function getUsedValue(): int
+    {
+        return $this->usedValue;
+    }
+
+    public function setUsedValue(int $usedValue): static
+    {
+        $this->usedValue = $usedValue;
 
         return $this;
     }

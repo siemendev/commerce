@@ -5,6 +5,7 @@ namespace Siemendev\Checkout\GiftCard\AdditionalCost;
 use Siemendev\Checkout\Data\CheckoutDataInterface;
 use Siemendev\Checkout\GiftCard\Data\GiftCardApplicableCheckoutDataInterface;
 use Siemendev\Checkout\Products\AdditionalCost\AdditionalCostProviderInterface;
+use Siemendev\Checkout\Products\Quote\QuoteInterface;
 
 class GiftCardAdditionalCostProvider implements AdditionalCostProviderInterface
 {
@@ -16,13 +17,27 @@ class GiftCardAdditionalCostProvider implements AdditionalCostProviderInterface
     /**
      * @param GiftCardApplicableCheckoutDataInterface&CheckoutDataInterface $data
      */
-    public function getAdditionalCosts(CheckoutDataInterface $data): array
+    public function getAdditionalCosts(CheckoutDataInterface $data, QuoteInterface $quote): array
     {
         $additionalCosts = [];
 
+        $openTotal = $quote->getTotalNet();
+
         foreach ($data->getGiftCards() as $giftCard) {
+            // If the total is 0 or less, we don't need to add a gift card
+            if ($openTotal <= 0) {
+                break;
+            }
+            $value = $giftCard->getValue();
+            // If the gift card value is higher than the open total, we need to reduce the (used) value
+            if ($value > $openTotal) {
+                $value = $openTotal;
+            }
+            $openTotal -= $value;
+            $giftCard->setUsedValue($value);
+
             $additionalCosts[] = (new GiftCardAdditionalCost())
-                ->setGiftCardValue($giftCard->getValue())
+                ->setGiftCardValue($value)
                 ->setCurrency($giftCard->getCurrency())
             ;
         }
