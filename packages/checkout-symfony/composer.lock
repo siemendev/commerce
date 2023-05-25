@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bef9fc3e3df858ae14dabd8e3afc4940",
+    "content-hash": "60216aaad67e0c1fd1eead45d26b6cff",
     "packages": [
         {
             "name": "psr/cache",
@@ -241,66 +241,6 @@
                 }
             ],
             "description": "checkout abstraction",
-            "transport-options": {
-                "relative": true
-            }
-        },
-        {
-            "name": "siemendev/checkout-products",
-            "version": "dev-main",
-            "dist": {
-                "type": "path",
-                "url": "../products",
-                "reference": "6ef67e20d839a0a3b3e5e40736d7417027668b93"
-            },
-            "require": {
-                "php": ">=8.1",
-                "siemendev/checkout": "dev-main",
-                "symfony/framework-bundle": "^5.0|^6.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Siemendev\\Checkout\\Products\\": "src/"
-                }
-            },
-            "authors": [
-                {
-                    "name": "Patrick Siemen",
-                    "email": "post@patrick-siemen.de"
-                }
-            ],
-            "description": "checkout symfony bridge",
-            "transport-options": {
-                "relative": true
-            }
-        },
-        {
-            "name": "siemendev/checkout-symfony-bridge",
-            "version": "dev-main",
-            "dist": {
-                "type": "path",
-                "url": "../checkout-symfony",
-                "reference": "a6e1a47642f9ae9586a90a0a536aeded81053152"
-            },
-            "require": {
-                "php": ">=8.1",
-                "siemendev/checkout": "dev-main",
-                "symfony/framework-bundle": "^5.0|^6.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Siemendev\\Checkout\\SymfonyBridge\\": "src/"
-                }
-            },
-            "authors": [
-                {
-                    "name": "Patrick Siemen",
-                    "email": "post@patrick-siemen.de"
-                }
-            ],
-            "description": "checkout symfony bridge",
             "transport-options": {
                 "relative": true
             }
@@ -2046,8 +1986,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "siemendev/checkout-products": 20,
-        "siemendev/checkout-symfony-bridge": 20
+        "siemendev/checkout": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

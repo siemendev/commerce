@@ -115,7 +115,7 @@
         },
         {
             "type": "path",
-            "url": "../../packages/symfony-bridge"
+            "url": "../../packages/checkout-symfony"
         },
         {
             "type": "path",

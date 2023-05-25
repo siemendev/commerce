@@ -120,7 +120,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "siemendev/checkout": 20
+        "siemendev/checkout": 20,
+        "mpociot/vat-calculator": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

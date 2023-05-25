@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "75b60b2aad0d92fa07f1e510562cb889",
+    "content-hash": "9b18830ac71b20c4e3e58958aa25b28b",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -2309,11 +2309,11 @@
         },
         {
             "name": "siemendev/checkout-products-symfony-bridge",
-            "version": "dev-increase_abstraction",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "../../packages/products-symfony",
-                "reference": "70054eb4fb4b3a6ac0351dcb8c09c77f7180da96"
+                "reference": "961ea30d342f625119923fc982d85d564d32fd3e"
             },
             "require": {
                 "php": ">=8.1",
@@ -2343,7 +2343,7 @@
             "version": "dev-main",
             "dist": {
                 "type": "path",
-                "url": "../../packages/symfony-bridge",
+                "url": "../../packages/checkout-symfony",
                 "reference": "a6e1a47642f9ae9586a90a0a536aeded81053152"
             },
             "require": {
