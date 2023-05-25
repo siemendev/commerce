@@ -23,12 +23,7 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-    Siemendev\Checkout\GiftCard\Quote\GiftCardAdditionalCostProvider: ~
-
-    App\Commerce\Provider\PriceProvider:
-        arguments:
-            $taxResolver: '@Siemendev\Checkout\Taxation\EuropeanVatTaxResolver'
-
     Siemendev\Checkout\Taxation\EuropeanVatTaxResolver:
         arguments:
             $businessCountryCode: 'DE'
+    Siemendev\Checkout\Taxation\EuropeanVatTaxResolverInterface: '@Siemendev\Checkout\Taxation\EuropeanVatTaxResolver'

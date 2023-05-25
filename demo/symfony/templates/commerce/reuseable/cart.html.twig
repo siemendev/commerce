@@ -1,4 +1,4 @@
-{% if quote.products %}
+{% if quote.quoteItems %}
     <h2>Products</h2>
     <table>
         <tr>
@@ -10,15 +10,16 @@
             <th>Total price (net)</th>
             <th>Total price (gross)</th>
         </tr>
-        {% for product in quote.products %}
+        {% for item in quote.quoteItems %}
+            {% set product = item.product %}
             <tr>
-                <td>{{ product.product.quantity }}x</td>
-                <td>{{ product.product.name }}</td>
-                <td>{{ product.price.vatRate }}%</td>
-                <td>{{ product.price.unitPriceNet / 100 }} {{ product.price.currency }}</td>
-                <td>{{ product.price.unitPriceGross / 100 }} {{ product.price.currency }}</td>
-                <td>{{ product.price.totalPriceNet / 100 }} {{ product.price.currency }}</td>
-                <td>{{ product.price.totalPriceGross / 100 }} {{ product.price.currency }}</td>
+                <td>{{ item.product.quantity }}x</td>
+                <td>{{ item.product.name }}</td>
+                <td>{{ item.price.vatRate }}%</td>
+                <td>{{ item.price.unitPriceNet / 100 }} {{ item.price.currency }}</td>
+                <td>{{ item.price.unitPriceGross / 100 }} {{ item.price.currency }}</td>
+                <td>{{ item.price.totalPriceNet / 100 }} {{ item.price.currency }}</td>
+                <td>{{ item.price.totalPriceGross / 100 }} {{ item.price.currency }}</td>
             </tr>
         {% endfor %}
         <tr>
@@ -41,24 +42,5 @@
             <td>{{ quote.totalNet / 100 }}</td>
             <td>{{ quote.totalGross / 100 }}</td>
         </tr>
-    </table>
-{% endif %}
-{% if quote.subscriptions %}
-    <h2>Subscriptions</h2>
-    <table>
-        <tr>
-            <th>#</th>
-            <th>Item</th>
-            <th>Price</th>
-            <th>Interval</th>
-        </tr>
-        {% for subscription in quote.subscriptions %}
-            <tr>
-                <td>{{ loop.index }}</td>
-                <td>{{ subscription.subscription.name }}</td>
-                <td>-</td>
-                <td>-</td>
-            </tr>
-        {% endfor %}
     </table>
 {% endif %}

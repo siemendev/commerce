@@ -2,27 +2,28 @@
 
 namespace App\Commerce;
 
-use Siemendev\Checkout\Item\Quantifiable;
-use Siemendev\Checkout\Item\RequiredCheckoutData;
-use Siemendev\Checkout\Item\Product\ProductInterface;
-use Siemendev\Checkout\Item\QuantifiableItemInterface;
+use Siemendev\Checkout\Products\Product\ProductInterface;
 use Siemendev\Checkout\Taxation\VatTyped;
 use Siemendev\Checkout\Taxation\VatTypedItemInterface;
 
 class Product implements ProductInterface, VatTypedItemInterface
 {
-    use RequiredCheckoutData, Quantifiable, VatTyped;
+    use VatTyped;
 
     private string $id;
 
     private string $name;
 
-    public function getItemIdentifier(): string
+    private int $quantity = 1;
+
+    private array $requiredSteps = [];
+
+    public function getIdentifier(): string
     {
         return $this->id;
     }
 
-    public function setId(string $id): static
+    public function setIdentifier(string $id): static
     {
         $this->id = $id;
 
@@ -37,6 +38,30 @@ class Product implements ProductInterface, VatTypedItemInterface
     public function setName(string $name): static
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function requiredSteps(): array
+    {
+        return $this->requiredSteps;
+    }
+
+    public function addRequiredStep(string $stepIdentifier): static
+    {
+        $this->requiredSteps[] = $stepIdentifier;
+
+        return $this;
+    }
+
+    public function getQuantity(): int
+    {
+        return $this->quantity;
+    }
+
+    public function setQuantity(int $quantity): static
+    {
+        $this->quantity = $quantity;
 
         return $this;
     }

@@ -3,9 +3,9 @@
 namespace Siemendev\Checkout\Taxation;
 
 use Siemendev\Checkout\Data\CheckoutDataInterface;
-use Siemendev\Checkout\Item\ItemInterface;
+use Siemendev\Checkout\Products\Product\ProductInterface;
 
 interface EuropeanVatTaxResolverInterface
 {
-    public function getItemTaxRate(ItemInterface $item, CheckoutDataInterface $data): float;
+    public function getProductTaxRate(ProductInterface $product, CheckoutDataInterface $data): float;
 }

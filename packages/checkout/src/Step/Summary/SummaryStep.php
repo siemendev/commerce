@@ -7,11 +7,9 @@ use Siemendev\Checkout\Step\StepInterface;
 
 class SummaryStep implements StepInterface
 {
-    public const STEP_IDENTIFIER = 'summary';
-
     public static function stepIdentifier(): string
     {
-        return self::STEP_IDENTIFIER;
+        return 'summary';
     }
 
     public static function isRequired(): bool

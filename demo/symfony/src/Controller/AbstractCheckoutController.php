@@ -3,8 +3,9 @@
 namespace App\Controller;
 
 use App\Commerce\CheckoutData;
-use Siemendev\Checkout\Checkout;
+use Siemendev\Checkout\Products\Quote\QuoteGeneratorInterface as ProductsQuoteGenerator;
 use Siemendev\Checkout\Step\StepInterface;
+use Siemendev\Checkout\Step\Machine\StepMachineInterface;
 use Siemendev\Checkout\SymfonyBridge\Data\CheckoutDataManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -17,19 +18,28 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 abstract class AbstractCheckoutController extends AbstractController
 {
     public function __construct(
-        private readonly Checkout $checkout,
+        private readonly StepMachineInterface $stepMachine,
+        private readonly ProductsQuoteGenerator $productsQuoteGenerator,
         private readonly CheckoutDataManager $checkoutDataManager,
     ) {
     }
 
-    public function getCheckout(): Checkout
+    public function getStepMachine(): StepMachineInterface
     {
-        return $this->checkout;
+        return $this->stepMachine;
+    }
+
+    public function getProductsQuoteGenerator(): ProductsQuoteGenerator
+    {
+        return $this->productsQuoteGenerator;
     }
 
     public function getCheckoutData(): CheckoutData
     {
-        return $this->checkoutDataManager->getCheckoutData();
+        /** @var CheckoutData $data */
+        $data = $this->checkoutDataManager->getCheckoutData();
+
+        return $data;
     }
 
     public function saveCheckoutData(CheckoutData $checkoutData): CheckoutData
@@ -46,7 +56,7 @@ abstract class AbstractCheckoutController extends AbstractController
 
     protected function getCurrentStepIdentifier(): string
     {
-        return $this->getCheckout()->getCurrentStep($this->getCheckoutData())::stepIdentifier();
+        return $this->getStepMachine()->getCurrentStep($this->getCheckoutData())::stepIdentifier();
     }
 
     protected function getCurrentStepUrl(): string
@@ -67,9 +77,9 @@ abstract class AbstractCheckoutController extends AbstractController
         return array_map(
             fn (StepInterface $step): array => [
                 'id' => $step::stepIdentifier(),
-                'url' => $this->getCheckout()->isStepAllowed($this->getCheckoutData(), $step::stepIdentifier()) ? $this->getStepUrl($step::stepIdentifier()) : null
+                'url' => $this->getStepMachine()->isStepAllowed($this->getCheckoutData(), $step::stepIdentifier()) ? $this->getStepUrl($step::stepIdentifier()) : null
             ],
-            $this->getCheckout()->getRequiredSteps($this->getCheckoutData())
+            $this->getStepMachine()->getRequiredSteps($this->getCheckoutData())
         );
     }
 }

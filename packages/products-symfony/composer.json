@@ -1,0 +1,37 @@
+{
+    "name": "siemendev/checkout-products-symfony-bridge",
+    "description": "checkout products symfony bridge",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Siemendev\\Checkout\\Products\\SymfonyBridge\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Patrick Siemen",
+            "email": "post@patrick-siemen.de"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=8.1",
+        "siemendev/checkout-products": "dev-main",
+        "siemendev/checkout-symfony-bridge": "dev-main",
+        "symfony/framework-bundle": "^5.0|^6.0"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../checkout"
+        },
+        {
+            "type": "path",
+            "url": "../symfony-bridge"
+        },
+        {
+            "type": "path",
+            "url": "../products"
+        }
+    ]
+}

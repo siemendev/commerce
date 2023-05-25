@@ -13,13 +13,13 @@ class SummaryController extends AbstractCheckoutController
 {
     public function __invoke(): Response
     {
-        if (!$this->getCheckout()->isStepAllowed($this->getCheckoutData(), SummaryStep::stepIdentifier())) {
+        if (!$this->getStepMachine()->isStepAllowed($this->getCheckoutData(), SummaryStep::stepIdentifier())) {
             return $this->redirectToCurrentStep();
         }
 
         return $this->render('commerce/steps/summary.html.twig', [
             'steps' => $this->getStepsData(),
-            'quote' => $this->getCheckout()->getQuoteByCheckoutData($this->getCheckoutData()),
+            'quote' => $this->getProductsQuoteGenerator()->generate($this->getCheckoutData()),
         ]);
     }
 }

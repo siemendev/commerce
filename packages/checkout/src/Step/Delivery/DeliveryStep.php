@@ -9,11 +9,9 @@ use Siemendev\Checkout\Step\StepInterface;
 
 class DeliveryStep implements StepInterface
 {
-    public const STEP_IDENTIFIER = 'delivery';
-
     public static function stepIdentifier(): string
     {
-        return self::STEP_IDENTIFIER;
+        return 'delivery';
     }
 
     public static function isRequired(): bool

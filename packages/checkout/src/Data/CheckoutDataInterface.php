@@ -2,9 +2,9 @@
 
 namespace Siemendev\Checkout\Data;
 
-use Siemendev\Checkout\Cart\CartInterface;
-
+/**
+ * This interface is only used to identify a class as checkout data.
+ */
 interface CheckoutDataInterface
 {
-    public function getCart(): CartInterface;
 }

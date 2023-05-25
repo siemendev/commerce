@@ -17,7 +17,7 @@ class BillingAddressController extends AbstractCheckoutController
 {
     public function __invoke(Request $request): Response
     {
-        if (!$this->getCheckout()->isStepAllowed($this->getCheckoutData(), BillingAddressStep::stepIdentifier())) {
+        if (!$this->getStepMachine()->isStepAllowed($this->getCheckoutData(), BillingAddressStep::stepIdentifier())) {
             return $this->redirectToCurrentStep();
         }
 
@@ -64,7 +64,7 @@ class BillingAddressController extends AbstractCheckoutController
         }
 
         return $this->render('commerce/steps/billing_address.html.twig', [
-            'delivery_needed' => in_array(DeliveryAddressStep::stepIdentifier(), array_map(fn (StepInterface $step) => $step::stepIdentifier(), $this->getCheckout()->getRequiredSteps($this->getCheckoutData()))),
+            'delivery_needed' => in_array(DeliveryAddressStep::stepIdentifier(), array_map(fn (StepInterface $step) => $step::stepIdentifier(), $this->getStepMachine()->getRequiredSteps($this->getCheckoutData()))),
             'message' => $message ?? null,
             'address' => $address,
             'session' => $this->getCheckoutData(),

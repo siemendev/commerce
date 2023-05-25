@@ -1,0 +1,41 @@
+services:
+
+  checkout.step_voters.products:
+    public: true
+    class: 'Siemendev\Checkout\Products\Step\Voter\StepVoter'
+
+  checkout.steps.products_cart:
+    public: true
+    class: Siemendev\Checkout\Products\Step\CartStep
+
+  checkout.quote_generators.products:
+    public: true
+    class: 'Siemendev\Checkout\Products\Quote\QuoteGenerator'
+    arguments:
+      $priceResolver: '@checkout.product_price_resolver'
+      $availabilityResolver: '@checkout.product_availability_resolver'
+      $additionalCostsAggregator: '@checkout.additional_costs_aggregator'
+  Siemendev\Checkout\Products\Quote\QuoteGeneratorInterface:
+    alias: checkout.quote_generators.products
+    public: false
+
+  checkout.product_price_resolver:
+    public: true
+    class: 'Siemendev\Checkout\Products\Pricing\Resolver\PriceResolver'
+  Siemendev\Checkout\Products\Pricing\Resolver\PriceResolverInterface:
+    alias: checkout.product_price_resolver
+    public: false
+
+  checkout.product_availability_resolver:
+    public: true
+    class: 'Siemendev\Checkout\Products\Availability\AvailabilityResolver'
+  Siemendev\Checkout\Products\Availability\AvailabilityResolverInterface:
+    alias: checkout.product_availability_resolver
+    public: false
+
+  checkout.additional_costs_aggregator:
+    public: true
+    class: 'Siemendev\Checkout\Products\AdditionalCost\AdditionalCostsAggregator'
+  Siemendev\Checkout\Products\AdditionalCost\AdditionalCostsAggregatorInterface:
+    public: false
+    alias: checkout.additional_costs_aggregator

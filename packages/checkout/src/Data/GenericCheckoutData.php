@@ -7,7 +7,7 @@ use Siemendev\Checkout\Step\Address\Billing\BillingAddressableCheckoutDataInterf
 use Siemendev\Checkout\Step\Delivery\DeliverableCheckoutData;
 use Siemendev\Checkout\Step\Delivery\DeliverableCheckoutDataInterface;
 
-class GenericCheckoutData extends AbstractCheckoutData implements DeliverableCheckoutDataInterface, BillingAddressableCheckoutDataInterface
+class GenericCheckoutData implements CheckoutDataInterface, DeliverableCheckoutDataInterface, BillingAddressableCheckoutDataInterface
 {
     use DeliverableCheckoutData;
     use BillingAddressableCheckoutData;

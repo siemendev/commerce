@@ -18,37 +18,7 @@ class CheckoutCompilerPass implements CompilerPassInterface
             CheckoutBundle::SERVICE_STEP_MACHINE,
             $config['steps'],
             $container,
-            'addStep',
-        );
-        $this->wireConfiguredServices(
-            CheckoutBundle::SERVICE_QUOTE_BUILDER,
-            $config['quote_builders'],
-            $container,
-            'addQuotePartBuilder',
-        );
-        $this->wireConfiguredServices(
-            CheckoutBundle::SERVICE_PRICE_RESOLVER,
-            $config['product_price_providers'],
-            $container,
-            'addProductPriceProvider',
-        );
-        $this->wireConfiguredServices(
-            CheckoutBundle::SERVICE_PRICE_RESOLVER,
-            $config['subscription_price_providers'],
-            $container,
-            'addSubscriptionPriceProvider',
-        );
-        $this->wireConfiguredServices(
-            CheckoutBundle::SERVICE_AVAILABILITY_RESOLVER,
-            $config['availability_providers'],
-            $container,
-            'addAvailabilityProvider',
-        );
-        $this->wireConfiguredServices(
-            CheckoutBundle::SERVICE_ADDITIONAL_COSTS_QUOTE_PART_BUILDER,
-            $config['additional_cost_providers'],
-            $container,
-            'addAdditionalCostProvider',
+            'addAvailableStep',
         );
 
         if (!class_exists($config['data_creator'])

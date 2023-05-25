@@ -13,11 +13,6 @@ class CheckoutConfiguration implements ConfigurationInterface
 
         $treeBuilder->getRootNode()->children()->scalarNode('data_creator');
         $treeBuilder->getRootNode()->children()->arrayNode('steps')->scalarPrototype();
-        $treeBuilder->getRootNode()->children()->arrayNode('quote_builders')->scalarPrototype();
-        $treeBuilder->getRootNode()->children()->arrayNode('product_price_providers')->scalarPrototype();
-        $treeBuilder->getRootNode()->children()->arrayNode('subscription_price_providers')->scalarPrototype();
-        $treeBuilder->getRootNode()->children()->arrayNode('availability_providers')->scalarPrototype();
-        $treeBuilder->getRootNode()->children()->arrayNode('additional_cost_providers')->scalarPrototype();
 
         return $treeBuilder;
     }

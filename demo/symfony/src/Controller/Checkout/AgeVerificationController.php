@@ -13,7 +13,7 @@ class AgeVerificationController extends AbstractCheckoutController
 {
     public function __invoke(Request $request): Response
     {
-        if (!$this->getCheckout()->isStepAllowed($this->getCheckoutData(), AgeVerificationStep::stepIdentifier())) {
+        if (!$this->getStepMachine()->isStepAllowed($this->getCheckoutData(), AgeVerificationStep::stepIdentifier())) {
             return $this->redirectToCurrentStep();
         }
 

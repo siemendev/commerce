@@ -4,7 +4,7 @@ namespace Siemendev\Checkout\Taxation;
 
 use Mpociot\VatCalculator\VatCalculator;
 use Siemendev\Checkout\Data\CheckoutDataInterface;
-use Siemendev\Checkout\Item\ItemInterface;
+use Siemendev\Checkout\Products\Product\ProductInterface;
 
 class EuropeanVatTaxResolver implements EuropeanVatTaxResolverInterface
 {
@@ -12,7 +12,7 @@ class EuropeanVatTaxResolver implements EuropeanVatTaxResolverInterface
     {
     }
 
-    public function getItemTaxRate(ItemInterface $item, CheckoutDataInterface $data): float
+    public function getProductTaxRate(ProductInterface $product, CheckoutDataInterface $data): float
     {
         $vatCalculator = new VatCalculator();
         if ($this->businessCountryCode !== null) {
@@ -23,7 +23,7 @@ class EuropeanVatTaxResolver implements EuropeanVatTaxResolverInterface
             countryCode: $data->getBillingAddress()?->getCountryCode(),
             postalCode: $data->getBillingAddress()?->getPostalCode(),
             company: $data->getBillingAddress()?->isCompany(),
-            type: $item instanceof VatTypedItemInterface ? $item->getVatType() : VatTypedItemInterface::VAT_TYPE_DEFAULT,
+            type: $product instanceof VatTypedItemInterface ? $product->getVatType() : VatTypedItemInterface::VAT_TYPE_DEFAULT,
         );
 
         return $vatCalculator->getTaxRate() * 100;

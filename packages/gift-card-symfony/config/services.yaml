@@ -1,0 +1,7 @@
+services:
+
+  checkout.additional_costs_provider.gift_card:
+    public: true
+    autoconfigure: true
+    class: 'Siemendev\Checkout\GiftCard\AdditionalCost\GiftCardAdditionalCostProvider'
+

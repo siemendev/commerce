@@ -2,8 +2,8 @@
 
 namespace App\Controller\Cart;
 
+use App\Commerce\Step\CartStep;
 use App\Controller\AbstractCheckoutController;
-use Siemendev\Checkout\Step\Cart\CartStep;
 use Siemendev\Checkout\Step\Exception\AssignedValidationException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,14 +14,14 @@ class OverviewController extends AbstractCheckoutController
     public function __invoke(): Response
     {
         $data = [
-            'quote' => $this->getCheckout()->getQuoteByCheckoutData($this->getCheckoutData()),
+            'quote' => $this->getProductsQuoteGenerator()->generate($this->getCheckoutData()),
             'continue' => $this->getCurrentStepUrl(),
             'step_name' => $this->getCurrentStepIdentifier()
         ];
         try {
-            $this->getCheckout()->validateStep($this->getCheckoutData(), CartStep::STEP_IDENTIFIER);
+            $this->getStepMachine()->validateStep($this->getCheckoutData(), CartStep::stepIdentifier());
         } catch (AssignedValidationException $e) {
-            if ($e->step::stepIdentifier() === CartStep::STEP_IDENTIFIER) {
+            if ($e->step::stepIdentifier() === CartStep::stepIdentifier()) {
                 $data['error'] = $e->getMessage();
             }
         }
