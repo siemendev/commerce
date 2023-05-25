@@ -6,6 +6,7 @@ use LogicException;
 use Siemendev\Checkout\Data\CheckoutDataInterface;
 use Siemendev\Checkout\Step\Exception\ValidationException;
 use Siemendev\Checkout\Step\Exception\AssignedValidationException;
+use Siemendev\Checkout\Step\FinalStepInterface;
 use Siemendev\Checkout\Step\StepInterface;
 use Siemendev\Checkout\Step\Summary\SummaryStep;
 use Siemendev\Checkout\Step\Voter\StepVoterInterface;
@@ -91,7 +92,7 @@ class StepMachine implements StepMachineInterface
             }
         }
 
-        return $this->getSummaryStep();
+        return $this->getFinalStep();
     }
 
     public function isStepAllowed(CheckoutDataInterface $data, string $stepIdentifier): bool
@@ -136,16 +137,15 @@ class StepMachine implements StepMachineInterface
         return $steps;
     }
 
-    // todo the only way to change SummaryStep is to extend it. Make this more flexible by having a FinalStepInterface or something like that
-    private function getSummaryStep(): SummaryStep
+    private function getFinalStep(): FinalStepInterface
     {
+        // todo this can be performance optimized by walking the array backwards (final step is usually at the end)
         foreach ($this->availableSteps as $step) {
-            if ($step::stepIdentifier() === SummaryStep::stepIdentifier()) {
-                /** @var SummaryStep $step */
+            if ($step instanceof FinalStepInterface) {
                 return $step;
             }
         }
 
-        throw new LogicException('No summary step found');
+        throw new LogicException('No final step found');
     }
 }

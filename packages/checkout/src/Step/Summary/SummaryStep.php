@@ -3,9 +3,10 @@
 namespace Siemendev\Checkout\Step\Summary;
 
 use Siemendev\Checkout\Data\CheckoutDataInterface;
+use Siemendev\Checkout\Step\FinalStepInterface;
 use Siemendev\Checkout\Step\StepInterface;
 
-class SummaryStep implements StepInterface
+class SummaryStep implements StepInterface, FinalStepInterface
 {
     public static function stepIdentifier(): string
     {
