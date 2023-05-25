@@ -3,6 +3,7 @@
 namespace Siemendev\Checkout\Products\AdditionalCost;
 
 use Siemendev\Checkout\Data\CheckoutDataInterface;
+use Siemendev\Checkout\Products\Quote\QuoteInterface;
 
 class AdditionalCostsAggregator implements AdditionalCostsAggregatorInterface
 {
@@ -31,13 +32,13 @@ class AdditionalCostsAggregator implements AdditionalCostsAggregatorInterface
         return $this;
     }
 
-    public function getAdditionalCost(CheckoutDataInterface $data): array
+    public function getAdditionalCost(CheckoutDataInterface $data, QuoteInterface $quote): array
     {
         $additionalCosts = [];
 
         foreach ($this->providers as $provider) {
             if ($provider->eligible($data)) {
-                foreach ($provider->getAdditionalCosts($data) as $additionalCost) {
+                foreach ($provider->getAdditionalCosts($data, $quote) as $additionalCost) {
                     $additionalCosts[] = $additionalCost;
                 }
             }

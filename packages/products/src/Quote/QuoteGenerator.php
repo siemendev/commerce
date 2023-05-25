@@ -41,7 +41,7 @@ class QuoteGenerator implements QuoteGeneratorInterface
             );
         }
 
-        foreach ($this->additionalCostsAggregator->getAdditionalCost($data) as $additionalCost) {
+        foreach ($this->additionalCostsAggregator->getAdditionalCost($data, $quote) as $additionalCost) {
             $quote->addAdditionalCost($additionalCost);
         }
 
