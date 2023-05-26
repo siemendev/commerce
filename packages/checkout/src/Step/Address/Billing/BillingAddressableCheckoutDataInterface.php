@@ -2,9 +2,10 @@
 
 namespace Siemendev\Checkout\Step\Address\Billing;
 
+use Siemendev\Checkout\Data\CheckoutDataInterface;
 use Siemendev\Checkout\Step\Address\AddressInterface;
 
-interface BillingAddressableCheckoutDataInterface
+interface BillingAddressableCheckoutDataInterface extends CheckoutDataInterface
 {
     public function getBillingAddress(): ?AddressInterface;
 }

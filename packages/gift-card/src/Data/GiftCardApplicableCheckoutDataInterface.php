@@ -2,9 +2,10 @@
 
 namespace Siemendev\Checkout\GiftCard\Data;
 
+use Siemendev\Checkout\Data\CheckoutDataInterface;
 use Siemendev\Checkout\GiftCard\GiftCardInterface;
 
-interface GiftCardApplicableCheckoutDataInterface
+interface GiftCardApplicableCheckoutDataInterface extends CheckoutDataInterface
 {
     /**
      * @return array<GiftCardInterface>

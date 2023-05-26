@@ -2,7 +2,9 @@
 
 namespace App\Commerce\Step;
 
-interface AgeVerifiableCheckoutDataInterface
+use Siemendev\Checkout\Data\CheckoutDataInterface;
+
+interface AgeVerifiableCheckoutDataInterface extends CheckoutDataInterface
 {
     public function isAgeVerified(): bool;
 }

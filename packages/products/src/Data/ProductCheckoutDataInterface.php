@@ -2,10 +2,11 @@
 
 namespace Siemendev\Checkout\Products\Data;
 
+use Siemendev\Checkout\Data\CheckoutDataInterface;
 use Siemendev\Checkout\Products\Payment\PaymentInterface;
 use Siemendev\Checkout\Products\Product\ProductInterface;
 
-interface ProductCheckoutDataInterface
+interface ProductCheckoutDataInterface extends CheckoutDataInterface
 {
     /**
      * @return array<ProductInterface>
