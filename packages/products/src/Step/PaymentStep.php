@@ -25,6 +25,11 @@ class PaymentStep implements StepInterface
 
     public function validate(CheckoutDataInterface $data): void
     {
-        // TODO: Implement validate() method.
+
+    }
+
+    public static function requiresSteps(): array
+    {
+        return [];
     }
 }

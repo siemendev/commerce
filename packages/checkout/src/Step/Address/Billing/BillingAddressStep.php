@@ -32,4 +32,9 @@ class BillingAddressStep implements StepInterface
     {
         return [BillingAddressableCheckoutDataInterface::class];
     }
+
+    public static function requiresSteps(): array
+    {
+        return [];
+    }
 }

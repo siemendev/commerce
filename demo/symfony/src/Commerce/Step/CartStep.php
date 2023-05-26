@@ -52,4 +52,9 @@ class CartStep implements StepInterface
 
         return $this->productsCartStep->requiresCheckoutData();
     }
+
+    public static function requiresSteps(): array
+    {
+        return [];
+    }
 }

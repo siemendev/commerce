@@ -36,4 +36,9 @@ class CartStep implements StepInterface
 
         // todo check availability
     }
+
+    public static function requiresSteps(): array
+    {
+        return [];
+    }
 }

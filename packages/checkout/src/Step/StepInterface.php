@@ -19,6 +19,13 @@ interface StepInterface
     public function requiresCheckoutData(): array;
 
     /**
+     * Returns a list of steps (step identifiers) that this step depends on
+     *
+     * @return array<string>
+     */
+    public static function requiresSteps(): array;
+
+    /**
      * @throws ValidationException
      */
     public function validate(CheckoutDataInterface $data): void;

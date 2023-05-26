@@ -5,6 +5,7 @@ namespace Siemendev\Checkout\Step\Address\Delivery;
 use LogicException;
 use Siemendev\Checkout\Data\CheckoutDataInterface;
 use Siemendev\Checkout\Step\Delivery\DeliverableCheckoutDataInterface;
+use Siemendev\Checkout\Step\Delivery\DeliveryStep;
 use Siemendev\Checkout\Step\StepInterface;
 
 class DeliveryAddressStep implements StepInterface
@@ -31,5 +32,10 @@ class DeliveryAddressStep implements StepInterface
     public function requiresCheckoutData(): array
     {
         return [DeliverableCheckoutDataInterface::class];
+    }
+
+    public static function requiresSteps(): array
+    {
+        return [DeliveryStep::stepIdentifier()];
     }
 }

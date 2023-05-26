@@ -27,4 +27,9 @@ class SummaryStep implements StepInterface, FinalStepInterface
     {
         return [CheckoutDataInterface::class];
     }
+
+    public static function requiresSteps(): array
+    {
+        return [];
+    }
 }

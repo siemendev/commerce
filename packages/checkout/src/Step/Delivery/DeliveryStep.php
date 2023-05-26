@@ -4,6 +4,7 @@ namespace Siemendev\Checkout\Step\Delivery;
 
 use LogicException;
 use Siemendev\Checkout\Data\CheckoutDataInterface;
+use Siemendev\Checkout\Step\Address\Delivery\DeliveryAddressStep;
 use Siemendev\Checkout\Step\Delivery\Exception\DeliveryTypeNotSetException;
 use Siemendev\Checkout\Step\StepInterface;
 
@@ -33,5 +34,10 @@ class DeliveryStep implements StepInterface
         if (null === $data->getDeliveryType()) {
             throw new DeliveryTypeNotSetException($data);
         }
+    }
+
+    public static function requiresSteps(): array
+    {
+        return [DeliveryAddressStep::stepIdentifier()];
     }
 }

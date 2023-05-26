@@ -6,8 +6,11 @@ use LogicException;
 
 class StepNotFoundException extends LogicException
 {
-    public function __construct(public readonly string $stepIdentifier)
+    /**
+     * @param array<string> $availableSteps
+     */
+    public function __construct(string $stepIdentifier, array $availableSteps = [])
     {
-        parent::__construct('Step not found');
+        parent::__construct(sprintf('Step "%s" not found. Available steps: %s', $stepIdentifier, implode(', ', $availableSteps)));
     }
 }

@@ -38,4 +38,9 @@ class AgeVerificationStep implements StepInterface
     {
         return [AgeVerifiableCheckoutDataInterface::class];
     }
+
+    public static function requiresSteps(): array
+    {
+        return [];
+    }
 }

@@ -108,33 +108,7 @@ class StepMachine implements StepMachineInterface
 
     public function getRequiredSteps(CheckoutDataInterface $data): array
     {
-        $steps = [];
-        foreach ($this->availableSteps as $step) {
-            if (in_array($step, $steps, true)) {
-                continue;
-            }
-            if ($step::isRequired()) {
-                $steps[] = $step;
-                continue;
-            }
-            foreach ($this->stepVoters as $stepVoter) {
-                if ($stepVoter->stepRequired($step, $data)) {
-                    $steps[] = $step;
-                    continue 2;
-                }
-            }
-        }
-
-        // check if all required checkout data interfaces are implemented
-        foreach ($steps as $step) {
-            foreach ($step->requiresCheckoutData() as $checkoutDataInterface) {
-                if (!is_a($data, $checkoutDataInterface)) {
-                    throw new LogicException(sprintf('Step "%s" requires checkout data "%s" to implement "%s".', $step::stepIdentifier(), $data::class, $checkoutDataInterface));
-                }
-            }
-        }
-
-        return $steps;
+        return (new RequiredStepsHelper($this->availableSteps, $this->stepVoters))->getRequiredSteps($data);
     }
 
     private function getFinalStep(): FinalStepInterface
