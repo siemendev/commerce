@@ -21,7 +21,7 @@ class FillController extends AbstractCheckoutController
             ->setProducts([
                 (new Product())
                     ->setQuantity(2)
-//                    ->addRequiredStep(DeliveryAddressStep::stepIdentifier())
+                    ->addRequiredStep(DeliveryAddressStep::stepIdentifier())
                     ->setName('Deliverable Product')
                     ->setIdentifier('test-product-1'),
                 (new Product())
