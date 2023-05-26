@@ -7,6 +7,9 @@ services:
   checkout.steps.products_cart:
     public: true
     class: Siemendev\Checkout\Products\Step\CartStep
+  checkout.steps.products_payment:
+    public: true
+    class: Siemendev\Checkout\Products\Step\PaymentStep
 
   checkout.quote_generators.products:
     public: true

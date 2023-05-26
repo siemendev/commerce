@@ -35,3 +35,6 @@ services:
   checkout.steps.summary:
     public: false
     class: 'Siemendev\Checkout\Step\Summary\SummaryStep'
+  checkout.steps.delivery:
+    public: false
+    class: 'Siemendev\Checkout\Step\Delivery\DeliveryStep'

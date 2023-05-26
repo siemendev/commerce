@@ -5,4 +5,6 @@ checkout:
     - checkout.steps.billing_address
     - checkout.steps.delivery_address
     - App\Commerce\Step\AgeVerificationStep
+    - checkout.steps.delivery
+    - checkout.steps.products_payment
     - checkout.steps.summary
