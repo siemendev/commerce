@@ -3,10 +3,10 @@
     <div style="width: 500px; display: flex; justify-content: space-between">
         {% for step in steps %}
         <div style="">
-            {% if step.url is defined %}
+            {% if step.url is not empty %}
                 <a href="{{ step.url }}">{{ step.id }}</a>
             {% else %}
-                <span>{{ step.id }}</span>
+                <span title="complete the previous steps to get to this one!">{{ step.id }}</span>
             {% endif %}
         </div>
         {% endfor %}
