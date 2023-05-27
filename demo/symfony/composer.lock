@@ -2283,12 +2283,11 @@
             "dist": {
                 "type": "path",
                 "url": "../../packages/products",
-                "reference": "6ef67e20d839a0a3b3e5e40736d7417027668b93"
+                "reference": "8fecb518b5e70e27d37b04b7259aba0a82d53ab7"
             },
             "require": {
                 "php": ">=8.1",
-                "siemendev/checkout": "dev-main",
-                "symfony/framework-bundle": "^5.0|^6.0"
+                "siemendev/checkout": "dev-main"
             },
             "type": "library",
             "autoload": {

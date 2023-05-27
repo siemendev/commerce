@@ -1,0 +1,109 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "8b8cc3f45378f4044a228ef5ad8eb825",
+    "packages": [
+        {
+            "name": "siemendev/checkout",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "../checkout",
+                "reference": "ca3398d34f2d4373210f4bab3d208e090ca08388"
+            },
+            "require": {
+                "php": ">=8.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Siemendev\\Checkout\\": "src/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Patrick Siemen",
+                    "email": "post@patrick-siemen.de"
+                }
+            ],
+            "description": "checkout abstraction",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "siemendev/checkout-payment",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "../payment",
+                "reference": "9e26f5c4641fe1c90cc03c68b3c723d05583de71"
+            },
+            "require": {
+                "php": ">=8.1",
+                "siemendev/checkout-products": "dev-main"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Siemendev\\Checkout\\Payment\\": "src/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Patrick Siemen",
+                    "email": "post@patrick-siemen.de"
+                }
+            ],
+            "description": "checkout taxation implementation",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "siemendev/checkout-products",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "../products",
+                "reference": "8fecb518b5e70e27d37b04b7259aba0a82d53ab7"
+            },
+            "require": {
+                "php": ">=8.1",
+                "siemendev/checkout": "dev-main"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Siemendev\\Checkout\\Products\\": "src/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Patrick Siemen",
+                    "email": "post@patrick-siemen.de"
+                }
+            ],
+            "description": "checkout symfony bridge",
+            "transport-options": {
+                "relative": true
+            }
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "siemendev/checkout-payment": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": ">=8.1"
+    },
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
+}

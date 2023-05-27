@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Siemendev\Checkout\Products\Step;
+namespace Siemendev\Checkout\Payment\Step;
 
 use Siemendev\Checkout\Data\CheckoutDataInterface;
 use Siemendev\Checkout\Products\Data\ProductCheckoutDataInterface;
@@ -13,7 +13,7 @@ class PaymentStep implements StepInterface
         return 'product_payment';
     }
 
-    public static function isRequired(): bool
+    public function isRequired(CheckoutDataInterface $data): bool
     {
         return false;
     }
