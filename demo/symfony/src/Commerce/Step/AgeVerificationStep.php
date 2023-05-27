@@ -13,7 +13,7 @@ class AgeVerificationStep implements StepInterface
         return 'age_verification';
     }
 
-    public static function isRequired(): bool
+    public function isRequired(CheckoutDataInterface $data): bool
     {
         return false;
     }

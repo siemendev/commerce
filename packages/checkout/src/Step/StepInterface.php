@@ -9,7 +9,7 @@ interface StepInterface
 {
     public static function stepIdentifier(): string;
 
-    public static function isRequired(): bool;
+    public function isRequired(CheckoutDataInterface $data): bool;
 
     /**
      * Returns a list of interface names that are required to be implemented in the checkout data

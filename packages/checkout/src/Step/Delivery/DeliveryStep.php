@@ -15,7 +15,7 @@ class DeliveryStep implements StepInterface
         return 'delivery';
     }
 
-    public static function isRequired(): bool
+    public function isRequired(CheckoutDataInterface $data): bool
     {
         return false;
     }

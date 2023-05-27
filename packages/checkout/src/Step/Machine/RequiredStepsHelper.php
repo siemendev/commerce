@@ -56,7 +56,7 @@ class RequiredStepsHelper
 
     private function isStepRequired(StepInterface $step, CheckoutDataInterface $data): bool
     {
-        if ($step::isRequired()) {
+        if ($step->isRequired($data)) {
             return true;
         }
         foreach ($this->stepVoters as $stepVoter) {

@@ -13,7 +13,7 @@ class SummaryStep implements StepInterface, FinalStepInterface
         return 'summary';
     }
 
-    public static function isRequired(): bool
+    public function isRequired(CheckoutDataInterface $data): bool
     {
         return true;
     }

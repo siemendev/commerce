@@ -28,7 +28,7 @@ class CartStep implements StepInterface
         return 'cart';
     }
 
-    public static function isRequired(): bool
+    public function isRequired(CheckoutDataInterface $data): bool
     {
         return true;
     }
