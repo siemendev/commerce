@@ -18,7 +18,9 @@ class AgeVerificationController extends AbstractCheckoutController
         }
 
         if ($request->getMethod() === 'POST') {
-            $this->getCheckoutData()->setAgeVerified($request->request->has('age_verification'));
+            $this->saveCheckoutData(
+                $this->getCheckoutData()->setAgeVerified($request->request->has('age_verification'))
+            );
 
             return $this->redirectToCurrentStep();
         }

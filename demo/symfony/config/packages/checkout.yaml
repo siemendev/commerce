@@ -8,3 +8,7 @@ checkout:
     - checkout.steps.delivery
     - checkout.steps.products_payment
     - checkout.steps.summary
+
+checkout_delivery:
+  options:
+    - App\Commerce\Delivery\DhlDeliveryOption

@@ -2,9 +2,6 @@
 
 namespace Siemendev\Checkout\Delivery\SymfonyBridge;
 
-use Siemendev\Checkout\Products\AdditionalCost\AdditionalCostProviderInterface;
-use Siemendev\Checkout\Products\Availability\Provider\AvailabilityProviderInterface;
-use Siemendev\Checkout\Products\Pricing\Provider\PriceProviderInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
@@ -14,6 +11,11 @@ class CheckoutDeliveryExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container): void
     {
+        $configuration = new CheckoutDeliveryConfiguration();
+        $config = $this->processConfiguration($configuration, $configs);
+
+        $container->setParameter(CheckoutDeliveryBundle::PARAMETER_CONFIG, $config);
+
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../config'));
         $loader->load('services.yaml');
     }

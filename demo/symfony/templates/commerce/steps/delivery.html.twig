@@ -1,4 +1,18 @@
 {% extends 'commerce/checkout.html.twig' %}
 {% block content %}
     <h1>Delivery</h1>
+    <p>Choose your delivery option</p>
+    {% if error %}
+        <p>Error: {{ error }}</p>
+    {% endif %}
+    {% if deliveryOptions is empty %}
+        <p>There are no delivery options available for your address.</p>
+    {% else %}
+        <form method="post">
+            {% for delivery_option in deliveryOptions %}
+                <input id="{{ delivery_option.identifier }}" type="radio" name="delivery_option" value="{{ delivery_option.identifier }}"> <label for="{{ delivery_option.identifier }}">{{ delivery_option.identifier }}</label><br>
+            {% endfor %}
+            <button type="submit" name="submit">Continue</button>
+        </form>
+    {% endif %}
 {% endblock %}

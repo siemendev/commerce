@@ -7,3 +7,10 @@ services:
   checkout.steps.delivery:
     public: false
     class: 'Siemendev\Checkout\Delivery\Step\DeliveryStep'
+
+  checkout.delivery.options_resolver:
+    public: true
+    class: 'Siemendev\Checkout\Delivery\Option\Resolver\DeliveryOptionsResolver'
+  Siemendev\Checkout\Delivery\Option\Resolver\DeliveryOptionsResolverInterface:
+    public: false
+    alias: checkout.delivery.options_resolver
