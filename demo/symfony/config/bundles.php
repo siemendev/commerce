@@ -15,5 +15,6 @@ return [
     Siemendev\Checkout\SymfonyBridge\CheckoutBundle::class => ['all' => true],
     Siemendev\Checkout\Products\SymfonyBridge\CheckoutProductsBundle::class => ['all' => true],
     Siemendev\Checkout\Payment\SymfonyBridge\CheckoutPaymentBundle::class => ['all' => true],
+    Siemendev\Checkout\Delivery\SymfonyBridge\CheckoutDeliveryBundle::class => ['all' => true],
     Siemendev\Checkout\GiftCard\SymfonyBridge\CheckoutGiftCardBundle::class => ['all' => true],
 ];

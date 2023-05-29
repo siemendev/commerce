@@ -26,15 +26,9 @@ services:
     alias: checkout.step_machine
     public: false
 
-  checkout.steps.delivery_address:
-    public: false
-    class: 'Siemendev\Checkout\Step\Address\Delivery\DeliveryAddressStep'
   checkout.steps.billing_address:
     public: false
     class: 'Siemendev\Checkout\Step\Address\Billing\BillingAddressStep'
   checkout.steps.summary:
     public: false
     class: 'Siemendev\Checkout\Step\Summary\SummaryStep'
-  checkout.steps.delivery:
-    public: false
-    class: 'Siemendev\Checkout\Step\Delivery\DeliveryStep'

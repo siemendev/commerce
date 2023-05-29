@@ -5,8 +5,8 @@ namespace App\Controller\Cart;
 use App\Commerce\Product;
 use App\Commerce\Step\AgeVerificationStep;
 use App\Controller\AbstractCheckoutController;
+use Siemendev\Checkout\Delivery\Step\DeliveryStep;
 use Siemendev\Checkout\GiftCard\GiftCard;
-use Siemendev\Checkout\Step\Address\Delivery\DeliveryAddressStep;
 use Siemendev\Checkout\Taxation\VatTypedItemInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,7 +21,7 @@ class FillController extends AbstractCheckoutController
             ->setProducts([
                 (new Product())
                     ->setQuantity(2)
-                    ->addRequiredStep(DeliveryAddressStep::stepIdentifier())
+                    ->addRequiredStep(DeliveryStep::stepIdentifier())
                     ->setName('Deliverable Product')
                     ->setIdentifier('test-product-1'),
                 (new Product())

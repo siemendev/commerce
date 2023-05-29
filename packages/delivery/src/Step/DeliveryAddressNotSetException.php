@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Siemendev\Checkout\Step\Address\Delivery;
+namespace Siemendev\Checkout\Delivery\Step;
 
 use Siemendev\Checkout\Step\Exception\ValidationException;
 

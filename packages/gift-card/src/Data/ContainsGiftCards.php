@@ -4,7 +4,7 @@ namespace Siemendev\Checkout\GiftCard\Data;
 
 use Siemendev\Checkout\GiftCard\GiftCardInterface;
 
-trait GiftCardApplicableCheckoutData
+trait ContainsGiftCards
 {
     /** @var array<GiftCardInterface> */
     private array $giftCards = [];

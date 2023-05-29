@@ -1,10 +1,10 @@
 {
-    "name": "siemendev/checkout-products",
-    "description": "checkout products implementation",
+    "name": "siemendev/checkout-delivery",
+    "description": "checkout delivery implementation",
     "type": "library",
     "autoload": {
         "psr-4": {
-            "Siemendev\\Checkout\\Products\\": "src/"
+            "Siemendev\\Checkout\\Delivery\\": "src/"
         }
     },
     "authors": [

@@ -1,11 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Siemendev\Checkout\Step\Address\Delivery;
+namespace Siemendev\Checkout\Delivery\Step;
 
-use LogicException;
 use Siemendev\Checkout\Data\CheckoutDataInterface;
-use Siemendev\Checkout\Step\Delivery\DeliverableCheckoutDataInterface;
-use Siemendev\Checkout\Step\Delivery\DeliveryStep;
+use Siemendev\Checkout\Delivery\Data\DeliverableCheckoutDataInterface;
 use Siemendev\Checkout\Step\StepInterface;
 
 class DeliveryAddressStep implements StepInterface

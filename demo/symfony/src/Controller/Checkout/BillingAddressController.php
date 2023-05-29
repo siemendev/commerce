@@ -3,9 +3,9 @@
 namespace App\Controller\Checkout;
 
 use App\Controller\AbstractCheckoutController;
+use Siemendev\Checkout\Delivery\Step\DeliveryAddressStep;
 use Siemendev\Checkout\Step\Address\Address;
 use Siemendev\Checkout\Step\Address\Billing\BillingAddressStep;
-use Siemendev\Checkout\Step\Address\Delivery\DeliveryAddressStep;
 use Siemendev\Checkout\Step\Exception\ValidationException;
 use Siemendev\Checkout\Step\StepInterface;
 use Symfony\Component\HttpFoundation\Request;

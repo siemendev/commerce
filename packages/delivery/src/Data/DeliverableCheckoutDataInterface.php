@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Siemendev\Checkout\Step\Delivery;
+namespace Siemendev\Checkout\Delivery\Data;
 
 use Siemendev\Checkout\Data\CheckoutDataInterface;
+use Siemendev\Checkout\Delivery\Type\DeliveryTypeInterface;
 use Siemendev\Checkout\Step\Address\AddressInterface;
-use Siemendev\Checkout\Step\Delivery\Type\DeliveryTypeInterface;
 
 interface DeliverableCheckoutDataInterface extends CheckoutDataInterface
 {

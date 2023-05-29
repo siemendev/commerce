@@ -4,7 +4,7 @@ namespace App\Commerce\Step;
 
 use App\Commerce\CheckoutData;
 
-trait AgeVerifiableCheckoutData
+trait HasAgeVerification
 {
     private bool $ageVerified = false;
 

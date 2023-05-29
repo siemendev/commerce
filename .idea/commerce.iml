@@ -14,6 +14,8 @@
       <excludeFolder url="file://$MODULE_DIR$/packages/payment-paypal/vendor/siemendev" />
       <excludeFolder url="file://$MODULE_DIR$/packages/payment/vendor/siemendev" />
       <excludeFolder url="file://$MODULE_DIR$/packages/payment-symfony/vendor/siemendev" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/delivery/vendor/siemendev" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/delivery-symfony/vendor/siemendev" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

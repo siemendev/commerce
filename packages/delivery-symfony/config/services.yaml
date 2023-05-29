@@ -1,0 +1,9 @@
+services:
+
+  checkout.steps.delivery_address:
+    public: false
+    class: 'Siemendev\Checkout\Delivery\Step\DeliveryAddressStep'
+
+  checkout.steps.delivery:
+    public: false
+    class: 'Siemendev\Checkout\Delivery\Step\DeliveryStep'

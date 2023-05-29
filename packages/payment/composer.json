@@ -1,6 +1,6 @@
 {
     "name": "siemendev/checkout-payment",
-    "description": "checkout taxation implementation",
+    "description": "checkout payment implementation",
     "type": "library",
     "autoload": {
         "psr-4": {
