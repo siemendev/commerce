@@ -1,14 +1,12 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    <div style="width: 500px; display: flex; justify-content: space-between">
+    <div style="width: 100%; display: flex; justify-content: space-between">
         {% for step in steps %}
-        <div style="">
             {% if step.url is not empty %}
                 <a href="{{ step.url }}">{{ step.id }}</a>
             {% else %}
                 <span title="complete the previous steps to get to this one!">{{ step.id }}</span>
             {% endif %}
-        </div>
         {% endfor %}
     </div>
     <div>
