@@ -5,6 +5,7 @@
         <p>Error: {{ message }}</p>
     {% endif %}
     <form method="post">
+        <input name="name" type="text" placeholder="Full name" value="{{ address.name }}"><br>
         <input name="address_line1" type="text" placeholder="Address Line 1" value="{{ address.addressLine1 }}"><br>
         <input name="address_line2" type="text" placeholder="Address Line 2" value="{{ address.addressLine2 }}"><br>
         <input name="postal_code" type="text" placeholder="Postal code" value="{{ address.postalCode }}">
