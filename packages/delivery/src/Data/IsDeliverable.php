@@ -2,14 +2,14 @@
 
 namespace Siemendev\Checkout\Delivery\Data;
 
-use Siemendev\Checkout\Delivery\Type\DeliveryTypeInterface;
+use Siemendev\Checkout\Delivery\Option\DeliveryOptionInterface;
 use Siemendev\Checkout\Step\Address\AddressInterface;
 
 trait IsDeliverable
 {
     private ?AddressInterface $deliveryAddress = null;
 
-    private ?DeliveryTypeInterface $deliveryType = null;
+    private ?DeliveryOptionInterface $deliveryOption = null;
 
     public function setDeliveryAddress(?AddressInterface $deliveryAddress): static
     {
@@ -23,15 +23,15 @@ trait IsDeliverable
         return $this->deliveryAddress;
     }
 
-    public function setDeliveryType(?DeliveryTypeInterface $deliveryType): static
+    public function setDeliveryOption(?DeliveryOptionInterface $deliveryOption): static
     {
-        $this->deliveryType = $deliveryType;
+        $this->deliveryOption = $deliveryOption;
 
         return $this;
     }
 
-    public function getDeliveryType(): ?DeliveryTypeInterface
+    public function getDeliveryOption(): ?DeliveryOptionInterface
     {
-        return $this->deliveryType;
+        return $this->deliveryOption;
     }
 }

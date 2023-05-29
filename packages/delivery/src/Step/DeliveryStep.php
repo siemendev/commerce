@@ -30,7 +30,7 @@ class DeliveryStep implements StepInterface
             throw new LogicException(sprintf('%s needs to implement %s', $data::class, DeliverableCheckoutDataInterface::class));
         }
 
-        if (null === $data->getDeliveryType()) {
+        if (null === $data->getDeliveryOption()) {
             throw new DeliveryTypeNotSetException($data);
         }
     }
