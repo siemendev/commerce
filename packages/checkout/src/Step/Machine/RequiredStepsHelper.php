@@ -33,21 +33,29 @@ class RequiredStepsHelper
      */
     public function getRequiredSteps(CheckoutDataInterface $data): array
     {
-        $steps = [];
+        $stepIdentifiers = [];
 
         // get all required steps recursively
         foreach ($this->availableSteps as $step) {
             if ($this->isStepRequired($step, $data)) {
-                $steps = $this->getRequiredStepsFromStep($step, $steps);
+                $stepIdentifiers = $this->getRequiredStepsFromStep($step, $stepIdentifiers);
             }
         }
 
         // check if all required checkout data interfaces are implemented
-        foreach ($steps as $step) {
-            foreach ($step->requiresCheckoutData() as $checkoutDataInterface) {
+        foreach ($stepIdentifiers as $step) {
+            foreach ($this->availableSteps[$step]->requiresCheckoutData() as $checkoutDataInterface) {
                 if (!is_a($data, $checkoutDataInterface)) {
                     throw new LogicException(sprintf('Step "%s" requires checkout data "%s" to implement "%s".', $step::stepIdentifier(), $data::class, $checkoutDataInterface));
                 }
+            }
+        }
+
+        $steps = [];
+
+        foreach ($this->availableSteps as $availableStep) {
+            if (in_array($availableStep::stepIdentifier(), $stepIdentifiers, true)) {
+                $steps[] = $availableStep;
             }
         }
 
@@ -68,21 +76,21 @@ class RequiredStepsHelper
         return false;
     }
 
-    private function getRequiredStepsFromStep(StepInterface $step, array $steps = []): array
+    private function getRequiredStepsFromStep(StepInterface $step, array $stepIdentifiers = []): array
     {
-        if (isset($steps[$step::stepIdentifier()])) {
-            return $steps;
+        if (in_array($step::stepIdentifier(), $stepIdentifiers, true)) {
+            return $stepIdentifiers;
         }
 
-        $steps[$step::stepIdentifier()] = $step;
+        $stepIdentifiers[] = $step::stepIdentifier();
 
         foreach ($step::requiresSteps() as $requiredStep) {
             if (!isset($this->availableSteps[$requiredStep])) {
                 throw new StepNotFoundException($requiredStep, $this->availableSteps);
             }
-            $steps = $this->getRequiredStepsFromStep($this->availableSteps[$requiredStep], $steps);
+            $stepIdentifiers = $this->getRequiredStepsFromStep($this->availableSteps[$requiredStep], $stepIdentifiers);
         }
 
-        return $steps;
+        return $stepIdentifiers;
     }
 }
