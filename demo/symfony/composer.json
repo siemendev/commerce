@@ -15,6 +15,7 @@
         "sensio/framework-extra-bundle": "^6.1",
         "siemendev/checkout-gift-card-symfony-bridge": "dev-main",
         "siemendev/checkout-products-symfony-bridge": "*",
+        "siemendev/checkout-payment-symfony-bridge": "*",
         "siemendev/checkout-symfony-bridge": "*",
         "siemendev/checkout-taxation": "dev-main",
         "symfony/asset": "6.2.*",
@@ -124,6 +125,14 @@
         {
             "type": "path",
             "url": "../../packages/products-symfony"
+        },
+        {
+            "type": "path",
+            "url": "../../packages/payment"
+        },
+        {
+            "type": "path",
+            "url": "../../packages/payment-symfony"
         },
         {
             "type": "path",

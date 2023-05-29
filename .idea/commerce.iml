@@ -12,8 +12,8 @@
       <excludeFolder url="file://$MODULE_DIR$/packages/gift-card-symfony/vendor/siemendev" />
       <excludeFolder url="file://$MODULE_DIR$/packages/products/vendor/siemendev" />
       <excludeFolder url="file://$MODULE_DIR$/packages/payment-paypal/vendor/siemendev" />
-      <excludeFolder url="file://$MODULE_DIR$/packages/payment/vendor/siemendev/checkout-products/vendor/siemendev" />
       <excludeFolder url="file://$MODULE_DIR$/packages/payment/vendor/siemendev" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/payment-symfony/vendor/siemendev" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

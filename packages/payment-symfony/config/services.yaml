@@ -1,0 +1,7 @@
+services:
+
+  checkout.steps.products_payment:
+    public: true
+    class: 'Siemendev\Checkout\Payment\Step\PaymentStep'
+    arguments:
+      $quoteGenerator: '@checkout.quote_generators.products'

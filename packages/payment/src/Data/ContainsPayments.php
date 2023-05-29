@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Siemendev\Checkout\Products\Data;
+namespace Siemendev\Checkout\Payment\Data;
 
-use Siemendev\Checkout\Products\Payment\PaymentInterface;
+use Siemendev\Checkout\Payment\Payment\PaymentInterface;
 
-trait ContainsProductPayments
+trait ContainsPayments
 {
     /**
      * @var array<PaymentInterface>

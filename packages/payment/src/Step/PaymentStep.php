@@ -2,12 +2,27 @@
 
 namespace Siemendev\Checkout\Payment\Step;
 
+use InvalidArgumentException;
 use Siemendev\Checkout\Data\CheckoutDataInterface;
+use Siemendev\Checkout\Payment\Data\PaymentCheckoutDataInterface;
 use Siemendev\Checkout\Products\Data\ProductCheckoutDataInterface;
+use Siemendev\Checkout\Products\Quote\QuoteGeneratorInterface;
 use Siemendev\Checkout\Step\StepInterface;
 
 class PaymentStep implements StepInterface
 {
+    public function __construct(
+        private QuoteGeneratorInterface $quoteGenerator,
+    ) {
+    }
+
+    public function setQuoteGenerator(QuoteGeneratorInterface $quoteGenerator): static
+    {
+        $this->quoteGenerator = $quoteGenerator;
+
+        return $this;
+    }
+
     public static function stepIdentifier(): string
     {
         return 'product_payment';
@@ -15,7 +30,21 @@ class PaymentStep implements StepInterface
 
     public function isRequired(CheckoutDataInterface $data): bool
     {
-        return false;
+        if (!$data instanceof PaymentCheckoutDataInterface) {
+            throw new InvalidArgumentException(sprintf(
+                '%s needs to implement %s for the payment step to work.',
+                $data::class,
+                PaymentCheckoutDataInterface::class,
+            ));
+        }
+
+        // always show the payment step as soon as there are payments registered on the data
+        if (count($data->getPayments()) > 0) {
+            return true;
+        }
+
+        // only show the payment step if there is a total gross amount to pay
+        return $this->quoteGenerator->generate($data)->getTotalGross() > 0;
     }
 
     public function requiresCheckoutData(): array

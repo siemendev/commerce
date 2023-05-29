@@ -46,14 +46,14 @@ class FillController extends AbstractCheckoutController
                     ->setIdentifier('test-gift-card-2')
                     ->setValue(500)
                     ->setCurrency('EUR'),
-                (new GiftCard())
-                    ->setIdentifier('test-gift-card-3')
-                    ->setValue(5000)
-                    ->setCurrency('EUR'),
-                (new GiftCard())
-                    ->setIdentifier('test-gift-card-4')
-                    ->setValue(2500)
-                    ->setCurrency('EUR'),
+//                (new GiftCard())
+//                    ->setIdentifier('test-gift-card-3')
+//                    ->setValue(5000)
+//                    ->setCurrency('EUR'),
+//                (new GiftCard())
+//                    ->setIdentifier('test-gift-card-4')
+//                    ->setValue(2500)
+//                    ->setCurrency('EUR'),
             ])
         ;
 

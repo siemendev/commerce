@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Siemendev\Checkout\Payment;
+namespace Siemendev\Checkout\Payment\Payment;
 
 abstract class AbstractPayment implements PaymentInterface
 {
