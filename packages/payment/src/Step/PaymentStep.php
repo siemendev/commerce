@@ -5,6 +5,7 @@ namespace Siemendev\Checkout\Payment\Step;
 use InvalidArgumentException;
 use Siemendev\Checkout\Data\CheckoutDataInterface;
 use Siemendev\Checkout\Payment\Data\PaymentCheckoutDataInterface;
+use Siemendev\Checkout\Payment\Payment\PaymentInterface;
 use Siemendev\Checkout\Products\Data\ProductCheckoutDataInterface;
 use Siemendev\Checkout\Products\Quote\QuoteGeneratorInterface;
 use Siemendev\Checkout\Step\StepInterface;
@@ -54,7 +55,27 @@ class PaymentStep implements StepInterface
 
     public function validate(CheckoutDataInterface $data): void
     {
+        if (!$data instanceof PaymentCheckoutDataInterface) {
+            throw new InvalidArgumentException(sprintf(
+                '%s needs to implement %s for the payment step to work.',
+                $data::class,
+                PaymentCheckoutDataInterface::class,
+            ));
+        }
 
+        if (count($data->getPayments())) {
+            throw new NotPaidException();
+        }
+
+        $quote = $this->quoteGenerator->generate($data);
+        $paidAmount = array_sum(array_map(
+            static fn (PaymentInterface $payment) => $payment->getAmount(),
+            $data->getPayments()
+        ));
+
+        if ($quote->getTotalGross() - $paidAmount > 0) {
+            throw new PartiallyPaidException();
+        }
     }
 
     public static function requiresSteps(): array
