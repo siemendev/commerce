@@ -13,9 +13,7 @@ class CheckoutBundle extends Bundle
 
     public const SERVICE_CHECKOUT = 'checkout';
     public const SERVICE_STEP_MACHINE = self::SERVICE_CHECKOUT . '.step_machine';
-    public const SERVICE_AVAILABILITY_RESOLVER = self::SERVICE_CHECKOUT . '.availability_resolver';
     public const SERVICE_DATA_FACTORY = self::SERVICE_CHECKOUT . '.data_manager';
-    public const SERVICE_CHECKOUT_DATA_INTERFACES_RESOLVER = self::SERVICE_CHECKOUT . '.required_checkout_data_interfaces_resolver';
 
     public function build(ContainerBuilder $container): void
     {
