@@ -9,7 +9,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class CheckoutBundle extends Bundle
 {
-    public const PARAMETER_CONFIG = 'checkout';
+    public const PARAMETER_CONFIG = '.checkout';
 
     public const SERVICE_CHECKOUT = 'checkout';
     public const SERVICE_STEP_MACHINE = self::SERVICE_CHECKOUT . '.step_machine';
