@@ -16,4 +16,14 @@ abstract class AbstractDeliveryOption implements DeliveryOptionInterface
 
         return true;
     }
+
+    public function getPriceNet(DeliverableCheckoutDataInterface $data): int
+    {
+        return 0;
+    }
+
+    public function getPriceGross(DeliverableCheckoutDataInterface $data): int
+    {
+        return 0;
+    }
 }

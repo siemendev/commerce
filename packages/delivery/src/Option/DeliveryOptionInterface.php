@@ -26,4 +26,16 @@ interface DeliveryOptionInterface
      * @throws DeliveryOptionNotAvailableException
      */
     public function checkAvailability(DeliverableCheckoutDataInterface $data): void;
+
+    /**
+     * Get price (net)
+     * Returns the net price of the delivery option. Price is in the currency of the checkout data ($data->getCurrency()).
+     */
+    public function getPriceNet(DeliverableCheckoutDataInterface $data): int;
+
+    /**
+     * Get price (gross)
+     * Returns the gross price of the delivery option. Price is in the currency of the checkout data ($data->getCurrency()).
+     */
+    public function getPriceGross(DeliverableCheckoutDataInterface $data): int;
 }

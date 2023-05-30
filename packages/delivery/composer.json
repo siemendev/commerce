@@ -18,10 +18,17 @@
         "php": ">=8.1",
         "siemendev/checkout": "dev-main"
     },
+    "suggest": {
+        "siemendev/checkout-payment": "Delivery cost will be automatically added as a additional cost to the checkout"
+    },
     "repositories": [
         {
             "type": "path",
             "url": "../checkout"
+        },
+        {
+            "type": "path",
+            "url": "../payment"
         }
     ]
 }
