@@ -11,4 +11,8 @@ interface PaymentInterface
     public function getAmount(): int;
 
     public function getCurrency(): string;
+
+    public function isAuthorized(): bool;
+
+    public function isCaptured(): bool;
 }

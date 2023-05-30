@@ -2,7 +2,8 @@
 
 namespace Siemendev\Checkout\Payment\PayPal;
 
-use Siemendev\Checkout\Payment\AbstractPayment;
+
+use Siemendev\Checkout\Payment\Payment\AbstractPayment;
 
 class PayPalPayment extends AbstractPayment
 {
