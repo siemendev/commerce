@@ -10,7 +10,8 @@
     {% else %}
         <form method="post">
             {% for delivery_option in deliveryOptions %}
-                <input id="{{ delivery_option.identifier }}" type="radio" name="delivery_option" value="{{ delivery_option.identifier }}"> <label for="{{ delivery_option.identifier }}">{{ delivery_option.identifier }}</label><br>
+                <input id="{{ delivery_option.identifier }}" type="radio" name="delivery_option" value="{{ delivery_option.identifier }}" {% if selectedDeliveryOption == delivery_option %} checked{% endif %}>
+                <label for="{{ delivery_option.identifier }}">{{ delivery_option.identifier }}</label><br>
             {% endfor %}
             <button type="submit" name="submit">Continue</button>
         </form>
