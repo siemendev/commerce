@@ -26,4 +26,6 @@ class CheckoutData extends GenericCheckoutData implements
     use ContainsProducts;
     use ContainsPayments;
     use ContainsGiftCards;
+
+    public ?string $orderFileName = null;
 }

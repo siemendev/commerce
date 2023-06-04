@@ -5,4 +5,9 @@
         <p>Error: {{ error }}</p>
     {% endif %}
     {% include 'commerce/reuseable/cart.html.twig' with { 'quote': quote } only %}
+    {% if finalizable %}
+        <form action="{{ path('checkout_finalize') }}" method="post">
+            <button type="submit">Buy now</button>
+        </form>
+    {% endif %}
 {% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div>
+        <h2>Thank you for your oder!</h2>
+        <p>Detailed order information:</p>
+        {{ dump(data) }}
+        <p>Your order is also saved as a JSON file in <span style="font-family: monospace">&lt;project directory&gt;/var/orders</span>.</p>
+    </div>
+{% endblock %}
