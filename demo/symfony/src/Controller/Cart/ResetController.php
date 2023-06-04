@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[Route('/cart/clear', name: 'cart_clear')]
 #[Route('/cart/reset', name: 'cart_reset')]
 class ResetController extends AbstractCheckoutController
 {
