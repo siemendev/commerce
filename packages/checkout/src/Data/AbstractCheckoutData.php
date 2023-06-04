@@ -6,6 +6,8 @@ abstract class AbstractCheckoutData implements CheckoutDataInterface
 {
     private string $currency;
 
+    private bool $locked = false;
+
     public function getCurrency(): string
     {
         return $this->currency;
@@ -16,5 +18,15 @@ abstract class AbstractCheckoutData implements CheckoutDataInterface
         $this->currency = $string;
 
         return $this;
+    }
+
+    public function isLocked(): bool
+    {
+        return $this->locked;
+    }
+
+    public function lock(): void
+    {
+        $this->locked = true;
     }
 }

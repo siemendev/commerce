@@ -8,4 +8,8 @@ namespace Siemendev\Checkout\Data;
 interface CheckoutDataInterface
 {
     public function getCurrency(): string;
+
+    public function isLocked(): bool;
+
+    public function lock(): void;
 }
