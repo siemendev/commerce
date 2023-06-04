@@ -1,0 +1,11 @@
+<input name="name" type="text" placeholder="Full name" value="{{ address.name }}"><br>
+<input name="address_line1" type="text" placeholder="Address Line 1" value="{{ address.addressLine1 }}"><br>
+<input name="address_line2" type="text" placeholder="Address Line 2" value="{{ address.addressLine2 }}"><br>
+<input name="postal_code" type="text" placeholder="Postal code" value="{{ address.postalCode }}">
+<input name="city" type="text" placeholder="City" value="{{ address.city }}"><br>
+<input name="state" type="text" placeholder="State" value="{{ address.state }}"><br>
+<select name="country">
+    <option value="">Select country</option>
+    <option value="DE" {% if 'DE' == address.countryCode %} selected{% endif %}>Germany</option>
+    <option value="US"{% if 'US' == address.countryCode %} selected{% endif %}>USA</option>
+</select><br>
