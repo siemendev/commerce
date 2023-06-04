@@ -4,6 +4,9 @@ namespace Siemendev\Checkout\Payment\Data;
 
 use Siemendev\Checkout\Payment\Payment\PaymentInterface;
 
+/**
+ * @see PaymentCheckoutDataInterface
+ */
 trait ContainsPayments
 {
     /**
