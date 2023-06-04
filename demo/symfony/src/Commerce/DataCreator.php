@@ -15,6 +15,7 @@ class DataCreator implements CheckoutDataCreatorInterface
                 (new Address())
                     ->setCountryCode('FR') // todo load locale from request
             )
+            ->setCurrency('EUR')
         ;
     }
 }
