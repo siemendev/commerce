@@ -67,6 +67,17 @@ class StepMachine implements StepMachineInterface
         }
     }
 
+    public function isValid(CheckoutDataInterface $data): bool
+    {
+        try {
+            $this->validate($data);
+        } catch (AssignedValidationException) {
+            return false;
+        }
+
+        return true;
+    }
+
     public function validateStep(CheckoutDataInterface $checkoutData, string $stepIdentifier): void
     {
         foreach ($this->getRequiredSteps($checkoutData) as $step) {

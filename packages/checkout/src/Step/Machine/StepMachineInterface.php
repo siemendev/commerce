@@ -13,6 +13,8 @@ interface StepMachineInterface
      */
     public function validate(CheckoutDataInterface $data): void;
 
+    public function isValid(CheckoutDataInterface $data): bool;
+
     /**
      * @throws AssignedValidationException
      */
