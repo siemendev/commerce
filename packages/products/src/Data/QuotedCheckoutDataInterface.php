@@ -9,7 +9,7 @@ interface QuotedCheckoutDataInterface extends CheckoutDataInterface
 {
     public function setQuote(?QuoteInterface $quote): static;
 
-    public function getQuote(): ?QuoteInterface;
+    public function getQuote(): QuoteInterface;
 
     public function setCalculatedHash(string $hash): static;
 

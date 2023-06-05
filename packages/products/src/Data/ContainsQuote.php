@@ -2,6 +2,8 @@
 
 namespace Siemendev\Checkout\Products\Data;
 
+use LogicException;
+use Siemendev\Checkout\Products\Quote\Calculation\CheckoutQuoteCalculatorInterface;
 use Siemendev\Checkout\Products\Quote\QuoteInterface;
 
 /**
@@ -9,7 +11,7 @@ use Siemendev\Checkout\Products\Quote\QuoteInterface;
  */
 trait ContainsQuote
 {
-    private ?QuoteInterface $quote = null;
+    private QuoteInterface $quote;
 
     private string $calculatedHash = '';
 
@@ -20,8 +22,15 @@ trait ContainsQuote
         return $this;
     }
 
-    public function getQuote(): ?QuoteInterface
+    public function getQuote(): QuoteInterface
     {
+        if (!isset($this->quote)) {
+            throw new LogicException(sprintf(
+                'The checkout data needs to be calculated before fetching it. Try using an implementation of %s to calculate the checkout data first!',
+                CheckoutQuoteCalculatorInterface::class
+            ));
+        }
+
         return $this->quote;
     }
 

@@ -41,10 +41,6 @@ class PaymentMethodsProvider implements PaymentMethodsProviderInterface
             throw new LogicException(sprintf('%s needs to implement %s to check the eligibility of payment methods.', $data::class, PaymentCheckoutDataInterface::class));
         }
 
-        if ($data->getQuote() === null) {
-            throw new LogicException('The checkout data needs to be calculated before getting the eligible payment methods.');
-        }
-
         // no need to iterate the payment methods when there is nothing to be paid
         if (($data->getQuote()->getTotalGross() - $data->getPayments()->getTotal($data->getCurrency())) <= 0) {
             return [];
