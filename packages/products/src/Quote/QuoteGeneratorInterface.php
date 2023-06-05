@@ -6,5 +6,5 @@ use Siemendev\Checkout\Data\CheckoutDataInterface;
 
 interface QuoteGeneratorInterface
 {
-    public function generate(CheckoutDataInterface $data): Quote;
+    public function generate(CheckoutDataInterface $data): QuoteInterface;
 }
