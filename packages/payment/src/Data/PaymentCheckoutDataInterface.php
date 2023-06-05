@@ -3,12 +3,9 @@
 namespace Siemendev\Checkout\Payment\Data;
 
 use Siemendev\Checkout\Data\CheckoutDataInterface;
-use Siemendev\Checkout\Payment\Payment\PaymentInterface;
+use Siemendev\Checkout\Payment\Payment\Collection\PaymentCollectionInterface;
 
 interface PaymentCheckoutDataInterface extends CheckoutDataInterface
 {
-    /**
-     * @return array<PaymentInterface>
-     */
-    public function getPayments(): array;
+    public function getPayments(): PaymentCollectionInterface;
 }

@@ -4,6 +4,7 @@ namespace Siemendev\Checkout\Payment\Method;
 
 use LogicException;
 use Siemendev\Checkout\Data\CheckoutDataInterface;
+use Siemendev\Checkout\Payment\Data\PaymentCheckoutDataInterface;
 use Siemendev\Checkout\Products\Data\QuotedCheckoutDataInterface;
 
 class PaymentMethodsProvider implements PaymentMethodsProviderInterface
@@ -36,12 +37,16 @@ class PaymentMethodsProvider implements PaymentMethodsProviderInterface
         if (!$data instanceof QuotedCheckoutDataInterface) {
             throw new LogicException(sprintf('%s needs to implement %s to check the eligibility of payment methods.', $data::class, QuotedCheckoutDataInterface::class));
         }
+        if (!$data instanceof PaymentCheckoutDataInterface) {
+            throw new LogicException(sprintf('%s needs to implement %s to check the eligibility of payment methods.', $data::class, PaymentCheckoutDataInterface::class));
+        }
 
         if ($data->getQuote() === null) {
             throw new LogicException('The checkout data needs to be calculated before getting the eligible payment methods.');
         }
 
-        if ($data->getQuote()->getTotalGross() <= 0) {
+        // no need to iterate the payment methods when there is nothing to be paid
+        if (($data->getQuote()->getTotalGross() - $data->getPayments()->getTotal($data->getCurrency())) <= 0) {
             return [];
         }
 

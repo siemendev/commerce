@@ -43,7 +43,7 @@ class CheckoutData extends GenericCheckoutData implements
             . $this->getBillingAddress()?->getHash()
             . $this->getDeliveryAddress()?->getHash()
             . implode('-', array_map(static fn (ProductInterface $product) => $product->getIdentifier(), $this->getProducts()))
-            . implode('-', array_map(static fn (PaymentInterface $payment) => $payment->getIdentifier() . $payment->getCurrency() . $payment->getAmount(), $this->getPayments()))
+            . implode('-', array_map(static fn (PaymentInterface $payment) => $payment->getIdentifier() . $payment->getCurrency() . $payment->getAmount(), iterator_to_array($this->getPayments())))
             . implode('-', array_map(static fn (GiftCard $giftCard) => $giftCard->getIdentifier() . $giftCard->getCurrency() . $giftCard->getValue(), $this->getGiftCards()))
             . $this->isAgeVerified()
             . $this->getDeliveryOption()?->getIdentifier()
