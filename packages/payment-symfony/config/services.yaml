@@ -4,13 +4,13 @@ services:
     public: true
     class: 'Siemendev\Checkout\Payment\Step\PaymentStep'
     arguments:
-      $quoteGenerator: '@checkout.quote_generators.products'
+      $quoteGenerator: '@checkout.quote_generator'
 
   checkout.payment.methods_provider:
     public: true
     class: 'Siemendev\Checkout\Payment\Method\PaymentMethodsProvider'
     arguments:
-      $quoteGenerator: '@checkout.quote_generators.products'
+      $quoteGenerator: '@checkout.quote_generator'
 
   Siemendev\Checkout\Payment\Method\PaymentMethodsProviderInterface:
     public: false

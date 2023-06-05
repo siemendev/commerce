@@ -15,6 +15,8 @@ class DeliveryAddressController extends AbstractCheckoutController
 {
     public function __invoke(Request $request): Response
     {
+        $this->getQuoteCalculator()->calculate($this->getCheckoutData());
+
         if (!$this->getStepMachine()->isStepAllowed($this->getCheckoutData(), DeliveryAddressStep::stepIdentifier())) {
             return $this->redirectToCurrentStep();
         }

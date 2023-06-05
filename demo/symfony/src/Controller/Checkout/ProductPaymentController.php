@@ -18,6 +18,8 @@ class ProductPaymentController extends AbstractCheckoutController
         DeliveryOptionsResolverInterface $optionsResolver,
         PaymentMethodsProviderInterface $paymentMethodProvider
     ): Response {
+        $this->getQuoteCalculator()->calculate($this->getCheckoutData());
+
         if (!$this->getStepMachine()->isStepAllowed($this->getCheckoutData(), PaymentStep::stepIdentifier())) {
             return $this->redirectToCurrentStep();
         }
@@ -25,7 +27,6 @@ class ProductPaymentController extends AbstractCheckoutController
         $paymentMethods = $paymentMethodProvider->getEligiblePaymentMethods($this->getCheckoutData());
 
         return $this->render('commerce/steps/product_payment.html.twig', [
-            'quote' => $this->getProductsQuoteGenerator()->generate($this->getCheckoutData()),
             'paymentMethods' => $paymentMethods,
             'steps' => $this->getStepsData(),
             'data' => $this->getCheckoutData(),

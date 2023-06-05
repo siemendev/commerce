@@ -14,6 +14,8 @@ class FinalizeController extends AbstractCheckoutController
     public function __invoke(Request $request, CheckoutFinalizerInterface $checkoutFinalizer): Response
     {
         $checkoutData = $this->getCheckoutData();
+        $this->getQuoteCalculator()->calculate($checkoutData);
+
         if (!$this->getStepMachine()->isValid($checkoutData)) {
             return $this->redirectToCurrentStep();
         }

@@ -18,4 +18,6 @@ interface AddressInterface
     public function getPostalCode(): string;
 
     public function isCompany(): bool;
+
+    public function getHash(): string;
 }

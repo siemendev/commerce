@@ -123,5 +123,19 @@ class Address implements AddressInterface
 
         return true;
     }
+
+    public function getHash(): string
+    {
+        return md5(
+            $this->getCountryCode()
+            . $this->getPostalCode()
+            . $this->getCity()
+            . $this->getAddressLine1()
+            . $this->getAddressLine2()
+            . $this->getState()
+            . $this->getName()
+            . $this->isCompany()
+        );
+    }
 }
 

@@ -2,7 +2,9 @@
 
 namespace Siemendev\Checkout\Payment\Method;
 
+use LogicException;
 use Siemendev\Checkout\Data\CheckoutDataInterface;
+use Siemendev\Checkout\Products\Data\QuotedCheckoutDataInterface;
 use Siemendev\Checkout\Products\Quote\QuoteGeneratorInterface;
 
 class PaymentMethodsProvider implements PaymentMethodsProviderInterface
@@ -41,9 +43,17 @@ class PaymentMethodsProvider implements PaymentMethodsProviderInterface
             return [];
         }
 
+        if (!$data instanceof QuotedCheckoutDataInterface) {
+            throw new LogicException(sprintf('%s needs to implement %s to check the eligibility of payment methods.', $data::class, QuotedCheckoutDataInterface::class));
+        }
+
+        if ($data->getQuote() === null) {
+            throw new LogicException('The checkout data needs to be calculated before getting the eligible payment methods.');
+        }
+
         return array_values(array_filter(
             $this->paymentMethods,
-            static fn (PaymentMethodInterface $paymentMethod) => $paymentMethod->isEligible($data, $quote),
+            static fn (PaymentMethodInterface $paymentMethod) => $paymentMethod->isEligible($data),
         ));
     }
 }

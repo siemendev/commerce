@@ -17,6 +17,8 @@ class BillingAddressController extends AbstractCheckoutController
 {
     public function __invoke(Request $request): Response
     {
+        $this->getQuoteCalculator()->calculate($this->getCheckoutData());
+
         if (!$this->getStepMachine()->isStepAllowed($this->getCheckoutData(), BillingAddressStep::stepIdentifier())) {
             return $this->redirectToCurrentStep();
         }

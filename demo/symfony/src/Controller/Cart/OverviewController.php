@@ -13,8 +13,9 @@ class OverviewController extends AbstractCheckoutController
 {
     public function __invoke(): Response
     {
+        $this->getQuoteCalculator()->calculate($this->getCheckoutData());
+
         $data = [
-            'quote' => $this->getProductsQuoteGenerator()->generate($this->getCheckoutData()),
             'continue' => $this->getCurrentStepUrl(),
             'step_name' => $this->getCurrentStepIdentifier(),
             'data' => $this->getCheckoutData(),

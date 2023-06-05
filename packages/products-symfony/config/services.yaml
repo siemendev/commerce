@@ -8,7 +8,7 @@ services:
     public: true
     class: Siemendev\Checkout\Products\Step\CartStep
 
-  checkout.quote_generators.products:
+  checkout.quote_generator:
     public: true
     class: 'Siemendev\Checkout\Products\Quote\QuoteGenerator'
     arguments:
@@ -16,7 +16,7 @@ services:
       $availabilityResolver: '@checkout.product_availability_resolver'
       $additionalCostsAggregator: '@checkout.additional_costs_aggregator'
   Siemendev\Checkout\Products\Quote\QuoteGeneratorInterface:
-    alias: checkout.quote_generators.products
+    alias: checkout.quote_generator
     public: false
 
   checkout.product_price_resolver:
@@ -39,3 +39,12 @@ services:
   Siemendev\Checkout\Products\AdditionalCost\AdditionalCostsAggregatorInterface:
     public: false
     alias: checkout.additional_costs_aggregator
+
+  checkout.quote_calculator:
+    public: true
+    class: 'Siemendev\Checkout\Products\Quote\Calculation\CheckoutQuoteCalculator'
+    arguments:
+      $quoteGenerator: '@checkout.quote_generator'
+  Siemendev\Checkout\Products\Quote\Calculation\CheckoutQuoteCalculatorInterface:
+    public: false
+    alias: checkout.quote_calculator

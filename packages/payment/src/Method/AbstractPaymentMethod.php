@@ -2,15 +2,14 @@
 
 namespace Siemendev\Checkout\Payment\Method;
 
-use Siemendev\Checkout\Data\CheckoutDataInterface;
-use Siemendev\Checkout\Products\Quote\QuoteInterface;
+use Siemendev\Checkout\Products\Data\QuotedCheckoutDataInterface;
 
 abstract class AbstractPaymentMethod implements PaymentMethodInterface
 {
-    public function isEligible(CheckoutDataInterface $data, QuoteInterface $quote): bool
+    public function isEligible(QuotedCheckoutDataInterface $data): bool
     {
         try {
-            $this->eligible($data, $quote);
+            $this->eligible($data);
         } catch (PaymentMethodNotEligibleException) {
             return false;
         }

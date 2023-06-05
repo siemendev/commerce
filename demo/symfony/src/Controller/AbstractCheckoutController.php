@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Commerce\CheckoutData;
-use Siemendev\Checkout\Products\Quote\QuoteGeneratorInterface as ProductsQuoteGenerator;
+use Siemendev\Checkout\Products\Quote\Calculation\CheckoutQuoteCalculatorInterface;
 use Siemendev\Checkout\Step\StepInterface;
 use Siemendev\Checkout\Step\Machine\StepMachineInterface;
 use Siemendev\Checkout\SymfonyBridge\Data\CheckoutDataManager;
@@ -19,7 +19,7 @@ abstract class AbstractCheckoutController extends AbstractController
 {
     public function __construct(
         private readonly StepMachineInterface $stepMachine,
-        private readonly ProductsQuoteGenerator $productsQuoteGenerator,
+        private readonly CheckoutQuoteCalculatorInterface $checkoutQuoteCalculator,
         private readonly CheckoutDataManager $checkoutDataManager,
     ) {
     }
@@ -29,9 +29,9 @@ abstract class AbstractCheckoutController extends AbstractController
         return $this->stepMachine;
     }
 
-    public function getProductsQuoteGenerator(): ProductsQuoteGenerator
+    public function getQuoteCalculator(): CheckoutQuoteCalculatorInterface
     {
-        return $this->productsQuoteGenerator;
+        return $this->checkoutQuoteCalculator;
     }
 
     public function getCheckoutData(): CheckoutData

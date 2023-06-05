@@ -3,6 +3,7 @@
 namespace Siemendev\Checkout\Payment\Method;
 
 use Siemendev\Checkout\Data\CheckoutDataInterface;
+use Siemendev\Checkout\Products\Data\QuotedCheckoutDataInterface;
 use Siemendev\Checkout\Products\Quote\QuoteInterface;
 
 interface PaymentMethodInterface
@@ -12,7 +13,7 @@ interface PaymentMethodInterface
     /**
      * @throws PaymentMethodNotEligibleException
      */
-    public function eligible(CheckoutDataInterface $data, QuoteInterface $quote): void;
+    public function eligible(QuotedCheckoutDataInterface $data): void;
 
-    public function isEligible(CheckoutDataInterface $data, QuoteInterface $quote): bool;
+    public function isEligible(QuotedCheckoutDataInterface $data): bool;
 }

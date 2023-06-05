@@ -14,7 +14,7 @@ class DeliveryController extends AbstractCheckoutController
 {
     public function __invoke(Request $request, DeliveryOptionsResolverInterface $optionsResolver): Response
     {
-        $error = null;
+        $this->getQuoteCalculator()->calculate($this->getCheckoutData());
 
         if (!$this->getStepMachine()->isStepAllowed($this->getCheckoutData(), DeliveryStep::stepIdentifier())) {
             return $this->redirectToCurrentStep();
@@ -22,6 +22,7 @@ class DeliveryController extends AbstractCheckoutController
 
         $availableOptions = $optionsResolver->getAvailableOptions($this->getCheckoutData());
 
+        $error = null;
         if ($request->getMethod() === 'POST') {
             $selectedDeliveryOptionIdentifier = $request->request->get('delivery_option');
 
