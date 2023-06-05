@@ -10,8 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/checkout/payment/products', name: 'checkout_product_payment')]
-class ProductPaymentController extends AbstractCheckoutController
+#[Route('/checkout/payment', name: 'checkout_payment')]
+class PaymentController extends AbstractCheckoutController
 {
     public function __invoke(
         Request $request,
@@ -26,7 +26,7 @@ class ProductPaymentController extends AbstractCheckoutController
 
         $paymentMethods = $paymentMethodProvider->getEligiblePaymentMethods($this->getCheckoutData());
 
-        return $this->render('commerce/steps/product_payment.html.twig', [
+        return $this->render('commerce/steps/payment.html.twig', [
             'paymentMethods' => $paymentMethods,
             'openTotal' => $this->getCheckoutData()->getOpenTotal(),
             'steps' => $this->getStepsData(),

@@ -15,7 +15,7 @@ class PaymentStep implements StepInterface
 {
     public static function stepIdentifier(): string
     {
-        return 'product_payment';
+        return 'payment';
     }
 
     public function isRequired(CheckoutDataInterface $data): bool
