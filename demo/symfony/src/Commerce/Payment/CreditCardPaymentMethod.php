@@ -6,9 +6,9 @@ use Siemendev\Checkout\Payment\Method\AbstractPaymentMethod;
 use Siemendev\Checkout\Payment\Method\PaymentMethodNotEligibleException;
 use Siemendev\Checkout\Products\Data\QuotedCheckoutDataInterface;
 
-class InvoicePaymentMethod extends AbstractPaymentMethod
+class CreditCardPaymentMethod extends AbstractPaymentMethod
 {
-    public const IDENTIFIER = 'invoice';
+    public const IDENTIFIER = 'credit-card';
 
     public function identifier(): string
     {
@@ -18,10 +18,10 @@ class InvoicePaymentMethod extends AbstractPaymentMethod
     public function eligible(QuotedCheckoutDataInterface $data): void
     {
         if ($data->getQuote()->getTotalGross() < 1000) {
-            throw new PaymentMethodNotEligibleException('Invoice payment is only available for orders 10€ and up');
+            throw new PaymentMethodNotEligibleException('Credit card payment is only available for orders 10€ and up');
         }
         if ($data->getQuote()->getTotalGross() > 100000) {
-            throw new PaymentMethodNotEligibleException('Invoice payment is only available for orders up to 1000€');
+            throw new PaymentMethodNotEligibleException('Credit card payment is only available for orders up to 1000€');
         }
     }
 }
