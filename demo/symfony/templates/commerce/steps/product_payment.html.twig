@@ -1,4 +1,15 @@
 {% extends 'commerce/checkout.html.twig' %}
 {% block content %}
-    <h1>Payment</h1>
+    <h2>Payment</h2>
+    <p>TODO: add existing payments overview</p>
+    <h2>Add payment</h2>
+    <form method="post">
+        <select name="payment_method">
+            {% for paymentMethod in paymentMethods %}
+                <option value="{{ paymentMethod.identifier }}">{{ paymentMethod.identifier }}</option>
+            {% endfor %}
+        </select>
+        <input type="number" name="amount" placeholder="Amount in cents" value="">
+        <button type="submit">Add payment</button>
+    </form>
 {% endblock %}
