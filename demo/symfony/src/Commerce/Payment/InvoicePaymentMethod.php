@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Commerce\Provider\Payment;
+namespace App\Commerce\Payment;
 
 use Siemendev\Checkout\Payment\Method\AbstractPaymentMethod;
 use Siemendev\Checkout\Payment\Method\PaymentMethodNotEligibleException;

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Commerce\Provider\Product;
+namespace App\Commerce\Provider;
 
 
 use Siemendev\Checkout\Products\Availability\Provider\AvailabilityProviderInterface;
