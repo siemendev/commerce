@@ -58,19 +58,12 @@ class PaymentStep implements StepInterface
                 PaymentCheckoutDataInterface::class,
             ));
         }
-        if (!$data instanceof QuotedCheckoutDataInterface) {
-            throw new InvalidArgumentException(sprintf(
-                '%s needs to implement %s for the payment step to work.',
-                $data::class,
-                QuotedCheckoutDataInterface::class,
-            ));
-        }
 
         if ($data->getPayments()->isEmpty()) {
             throw new NotPaidException();
         }
 
-        if ($data->getQuote()->getTotalGross() - $data->getPayments()->getTotal($data->getCurrency()) > 0) {
+        if ($data->getOpenTotal() > 0) {
             throw new PartiallyPaidException();
         }
     }

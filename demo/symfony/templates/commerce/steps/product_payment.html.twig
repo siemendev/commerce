@@ -9,7 +9,7 @@
                 <option value="{{ paymentMethod.identifier }}">{{ paymentMethod.identifier }}</option>
             {% endfor %}
         </select>
-        <input type="number" name="amount" placeholder="Amount in cents" value="">
+        <input type="number" name="amount" placeholder="Amount in cents" value="{{ openTotal }}">
         <button type="submit">Add payment</button>
     </form>
 {% endblock %}

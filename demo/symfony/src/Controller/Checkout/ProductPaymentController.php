@@ -28,6 +28,7 @@ class ProductPaymentController extends AbstractCheckoutController
 
         return $this->render('commerce/steps/product_payment.html.twig', [
             'paymentMethods' => $paymentMethods,
+            'openTotal' => $this->getCheckoutData()->getOpenTotal(),
             'steps' => $this->getStepsData(),
             'data' => $this->getCheckoutData(),
         ]);
