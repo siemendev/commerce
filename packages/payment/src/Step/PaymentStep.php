@@ -7,23 +7,12 @@ use Siemendev\Checkout\Data\CheckoutDataInterface;
 use Siemendev\Checkout\Payment\Data\PaymentCheckoutDataInterface;
 use Siemendev\Checkout\Payment\Payment\PaymentInterface;
 use Siemendev\Checkout\Products\Data\ProductCheckoutDataInterface;
+use Siemendev\Checkout\Products\Data\QuotedCheckoutDataInterface;
 use Siemendev\Checkout\Products\Quote\QuoteGeneratorInterface;
 use Siemendev\Checkout\Step\StepInterface;
 
 class PaymentStep implements StepInterface
 {
-    public function __construct(
-        private QuoteGeneratorInterface $quoteGenerator,
-    ) {
-    }
-
-    public function setQuoteGenerator(QuoteGeneratorInterface $quoteGenerator): static
-    {
-        $this->quoteGenerator = $quoteGenerator;
-
-        return $this;
-    }
-
     public static function stepIdentifier(): string
     {
         return 'product_payment';
@@ -38,14 +27,21 @@ class PaymentStep implements StepInterface
                 PaymentCheckoutDataInterface::class,
             ));
         }
+        if (!$data instanceof QuotedCheckoutDataInterface) {
+            throw new InvalidArgumentException(sprintf(
+                '%s needs to implement %s for the payment step to work.',
+                $data::class,
+                QuotedCheckoutDataInterface::class,
+            ));
+        }
 
         // always show the payment step as soon as there are payments registered on the data
-        if (count($data->getPayments()) > 0) {
+        if (!$data->getPayments()->isEmpty()) {
             return true;
         }
 
         // only show the payment step if there is a total gross amount to pay
-        return $this->quoteGenerator->generate($data)->getTotalGross() > 0;
+        return $data->getQuote()->getTotalGross() > 0;
     }
 
     public function requiresCheckoutData(): array
@@ -62,18 +58,19 @@ class PaymentStep implements StepInterface
                 PaymentCheckoutDataInterface::class,
             ));
         }
+        if (!$data instanceof QuotedCheckoutDataInterface) {
+            throw new InvalidArgumentException(sprintf(
+                '%s needs to implement %s for the payment step to work.',
+                $data::class,
+                QuotedCheckoutDataInterface::class,
+            ));
+        }
 
-        if (count($data->getPayments())) {
+        if ($data->getPayments()->isEmpty()) {
             throw new NotPaidException();
         }
 
-        $quote = $this->quoteGenerator->generate($data);
-        $paidAmount = array_sum(array_map(
-            static fn (PaymentInterface $payment) => $payment->getAmount(),
-            $data->getPayments()
-        ));
-
-        if ($quote->getTotalGross() - $paidAmount > 0) {
+        if ($data->getQuote()->getTotalGross() - $data->getPayments()->getTotal($data->getCurrency()) > 0) {
             throw new PartiallyPaidException();
         }
     }
