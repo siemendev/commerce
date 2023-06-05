@@ -42,9 +42,14 @@ class PaymentMethodsProvider implements PaymentMethodsProviderInterface
             return [];
         }
 
-        return array_values(array_filter(
-            $this->paymentMethods,
-            static fn (PaymentMethodInterface $paymentMethod) => $paymentMethod->isEligible($data),
-        ));
+        $paymentMethods = [];
+        foreach ($this->paymentMethods as $paymentMethod) {
+            if (!$paymentMethod->isEligible($data)) {
+                continue;
+            }
+            $paymentMethods[$paymentMethod->identifier()] = $paymentMethod;
+        }
+
+        return $paymentMethods;
     }
 }

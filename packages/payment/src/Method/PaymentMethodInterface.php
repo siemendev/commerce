@@ -2,9 +2,8 @@
 
 namespace Siemendev\Checkout\Payment\Method;
 
-use Siemendev\Checkout\Data\CheckoutDataInterface;
+use Siemendev\Checkout\Payment\Payment\PaymentInterface;
 use Siemendev\Checkout\Products\Data\QuotedCheckoutDataInterface;
-use Siemendev\Checkout\Products\Quote\QuoteInterface;
 
 interface PaymentMethodInterface
 {

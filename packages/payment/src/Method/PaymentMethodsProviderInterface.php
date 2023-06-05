@@ -6,5 +6,8 @@ use Siemendev\Checkout\Data\CheckoutDataInterface;
 
 interface PaymentMethodsProviderInterface
 {
+    /**
+     * @return array<string, PaymentMethodInterface> indexed by identifier
+     */
     public function getEligiblePaymentMethods(CheckoutDataInterface $data): array;
 }

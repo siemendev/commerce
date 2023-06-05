@@ -3,6 +3,7 @@
 namespace App\Controller\Checkout;
 
 use App\Controller\AbstractCheckoutController;
+use RuntimeException;
 use Siemendev\Checkout\Delivery\Option\Resolver\DeliveryOptionsResolverInterface;
 use Siemendev\Checkout\Payment\Method\PaymentMethodsProviderInterface;
 use Siemendev\Checkout\Payment\Step\PaymentStep;
@@ -25,6 +26,13 @@ class PaymentController extends AbstractCheckoutController
         }
 
         $paymentMethods = $paymentMethodProvider->getEligiblePaymentMethods($this->getCheckoutData());
+
+        if ($request->getMethod() === Request::METHOD_POST) {
+            $paymentMethod = $paymentMethods[$request->request->getString('payment_method')];
+            if ($paymentMethod === null) {
+                throw new RuntimeException('Invalid payment method selected');
+            }
+        }
 
         return $this->render('commerce/steps/payment.html.twig', [
             'paymentMethods' => $paymentMethods,

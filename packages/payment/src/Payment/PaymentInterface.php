@@ -2,11 +2,16 @@
 
 namespace Siemendev\Checkout\Payment\Payment;
 
+use Siemendev\Checkout\Payment\Method\PaymentMethodInterface;
+
 interface PaymentInterface
 {
     public function getIdentifier(): string;
 
-    public static function getPaymentMethodIdentifier(): string;
+    /**
+     * @see PaymentMethodInterface::identifier()
+     */
+    public function getPaymentMethodIdentifier(): string;
 
     public function getAmount(): int;
 

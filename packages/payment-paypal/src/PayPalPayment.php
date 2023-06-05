@@ -2,13 +2,26 @@
 
 namespace Siemendev\Checkout\Payment\PayPal;
 
+use Siemendev\Checkout\Payment\Payment\Payment;
 
-use Siemendev\Checkout\Payment\Payment\AbstractPayment;
-
-class PayPalPayment extends AbstractPayment
+class PayPalPayment extends Payment
 {
-    public static function getPaymentMethodIdentifier(): string
+    private ?string $paypalOrderId = null;
+
+    public function getPaymentMethodIdentifier(): string
     {
         return 'paypal';
+    }
+
+    public function getPayPalOrderId(): ?string
+    {
+        return $this->paypalOrderId;
+    }
+
+    public function setPayPalOrderId(?string $paypalOrderId): static
+    {
+        $this->paypalOrderId = $paypalOrderId;
+
+        return $this;
     }
 }
