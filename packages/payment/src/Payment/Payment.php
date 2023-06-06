@@ -7,14 +7,6 @@ class Payment implements PaymentInterface
     protected bool $authorized = false;
     protected bool $captured = false;
 
-    public function __construct(
-        private string $identifier,
-        private string $paymentMethodIdentifier,
-        private int $amount,
-        private string $currency,
-    ) {
-    }
-
     public function setPaymentMethodIdentifier(string $paymentMethodIdentifier): static
     {
         $this->paymentMethodIdentifier = $paymentMethodIdentifier;
