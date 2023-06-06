@@ -11,7 +11,7 @@ interface CheckoutDataInterface
 
     public function isLocked(): bool;
 
-    public function lock(): void;
+    public function lock(): static;
 
     /**
      * This method is used to identify changes in the checkout data. Make sure your implementation includes all

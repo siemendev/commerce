@@ -25,8 +25,10 @@ abstract class AbstractCheckoutData implements CheckoutDataInterface
         return $this->locked;
     }
 
-    public function lock(): void
+    public function lock(): static
     {
         $this->locked = true;
+
+        return $this;
     }
 }
