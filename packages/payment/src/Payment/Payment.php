@@ -82,6 +82,7 @@ class Payment implements PaymentInterface
 
     public function captured(): static
     {
+        $this->authorized = true;
         $this->captured = true;
 
         return $this;
