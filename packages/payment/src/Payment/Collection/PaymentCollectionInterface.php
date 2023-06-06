@@ -7,7 +7,7 @@ interface PaymentCollectionInterface
     /**
      * Convenience method to get the total amount of all payments in a given currency.
      */
-    public function getTotal(?string $currency = null): int;
+    public function getTotal(string $currency): int;
 
     public function isEmpty(): bool;
 }

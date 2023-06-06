@@ -29,15 +29,17 @@ class PaymentCollection implements PaymentCollectionInterface, Countable, Iterat
         }
     }
 
-    public function getTotal(?string $currency = null): int
+    public function getTotal(string $currency): int
     {
+        $authorizedPayments = array_filter(
+            $this->payments,
+            static fn (PaymentInterface $payment) => $payment->isAuthorized() && $payment->getCurrency() === $currency,
+        );
+
         return array_sum(
             array_map(
                 static fn(PaymentInterface $payment) => $payment->getAmount(),
-                null === $currency ? $this->payments : array_filter(
-                    $this->payments,
-                    static fn (PaymentInterface $payment) => $payment->getCurrency() === $currency,
-                ),
+                $authorizedPayments,
             ),
         );
     }
