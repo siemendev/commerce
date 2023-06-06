@@ -2,6 +2,8 @@
 
 namespace Siemendev\Checkout\Payment\Payment\Collection;
 
+use Siemendev\Checkout\Payment\Payment\PaymentInterface;
+
 interface PaymentCollectionInterface
 {
     /**
@@ -10,4 +12,11 @@ interface PaymentCollectionInterface
     public function getTotal(string $currency): int;
 
     public function isEmpty(): bool;
+
+    public function add(PaymentInterface $payment): static;
+
+    /**
+     * @return array<string, PaymentInterface> Indexed by payment identifier
+     */
+    public function getByPaymentMethodIdentifier(string $paymentMethodIdentifier): array;
 }
