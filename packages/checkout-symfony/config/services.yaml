@@ -32,3 +32,10 @@ services:
   checkout.steps.summary:
     public: false
     class: 'Siemendev\Checkout\Step\Summary\SummaryStep'
+
+  checkout.finalizer:
+    public: true
+    class: 'Siemendev\Checkout\Finalize\CheckoutFinalizer'
+  Siemendev\Checkout\Finalize\CheckoutFinalizerInterface:
+    public: false
+    alias: checkout.finalizer

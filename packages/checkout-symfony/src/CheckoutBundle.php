@@ -12,8 +12,11 @@ class CheckoutBundle extends Bundle
     public const PARAMETER_CONFIG = '.checkout';
 
     public const SERVICE_CHECKOUT = 'checkout';
-    public const SERVICE_STEP_MACHINE = self::SERVICE_CHECKOUT . '.step_machine';
-    public const SERVICE_DATA_FACTORY = self::SERVICE_CHECKOUT . '.data_manager';
+    public const SERVICE_STEP_MACHINE = 'checkout.step_machine';
+    public const SERVICE_DATA_FACTORY = 'checkout.data_manager';
+    public const SERVICE_FINALIZER = 'checkout.finalizer';
+
+    public const TAG_FINALIZATION_HANDLER = 'checkout.finalization_handler';
 
     public function build(ContainerBuilder $container): void
     {

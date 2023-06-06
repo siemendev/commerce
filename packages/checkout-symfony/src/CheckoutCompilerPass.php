@@ -2,6 +2,7 @@
 
 namespace Siemendev\Checkout\SymfonyBridge;
 
+use Siemendev\Checkout\Finalize\CheckoutFinalizationHandlerInterface;
 use Siemendev\Checkout\Step\StepInterface;
 use Siemendev\Checkout\SymfonyBridge\Data\CheckoutDataCreatorInterface;
 use Siemendev\SymfonyPackageHelper\CompilerPassHelper;
@@ -26,6 +27,12 @@ class CheckoutCompilerPass implements CompilerPassInterface
                 $config['data_creator'],
                 'setDataCreator',
                 CheckoutDataCreatorInterface::class,
+            )
+            ->addTaggedServicesToParent(
+                CheckoutBundle::SERVICE_FINALIZER,
+                CheckoutBundle::TAG_FINALIZATION_HANDLER,
+                'addFinalizationHandler',
+                CheckoutFinalizationHandlerInterface::class,
             )
         ;
     }
