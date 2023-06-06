@@ -47,4 +47,9 @@ class CheckoutDataManager
     {
         $this->requestStack->getSession()->set(static::SESSION_KEY, $checkoutData);
     }
+
+    public function clearCheckoutData(): void
+    {
+        $this->requestStack->getSession()->remove(static::SESSION_KEY);
+    }
 }

@@ -8,6 +8,8 @@ abstract class AbstractCheckoutData implements CheckoutDataInterface
 
     private bool $locked = false;
 
+    private bool $finalized = false;
+
     public function getCurrency(): string
     {
         return $this->currency;
@@ -28,6 +30,19 @@ abstract class AbstractCheckoutData implements CheckoutDataInterface
     public function lock(): static
     {
         $this->locked = true;
+
+        return $this;
+    }
+
+    public function isFinalized(): bool
+    {
+        return $this->finalized;
+    }
+
+    public function finalize(): static
+    {
+        $this->finalized = true;
+        $this->lock();
 
         return $this;
     }

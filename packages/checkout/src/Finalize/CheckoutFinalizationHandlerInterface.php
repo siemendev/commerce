@@ -16,6 +16,9 @@ interface CheckoutFinalizationHandlerInterface
      * Finalizes your part of the checkout process. CheckoutFinalizaterInterface will call this method for each step in
      * the configured order. If you throw an exception, the finalizer will return that exception and rollback all
      * previous finalization steps.
+     * Important: ONLY use (instances of) CheckoutNotFinalizableException to indicate that the checkout process cannot
+     * be finalized. Every other exception will not be caught by the finalizer and will result in a fatal error with
+     * no rollback!
      *
      * @throws CheckoutNotFinalizableException
      */

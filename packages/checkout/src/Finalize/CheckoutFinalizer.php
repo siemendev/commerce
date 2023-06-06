@@ -66,6 +66,7 @@ class CheckoutFinalizer implements CheckoutFinalizerInterface
             }
             throw $exception;
         }
+        $data->finalize();
 
         if (count($todoHandlers) > 0) {
             throw new UnknownFinalizationStepException($todoHandlers[0], $this->finalizationSteps);

@@ -49,6 +49,11 @@ abstract class AbstractCheckoutController extends AbstractController
         return $checkoutData;
     }
 
+    public function clearCheckoutData(): void
+    {
+        $this->checkoutDataManager->clearCheckoutData();
+    }
+
     protected function redirectToCurrentStep(): RedirectResponse
     {
         return $this->redirect($this->getCurrentStepUrl());

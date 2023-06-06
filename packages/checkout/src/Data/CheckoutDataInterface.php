@@ -13,6 +13,10 @@ interface CheckoutDataInterface
 
     public function lock(): static;
 
+    public function isFinalized(): bool;
+
+    public function finalize(): static;
+
     /**
      * This method is used to identify changes in the checkout data. Make sure your implementation includes all
      * properties that are used to calculate the quote, otherwise the quote will not be recalculated when these
