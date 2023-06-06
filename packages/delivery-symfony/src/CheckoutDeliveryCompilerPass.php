@@ -2,11 +2,10 @@
 
 namespace Siemendev\Checkout\Delivery\SymfonyBridge;
 
-use LogicException;
-use Siemendev\Checkout\SymfonyBridge\Data\CheckoutDataCreatorInterface;
+use Siemendev\Checkout\Delivery\Option\DeliveryOptionInterface;
+use Siemendev\SymfonyPackageHelper\CompilerPassHelper;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
 
 class CheckoutDeliveryCompilerPass implements CompilerPassInterface
 {
@@ -14,28 +13,13 @@ class CheckoutDeliveryCompilerPass implements CompilerPassInterface
     {
         $config = $container->getParameter(CheckoutDeliveryBundle::PARAMETER_CONFIG);
 
-        $this->wireConfiguredServices(
-            CheckoutDeliveryBundle::SERVICE_DELIVERY_OPTIONS_RESOLVER,
-            $config['options'],
-            $container,
-            'addOption',
-        );
-    }
-
-    private function wireConfiguredServices(
-        string $parentServiceId,
-        array $childServiceIds,
-        ContainerBuilder $container,
-        string $methodToCall,
-    ): void {
-        foreach ($childServiceIds as $childServiceId) {
-            if (!$container->hasDefinition($childServiceId)) {
-                throw new LogicException(sprintf('Service with ID "%s" does not exist.', $childServiceId));
-            }
-
-            $container->getDefinition($parentServiceId)
-                ->addMethodCall($methodToCall, [new Reference($childServiceId)])
-            ;
-        }
+        (new CompilerPassHelper($container))
+            ->addChildServicesToParent(
+                CheckoutDeliveryBundle::SERVICE_DELIVERY_OPTIONS_RESOLVER,
+                $config['options'],
+                'addOption',
+                DeliveryOptionInterface::class,
+            )
+        ;
     }
 }

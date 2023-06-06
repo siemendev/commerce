@@ -40,7 +40,7 @@
             "dist": {
                 "type": "path",
                 "url": "../products",
-                "reference": "8fecb518b5e70e27d37b04b7259aba0a82d53ab7"
+                "reference": "c8245ecfe58ae58b2cb7ec8ca755f62d99a3bfa8"
             },
             "require": {
                 "php": ">=8.1",
@@ -58,7 +58,7 @@
                     "email": "post@patrick-siemen.de"
                 }
             ],
-            "description": "checkout symfony bridge",
+            "description": "checkout products implementation",
             "transport-options": {
                 "relative": true
             }

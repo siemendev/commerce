@@ -40,7 +40,7 @@
             "dist": {
                 "type": "path",
                 "url": "../payment",
-                "reference": "9e26f5c4641fe1c90cc03c68b3c723d05583de71"
+                "reference": "09b79fd1b3f5ddde4299c6e222bf2dbb63f07b9c"
             },
             "require": {
                 "php": ">=8.1",
@@ -58,7 +58,7 @@
                     "email": "post@patrick-siemen.de"
                 }
             ],
-            "description": "checkout taxation implementation",
+            "description": "checkout payment implementation",
             "transport-options": {
                 "relative": true
             }
@@ -69,7 +69,7 @@
             "dist": {
                 "type": "path",
                 "url": "../products",
-                "reference": "8fecb518b5e70e27d37b04b7259aba0a82d53ab7"
+                "reference": "c8245ecfe58ae58b2cb7ec8ca755f62d99a3bfa8"
             },
             "require": {
                 "php": ">=8.1",
@@ -87,7 +87,7 @@
                     "email": "post@patrick-siemen.de"
                 }
             ],
-            "description": "checkout symfony bridge",
+            "description": "checkout products implementation",
             "transport-options": {
                 "relative": true
             }

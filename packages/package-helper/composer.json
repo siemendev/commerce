@@ -1,0 +1,21 @@
+{
+    "name": "siemendev/symfony-package-helper",
+    "description": "symfony package helper",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Siemendev\\SymfonyPackageHelper\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Patrick Siemen",
+            "email": "post@patrick-siemen.de"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=7.4",
+        "symfony/dependency-injection": "^4.0|^5.0|^6.0"
+    }
+}

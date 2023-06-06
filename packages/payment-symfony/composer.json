@@ -18,6 +18,7 @@
         "php": ">=8.1",
         "siemendev/checkout-payment": "dev-main",
         "siemendev/checkout-products-symfony-bridge": "dev-main",
+        "siemendev/symfony-package-helper": "dev-main",
         "symfony/framework-bundle": "^5.0|^6.0"
     },
     "repositories": [
@@ -36,6 +37,10 @@
         {
             "type": "path",
             "url": "../products-symfony"
+        },
+        {
+            "type": "path",
+            "url": "../package-helper"
         }
     ]
 }

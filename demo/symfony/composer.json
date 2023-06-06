@@ -154,6 +154,10 @@
         {
             "type": "path",
             "url": "../../packages/taxation"
+        },
+        {
+            "type": "path",
+            "url": "../../packages/package-helper"
         }
     ]
 }

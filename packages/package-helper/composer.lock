@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "86526a02a0e0aada4909a98940d8fba7",
+    "content-hash": "0852db71fd11ef5c4a8c08db85928d35",
     "packages": [
         {
             "name": "psr/container",
@@ -59,95 +59,6 @@
                 "source": "https://github.com/php-fig/container/tree/master"
             },
             "time": "2022-07-19T17:36:59+00:00"
-        },
-        {
-            "name": "siemendev/checkout",
-            "version": "dev-main",
-            "dist": {
-                "type": "path",
-                "url": "../checkout",
-                "reference": "ca3398d34f2d4373210f4bab3d208e090ca08388"
-            },
-            "require": {
-                "php": ">=8.1"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Siemendev\\Checkout\\": "src/"
-                }
-            },
-            "authors": [
-                {
-                    "name": "Patrick Siemen",
-                    "email": "post@patrick-siemen.de"
-                }
-            ],
-            "description": "checkout abstraction",
-            "transport-options": {
-                "relative": true
-            }
-        },
-        {
-            "name": "siemendev/checkout-delivery",
-            "version": "dev-main",
-            "dist": {
-                "type": "path",
-                "url": "../delivery",
-                "reference": "a1ac3eb06a7e813c54ec748be67f8d5375a3f03f"
-            },
-            "require": {
-                "php": ">=8.1",
-                "siemendev/checkout": "dev-main"
-            },
-            "suggest": {
-                "siemendev/checkout-payment": "Delivery cost will be automatically added as a additional cost to the checkout"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Siemendev\\Checkout\\Delivery\\": "src/"
-                }
-            },
-            "authors": [
-                {
-                    "name": "Patrick Siemen",
-                    "email": "post@patrick-siemen.de"
-                }
-            ],
-            "description": "checkout delivery implementation",
-            "transport-options": {
-                "relative": true
-            }
-        },
-        {
-            "name": "siemendev/symfony-package-helper",
-            "version": "dev-main",
-            "dist": {
-                "type": "path",
-                "url": "../package-helper",
-                "reference": "0f3be1881abbd42ac0dbb88d322ed33cdd7750c5"
-            },
-            "require": {
-                "php": ">=7.4",
-                "symfony/dependency-injection": "^4.0|^5.0|^6.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Siemendev\\SymfonyPackageHelper\\": "src/"
-                }
-            },
-            "authors": [
-                {
-                    "name": "Patrick Siemen",
-                    "email": "post@patrick-siemen.de"
-                }
-            ],
-            "description": "symfony package helper",
-            "transport-options": {
-                "relative": true
-            }
         },
         {
             "name": "symfony/dependency-injection",
@@ -459,14 +370,11 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "siemendev/checkout-delivery": 20,
-        "siemendev/symfony-package-helper": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=8.1"
+        "php": ">=7.4"
     },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"
