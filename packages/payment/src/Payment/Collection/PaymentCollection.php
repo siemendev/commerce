@@ -14,7 +14,7 @@ use Traversable;
 class PaymentCollection implements PaymentCollectionInterface, Countable, IteratorAggregate, ArrayAccess, JsonSerializable
 {
     /**
-     * @param array<PaymentInterface> $payments
+     * @var array<PaymentInterface>
      */
     private array $payments = [];
 
