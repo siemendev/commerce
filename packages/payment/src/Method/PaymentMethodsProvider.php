@@ -52,4 +52,16 @@ class PaymentMethodsProvider implements PaymentMethodsProviderInterface
 
         return $paymentMethods;
     }
+
+    // todo no use yet, consider removing
+    public function getPaymentMethod(string $identifier): PaymentMethodInterface
+    {
+        foreach ($this->paymentMethods as $paymentMethod) {
+            if ($paymentMethod->identifier() === $identifier) {
+                return $paymentMethod;
+            }
+        }
+
+        throw new LogicException(sprintf('Payment method with identifier "%s" not found.', $identifier));
+    }
 }
