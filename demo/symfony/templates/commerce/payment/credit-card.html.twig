@@ -1,0 +1,33 @@
+<h3>Credit card payment</h3>
+<form method="post" action="{{ path('checkout.payment.credit-card') }}" style="max-width:500px;width:100%">
+    <input type="tel" name="card_number" inputmode="numeric" pattern="[0-9\s]{13,19}" autocomplete="cc-number" maxlength="19" placeholder="xxxx xxxx xxxx xxxx" style="width:100%">
+    <br>
+    <select name="card_expire_month" autocomplete="cc-exp-month">
+        <option value="">Month</option>
+        <option value="01">January</option>
+        <option value="02">February</option>
+        <option value="03">March</option>
+        <option value="04">April</option>
+        <option value="05">May</option>
+        <option value="06">June</option>
+        <option value="07">July</option>
+        <option value="08">August</option>
+        <option value="09">September</option>
+        <option value="10">October</option>
+        <option value="11">November</option>
+        <option value="12">December</option>
+    </select>
+    <select name="card_expire_year" autocomplete="cc-exp-year">
+        <option value="{{ "now"|date("y")  }}">{{ "now"|date("Y")  }}</option>
+        <option value="{{ "+1 year"|date("y")  }}">{{ "+1 year"|date("Y")  }}</option>
+        <option value="{{ "+2 years"|date("y")  }}">{{ "+2 years"|date("Y")  }}</option>
+        <option value="{{ "+3 years"|date("y")  }}">{{ "+3 years"|date("Y")  }}</option>
+        <option value="{{ "+4 years"|date("y")  }}">{{ "+4 years"|date("Y")  }}</option>
+        <option value="{{ "+5 years"|date("y")  }}">{{ "+5 years"|date("Y")  }}</option>
+    </select>
+    <input type="tel" name="card_csc" inputmode="numeric" pattern="[0-9\s]{3,4}" autocomplete="cc-csc" maxlength="4" placeholder="XXX">
+    <br>
+    <input type="text" name="card_holder" placeholder="Card holder" autocomplete="cc-name" style="width:100%">
+    <br>
+    <button type="submit">Authorize</button>
+</form>
