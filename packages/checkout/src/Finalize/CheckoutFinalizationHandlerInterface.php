@@ -27,6 +27,8 @@ interface CheckoutFinalizationHandlerInterface
     /**
      * Roll back your part of the checkout process. In case another handler fails after your handler has been executed,
      * the finalizer will call this method to roll back your changes.
+     *
+     * @throws FinalizationRollbackException
      */
     public function rollback(CheckoutDataInterface $data): void;
 }

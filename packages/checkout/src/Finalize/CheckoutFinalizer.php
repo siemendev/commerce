@@ -65,12 +65,19 @@ class CheckoutFinalizer implements CheckoutFinalizerInterface
                 }
             }
         } catch(Throwable $exception) {
+            $rollbackExceptions = [];
             foreach ($doneHandlers as $finalizationHandler) {
-                /** @var $finalizationHandler CheckoutFinalizationHandlerInterface */
-                $finalizationHandler->rollback($data);
+                try {
+                    /** @var $finalizationHandler CheckoutFinalizationHandlerInterface */
+                    $finalizationHandler->rollback($data);
+                } catch (FinalizationRollbackException $e) {
+                    $rollbackExceptions[] = $e;
+                }
             }
-            throw $exception;
+
+            throw new CheckoutFinalizationExceptionWrapper($exception, $rollbackExceptions);
         }
+
         $data->finalize();
 
         if (count($todoHandlers) > 0) {
