@@ -12,7 +12,7 @@ use Siemendev\Checkout\Products\Data\QuotedCheckoutDataInterface;
 
 class CreditCardPaymentMethod extends AbstractPaymentMethod
 {
-    private const CHAOS_MONKEY_FAILURE_RATE = 75; // how high is the probability that the chaos monkey strikes (in %)?
+    private const CHAOS_MONKEY_FAILURE_RATE = 50; // how high is the probability that the chaos monkey strikes (in %)?
 
     public const IDENTIFIER = 'credit-card';
 
