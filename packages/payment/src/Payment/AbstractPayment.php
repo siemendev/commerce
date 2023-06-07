@@ -51,9 +51,9 @@ abstract class AbstractPayment implements PaymentInterface
         return $this->authorized;
     }
 
-    public function authorized(): static
+    public function setAuthorized(bool $authorized): static
     {
-        $this->authorized = true;
+        $this->authorized = $authorized;
 
         return $this;
     }
@@ -63,10 +63,9 @@ abstract class AbstractPayment implements PaymentInterface
         return $this->captured;
     }
 
-    public function captured(): static
+    public function setCaptured(bool $captured): static
     {
-        $this->authorized = true;
-        $this->captured = true;
+        $this->captured = $captured;
 
         return $this;
     }

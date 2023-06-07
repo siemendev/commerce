@@ -35,7 +35,7 @@ class CreditCardPaymentController extends AbstractCheckoutController
 
         $payment
             ->setIdentifier($externalPaymentId)
-            ->authorized()
+            ->setAuthorized(true)
         ;
         $data
             ->lock() // don't forget to lock the data as soon as you add payments!

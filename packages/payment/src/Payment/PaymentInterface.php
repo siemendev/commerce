@@ -19,5 +19,9 @@ interface PaymentInterface
 
     public function isAuthorized(): bool;
 
+    public function setAuthorized(bool $authorized): static;
+
     public function isCaptured(): bool;
+
+    public function setCaptured(bool $captured): static;
 }

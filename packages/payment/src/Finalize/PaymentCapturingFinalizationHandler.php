@@ -10,6 +10,7 @@ use Siemendev\Checkout\Payment\Data\PaymentCheckoutDataInterface;
 use Siemendev\Checkout\Payment\Method\PaymentCaptureRollbackException;
 use Siemendev\Checkout\Payment\Method\PaymentMethodsProviderInterface;
 use Siemendev\Checkout\Payment\Method\PaymentNotCapturableException;
+use Siemendev\Checkout\Payment\Payment\PaymentInterface;
 
 class PaymentCapturingFinalizationHandler implements CheckoutFinalizationHandlerInterface
 {
@@ -43,6 +44,7 @@ class PaymentCapturingFinalizationHandler implements CheckoutFinalizationHandler
         }
 
         foreach ($data->getPayments() as $payment) {
+            /** @var PaymentInterface $payment */
             if ($payment->isCaptured()) {
                 continue;
             }
@@ -52,6 +54,7 @@ class PaymentCapturingFinalizationHandler implements CheckoutFinalizationHandler
                     ->getPaymentMethod($payment->getPaymentMethodIdentifier())
                     ->capture($payment)
                 ;
+                $payment->setCaptured(true);
             } catch (PaymentNotCapturableException $e) {
                 throw new PaymentNotCapturableCheckoutNotFinalizableException($e);
             }
@@ -60,8 +63,19 @@ class PaymentCapturingFinalizationHandler implements CheckoutFinalizationHandler
 
     public function rollback(CheckoutDataInterface $data): void
     {
+        if (!$data instanceof PaymentCheckoutDataInterface) {
+            throw new InvalidArgumentException(
+                sprintf(
+                    '%s needs to implement %s to finalize the payment.',
+                    $data::class,
+                    PaymentCheckoutDataInterface::class
+                ),
+            );
+        }
+
         $exceptions = [];
         foreach ($data->getPayments() as $payment) {
+            /** @var PaymentInterface $payment */
             if (!$payment->isCaptured()) {
                 continue;
             }
@@ -69,7 +83,11 @@ class PaymentCapturingFinalizationHandler implements CheckoutFinalizationHandler
             try {
                 $this->paymentMethodsProvider
                     ->getPaymentMethod($payment->getPaymentMethodIdentifier())
-                    ->rollbackCapture($payment);
+                    ->rollbackCapture($payment)
+                ;
+                if (!$payment->isAuthorized()) {
+                    $data->getPayments()->remove($payment);
+                }
             } catch (PaymentCaptureRollbackException $exception) {
                 $exceptions[] = $exception;
             }

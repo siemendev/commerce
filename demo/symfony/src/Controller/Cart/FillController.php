@@ -92,7 +92,7 @@ class FillController extends AbstractCheckoutController
                 ->setCardExpiryMonth(2)
                 ->setCardExpiryYear(26)
                 ->setCardCsc('837')
-                ->authorized()
+                ->setAuthorized(true)
         ]);
 
         $this->getQuoteCalculator()->calculate($this->getCheckoutData());
