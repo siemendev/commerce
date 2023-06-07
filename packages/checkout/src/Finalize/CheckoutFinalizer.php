@@ -3,6 +3,7 @@
 namespace Siemendev\Checkout\Finalize;
 
 use Siemendev\Checkout\Data\CheckoutDataInterface;
+use Throwable;
 
 class CheckoutFinalizer implements CheckoutFinalizerInterface
 {
@@ -44,6 +45,10 @@ class CheckoutFinalizer implements CheckoutFinalizerInterface
         return $this;
     }
 
+    /**
+     * @inheritDoc
+     * @throws Throwable
+     */
     public function finalize(CheckoutDataInterface $data): void
     {
         $doneHandlers = [];
@@ -59,7 +64,7 @@ class CheckoutFinalizer implements CheckoutFinalizerInterface
                     $doneHandlers[] = $finalizationHandler;
                 }
             }
-        } catch(CheckoutNotFinalizableException $exception) {
+        } catch(Throwable $exception) {
             foreach ($doneHandlers as $finalizationHandler) {
                 /** @var $finalizationHandler CheckoutFinalizationHandlerInterface */
                 $finalizationHandler->rollback($data);
