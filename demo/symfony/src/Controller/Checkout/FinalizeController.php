@@ -30,6 +30,9 @@ class FinalizeController extends AbstractCheckoutController
             $checkoutFinalizer->finalize($checkoutData);
         } catch (CheckoutFinalizationExceptionWrapper $e) {
             $this->addFlash('error', $e->getMessage());
+            foreach ($e->getRollbackExceptions() as $rollbackException) {
+                $this->addFlash('error', $rollbackException->getMessage());
+            }
 
             return $this->redirectToCurrentStep();
         }
