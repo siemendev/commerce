@@ -25,6 +25,8 @@ interface PaymentCollectionInterface extends Countable, IteratorAggregate, Array
      */
     public function set(array $payments): static;
 
+    public function remove(PaymentInterface $payment): static;
+
     /**
      * @return array<string, PaymentInterface> Indexed by payment identifier
      */

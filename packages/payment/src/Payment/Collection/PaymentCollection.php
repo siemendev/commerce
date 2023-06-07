@@ -76,6 +76,15 @@ class PaymentCollection implements PaymentCollectionInterface
         return $this;
     }
 
+    public function remove(PaymentInterface $payment): static
+    {
+        if (isset($this->payments[$payment->getIdentifier()])) {
+            unset($this->payments[$payment->getIdentifier()]);
+        }
+
+        return $this;
+    }
+
     public function getIterator(): Traversable
     {
         return new ArrayIterator($this->payments);
