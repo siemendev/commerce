@@ -21,6 +21,11 @@ interface PaymentCollectionInterface extends Countable, IteratorAggregate, Array
     public function add(PaymentInterface $payment): static;
 
     /**
+     * @param array<PaymentInterface> $payments
+     */
+    public function set(array $payments): static;
+
+    /**
      * @return array<string, PaymentInterface> Indexed by payment identifier
      */
     public function getByPaymentMethodIdentifier(string $paymentMethodIdentifier): array;

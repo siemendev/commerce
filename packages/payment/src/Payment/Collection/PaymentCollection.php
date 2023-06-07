@@ -65,6 +65,17 @@ class PaymentCollection implements PaymentCollectionInterface
         return $this;
     }
 
+    public function set(array $payments): static
+    {
+        $this->payments = [];
+
+        foreach ($payments as $payment) {
+            $this->add($payment);
+        }
+
+        return $this;
+    }
+
     public function getIterator(): Traversable
     {
         return new ArrayIterator($this->payments);
