@@ -3,6 +3,7 @@
 namespace App\Controller\Cart;
 
 use App\Commerce\Delivery\DhlDeliveryOption;
+use App\Commerce\Payment\CreditCardPayment;
 use App\Commerce\Product;
 use App\Commerce\Step\AgeVerificationStep;
 use App\Controller\AbstractCheckoutController;
@@ -81,8 +82,22 @@ class FillController extends AbstractCheckoutController
             ])
         ;
 
+        $this->getCheckoutData()->getPayments()->set([
+            (new CreditCardPayment())
+                ->setIdentifier((string) rand(100000, 999999))
+                ->setCurrency('EUR')
+                ->setAmount(3449)
+                ->setCardHolder('John Doe')
+                ->setCardNumber('4263982640269299')
+                ->setCardExpiryMonth(2)
+                ->setCardExpiryYear(26)
+                ->setCardCsc('837')
+                ->authorized()
+        ]);
+
+        $this->getQuoteCalculator()->calculate($this->getCheckoutData());
         $this->saveCheckoutData($this->getCheckoutData());
 
-        return $this->redirectToRoute('checkout_cart');
+        return $this->redirectToCurrentStep();
     }
 }
