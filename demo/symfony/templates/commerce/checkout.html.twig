@@ -10,6 +10,13 @@
         {% endfor %}
     </div>
     <div>
+        {% if app.session.flashBag.has('error') %}
+            <div style="margin-top:25px;">
+                {% for msg in app.session.flashBag.get('error') %}
+                <div style="background:lightcoral;border:1px solid darkred;color:white;padding:10px 25px;margin: 10px 0">{{ msg }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
         {% block content %}
 
         {% endblock %}
