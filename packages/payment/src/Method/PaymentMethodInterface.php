@@ -5,6 +5,9 @@ namespace Siemendev\Checkout\Payment\Method;
 use Siemendev\Checkout\Payment\Payment\PaymentInterface;
 use Siemendev\Checkout\Products\Data\QuotedCheckoutDataInterface;
 
+/**
+ * @template T of PaymentInterface
+ */
 interface PaymentMethodInterface
 {
     public function identifier(): string;
@@ -17,6 +20,7 @@ interface PaymentMethodInterface
     public function isEligible(QuotedCheckoutDataInterface $data): bool;
 
     /**
+     * @param T $payment
      * @throws PaymentNotCapturableException
      */
     public function capture(PaymentInterface $payment): void;
@@ -28,6 +32,7 @@ interface PaymentMethodInterface
      * authorized, not just the capture reverted) set $payment->setAuthorized(false) and the payment will automatically
      * be removed from the checkout payments.
      *
+     * @param T $payment
      * @throws PaymentCaptureRollbackException
      */
     public function rollbackCapture(PaymentInterface $payment): void;

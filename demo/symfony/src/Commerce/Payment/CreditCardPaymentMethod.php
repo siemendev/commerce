@@ -5,11 +5,15 @@ namespace App\Commerce\Payment;
 use Exception;
 use Siemendev\Checkout\Payment\Method\AbstractPaymentMethod;
 use Siemendev\Checkout\Payment\Method\PaymentCaptureRollbackException;
+use Siemendev\Checkout\Payment\Method\PaymentMethodInterface;
 use Siemendev\Checkout\Payment\Method\PaymentMethodNotEligibleException;
 use Siemendev\Checkout\Payment\Method\PaymentNotCapturableException;
 use Siemendev\Checkout\Payment\Payment\PaymentInterface;
 use Siemendev\Checkout\Products\Data\QuotedCheckoutDataInterface;
 
+/**
+ * @implements PaymentMethodInterface<CreditCardPayment>
+ */
 class CreditCardPaymentMethod extends AbstractPaymentMethod
 {
     private const CHAOS_MONKEY_FAILURE_RATE = 50; // how high is the probability that the chaos monkey strikes (in %)?
