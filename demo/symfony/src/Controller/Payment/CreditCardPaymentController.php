@@ -19,23 +19,27 @@ class CreditCardPaymentController extends AbstractCheckoutController
     {
         $data = $this->getCheckoutData();
 
-        $openTotal = $data->getOpenTotal();
-        $currency = $data->getCurrency();
+        $payment = (new CreditCardPayment())
+            ->setAmount($data->getOpenTotal())
+            ->setCurrency($data->getCurrency())
+            ->setCardNumber($request->request->get('card_number'))
+            ->setCardHolder($request->request->get('card_holder'))
+            ->setCardExpiryMonth((int) $request->request->get('card_expire_month'))
+            ->setCardExpiryYear((int) $request->request->get('card_expire_year'))
+            ->setCardCsc($request->request->get('card_csc'))
+        ;
 
         // here is where you usually would start by authorizing the credit card payment
         // $externalPaymentId = $externalPaymentProvider->authorize($externalPaymentId, $openTotal);
         $externalPaymentId = (string) rand(100000, 999999); // id mocked for now
 
+        $payment
+            ->setIdentifier($externalPaymentId)
+            ->authorized()
+        ;
         $data
             ->lock() // don't forget to lock the data as soon as you add payments!
-            ->getPayments()
-            ->add(
-                (new CreditCardPayment())
-                    ->setIdentifier($externalPaymentId)
-                    ->setAmount($openTotal)
-                    ->setCurrency($currency)
-                    ->authorized()
-            )
+            ->getPayments()->add($payment)
         ;
 
         return $this->redirectToCurrentStep();
