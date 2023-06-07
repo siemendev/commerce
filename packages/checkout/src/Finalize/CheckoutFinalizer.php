@@ -45,10 +45,6 @@ class CheckoutFinalizer implements CheckoutFinalizerInterface
         return $this;
     }
 
-    /**
-     * @inheritDoc
-     * @throws Throwable
-     */
     public function finalize(CheckoutDataInterface $data): void
     {
         $doneHandlers = [];

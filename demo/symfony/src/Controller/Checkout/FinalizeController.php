@@ -3,6 +3,7 @@
 namespace App\Controller\Checkout;
 
 use App\Controller\AbstractCheckoutController;
+use Siemendev\Checkout\Finalize\CheckoutFinalizationExceptionWrapper;
 use Siemendev\Checkout\Finalize\CheckoutFinalizerInterface;
 use Siemendev\Checkout\Finalize\CheckoutNotFinalizableException;
 use Siemendev\Checkout\Finalize\UnknownFinalizationStepException;
@@ -25,10 +26,9 @@ class FinalizeController extends AbstractCheckoutController
             return $this->redirectToCurrentStep();
         }
 
-        // todo catch exception and redirect to summary page with error message
         try {
             $checkoutFinalizer->finalize($checkoutData);
-        } catch (CheckoutNotFinalizableException $e) {
+        } catch (CheckoutFinalizationExceptionWrapper $e) {
             $this->addFlash('error', $e->getMessage());
 
             return $this->redirectToCurrentStep();

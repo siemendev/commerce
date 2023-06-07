@@ -17,7 +17,7 @@ interface CheckoutFinalizerInterface
     ];
 
     /**
-     * @throws CheckoutNotFinalizableException
+     * @throws CheckoutFinalizationExceptionWrapper
      * @throws UnknownFinalizationStepException when there are handlers left with an unknown finalization step.
      */
     public function finalize(CheckoutDataInterface $data): void;
