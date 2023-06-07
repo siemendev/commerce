@@ -2,11 +2,13 @@
 
 namespace App\Controller\Cart;
 
+use App\Commerce\Delivery\DhlDeliveryOption;
 use App\Commerce\Product;
 use App\Commerce\Step\AgeVerificationStep;
 use App\Controller\AbstractCheckoutController;
 use Siemendev\Checkout\Delivery\Step\DeliveryStep;
 use Siemendev\Checkout\GiftCard\GiftCard;
+use Siemendev\Checkout\Step\Address\Address;
 use Siemendev\Checkout\Taxation\VatTypedItemInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,6 +20,28 @@ class FillController extends AbstractCheckoutController
     {
         $this->getCheckoutData()
             ->setCurrency('EUR')
+            ->setBillingAddress(
+                (new Address())
+                    ->setName('John Doe')
+                    ->setAddressLine1('Test Street 1')
+                    ->setPostalCode('12345')
+                    ->setCity('Berlin')
+                    ->setState('Berlin')
+                    ->setCountryCode('DE')
+                    ->setCompany(false)
+            )
+            ->setDeliveryAddress(
+                (new Address())
+                    ->setName('John Doe')
+                    ->setAddressLine1('Test Street 1')
+                    ->setPostalCode('12345')
+                    ->setCity('Berlin')
+                    ->setState('Berlin')
+                    ->setCountryCode('DE')
+                    ->setCompany(false)
+            )
+            ->setAgeVerified(true)
+            ->setDeliveryOption(new DhlDeliveryOption())
             ->setProducts([
                 (new Product())
                     ->setQuantity(2)
