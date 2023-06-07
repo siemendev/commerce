@@ -15,4 +15,14 @@ interface PaymentMethodInterface
     public function eligible(QuotedCheckoutDataInterface $data): void;
 
     public function isEligible(QuotedCheckoutDataInterface $data): bool;
+
+    /**
+     * @throws PaymentNotCapturableException
+     */
+    public function capture(PaymentInterface $payment): void;
+
+    /**
+     * @throws PaymentCaptureRollbackException
+     */
+    public function rollbackCapture(PaymentInterface $payment): void;
 }

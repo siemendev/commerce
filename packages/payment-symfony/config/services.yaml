@@ -11,3 +11,10 @@ services:
   Siemendev\Checkout\Payment\Method\PaymentMethodsProviderInterface:
     public: false
     alias: checkout.payment.methods_provider
+
+  checkout.finalization_handlers.payment_capturing:
+    public: true
+    autoconfigure: true
+    class: Siemendev\Checkout\Payment\Finalize\PaymentCapturingFinalizationHandler
+    arguments:
+      $paymentMethodsProvider: '@checkout.payment.methods_provider'

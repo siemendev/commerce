@@ -2,12 +2,18 @@
 
 namespace App\Commerce\Payment;
 
+use Exception;
 use Siemendev\Checkout\Payment\Method\AbstractPaymentMethod;
+use Siemendev\Checkout\Payment\Method\PaymentCaptureRollbackException;
 use Siemendev\Checkout\Payment\Method\PaymentMethodNotEligibleException;
+use Siemendev\Checkout\Payment\Method\PaymentNotCapturableException;
+use Siemendev\Checkout\Payment\Payment\PaymentInterface;
 use Siemendev\Checkout\Products\Data\QuotedCheckoutDataInterface;
 
 class CreditCardPaymentMethod extends AbstractPaymentMethod
 {
+    private const CHAOS_MONKEY_FAILURE_RATE = 75; // how high is the probability that the chaos monkey strikes (in %)?
+
     public const IDENTIFIER = 'credit-card';
 
     public function identifier(): string
@@ -22,6 +28,32 @@ class CreditCardPaymentMethod extends AbstractPaymentMethod
         }
         if ($data->getQuote()->getTotalGross() > 100000) {
             throw new PaymentMethodNotEligibleException('Credit card payment is only available for orders up to 1000€');
+        }
+    }
+
+    /**
+     * @inheritDoc
+     * @throws Exception
+     */
+    public function capture(PaymentInterface $payment): void
+    {
+        // Call the api of your payment gateway here to capture the payment.
+        // Throw a PaymentNotCapturableException if the payment could not be captured.
+
+        // to test our implementation, we invite the chaos monkey to simulate a failure occasionally:
+        if (random_int(0, 100) < self::CHAOS_MONKEY_FAILURE_RATE) {
+            throw new PaymentNotCapturableException('Credit card payment could not be captured. The chaos monkey strikes again!');
+        }
+    }
+
+    public function rollbackCapture(PaymentInterface $payment): void
+    {
+        // Call the api of your payment gateway here to roll back the captured payment.
+        // Throw a PaymentCaptureRollbackException if the payment could not be rolled back.
+
+        // to test our implementation, we invite the chaos monkey to simulate a failure occasionally:
+        if (random_int(0, 100) < self::CHAOS_MONKEY_FAILURE_RATE) {
+            throw new PaymentCaptureRollbackException('Credit card payment could not be rolled back. The chaos monkey strikes again!');
         }
     }
 }
