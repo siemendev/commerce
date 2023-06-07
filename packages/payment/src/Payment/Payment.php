@@ -2,27 +2,13 @@
 
 namespace Siemendev\Checkout\Payment\Payment;
 
-class Payment implements PaymentInterface
+abstract class Payment implements PaymentInterface
 {
     protected bool $authorized = false;
     protected bool $captured = false;
-
-    private string $paymentMethodIdentifier;
     private string $identifier;
     private int $amount;
     private string $currency;
-
-    public function setPaymentMethodIdentifier(string $paymentMethodIdentifier): static
-    {
-        $this->paymentMethodIdentifier = $paymentMethodIdentifier;
-
-        return $this;
-    }
-
-    public function getPaymentMethodIdentifier(): string
-    {
-        return $this->paymentMethodIdentifier;
-    }
 
     public function getIdentifier(): string
     {
