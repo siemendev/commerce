@@ -2,9 +2,9 @@
 
 namespace Siemendev\Checkout\Payment\PayPal;
 
-use Siemendev\Checkout\Payment\Payment\Payment;
+use Siemendev\Checkout\Payment\Payment\AbstractPayment;
 
-class PayPalPayment extends Payment
+class PayPalPayment extends AbstractPayment
 {
     private ?string $paypalOrderId = null;
 

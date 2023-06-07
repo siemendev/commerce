@@ -2,9 +2,9 @@
 
 namespace App\Commerce\Payment;
 
-use Siemendev\Checkout\Payment\Payment\Payment;
+use Siemendev\Checkout\Payment\Payment\AbstractPayment;
 
-class CreditCardPayment extends Payment
+class CreditCardPayment extends AbstractPayment
 {
     private string $cardNumber;
 

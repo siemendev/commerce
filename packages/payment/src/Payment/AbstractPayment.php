@@ -2,7 +2,7 @@
 
 namespace Siemendev\Checkout\Payment\Payment;
 
-abstract class Payment implements PaymentInterface
+abstract class AbstractPayment implements PaymentInterface
 {
     protected bool $authorized = false;
     protected bool $captured = false;
