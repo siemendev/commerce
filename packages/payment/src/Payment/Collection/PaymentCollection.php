@@ -2,16 +2,12 @@
 
 namespace Siemendev\Checkout\Payment\Payment\Collection;
 
-use ArrayAccess;
 use ArrayIterator;
-use Countable;
 use InvalidArgumentException;
-use IteratorAggregate;
-use JsonSerializable;
 use Siemendev\Checkout\Payment\Payment\PaymentInterface;
 use Traversable;
 
-class PaymentCollection implements PaymentCollectionInterface, Countable, IteratorAggregate, ArrayAccess, JsonSerializable
+class PaymentCollection implements PaymentCollectionInterface
 {
     /**
      * @var array<PaymentInterface>
@@ -69,7 +65,6 @@ class PaymentCollection implements PaymentCollectionInterface, Countable, Iterat
         return $this;
     }
 
-
     public function getIterator(): Traversable
     {
         return new ArrayIterator($this->payments);
@@ -102,10 +97,5 @@ class PaymentCollection implements PaymentCollectionInterface, Countable, Iterat
     public function count(): int
     {
         return count($this->payments);
-    }
-
-    public function jsonSerialize(): array
-    {
-        return $this->payments;
     }
 }

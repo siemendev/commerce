@@ -2,9 +2,14 @@
 
 namespace Siemendev\Checkout\Payment\Payment\Collection;
 
+use ArrayAccess;
+use Countable;
+use IteratorAggregate;
 use Siemendev\Checkout\Payment\Payment\PaymentInterface;
+use Traversable;
 
-interface PaymentCollectionInterface
+
+interface PaymentCollectionInterface extends Countable, IteratorAggregate, ArrayAccess
 {
     /**
      * Convenience method to get the total amount of all payments in a given currency.
@@ -19,4 +24,9 @@ interface PaymentCollectionInterface
      * @return array<string, PaymentInterface> Indexed by payment identifier
      */
     public function getByPaymentMethodIdentifier(string $paymentMethodIdentifier): array;
+
+    /**
+     * @return Traversable<PaymentInterface>
+     */
+    public function getIterator(): Traversable;
 }
