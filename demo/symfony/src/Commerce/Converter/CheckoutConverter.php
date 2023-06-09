@@ -2,12 +2,10 @@
 
 namespace App\Commerce\Converter;
 
+use App\ObjectExporter\ObjectExporter;
 use Siemendev\Checkout\Data\CheckoutDataInterface;
 use Siemendev\Checkout\Finalize\CheckoutFinalizationHandlerInterface;
 use Siemendev\Checkout\Finalize\CheckoutFinalizerInterface;
-use Symfony\Component\Serializer\Encoder\XmlEncoder;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
 
 /**
  * Demo of a checkout persistence handler that saves the checkout data to a file.
@@ -16,6 +14,11 @@ use Symfony\Component\Serializer\Serializer;
  */
 class CheckoutConverter implements CheckoutFinalizationHandlerInterface
 {
+    public function __construct(
+        private readonly ObjectExporter $objectExporter,
+    ) {
+    }
+
     public function step(): string
     {
         return CheckoutFinalizerInterface::FINALIZATION_STEP_CONVERSION;
@@ -23,27 +26,13 @@ class CheckoutConverter implements CheckoutFinalizationHandlerInterface
 
     public function finalize(CheckoutDataInterface $data): void
     {
-        $directory = '../var/orders/';
-        if (!is_dir($directory) && !mkdir(directory: $directory, recursive: true) && !is_dir($directory)) {
-            throw new \RuntimeException(sprintf('Directory "%s" was not created', $directory));
-        }
-        $data->orderFileName = date('Y-m-d_H-i-s') . '.xml';
-
-        $serializer = new Serializer([new ObjectNormalizer()], [new XmlEncoder()]);
-
-        file_put_contents(
-            $directory . $data->orderFileName,
-            $serializer->serialize($data, XmlEncoder::FORMAT, [
-                'xml_root_node_name' => 'order',
-                'xml_format_output' => true,
-            ]),
-        );
+        $filename = 'orders/' . date('Y-m-d_H-i-s') . '/order.xml';
+        $this->objectExporter->export($data, $filename);
+        $data->orderFileName = $filename;
     }
 
     public function rollback(CheckoutDataInterface $data): void
     {
-        if (null !== $data->orderFileName && file_exists($data->orderFileName)) {
-            unlink($data->orderFileName);
-        }
+        $this->objectExporter->remove($data->orderFileName);
     }
 }
