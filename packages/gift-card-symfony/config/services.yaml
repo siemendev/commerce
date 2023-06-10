@@ -1,7 +1,9 @@
 services:
 
-  checkout.additional_costs_provider.gift_card:
+  checkout.payment_methods.gift_card:
     public: true
     autoconfigure: true
-    class: 'Siemendev\Checkout\GiftCard\AdditionalCost\GiftCardAdditionalCostProvider'
-
+    class: Siemendev\Checkout\GiftCard\PaymentMethod\GiftCardPaymentMethod
+  Siemendev\Checkout\GiftCard\PaymentMethod\GiftCardPaymentMethodInterface:
+    public: false
+    alias: checkout.payment_methods.gift_card
