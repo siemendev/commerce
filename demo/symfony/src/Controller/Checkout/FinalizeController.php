@@ -10,12 +10,14 @@ use Siemendev\Checkout\Finalize\UnknownFinalizationStepException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Throwable;
 
 #[Route('/checkout/finish', name: 'checkout_finalize')]
 class FinalizeController extends AbstractCheckoutController
 {
     /**
      * @throws UnknownFinalizationStepException
+     * @throws Throwable
      */
     public function __invoke(Request $request, CheckoutFinalizerInterface $checkoutFinalizer): Response
     {
@@ -32,6 +34,10 @@ class FinalizeController extends AbstractCheckoutController
             $this->addFlash('error', $e->getMessage());
             foreach ($e->getRollbackExceptions() as $rollbackException) {
                 $this->addFlash('error', $rollbackException->getMessage());
+            }
+
+            if (!$e->getPrevious() instanceof CheckoutNotFinalizableException) {
+                throw $e->getPrevious();
             }
 
             return $this->redirectToCurrentStep();
