@@ -28,6 +28,11 @@ interface PaymentCollectionInterface extends Countable, IteratorAggregate, Array
     public function remove(PaymentInterface $payment): static;
 
     /**
+     * @return array<PaymentInterface>
+     */
+    public function getAuthorizedPayments(): array;
+
+    /**
      * @return array<string, PaymentInterface> Indexed by payment identifier
      */
     public function getByPaymentMethodIdentifier(string $paymentMethodIdentifier): array;

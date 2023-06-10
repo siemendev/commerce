@@ -40,6 +40,14 @@ class PaymentCollection implements PaymentCollectionInterface
         );
     }
 
+    public function getAuthorizedPayments(): array
+    {
+        return array_filter(
+            $this->payments,
+            static fn (PaymentInterface $payment) => $payment->isAuthorized(),
+        );
+    }
+
     public function isEmpty(): bool
     {
         return 0 === count($this->payments);
