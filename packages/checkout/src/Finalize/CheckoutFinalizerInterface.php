@@ -6,11 +6,13 @@ use Siemendev\Checkout\Data\CheckoutDataInterface;
 
 interface CheckoutFinalizerInterface
 {
+    public const FINALIZATION_STEP_INITIALIZATION = 'init';
     public const FINALIZATION_STEP_PAYMENT = 'payment';
     public const FINALIZATION_STEP_CONVERSION = 'conversion';
     public const FINALIZATION_STEP_NOTIFICATION = 'notification';
 
     public const DEFAULT_FINALIZATION_STEPS = [
+        self::FINALIZATION_STEP_INITIALIZATION,
         self::FINALIZATION_STEP_PAYMENT,
         self::FINALIZATION_STEP_CONVERSION,
         self::FINALIZATION_STEP_NOTIFICATION,
