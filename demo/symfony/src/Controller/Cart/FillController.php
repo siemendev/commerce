@@ -8,7 +8,7 @@ use App\Commerce\Product;
 use App\Commerce\Step\AgeVerificationStep;
 use App\Controller\AbstractCheckoutController;
 use Siemendev\Checkout\Delivery\Step\DeliveryStep;
-use Siemendev\Checkout\GiftCard\GiftCard;
+use Siemendev\Checkout\GiftCard\Payment\GiftCardPayment;
 use Siemendev\Checkout\Step\Address\Address;
 use Siemendev\Checkout\Taxation\VatTypedItemInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -56,33 +56,21 @@ class FillController extends AbstractCheckoutController
                     ->setIdentifier('test-product-2')
                     ->setVatType(VatTypedItemInterface::VAT_TYPE_LOWER),
             ])
-//            ->setSubscriptions([
-//                (new Subscription())
-//                    ->addRequiredStep(AgeVerificationStep::stepIdentifier())
-//                    ->setName('Test Subscription One')
-//                    ->setId('test-subscription-1'),
-//            ])
-            ->setGiftCards([
-                (new GiftCard()) // this should be ignored since it has the wrong currency
-                    ->setIdentifier('test-gift-card-1')
-                    ->setValue(15000)
-                    ->setCurrency('USD'),
-                (new GiftCard())
-                    ->setIdentifier('test-gift-card-2')
-                    ->setValue(500)
-                    ->setCurrency('EUR'),
-//                (new GiftCard())
-//                    ->setIdentifier('test-gift-card-3')
-//                    ->setValue(5000)
-//                    ->setCurrency('EUR'),
-//                (new GiftCard())
-//                    ->setIdentifier('test-gift-card-4')
-//                    ->setValue(2500)
-//                    ->setCurrency('EUR'),
-            ])
         ;
 
         $this->getCheckoutData()->getPayments()->set([
+            (new GiftCardPayment())
+                ->setIdentifier('test-gift-card-2')
+                ->setAmount(500)
+                ->setCurrency('EUR'),
+//                (new GiftCardPayment())
+//                    ->setIdentifier('test-gift-card-3')
+//                    ->setValue(5000)
+//                    ->setCurrency('EUR'),
+//                (new GiftCardPayment())
+//                    ->setIdentifier('test-gift-card-4')
+//                    ->setValue(2500)
+//                    ->setCurrency('EUR'),
             (new CreditCardPayment())
                 ->setIdentifier((string) rand(100000, 999999))
                 ->setCurrency('EUR')
@@ -92,7 +80,7 @@ class FillController extends AbstractCheckoutController
                 ->setCardExpiryMonth(2)
                 ->setCardExpiryYear(26)
                 ->setCardCsc('837')
-                ->setAuthorized(true)
+                ->setAuthorized(true),
         ]);
 
         $this->getQuoteCalculator()->calculate($this->getCheckoutData());

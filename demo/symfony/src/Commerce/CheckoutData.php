@@ -7,9 +7,6 @@ use App\Commerce\Step\AgeVerifiableCheckoutDataInterface;
 use Siemendev\Checkout\Data\GenericCheckoutData;
 use Siemendev\Checkout\Delivery\Data\DeliverableCheckoutDataInterface;
 use Siemendev\Checkout\Delivery\Data\IsDeliverable;
-use Siemendev\Checkout\GiftCard\Data\ContainsGiftCards;
-use Siemendev\Checkout\GiftCard\Data\GiftCardApplicableCheckoutDataInterface;
-use Siemendev\Checkout\GiftCard\GiftCard;
 use Siemendev\Checkout\Payment\Data\ContainsPayments;
 use Siemendev\Checkout\Payment\Data\PaymentCheckoutDataInterface;
 use Siemendev\Checkout\Payment\Payment\PaymentInterface;
@@ -24,7 +21,6 @@ class CheckoutData extends GenericCheckoutData implements
     ProductCheckoutDataInterface,
     QuotedCheckoutDataInterface,
     PaymentCheckoutDataInterface,
-    GiftCardApplicableCheckoutDataInterface,
     AgeVerifiableCheckoutDataInterface
 {
     use IsDeliverable;
@@ -32,7 +28,6 @@ class CheckoutData extends GenericCheckoutData implements
     use ContainsProducts;
     use ContainsQuote;
     use ContainsPayments;
-    use ContainsGiftCards;
 
     public ?string $orderFileName = null;
 
@@ -44,7 +39,6 @@ class CheckoutData extends GenericCheckoutData implements
             . $this->getDeliveryAddress()?->getHash()
             . implode('-', array_map(static fn (ProductInterface $product) => $product->getIdentifier(), $this->getProducts()))
             . implode('-', array_map(static fn (PaymentInterface $payment) => $payment->getIdentifier() . $payment->getCurrency() . $payment->getAmount(), iterator_to_array($this->getPayments())))
-            . implode('-', array_map(static fn (GiftCard $giftCard) => $giftCard->getIdentifier() . $giftCard->getCurrency() . $giftCard->getValue(), $this->getGiftCards()))
             . $this->isAgeVerified()
             . $this->getDeliveryOption()?->getIdentifier()
         );

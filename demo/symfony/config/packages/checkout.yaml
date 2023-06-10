@@ -12,3 +12,6 @@ checkout:
 checkout_delivery:
   options:
     - App\Commerce\Delivery\DhlDeliveryOption
+
+checkout_gift_card:
+  repository: App\Commerce\GiftCard\GiftCardRepository
