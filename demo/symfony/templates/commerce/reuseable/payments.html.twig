@@ -1,0 +1,24 @@
+{% if data.payments is not empty %}
+    <h3>Payments</h3>
+    <table style="width:100%">
+        <tr style="text-align: left">
+            <th style="border-bottom: 1px solid black">Payment method</th>
+            <th style="border-bottom: 1px solid black" title="Some payment methods capture the payment directly instead of just authorizing it.">Captured</th>
+            <th style="border-bottom: 1px solid black">Amount</th>
+        </tr>
+        {% set payments = data.payments.authorizedPayments %}
+        {% for payment in payments %}
+            <tr>
+                <td>{{ payment.paymentMethodIdentifier }}</td>
+                <td>{% if payment.captured %}yes{% else %}not yet{% endif %}</td>
+                <td>{{ (payment.amount / 100)|format_currency(payment.currency) }}</td>
+            </tr>
+        {% endfor %}
+        <tr>
+            <td style="border-top: 1px solid black; font-weight: bold" colspan="2">Total:</td>
+            <td style="border-top: 1px solid black; font-weight: bold">{{ (data.payments.getTotal(data.currency) / 100)|format_currency(data.currency) }}</td>
+        </tr>
+    </table>
+{% else %}
+    <p>No payments registered yet.</p>
+{% endif %}

@@ -1,7 +1,9 @@
 {% extends 'commerce/checkout.html.twig' %}
 {% block content %}
     <h2>Payment</h2>
-    <p>TODO: add existing payments overview</p>
+    {% include 'commerce/reuseable/payments.html.twig' with {
+        'data': data
+    } only %}
     {% if openTotal > 0 %}
         <h2>Add payment</h2>
         {% for paymentMethod in paymentMethods %}

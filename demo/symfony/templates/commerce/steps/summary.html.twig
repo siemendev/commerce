@@ -4,7 +4,8 @@
     {% if error is defined %}
         <p>Error: {{ error }}</p>
     {% endif %}
-    {% include 'commerce/reuseable/cart.html.twig' with { 'quote': data.quote } only %}
+    {% include 'commerce/reuseable/cart.html.twig' with { 'quote': data.quote, 'payments': data.payments.authorizedPayments } only %}
+    {% include 'commerce/reuseable/payments.html.twig' with { 'data': data } only %}
     {% if finalizable %}
         <form action="{{ path('checkout_finalize') }}" method="post" style="margin-top:15px;display:flex;flex-direction:row-reverse">
             <button type="submit" style="padding:10px 25px">Buy now</button>
