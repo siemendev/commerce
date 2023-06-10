@@ -16,8 +16,7 @@ interface PaymentMethodInterface
      * This identifier is used to identify the payment method in the checkout.
      * The format is your choice, but we advocate using kebab-case to align with our implementations.
      */
-    // todo rename this to getIdentifier() to be more in line with the rest of the codebase
-    public function identifier(): string;
+    public function getIdentifier(): string;
 
     /**
      * @throws PaymentMethodNotEligibleException

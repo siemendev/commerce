@@ -47,7 +47,7 @@ class PaymentMethodsProvider implements PaymentMethodsProviderInterface
             if (!$paymentMethod->isEligible($data)) {
                 continue;
             }
-            $paymentMethods[$paymentMethod->identifier()] = $paymentMethod;
+            $paymentMethods[$paymentMethod->getIdentifier()] = $paymentMethod;
         }
 
         return $paymentMethods;
@@ -57,7 +57,7 @@ class PaymentMethodsProvider implements PaymentMethodsProviderInterface
     public function getPaymentMethod(string $identifier): PaymentMethodInterface
     {
         foreach ($this->paymentMethods as $paymentMethod) {
-            if ($paymentMethod->identifier() === $identifier) {
+            if ($paymentMethod->getIdentifier() === $identifier) {
                 return $paymentMethod;
             }
         }

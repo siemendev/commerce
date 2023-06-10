@@ -42,7 +42,7 @@ class GiftCardPaymentMethod extends AbstractPaymentMethod implements GiftCardPay
         return $this;
     }
 
-    public function identifier(): string
+    public function getIdentifier(): string
     {
         return GiftCardPaymentMethodInterface::IDENTIFIER;
     }

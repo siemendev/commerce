@@ -9,7 +9,7 @@ interface PaymentInterface
     public function getIdentifier(): string;
 
     /**
-     * @see PaymentMethodInterface::identifier()
+     * @see PaymentMethodInterface::getIdentifier()
      */
     public function getPaymentMethodIdentifier(): string;
 

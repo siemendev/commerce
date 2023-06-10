@@ -20,7 +20,7 @@ class CreditCardPaymentMethod extends AbstractPaymentMethod
 
     public const IDENTIFIER = 'credit-card';
 
-    public function identifier(): string
+    public function getIdentifier(): string
     {
         return self::IDENTIFIER;
     }
