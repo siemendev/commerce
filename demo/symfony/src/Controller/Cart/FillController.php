@@ -76,7 +76,7 @@ class FillController extends AbstractCheckoutController
     //                    ->setValue(2500)
     //                    ->setCurrency('EUR'),
                 (new CreditCardPayment())
-                    ->setIdentifier((string) rand(100000, 999999))
+                    ->setIdentifier('credit-card-payment-1')
                     ->setCurrency('EUR')
                     ->setAmount(3449)
                     ->setCardHolder('John Doe')
