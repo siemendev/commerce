@@ -6,8 +6,8 @@
     {% endif %}
     {% include 'commerce/reuseable/cart.html.twig' with { 'quote': data.quote } only %}
     {% if finalizable %}
-        <form action="{{ path('checkout_finalize') }}" method="post">
-            <button type="submit">Buy now</button>
+        <form action="{{ path('checkout_finalize') }}" method="post" style="margin-top:15px;display:flex;flex-direction:row-reverse">
+            <button type="submit" style="padding:10px 25px">Buy now</button>
         </form>
     {% endif %}
 {% endblock %}
