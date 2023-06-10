@@ -89,7 +89,7 @@ class FillController extends AbstractCheckoutController
         ;
 
         $this->getQuoteCalculator()->calculate($data);
-        $this->saveCheckoutData($data);
+        $this->saveCheckoutData($data->lock());
 
         return $this->redirectToCurrentStep();
     }
