@@ -44,7 +44,7 @@ class ObjectExporter
     public function remove(string $fileName): void
     {
         if (file_exists(self::VAR_DIRECTORY . $fileName)) {
-            unlink($fileName);
+            unlink(self::VAR_DIRECTORY . $fileName);
         }
     }
 }
