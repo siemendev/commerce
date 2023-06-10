@@ -2,6 +2,7 @@
 
 namespace App\Commerce\Payment;
 
+use App\ObjectExporter\ObjectExporter;
 use Exception;
 use Siemendev\Checkout\Payment\Method\AbstractPaymentMethod;
 use Siemendev\Checkout\Payment\Method\PaymentCaptureRollbackException;
@@ -19,6 +20,11 @@ class CreditCardPaymentMethod extends AbstractPaymentMethod
     private const CHAOS_MONKEY_FAILURE_RATE = 50; // how high is the probability that the chaos monkey strikes (in %)?
 
     public const IDENTIFIER = 'credit-card';
+
+    public function __construct(
+        private readonly ObjectExporter $objectExporter,
+    ) {
+    }
 
     public function getIdentifier(): string
     {
@@ -48,6 +54,8 @@ class CreditCardPaymentMethod extends AbstractPaymentMethod
         if (random_int(0, 100) < self::CHAOS_MONKEY_FAILURE_RATE) {
             throw new PaymentNotCapturableException('Credit card payment could not be captured. The chaos monkey strikes again!');
         }
+
+        $this->objectExporter->export($payment, sprintf('orders/%s/payments/%s.xml', $data->getIdentifier(), $payment->getIdentifier()));
     }
 
     public function rollbackCapture(PaymentInterface $payment, QuotedCheckoutDataInterface $data): void
@@ -59,5 +67,7 @@ class CreditCardPaymentMethod extends AbstractPaymentMethod
         if (random_int(0, 100) < self::CHAOS_MONKEY_FAILURE_RATE) {
             throw new PaymentCaptureRollbackException('Credit card payment could not be rolled back. The chaos monkey strikes again!');
         }
+
+        $this->objectExporter->remove(sprintf('orders/%s/payments/%s.xml', $data->getIdentifier(), $payment->getIdentifier()));
     }
 }

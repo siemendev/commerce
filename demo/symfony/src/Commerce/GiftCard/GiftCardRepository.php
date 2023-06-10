@@ -9,7 +9,7 @@ use Siemendev\Checkout\GiftCard\Repository\GiftCardRepositoryInterface;
 
 class GiftCardRepository implements GiftCardRepositoryInterface
 {
-    private const PATH = 'orders/%s/gift-cards/%s.xml';
+    private const PATH = 'orders/%s/payments/%s.xml';
 
     public function __construct(
         private readonly ObjectExporter $objectExporter,
