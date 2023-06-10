@@ -15,8 +15,8 @@
             </tr>
         {% endfor %}
         <tr>
-            <td style="border-top: 1px solid black; font-weight: bold" colspan="2">Total:</td>
-            <td style="border-top: 1px solid black; font-weight: bold">{{ (data.payments.getTotal(data.currency) / 100)|format_currency(data.currency) }}</td>
+            <td style="border-top: 3px double black; font-weight: bold" colspan="2">Total:</td>
+            <td style="border-top: 3px double black; font-weight: bold">{{ (data.payments.getTotal(data.currency) / 100)|format_currency(data.currency) }}</td>
         </tr>
     </table>
 {% else %}

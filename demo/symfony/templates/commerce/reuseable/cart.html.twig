@@ -2,13 +2,13 @@
     <h3>Products</h3>
     <table style="width:100%">
         <tr>
-            <th></th>
-            <th>Item</th>
-            <th>Vat Rate</th>
-            <th>Unit price (net)</th>
-            <th>Unit price (gross)</th>
-            <th>Total price (net)</th>
-            <th>Total price (gross)</th>
+            <th style="border-bottom: 1px solid black"></th>
+            <th style="text-align:left;border-bottom: 1px solid black">Item</th>
+            <th style="text-align:left;border-bottom: 1px solid black">Vat Rate</th>
+            <th style="text-align:left;border-bottom: 1px solid black">Unit price (net)</th>
+            <th style="text-align:left;border-bottom: 1px solid black">Unit price (gross)</th>
+            <th style="text-align:left;border-bottom: 1px solid black">Total price (net)</th>
+            <th style="text-align:left;border-bottom: 1px solid black">Total price (gross)</th>
         </tr>
         {% for item in quote.quoteItems %}
             {% set product = item.product %}
@@ -23,10 +23,10 @@
             </tr>
         {% endfor %}
         <tr>
-            <td>&nbsp;</td>
-            <td colspan="4">Sub total</td>
-            <td>{{ (quote.subTotalNet / 100)|format_currency(quote.currency) }}</td>
-            <td>{{ (quote.subTotalGross / 100)|format_currency(quote.currency) }}</td>
+            <td style="border-top: 1px solid black">&nbsp;</td>
+            <td style="border-top: 1px solid black" colspan="4">Sub total</td>
+            <td style="border-top: 1px solid black">{{ (quote.subTotalNet / 100)|format_currency(quote.currency) }}</td>
+            <td style="border-top: 1px solid black">{{ (quote.subTotalGross / 100)|format_currency(quote.currency) }}</td>
         </tr>
         {% for additional_cost in quote.additionalCosts %}
             <tr>
@@ -38,9 +38,9 @@
         {% endfor %}
         <tr>
             <td>&nbsp;</td>
-            <td colspan="4">Total</td>
-            <td>{{ (quote.totalNet / 100)|format_currency(quote.currency) }}</td>
-            <td>{{ (quote.totalGross / 100)|format_currency(quote.currency) }}</td>
+            <td style="border-top: 3px double black; font-weight: bold" colspan="4">Total</td>
+            <td style="border-top: 3px double black; font-weight: bold">{{ (quote.totalNet / 100)|format_currency(quote.currency) }}</td>
+            <td style="border-top: 3px double black; font-weight: bold">{{ (quote.totalGross / 100)|format_currency(quote.currency) }}</td>
         </tr>
     </table>
 {% endif %}
