@@ -31,6 +31,10 @@ class PaymentCapturingFinalizationHandler implements CheckoutFinalizationHandler
         return CheckoutFinalizerInterface::FINALIZATION_STEP_PAYMENT;
     }
 
+    /**
+     * @inheritDoc
+     * @throws PaymentNotCapturableCheckoutNotFinalizableException
+     */
     public function finalize(CheckoutDataInterface $data): void
     {
         if (!$data instanceof PaymentCheckoutDataInterface) {
@@ -43,9 +47,12 @@ class PaymentCapturingFinalizationHandler implements CheckoutFinalizationHandler
             );
         }
 
+        $capturedPayments = [];
+
         foreach ($data->getPayments() as $payment) {
             /** @var PaymentInterface $payment */
             if ($payment->isCaptured()) {
+                $capturedPayments[] = $payment;
                 continue;
             }
 
@@ -55,8 +62,18 @@ class PaymentCapturingFinalizationHandler implements CheckoutFinalizationHandler
                     ->capture($payment, $data)
                 ;
                 $payment->setCaptured(true);
+                $capturedPayments[] = $payment;
             } catch (PaymentNotCapturableException $e) {
-                throw new PaymentNotCapturableCheckoutNotFinalizableException($e);
+                $rollbackExceptions = [];
+                foreach ($capturedPayments as $capturedPayment) {
+                    try {
+                        $this->rollbackPayment($capturedPayment, $data);
+                    } catch (PaymentCaptureRollbackException $e) {
+                        $rollbackExceptions[] = $e;
+                    }
+                }
+
+                throw new PaymentNotCapturableCheckoutNotFinalizableException($e, $rollbackExceptions);
             }
         }
     }
@@ -81,14 +98,7 @@ class PaymentCapturingFinalizationHandler implements CheckoutFinalizationHandler
             }
 
             try {
-                $this->paymentMethodsProvider
-                    ->getPaymentMethod($payment->getPaymentMethodIdentifier())
-                    ->rollbackCapture($payment, $data)
-                ;
-                $payment->setCaptured(false);
-                if (!$payment->isAuthorized()) {
-                    $data->getPayments()->remove($payment);
-                }
+                $this->rollbackPayment($payment, $data);
             } catch (PaymentCaptureRollbackException $exception) {
                 $exceptions[] = $exception;
             }
@@ -97,5 +107,23 @@ class PaymentCapturingFinalizationHandler implements CheckoutFinalizationHandler
         if (count($exceptions) > 0) {
             throw new PaymentsRollbackExceptionsCollection($exceptions);
         }
+    }
+
+    /**
+     * @throws PaymentCaptureRollbackException
+     */
+    private function rollbackPayment(PaymentInterface $payment, CheckoutDataInterface $data): void
+    {
+        $this->paymentMethodsProvider
+            ->getPaymentMethod($payment->getPaymentMethodIdentifier())
+            ->rollbackCapture($payment, $data)
+        ;
+        if (!$payment->isAuthorized()) {
+            $data->getPayments()->remove($payment);
+
+            return;
+        }
+
+        $payment->setCaptured(false);
     }
 }
