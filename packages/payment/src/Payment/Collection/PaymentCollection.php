@@ -53,19 +53,6 @@ class PaymentCollection implements PaymentCollectionInterface
         return 0 === count($this->payments);
     }
 
-    // todo no use yet, consider removing
-    public function getByPaymentMethodIdentifier(string $paymentMethodIdentifier): array
-    {
-        $payments = [];
-        foreach ($this->payments as $payment) {
-            if ($payment->getPaymentMethodIdentifier() === $paymentMethodIdentifier) {
-                $payments[$payment->getIdentifier()] = $payment;
-            }
-        }
-
-        return $payments;
-    }
-
     public function add(PaymentInterface $payment): static
     {
         $this->payments[$payment->getIdentifier()] = $payment;
