@@ -9,8 +9,19 @@ interface CheckoutDataInterface
 {
     public function getCurrency(): string;
 
+    /**
+     * Check if the checkout data is locked
+     * This is used to prevent changes to the checkout data after the quote has been calculated.
+     * Use CheckoutDataInterface::lock() to lock the checkout data before authorizing any payments.
+     */
     public function isLocked(): bool;
 
+    /**
+     * Lock the checkout data
+     * Call this method before authorizing any payments to prevent changes to the checkout data after the quote has
+     * been calculated. The quote will no longer be recalculated and prices as well as availabilities will be fixed.
+     * When calling this method, make sure the quote has set previously, otherwise the quote will not be calculated.
+     */
     public function lock(): static;
 
     public function isFinalized(): bool;
