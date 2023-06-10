@@ -10,7 +10,7 @@ use Symfony\Component\Serializer\Serializer;
 
 class ObjectExporter
 {
-    private const VAR_DIRECTORY = __DIR__ . '../../../var/';
+    private const VAR_DIRECTORY = '../var/';
 
     public function export(object $object, string $fileName): void
     {
