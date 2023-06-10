@@ -11,6 +11,7 @@ class DataCreator implements CheckoutDataCreatorInterface
     public function createEmptyCheckoutData(): CheckoutDataInterface
     {
         return (new CheckoutData())
+            ->setIdentifier((string) rand(1, PHP_INT_MAX))
             ->setBillingAddress(
                 (new Address())
                     ->setCountryCode('FR') // todo load locale from request

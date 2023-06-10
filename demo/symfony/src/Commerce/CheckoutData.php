@@ -29,7 +29,19 @@ class CheckoutData extends GenericCheckoutData implements
     use ContainsQuote;
     use ContainsPayments;
 
-    public ?string $orderFileName = null;
+    private string $identifier;
+
+    public function setIdentifier(string $identifier): static
+    {
+        $this->identifier = $identifier;
+
+        return $this;
+    }
+
+    public function getIdentifier(): string
+    {
+        return $this->identifier;
+    }
 
     public function getHash(): string
     {

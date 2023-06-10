@@ -14,6 +14,8 @@ use Siemendev\Checkout\Finalize\CheckoutFinalizerInterface;
  */
 class CheckoutConverter implements CheckoutFinalizationHandlerInterface
 {
+    private const PATH = 'orders/%s/order.xml';
+
     public function __construct(
         private readonly ObjectExporter $objectExporter,
     ) {
@@ -26,13 +28,11 @@ class CheckoutConverter implements CheckoutFinalizationHandlerInterface
 
     public function finalize(CheckoutDataInterface $data): void
     {
-        $filename = 'orders/' . date('Y-m-d_H-i-s') . '/order.xml';
-        $this->objectExporter->export($data, $filename);
-        $data->orderFileName = $filename;
+        $this->objectExporter->export($data, sprintf(self::PATH, $data->getIdentifier()));
     }
 
     public function rollback(CheckoutDataInterface $data): void
     {
-        $this->objectExporter->remove($data->orderFileName);
+        $this->objectExporter->remove(sprintf(self::PATH, $data->getIdentifier()));
     }
 }

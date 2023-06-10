@@ -19,7 +19,10 @@ class FillController extends AbstractCheckoutController
 {
     public function __invoke(): Response
     {
-        $this->getCheckoutData()
+        $data = $this->getCheckoutData();
+
+        $data
+            ->setIdentifier((string) rand(1, PHP_INT_MAX))
             ->setCurrency('EUR')
             ->setBillingAddress(
                 (new Address())
@@ -58,33 +61,35 @@ class FillController extends AbstractCheckoutController
             ])
         ;
 
-        $this->getCheckoutData()->getPayments()->set([
-            (new GiftCardPayment())
-                ->setIdentifier('test-gift-card-2')
-                ->setAmount(500)
-                ->setCurrency('EUR'),
-//                (new GiftCardPayment())
-//                    ->setIdentifier('test-gift-card-3')
-//                    ->setValue(5000)
-//                    ->setCurrency('EUR'),
-//                (new GiftCardPayment())
-//                    ->setIdentifier('test-gift-card-4')
-//                    ->setValue(2500)
-//                    ->setCurrency('EUR'),
-            (new CreditCardPayment())
-                ->setIdentifier((string) rand(100000, 999999))
-                ->setCurrency('EUR')
-                ->setAmount(3449)
-                ->setCardHolder('John Doe')
-                ->setCardNumber('4263982640269299')
-                ->setCardExpiryMonth(2)
-                ->setCardExpiryYear(26)
-                ->setCardCsc('837')
-                ->setAuthorized(true),
-        ]);
+        $data
+            ->getPayments()->set([
+                (new GiftCardPayment())
+                    ->setIdentifier('test-gift-card-2')
+                    ->setAmount(500)
+                    ->setCurrency('EUR'),
+    //                (new GiftCardPayment())
+    //                    ->setIdentifier('test-gift-card-3')
+    //                    ->setValue(5000)
+    //                    ->setCurrency('EUR'),
+    //                (new GiftCardPayment())
+    //                    ->setIdentifier('test-gift-card-4')
+    //                    ->setValue(2500)
+    //                    ->setCurrency('EUR'),
+                (new CreditCardPayment())
+                    ->setIdentifier((string) rand(100000, 999999))
+                    ->setCurrency('EUR')
+                    ->setAmount(3449)
+                    ->setCardHolder('John Doe')
+                    ->setCardNumber('4263982640269299')
+                    ->setCardExpiryMonth(2)
+                    ->setCardExpiryYear(26)
+                    ->setCardCsc('837')
+                    ->setAuthorized(true),
+            ])
+        ;
 
-        $this->getQuoteCalculator()->calculate($this->getCheckoutData());
-        $this->saveCheckoutData($this->getCheckoutData());
+        $this->getQuoteCalculator()->calculate($data);
+        $this->saveCheckoutData($data);
 
         return $this->redirectToCurrentStep();
     }

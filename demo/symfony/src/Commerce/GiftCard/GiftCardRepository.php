@@ -9,6 +9,8 @@ use Siemendev\Checkout\GiftCard\Repository\GiftCardRepositoryInterface;
 
 class GiftCardRepository implements GiftCardRepositoryInterface
 {
+    private const PATH = 'orders/%s/gift-cards/%s.xml';
+
     public function __construct(
         private readonly ObjectExporter $objectExporter,
     ) {
@@ -16,11 +18,16 @@ class GiftCardRepository implements GiftCardRepositoryInterface
 
     public function redeem(GiftCardPaymentInterface $payment, CheckoutDataInterface $data): void
     {
-        $this->objectExporter->export($payment, 'gift-cards/' . $payment->getIdentifier() .'.xml');
+        $this->objectExporter->export(
+            $payment,
+            sprintf(self::PATH, $data->getIdentifier(), $payment->getIdentifier())
+        );
     }
 
     public function rollback(GiftCardPaymentInterface $payment, CheckoutDataInterface $data): void
     {
-        $this->objectExporter->remove('gift-cards/' . $payment->getIdentifier() .'.xml');
+        $this->objectExporter->remove(
+            sprintf(self::PATH, $data->getIdentifier(), $payment->getIdentifier())
+        );
     }
 }
