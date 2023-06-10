@@ -93,6 +93,8 @@ class PaymentCapturingFinalizationHandler implements CheckoutFinalizationHandler
             }
         }
 
-        throw new PaymentsRollbackExceptionsCollection($exceptions);
+        if (count($exceptions) > 0) {
+            throw new PaymentsRollbackExceptionsCollection($exceptions);
+        }
     }
 }
