@@ -5,6 +5,7 @@ namespace App\ObjectExporter;
 use ReflectionClass;
 use RuntimeException;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
@@ -26,10 +27,17 @@ class ObjectExporter
 
         file_put_contents(
             self::VAR_DIRECTORY . $fileName,
-            $serializer->serialize($object, XmlEncoder::FORMAT, [
-                'xml_root_node_name' => (new ReflectionClass($object))->getShortName(),
-                'xml_format_output' => true,
-            ]),
+            $serializer->encode(
+                $serializer->normalize($object, XmlEncoder::FORMAT, [
+                    AbstractObjectNormalizer::SKIP_UNINITIALIZED_VALUES => false,
+                    AbstractObjectNormalizer::SKIP_NULL_VALUES => true,
+                ]),
+                XmlEncoder::FORMAT,
+                [
+                    'xml_root_node_name' => (new ReflectionClass($object))->getShortName(),
+                    'xml_format_output' => true,
+                ]
+            ),
         );
     }
 
