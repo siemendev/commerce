@@ -33,11 +33,6 @@ interface PaymentCollectionInterface extends Countable, IteratorAggregate, Array
     public function getAuthorizedPayments(): array;
 
     /**
-     * @return array<string, PaymentInterface> Indexed by payment identifier
-     */
-    public function getByPaymentMethodIdentifier(string $paymentMethodIdentifier): array;
-
-    /**
      * @return Traversable<PaymentInterface>
      */
     public function getIterator(): Traversable;
