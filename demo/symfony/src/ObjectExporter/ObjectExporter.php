@@ -15,6 +15,9 @@ class ObjectExporter
     public function export(object $object, string $fileName): void
     {
         $directory = dirname(self::VAR_DIRECTORY . $fileName);
+        if (is_file($directory)) {
+            unlink($directory);
+        }
         if (!is_dir($directory) && !mkdir(directory: $directory, recursive: true) && !is_dir($directory)) {
             throw new RuntimeException(sprintf('Directory "%s" was not created', $directory));
         }
