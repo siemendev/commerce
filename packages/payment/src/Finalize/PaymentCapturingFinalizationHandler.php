@@ -85,6 +85,7 @@ class PaymentCapturingFinalizationHandler implements CheckoutFinalizationHandler
                     ->getPaymentMethod($payment->getPaymentMethodIdentifier())
                     ->rollbackCapture($payment, $data)
                 ;
+                $payment->setCaptured(false);
                 if (!$payment->isAuthorized()) {
                     $data->getPayments()->remove($payment);
                 }
