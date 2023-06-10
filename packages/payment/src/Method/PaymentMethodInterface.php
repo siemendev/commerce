@@ -5,11 +5,18 @@ namespace Siemendev\Checkout\Payment\Method;
 use Siemendev\Checkout\Payment\Payment\PaymentInterface;
 use Siemendev\Checkout\Products\Data\QuotedCheckoutDataInterface;
 
+// todo both capture and rollbackCapture should be able to access the CheckoutData, we should pass it as an argument
 /**
  * @template T of PaymentInterface
  */
 interface PaymentMethodInterface
 {
+    /**
+     * The identifier of the payment method.
+     * This identifier is used to identify the payment method in the checkout.
+     * The format is your choice, but we advocate using kebab-case to align with our implementations.
+     *
+     */
     public function identifier(): string;
 
     /**
