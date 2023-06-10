@@ -39,7 +39,7 @@ class CreditCardPaymentMethod extends AbstractPaymentMethod
      * @inheritDoc
      * @throws Exception
      */
-    public function capture(PaymentInterface $payment): void
+    public function capture(PaymentInterface $payment, QuotedCheckoutDataInterface $data): void
     {
         // Call the api of your payment gateway here to capture the payment.
         // Throw a PaymentNotCapturableException if the payment could not be captured.
@@ -50,7 +50,7 @@ class CreditCardPaymentMethod extends AbstractPaymentMethod
         }
     }
 
-    public function rollbackCapture(PaymentInterface $payment): void
+    public function rollbackCapture(PaymentInterface $payment, QuotedCheckoutDataInterface $data): void
     {
         // Call the api of your payment gateway here to roll back the captured payment.
         // Throw a PaymentCaptureRollbackException if the payment could not be rolled back.

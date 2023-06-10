@@ -52,7 +52,7 @@ class PaymentCapturingFinalizationHandler implements CheckoutFinalizationHandler
             try {
                 $this->paymentMethodsProvider
                     ->getPaymentMethod($payment->getPaymentMethodIdentifier())
-                    ->capture($payment)
+                    ->capture($payment, $data)
                 ;
                 $payment->setCaptured(true);
             } catch (PaymentNotCapturableException $e) {
@@ -83,7 +83,7 @@ class PaymentCapturingFinalizationHandler implements CheckoutFinalizationHandler
             try {
                 $this->paymentMethodsProvider
                     ->getPaymentMethod($payment->getPaymentMethodIdentifier())
-                    ->rollbackCapture($payment)
+                    ->rollbackCapture($payment, $data)
                 ;
                 if (!$payment->isAuthorized()) {
                     $data->getPayments()->remove($payment);

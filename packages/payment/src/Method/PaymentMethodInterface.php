@@ -5,7 +5,6 @@ namespace Siemendev\Checkout\Payment\Method;
 use Siemendev\Checkout\Payment\Payment\PaymentInterface;
 use Siemendev\Checkout\Products\Data\QuotedCheckoutDataInterface;
 
-// todo both capture and rollbackCapture should be able to access the CheckoutData, we should pass it as an argument
 /**
  * @template T of PaymentInterface
  */
@@ -29,7 +28,7 @@ interface PaymentMethodInterface
      * @param T $payment
      * @throws PaymentNotCapturableException
      */
-    public function capture(PaymentInterface $payment): void;
+    public function capture(PaymentInterface $payment, QuotedCheckoutDataInterface $data): void;
 
     /**
      * Payment capture roll-back
@@ -41,5 +40,5 @@ interface PaymentMethodInterface
      * @param T $payment
      * @throws PaymentCaptureRollbackException
      */
-    public function rollbackCapture(PaymentInterface $payment): void;
+    public function rollbackCapture(PaymentInterface $payment, QuotedCheckoutDataInterface $data): void;
 }

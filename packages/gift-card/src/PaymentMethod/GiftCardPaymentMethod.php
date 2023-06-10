@@ -54,7 +54,7 @@ class GiftCardPaymentMethod extends AbstractPaymentMethod implements GiftCardPay
         }
     }
 
-    public function capture(PaymentInterface $payment): void
+    public function capture(PaymentInterface $payment, QuotedCheckoutDataInterface $data): void
     {
         if (!$payment instanceof GiftCardPaymentInterface) {
             throw new PaymentNotCapturableException(sprintf(
@@ -67,7 +67,7 @@ class GiftCardPaymentMethod extends AbstractPaymentMethod implements GiftCardPay
         $this->repository->redeem($payment);
     }
 
-    public function rollbackCapture(PaymentInterface $payment): void
+    public function rollbackCapture(PaymentInterface $payment, QuotedCheckoutDataInterface $data): void
     {
         if (!$payment instanceof GiftCardPaymentInterface) {
             throw new PaymentCaptureRollbackException(sprintf(
