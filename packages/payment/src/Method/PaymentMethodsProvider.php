@@ -53,7 +53,6 @@ class PaymentMethodsProvider implements PaymentMethodsProviderInterface
         return $paymentMethods;
     }
 
-    // todo no use yet, consider removing
     public function getPaymentMethod(string $identifier): PaymentMethodInterface
     {
         foreach ($this->paymentMethods as $paymentMethod) {
