@@ -64,7 +64,7 @@ class GiftCardPaymentMethod extends AbstractPaymentMethod implements GiftCardPay
             ));
         }
 
-        $this->repository->redeem($payment);
+        $this->repository->redeem($payment, $data);
     }
 
     public function rollbackCapture(PaymentInterface $payment, QuotedCheckoutDataInterface $data): void
@@ -77,6 +77,6 @@ class GiftCardPaymentMethod extends AbstractPaymentMethod implements GiftCardPay
             ));
         }
 
-        $this->repository->rollback($payment);
+        $this->repository->rollback($payment, $data);
     }
 }
