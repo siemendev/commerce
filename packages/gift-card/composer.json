@@ -22,6 +22,14 @@
         {
             "type": "path",
             "url": "../checkout"
+        },
+        {
+            "type": "path",
+            "url": "../payment"
+        },
+        {
+            "type": "path",
+            "url": "../products"
         }
     ]
 }

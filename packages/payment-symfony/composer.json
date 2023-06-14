@@ -40,6 +40,10 @@
         },
         {
             "type": "path",
+            "url": "../payment"
+        },
+        {
+            "type": "path",
             "url": "../package-helper"
         }
     ]

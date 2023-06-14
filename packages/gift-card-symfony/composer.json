@@ -27,6 +27,18 @@
         },
         {
             "type": "path",
+            "url": "../payment"
+        },
+        {
+            "type": "path",
+            "url": "../products"
+        },
+        {
+            "type": "path",
+            "url": "../package-helper"
+        },
+        {
+            "type": "path",
             "url": "../gift-card"
         }
     ]
