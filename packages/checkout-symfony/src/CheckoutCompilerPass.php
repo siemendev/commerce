@@ -18,13 +18,13 @@ class CheckoutCompilerPass implements CompilerPassInterface
         (new CompilerPassHelper($container))
             ->addChildServicesToParent(
                 CheckoutBundle::SERVICE_STEP_MACHINE,
-                $config['steps'],
+                is_array($config) ? $config['steps'] ?? [] : [],
                 'addAvailableStep',
                 StepInterface::class,
             )
             ->addChildServiceToParent(
                 CheckoutBundle::SERVICE_DATA_FACTORY,
-                $config['data_creator'],
+                is_array($config) ? $config['data_creator'] ?? '' : '',
                 'setDataCreator',
                 CheckoutDataCreatorInterface::class,
             )
