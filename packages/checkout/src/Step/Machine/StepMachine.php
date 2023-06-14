@@ -4,11 +4,11 @@ namespace Siemendev\Checkout\Step\Machine;
 
 use LogicException;
 use Siemendev\Checkout\Data\CheckoutDataInterface;
+use Siemendev\Checkout\Step\Exception\MissingCheckoutDataImplementationException;
 use Siemendev\Checkout\Step\Exception\ValidationException;
 use Siemendev\Checkout\Step\Exception\AssignedValidationException;
 use Siemendev\Checkout\Step\FinalStepInterface;
 use Siemendev\Checkout\Step\StepInterface;
-use Siemendev\Checkout\Step\Summary\SummaryStep;
 use Siemendev\Checkout\Step\Voter\StepVoterInterface;
 
 class StepMachine implements StepMachineInterface
@@ -59,6 +59,16 @@ class StepMachine implements StepMachineInterface
     public function validate(CheckoutDataInterface $data): void
     {
         foreach ($this->getRequiredSteps($data) as $step) {
+            foreach ($step->requiresCheckoutData() as $checkoutDataClassName) {
+                if (!$data instanceof $checkoutDataClassName) {
+                    throw new AssignedValidationException(
+                        new MissingCheckoutDataImplementationException(
+                            $data::class, $checkoutDataClassName, $step::stepIdentifier()
+                        ),
+                        $step
+                    );
+                }
+            }
             try {
                 $step->validate($data);
             } catch (ValidationException $e) {
