@@ -8,6 +8,11 @@ use Siemendev\Checkout\Step\Exception\StepNotFoundException;
 use Siemendev\Checkout\Step\StepInterface;
 use Siemendev\Checkout\Step\Voter\StepVoterInterface;
 
+/**
+ * Attention: This is not a service! This helper is stateful and needs to be instantiated each time it is used.
+ * Misuse may not be a big problem in "classic" stateless PHP applications, but results in strange and hard to debug
+ * errors in stateful application runtimes like swoole or roadrunner.
+ */
 class RequiredStepsHelper
 {
     /**
