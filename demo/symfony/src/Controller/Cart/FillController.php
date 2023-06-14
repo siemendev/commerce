@@ -63,28 +63,20 @@ class FillController extends AbstractCheckoutController
 
         $data
             ->getPayments()->set([
-                (new GiftCardPayment())
-                    ->setIdentifier('test-gift-card-2')
-                    ->setAmount(500)
-                    ->setCurrency('EUR'),
-    //                (new GiftCardPayment())
-    //                    ->setIdentifier('test-gift-card-3')
-    //                    ->setValue(5000)
-    //                    ->setCurrency('EUR'),
-    //                (new GiftCardPayment())
-    //                    ->setIdentifier('test-gift-card-4')
-    //                    ->setValue(2500)
-    //                    ->setCurrency('EUR'),
                 (new CreditCardPayment())
                     ->setIdentifier('credit-card-payment-1')
                     ->setCurrency('EUR')
-                    ->setAmount(3449)
+                    ->setAuthorizedAmount(50000)
                     ->setCardHolder('John Doe')
                     ->setCardNumber('4263982640269299')
                     ->setCardExpiryMonth(2)
                     ->setCardExpiryYear(26)
                     ->setCardCsc('837')
                     ->setAuthorized(true),
+                (new GiftCardPayment())
+                    ->setIdentifier('test-gift-card-1')
+                    ->setAuthorizedAmount(1500)
+                    ->setCurrency('EUR'),
             ])
         ;
 

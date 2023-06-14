@@ -19,6 +19,6 @@ trait ContainsPayments
 
     public function getOpenTotal(): int
     {
-        return $this->getQuote()->getTotalGross() - $this->getPayments()->getTotal($this->getCurrency());
+        return $this->getQuote()->getTotalGross() - $this->getPayments()->getAuthorizedTotal($this->getCurrency());
     }
 }

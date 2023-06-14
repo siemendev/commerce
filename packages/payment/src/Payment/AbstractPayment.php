@@ -7,7 +7,8 @@ abstract class AbstractPayment implements PaymentInterface
     protected bool $authorized = false;
     protected bool $captured = false;
     private string $identifier;
-    private int $amount;
+    private int $authorizedAmount = 0;
+    private int $capturedAmount = 0;
     private string $currency;
 
     public function getIdentifier(): string
@@ -22,14 +23,26 @@ abstract class AbstractPayment implements PaymentInterface
         return $this;
     }
 
-    public function getAmount(): int
+    public function getCapturedAmount(): int
     {
-        return $this->amount;
+        return $this->capturedAmount;
     }
 
-    public function setAmount(int $amount): static
+    public function setCapturedAmount(int $amount): static
     {
-        $this->amount = $amount;
+        $this->capturedAmount = $amount;
+
+        return $this;
+    }
+
+    public function getAuthorizedAmount(): int
+    {
+        return $this->authorizedAmount;
+    }
+
+    public function setAuthorizedAmount(int $amount): static
+    {
+        $this->authorizedAmount = $amount;
 
         return $this;
     }
@@ -68,5 +81,10 @@ abstract class AbstractPayment implements PaymentInterface
         $this->captured = $captured;
 
         return $this;
+    }
+
+    public function getPriority(): int
+    {
+        return static::PRIORITY_DEFAULT;
     }
 }

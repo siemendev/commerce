@@ -16,4 +16,9 @@ class GiftCardPayment extends AbstractPayment implements GiftCardPaymentInterfac
     {
         return true;
     }
+
+    public function getPriority(): int
+    {
+        return static::PRIORITY_HIGH; // gift cards should be used first
+    }
 }

@@ -28,7 +28,7 @@ interface PaymentMethodInterface
      * @param T $payment
      * @throws PaymentNotCapturableException
      */
-    public function capture(PaymentInterface $payment, QuotedCheckoutDataInterface $data): void;
+    public function capture(PaymentInterface $payment, QuotedCheckoutDataInterface $data, int $amount): void;
 
     /**
      * Payment capture roll-back

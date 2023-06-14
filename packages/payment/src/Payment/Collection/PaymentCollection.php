@@ -25,17 +25,15 @@ class PaymentCollection implements PaymentCollectionInterface
         }
     }
 
-    public function getTotal(string $currency): int
+    public function getAuthorizedTotal(string $currency): int
     {
-        $authorizedPayments = array_filter(
-            $this->payments,
-            static fn (PaymentInterface $payment) => $payment->isAuthorized() && $payment->getCurrency() === $currency,
-        );
-
         return array_sum(
             array_map(
-                static fn(PaymentInterface $payment) => $payment->getAmount(),
-                $authorizedPayments,
+                static fn(PaymentInterface $payment) => $payment->getAuthorizedAmount(),
+                array_filter(
+                    $this->payments,
+                    static fn (PaymentInterface $payment) => $payment->isAuthorized() && $payment->getCurrency() === $currency,
+                ),
             ),
         );
     }
@@ -45,6 +43,25 @@ class PaymentCollection implements PaymentCollectionInterface
         return array_filter(
             $this->payments,
             static fn (PaymentInterface $payment) => $payment->isAuthorized(),
+        );
+    }
+
+    public function getPrioritized(): array
+    {
+        $payments = $this->payments;
+        usort(
+            $payments,
+            static fn(PaymentInterface $a, PaymentInterface $b) => $b->getPriority() - $a->getPriority(),
+        );
+
+        return $payments;
+    }
+
+    public function getCaptured(): array
+    {
+        return array_filter(
+            $this->payments,
+            static fn (PaymentInterface $payment) => $payment->isCaptured(),
         );
     }
 

@@ -47,21 +47,30 @@ class PaymentCapturingFinalizationHandler implements CheckoutFinalizationHandler
             );
         }
 
-        $capturedPayments = [];
+        $leftTotal = $data->getQuote()->getTotalGross();
 
-        foreach ($data->getPayments() as $payment) {
-            /** @var PaymentInterface $payment */
+        $capturedPayments = [];
+        foreach ($data->getPayments()->getCaptured() as $capturedPayment) {
+            $capturedPayments[] = $capturedPayment;
+            $leftTotal -= $capturedPayment->getCapturedAmount();
+        }
+
+        foreach ($data->getPayments()->getPrioritized() as $payment) {
             if ($payment->isCaptured()) {
-                $capturedPayments[] = $payment;
                 continue;
             }
 
             try {
+                $captureAmount = $leftTotal > $payment->getAuthorizedAmount() ? $payment->getAuthorizedAmount() : $leftTotal;
                 $this->paymentMethodsProvider
                     ->getPaymentMethod($payment->getPaymentMethodIdentifier())
-                    ->capture($payment, $data)
+                    ->capture($payment, $data, $captureAmount)
                 ;
-                $payment->setCaptured(true);
+                $payment
+                    ->setCaptured(true)
+                    ->setCapturedAmount($captureAmount)
+                ;
+                $leftTotal -= $captureAmount;
                 $capturedPayments[] = $payment;
             } catch (PaymentNotCapturableException $e) {
                 $rollbackExceptions = [];

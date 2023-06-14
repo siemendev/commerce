@@ -45,7 +45,7 @@ class CreditCardPaymentMethod extends AbstractPaymentMethod
      * @inheritDoc
      * @throws Exception
      */
-    public function capture(PaymentInterface $payment, QuotedCheckoutDataInterface $data): void
+    public function capture(PaymentInterface $payment, QuotedCheckoutDataInterface $data, int $amount): void
     {
         // Call the api of your payment gateway here to capture the payment.
         // Throw a PaymentNotCapturableException if the payment could not be captured.
@@ -55,7 +55,7 @@ class CreditCardPaymentMethod extends AbstractPaymentMethod
             throw new PaymentNotCapturableException('Credit card payment could not be captured. The chaos monkey strikes again!');
         }
 
-        $this->objectExporter->export($payment, sprintf('orders/%s/payments/%s.xml', $data->getIdentifier(), $payment->getIdentifier()));
+        $this->objectExporter->export((clone $payment)->setCapturedAmount($amount), sprintf('orders/%s/payments/%s.xml', $data->getIdentifier(), $payment->getIdentifier()));
     }
 
     public function rollbackCapture(PaymentInterface $payment, QuotedCheckoutDataInterface $data): void

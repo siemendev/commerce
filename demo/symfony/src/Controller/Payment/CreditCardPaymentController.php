@@ -20,7 +20,7 @@ class CreditCardPaymentController extends AbstractCheckoutController
         $data = $this->getCheckoutData();
 
         $payment = (new CreditCardPayment())
-            ->setAmount($data->getOpenTotal())
+            ->setCapturedAmount($data->getOpenTotal())
             ->setCurrency($data->getCurrency())
             ->setCardNumber($request->request->get('card_number'))
             ->setCardHolder($request->request->get('card_holder'))

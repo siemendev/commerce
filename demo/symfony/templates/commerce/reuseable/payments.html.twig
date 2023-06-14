@@ -4,19 +4,19 @@
         <tr style="text-align: left">
             <th style="border-bottom: 1px solid black">Payment method</th>
             <th style="border-bottom: 1px solid black" title="Some payment methods capture the payment directly instead of just authorizing it.">Captured</th>
-            <th style="border-bottom: 1px solid black">Amount</th>
+            <th style="border-bottom: 1px solid black">Authorized</th>
         </tr>
         {% set payments = data.payments.authorizedPayments %}
         {% for payment in payments %}
             <tr>
                 <td>{{ payment.paymentMethodIdentifier }}</td>
-                <td>{% if payment.captured %}yes{% else %}not yet{% endif %}</td>
-                <td>{{ (payment.amount / 100)|format_currency(payment.currency) }}</td>
+                <td>{% if payment.captured %}{{ payment.capturedAmount }}{% else %}not yet{% endif %}</td>
+                <td>{{ (payment.authorizedAmount / 100)|format_currency(payment.currency) }}</td>
             </tr>
         {% endfor %}
         <tr>
             <td style="border-top: 3px double black; font-weight: bold" colspan="2">Total:</td>
-            <td style="border-top: 3px double black; font-weight: bold">{{ (data.payments.getTotal(data.currency) / 100)|format_currency(data.currency) }}</td>
+            <td style="border-top: 3px double black; font-weight: bold">{{ (data.payments.getAuthorizedTotal(data.currency) / 100)|format_currency(data.currency) }}</td>
         </tr>
     </table>
 {% else %}

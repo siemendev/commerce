@@ -16,10 +16,10 @@ class GiftCardRepository implements GiftCardRepositoryInterface
     ) {
     }
 
-    public function redeem(GiftCardPaymentInterface $payment, CheckoutDataInterface $data): void
+    public function redeem(GiftCardPaymentInterface $payment, CheckoutDataInterface $data, int $amount): void
     {
         $this->objectExporter->export(
-            $payment,
+            (clone $payment)->setCapturedAmount($amount),
             sprintf(self::PATH, $data->getIdentifier(), $payment->getIdentifier())
         );
     }

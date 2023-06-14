@@ -11,7 +11,7 @@ interface GiftCardRepositoryInterface
      * Redeem gift card
      * Redeems a gift card payment (e.g. decrease gift card value in database or via an api).
      */
-    public function redeem(GiftCardPaymentInterface $payment, CheckoutDataInterface $data): void;
+    public function redeem(GiftCardPaymentInterface $payment, CheckoutDataInterface $data, int $amount): void;
 
     /**
      * Roll back gift card payment

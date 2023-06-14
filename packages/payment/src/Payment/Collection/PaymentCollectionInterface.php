@@ -14,7 +14,7 @@ interface PaymentCollectionInterface extends Countable, IteratorAggregate, Array
     /**
      * Convenience method to get the total amount of all payments in a given currency.
      */
-    public function getTotal(string $currency): int;
+    public function getAuthorizedTotal(string $currency): int;
 
     public function isEmpty(): bool;
 
@@ -31,6 +31,20 @@ interface PaymentCollectionInterface extends Countable, IteratorAggregate, Array
      * @return array<PaymentInterface>
      */
     public function getAuthorizedPayments(): array;
+
+    /**
+     * Returns the payments in the order of their priority.
+     *
+     * @return array<PaymentInterface>
+     */
+    public function getPrioritized(): array;
+
+    /**
+     * Returns the payments that have already been captured.
+     *
+     * @return array<PaymentInterface>
+     */
+    public function getCaptured(): array;
 
     /**
      * @return Traversable<PaymentInterface>
