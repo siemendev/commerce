@@ -9,4 +9,4 @@ update:
 	cd demo; for DEMO in *; do cd $$DEMO; composer update; cd ..; done
 
 phpstan-package:
-	docker run --rm -v $$(pwd)/$$DIR:/app ghcr.io/phpstan/phpstan:latest-php8.1 analyse src --level 9 -a vendor/autoload.php
+	docker run --rm -v $$(pwd)/$$DIR:/app ghcr.io/phpstan/phpstan:latest-php8.2 analyse src --level 9 -a vendor/autoload.php
