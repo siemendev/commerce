@@ -11,7 +11,7 @@ use Siemendev\Checkout\Step\Voter\StepVoterInterface;
 class RequiredStepsHelper
 {
     /**
-     * @param array<string, StepInterface> $availableSteps
+     * @var array<string, StepInterface> $availableSteps
      */
     private array $availableSteps = [];
 
@@ -76,6 +76,10 @@ class RequiredStepsHelper
         return false;
     }
 
+    /**
+     * @param array<string> $stepIdentifiers
+     * @return array<string>
+     */
     private function getRequiredStepsFromStep(StepInterface $step, array $stepIdentifiers = []): array
     {
         if (in_array($step::stepIdentifier(), $stepIdentifiers, true)) {
@@ -86,7 +90,7 @@ class RequiredStepsHelper
 
         foreach ($step::requiresSteps() as $requiredStep) {
             if (!isset($this->availableSteps[$requiredStep])) {
-                throw new StepNotFoundException($requiredStep, $this->availableSteps);
+                throw new StepNotFoundException($requiredStep, array_map(static fn (StepInterface $step) => $step::stepIdentifier(),$this->availableSteps));
             }
             $stepIdentifiers = $this->getRequiredStepsFromStep($this->availableSteps[$requiredStep], $stepIdentifiers);
         }

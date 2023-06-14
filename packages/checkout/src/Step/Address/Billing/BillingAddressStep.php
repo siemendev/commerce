@@ -19,6 +19,10 @@ class BillingAddressStep implements StepInterface
         return true;
     }
 
+    /**
+     * @inheritDoc
+     * @param BillingAddressableCheckoutDataInterface $data
+     */
     public function validate(CheckoutDataInterface $data): void
     {
         if (!$data->getBillingAddress()) {

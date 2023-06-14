@@ -14,7 +14,7 @@ interface StepInterface
     /**
      * Returns a list of interface names that are required to be implemented in the checkout data
      *
-     * @return array<class-string<CheckoutDataInterface>
+     * @return array<class-string<CheckoutDataInterface>>
      */
     public function requiresCheckoutData(): array;
 
