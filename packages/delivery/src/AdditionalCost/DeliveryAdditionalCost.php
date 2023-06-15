@@ -9,7 +9,7 @@ if (class_exists(AbstractAdditionalCost::class)) {
     {
         public function __construct(private readonly string $option, int $amountNet, int $amountGross)
         {
-            parent::__construct($amountNet, $amountGross);
+            parent::__construct($amountNet, $amountGross); // @phpstan-ignore-line
         }
 
         public function getLabel(): string

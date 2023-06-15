@@ -9,6 +9,8 @@ interface AdditionalCostProviderInterface
 {
     public function eligible(CheckoutDataInterface $data): bool;
 
-    /** @return array<AdditionalCostInterface> */
+    /**
+     * @return array<AdditionalCostInterface>
+     */
     public function getAdditionalCosts(CheckoutDataInterface $data, QuoteInterface $quote): array;
 }

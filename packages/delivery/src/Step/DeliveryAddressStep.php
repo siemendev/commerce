@@ -18,6 +18,10 @@ class DeliveryAddressStep implements StepInterface
         return false;
     }
 
+    /**
+     * @inheritDoc
+     * @param DeliverableCheckoutDataInterface $data
+     */
     public function validate(CheckoutDataInterface $data): void
     {
         if (!$data->getDeliveryAddress()) {

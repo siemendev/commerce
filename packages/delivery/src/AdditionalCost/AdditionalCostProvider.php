@@ -19,10 +19,14 @@ if (interface_exists(AdditionalCostProviderInterface::class)) {
             ;
         }
 
-        public function getAdditionalCosts(CheckoutDataInterface $data, QuoteInterface $quote): array
+        /**
+         * @inheritDoc
+         * @param DeliverableCheckoutDataInterface $data
+         */
+        public function getAdditionalCosts(CheckoutDataInterface $data, QuoteInterface $quote): array // @phpstan-ignore-line
         {
             /** @var DeliveryOptionInterface $option */
-            $option = $data->getDeliveryOption(); // not polymorph, eligible() ensures that this is not null
+            $option = $data->getDeliveryOption();
 
             return [
                 new DeliveryAdditionalCost($option->getIdentifier(), $option->getPriceNet($data), $option->getPriceGross($data)),

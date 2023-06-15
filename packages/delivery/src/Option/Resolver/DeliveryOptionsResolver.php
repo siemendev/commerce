@@ -3,6 +3,7 @@
 namespace Siemendev\Checkout\Delivery\Option\Resolver;
 
 use Siemendev\Checkout\Data\CheckoutDataInterface;
+use Siemendev\Checkout\Delivery\Data\DeliverableCheckoutDataInterface;
 use Siemendev\Checkout\Delivery\Option\DeliveryOptionInterface;
 
 class DeliveryOptionsResolver implements DeliveryOptionsResolverInterface
@@ -32,7 +33,7 @@ class DeliveryOptionsResolver implements DeliveryOptionsResolverInterface
         return $this;
     }
 
-    public function getAvailableOptions(CheckoutDataInterface $data): array
+    public function getAvailableOptions(DeliverableCheckoutDataInterface $data): array
     {
         $options = [];
 
