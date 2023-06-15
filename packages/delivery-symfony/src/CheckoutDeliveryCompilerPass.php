@@ -16,7 +16,7 @@ class CheckoutDeliveryCompilerPass implements CompilerPassInterface
         (new CompilerPassHelper($container))
             ->addChildServicesToParent(
                 CheckoutDeliveryBundle::SERVICE_DELIVERY_OPTIONS_RESOLVER,
-                $config['options'],
+                is_array($config) ? $config['options'] ?? [] : [],
                 'addOption',
                 DeliveryOptionInterface::class,
             )

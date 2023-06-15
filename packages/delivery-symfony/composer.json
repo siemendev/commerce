@@ -17,7 +17,8 @@
     "require": {
         "php": ">=8.1",
         "siemendev/checkout-delivery": "dev-main",
-        "siemendev/symfony-package-helper": "dev-main"
+        "siemendev/symfony-package-helper": "dev-main",
+        "symfony/framework-bundle": "^5.0|^6.0"
     },
     "repositories": [
         {

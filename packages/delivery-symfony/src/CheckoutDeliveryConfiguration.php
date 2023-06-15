@@ -2,6 +2,7 @@
 
 namespace Siemendev\Checkout\Delivery\SymfonyBridge;
 
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -10,7 +11,9 @@ class CheckoutDeliveryConfiguration implements ConfigurationInterface
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('checkout_delivery');
-        $treeBuilder->getRootNode()->children()->arrayNode('options')->scalarPrototype();
+        if ($treeBuilder->getRootNode() instanceof ArrayNodeDefinition) {
+            $treeBuilder->getRootNode()->children()->arrayNode('options')->scalarPrototype();
+        }
 
         return $treeBuilder;
     }
