@@ -9,4 +9,4 @@ update:
 	cd demo; for DEMO in *; do cd $$DEMO; composer update; cd ..; done
 
 phpstan-package:
-	phpstan analyse $$DIR/src --level 9 -a $$DIR/vendor/autoload.php
+	cd $$DIR; phpstan analyse src --level 9
