@@ -11,9 +11,6 @@ use Siemendev\Checkout\Payment\Method\PaymentNotCapturableException;
 use Siemendev\Checkout\Payment\Payment\PaymentInterface;
 use Siemendev\Checkout\Products\Data\QuotedCheckoutDataInterface;
 
-/**
- * @implements GiftCardPaymentMethodInterface<GiftCardPaymentInterface>
- */
 class GiftCardPaymentMethod extends AbstractPaymentMethod implements GiftCardPaymentMethodInterface
 {
     private GiftCardRepositoryInterface $repository;
@@ -28,6 +25,7 @@ class GiftCardPaymentMethod extends AbstractPaymentMethod implements GiftCardPay
         return $this;
     }
 
+    /** @param array<GiftCardCheckerInterface> $checkers */
     public function setCheckers(array $checkers): static
     {
         $this->checkers = $checkers;

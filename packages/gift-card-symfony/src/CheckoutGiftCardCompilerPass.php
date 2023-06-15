@@ -17,7 +17,7 @@ class CheckoutGiftCardCompilerPass implements CompilerPassInterface
         (new CompilerPassHelper($container))
             ->addChildServiceToParent(
                 CheckoutGiftCardBundle::SERVICE_GIFT_CARD_PAYMENT_METHOD,
-                $config['repository'],
+                is_array($config) ? $config['repository'] ?? '' : '',
                 'setRepository',
                 GiftCardRepositoryInterface::class,
             )

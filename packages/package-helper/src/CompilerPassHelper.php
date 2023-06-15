@@ -4,6 +4,7 @@ namespace Siemendev\SymfonyPackageHelper;
 
 use LogicException;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 use Symfony\Component\DependencyInjection\Reference;
 
 class CompilerPassHelper
@@ -15,6 +16,9 @@ class CompilerPassHelper
         $this->container = $container;
     }
 
+    /**
+     * @param array<string> $childServiceIds array of service ids that should be added to the parent service
+     */
     public function addChildServicesToParent(
         string $parentServiceId,
         array $childServiceIds,
@@ -28,20 +32,34 @@ class CompilerPassHelper
         return $this;
     }
 
+    /**
+     * @throws ServiceNotFoundException when the child service id is not found
+     * @throws LogicException when the child service does not implement the given interface
+     */
     public function addChildServiceToParent(
         string $parentServiceId,
         string $childServiceId,
         string $methodToCall,
         ?string $interfaceToImplement = null
     ): self {
-        $service = $this->container->getDefinition($childServiceId);
+        $class = $this->container->getDefinition($childServiceId)->getClass();
 
-        if (null !== $interfaceToImplement && !is_a($service->getClass(), $interfaceToImplement, true)) {
-            throw new LogicException(sprintf(
-                '"%s" needs to implements "%s".',
-                $childServiceId,
-                $interfaceToImplement,
-            ));
+        if (null !== $interfaceToImplement) {
+            if (null === $class || !class_exists($class)) {
+                throw new LogicException(sprintf(
+                    'Service "%s" needs to have a valid class name configured to verify it implements interface "%s".',
+                    $childServiceId,
+                    $interfaceToImplement,
+                ));
+            }
+            if (!is_a($class, $interfaceToImplement, true)) {
+                throw new LogicException(sprintf(
+                    'Service "%s" needs to implements "%s" to be automatically added to service "%s".',
+                    $childServiceId,
+                    $interfaceToImplement,
+                    $parentServiceId,
+                ));
+            }
         }
 
         $this->container->getDefinition($parentServiceId)

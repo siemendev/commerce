@@ -6,7 +6,7 @@ use Siemendev\Checkout\GiftCard\Payment\GiftCardPaymentInterface;
 use Siemendev\Checkout\Payment\Method\PaymentMethodInterface;
 
 /**
- * @implements PaymentMethodInterface<GiftCardPaymentInterface>
+ * @extends PaymentMethodInterface<GiftCardPaymentInterface>
  */
 interface GiftCardPaymentMethodInterface extends PaymentMethodInterface
 {
