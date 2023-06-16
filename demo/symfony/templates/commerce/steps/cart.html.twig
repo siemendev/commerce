@@ -5,7 +5,6 @@
         <p>Error: {{ error }}</p>
     {% endif %}
     {% include 'commerce/reuseable/cart.html.twig' with { 'quote': data.quote, 'payments': data.payments.authorizedPayments } only %}
-    {% include 'commerce/reuseable/payments.html.twig' with { 'data': data } only %}
     {% if error is not defined %}
     <p>
         <a href="{{ continue }}">Continue to #{{ step_name }}</a>
