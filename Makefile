@@ -17,8 +17,10 @@ else
 endif
 
 cs-fixer:
-ifndef DIR
-	php-cs-fixer fix --path-mode=intersection $$DIR
+ifdef DIR
+	@echo "running cs fixer on \"$$DIR\":"
+	@php-cs-fixer fix --path-mode=intersection $$DIR
 else
+	@echo "running cs fixer on all files:"
 	@php-cs-fixer fix
 endif
