@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Siemendev\Checkout\Delivery\Step;
 
@@ -19,7 +21,7 @@ class DeliveryAddressStep implements StepInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      * @param DeliverableCheckoutDataInterface $data
      */
     public function validate(CheckoutDataInterface $data): void

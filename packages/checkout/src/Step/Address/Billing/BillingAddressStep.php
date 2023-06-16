@@ -1,11 +1,11 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Siemendev\Checkout\Step\Address\Billing;
 
-use LogicException;
 use Siemendev\Checkout\Data\CheckoutDataInterface;
 use Siemendev\Checkout\Step\StepInterface;
-use Siemendev\Checkout\Step\Exception\ValidationException;
 
 class BillingAddressStep implements StepInterface
 {
@@ -20,7 +20,8 @@ class BillingAddressStep implements StepInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
+     *
      * @param BillingAddressableCheckoutDataInterface $data
      */
     public function validate(CheckoutDataInterface $data): void

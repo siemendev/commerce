@@ -1,12 +1,14 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Siemendev\Checkout\Step\Machine;
 
-use LogicException;
 use Siemendev\Checkout\Data\CheckoutDataInterface;
 use Siemendev\Checkout\Step\Exception\StepNotFoundException;
 use Siemendev\Checkout\Step\StepInterface;
 use Siemendev\Checkout\Step\Voter\StepVoterInterface;
+use LogicException;
 
 /**
  * Attention: This is not a service! This helper is stateful and needs to be instantiated each time it is used.
@@ -15,9 +17,7 @@ use Siemendev\Checkout\Step\Voter\StepVoterInterface;
  */
 class RequiredStepsHelper
 {
-    /**
-     * @var array<string, StepInterface> $availableSteps
-     */
+    /** @var array<string, StepInterface> */
     private array $availableSteps = [];
 
     /**
@@ -83,6 +83,7 @@ class RequiredStepsHelper
 
     /**
      * @param array<string> $stepIdentifiers
+     *
      * @return array<string>
      */
     private function getRequiredStepsFromStep(StepInterface $step, array $stepIdentifiers = []): array
@@ -95,7 +96,7 @@ class RequiredStepsHelper
 
         foreach ($step::requiresSteps() as $requiredStep) {
             if (!isset($this->availableSteps[$requiredStep])) {
-                throw new StepNotFoundException($requiredStep, array_map(static fn (StepInterface $step) => $step::stepIdentifier(),$this->availableSteps));
+                throw new StepNotFoundException($requiredStep, array_map(static fn (StepInterface $step) => $step::stepIdentifier(), $this->availableSteps));
             }
             $stepIdentifiers = $this->getRequiredStepsFromStep($this->availableSteps[$requiredStep], $stepIdentifiers);
         }

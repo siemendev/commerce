@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Siemendev\Checkout\Products\AdditionalCost;
 
@@ -11,7 +13,7 @@ class AdditionalCostsAggregator implements AdditionalCostsAggregatorInterface
      * @param array<AdditionalCostProviderInterface> $providers
      */
     public function __construct(
-        private array $providers = []
+        private array $providers = [],
     ) {
     }
 

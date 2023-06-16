@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Siemendev\Checkout\Products\Data;
 
@@ -25,10 +27,7 @@ trait ContainsQuote
     public function getQuote(): QuoteInterface
     {
         if (!isset($this->quote)) {
-            throw new LogicException(sprintf(
-                'The checkout data needs to be calculated before fetching it. Try using an implementation of %s to calculate the checkout data first!',
-                CheckoutQuoteCalculatorInterface::class
-            ));
+            throw new LogicException(sprintf('The checkout data needs to be calculated before fetching it. Try using an implementation of %s to calculate the checkout data first!', CheckoutQuoteCalculatorInterface::class));
         }
 
         return $this->quote;

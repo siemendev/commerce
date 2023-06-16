@@ -1,14 +1,21 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Siemendev\Checkout\Payment\Payment;
 
 abstract class AbstractPayment implements PaymentInterface
 {
     protected bool $authorized = false;
+
     protected bool $captured = false;
+
     private string $identifier;
+
     private int $authorizedAmount = 0;
+
     private int $capturedAmount = 0;
+
     private string $currency;
 
     public function getIdentifier(): string

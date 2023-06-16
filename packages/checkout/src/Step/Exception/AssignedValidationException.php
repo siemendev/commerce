@@ -1,9 +1,11 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Siemendev\Checkout\Step\Exception;
 
-use Exception;
 use Siemendev\Checkout\Step\StepInterface;
+use Exception;
 
 class AssignedValidationException extends Exception
 {

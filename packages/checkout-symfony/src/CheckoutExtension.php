@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Siemendev\Checkout\SymfonyBridge;
 
@@ -21,7 +23,7 @@ class CheckoutExtension extends Extension
             ->addTag(CheckoutBundle::TAG_FINALIZATION_HANDLER)
         ;
 
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../config'));
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../config'));
         $loader->load('services.yaml');
     }
 }

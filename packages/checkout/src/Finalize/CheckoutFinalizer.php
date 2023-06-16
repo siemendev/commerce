@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Siemendev\Checkout\Finalize;
 
@@ -15,7 +17,7 @@ class CheckoutFinalizer implements CheckoutFinalizerInterface
 
     /**
      * @param CheckoutFinalizationHandlerInterface[] $finalizationHandlers
-     * @param null|string[] $finalizationSteps if null, CheckoutFinalizerInterface::DEFAULT_FINALIZATION_STEPS will be used
+     * @param string[]|null $finalizationSteps if null, CheckoutFinalizerInterface::DEFAULT_FINALIZATION_STEPS will be used
      */
     public function __construct(
         array $finalizationHandlers = [],
@@ -60,11 +62,11 @@ class CheckoutFinalizer implements CheckoutFinalizerInterface
                     $doneHandlers[] = $finalizationHandler;
                 }
             }
-        } catch(Throwable $exception) {
+        } catch (Throwable $exception) {
             $rollbackExceptions = [];
             foreach ($doneHandlers as $finalizationHandler) {
                 try {
-                    /** @var $finalizationHandler CheckoutFinalizationHandlerInterface */
+                    /* @var $finalizationHandler CheckoutFinalizationHandlerInterface */
                     $finalizationHandler->rollback($data);
                 } catch (FinalizationRollbackException $e) {
                     $rollbackExceptions[] = $e;

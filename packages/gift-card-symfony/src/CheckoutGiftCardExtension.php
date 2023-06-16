@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Siemendev\Checkout\GiftCard\SymfonyBridge;
 
@@ -21,7 +23,7 @@ class CheckoutGiftCardExtension extends Extension
             ->addTag(CheckoutGiftCardBundle::TAG_GIFT_CARD_CHECKER)
         ;
 
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../config'));
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../config'));
         $loader->load('services.yaml');
     }
 }

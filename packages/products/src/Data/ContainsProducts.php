@@ -1,15 +1,14 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Siemendev\Checkout\Products\Data;
-
 
 use Siemendev\Checkout\Products\Product\ProductInterface;
 
 trait ContainsProducts
 {
-    /**
-     * @var array<ProductInterface>
-     */
+    /** @var array<ProductInterface> */
     private array $products = [];
 
     /**
@@ -41,7 +40,7 @@ trait ContainsProducts
     {
         $this->products = array_filter(
             $this->products,
-            static fn (ProductInterface $p) => $p !== $product
+            static fn (ProductInterface $p) => $p !== $product,
         );
 
         return $this;

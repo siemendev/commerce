@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Siemendev\Checkout\Delivery\SymfonyBridge;
 
@@ -18,13 +20,13 @@ class CheckoutDeliveryExtension extends Extension
 
         $container->setParameter(CheckoutDeliveryBundle::PARAMETER_CONFIG, $config);
 
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../config'));
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../config'));
         $loader->load('services.yaml');
 
         if (class_exists(AdditionalCostProvider::class)) {
             $container->setDefinition(
                 'checkout.additional_costs_provider.delivery',
-                (new Definition(AdditionalCostProvider::class))->setAutoconfigured(true)
+                (new Definition(AdditionalCostProvider::class))->setAutoconfigured(true),
             );
         }
     }

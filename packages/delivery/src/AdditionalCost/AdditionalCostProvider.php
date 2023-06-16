@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Siemendev\Checkout\Delivery\AdditionalCost;
 
@@ -14,13 +16,13 @@ if (interface_exists(AdditionalCostProviderInterface::class)) {
         public function eligible(CheckoutDataInterface $data): bool
         {
             return $data instanceof DeliverableCheckoutDataInterface
-                && $data->getDeliveryOption() !== null
+                && null !== $data->getDeliveryOption()
                 && $data->getDeliveryOption()->getPriceNet($data) > 0
             ;
         }
 
         /**
-         * @inheritDoc
+         * {@inheritDoc}
          * @param DeliverableCheckoutDataInterface $data
          */
         public function getAdditionalCosts(CheckoutDataInterface $data, QuoteInterface $quote): array // @phpstan-ignore-line

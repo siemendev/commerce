@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Siemendev\Checkout\Products\Quote;
 
@@ -8,10 +10,14 @@ interface QuoteInterface
 {
     public function getCurrency(): string;
 
-    /** @return array<QuoteItemInterface> */
+    /**
+     * @return array<QuoteItemInterface>
+     */
     public function getQuoteItems(): array;
 
-    /** @return array<AdditionalCostInterface> */
+    /**
+     * @return array<AdditionalCostInterface>
+     */
     public function getAdditionalCosts(): array;
 
     public function getSubTotalNet(): int;

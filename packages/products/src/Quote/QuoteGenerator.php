@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Siemendev\Checkout\Products\Quote;
 
@@ -23,11 +25,7 @@ class QuoteGenerator implements QuoteGeneratorInterface
         $quote = (new Quote())->setCurrency($data->getCurrency());
 
         if (!$data instanceof ProductCheckoutDataInterface) {
-            throw new LogicException(sprintf(
-                '"%s" needs to implement "%s" to be able to generate a quote (for products)',
-                $data::class,
-                ProductCheckoutDataInterface::class,
-            ));
+            throw new LogicException(sprintf('"%s" needs to implement "%s" to be able to generate a quote (for products)', $data::class, ProductCheckoutDataInterface::class));
         }
 
         foreach ($data->getProducts() as $product) {
@@ -37,7 +35,7 @@ class QuoteGenerator implements QuoteGeneratorInterface
             }
 
             $quote->addQuoteItem(
-                (new QuoteItem())->setProduct($product)->setPrice($this->priceResolver->getPrice($product, $data))
+                (new QuoteItem())->setProduct($product)->setPrice($this->priceResolver->getPrice($product, $data)),
             );
         }
 

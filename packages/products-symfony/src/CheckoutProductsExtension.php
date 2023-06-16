@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Siemendev\Checkout\Products\SymfonyBridge;
 
@@ -24,7 +26,7 @@ class CheckoutProductsExtension extends Extension
             ->addTag(CheckoutProductsBundle::TAG_ADDITIONAL_COSTS_PROVIDER)
         ;
 
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../config'));
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../config'));
         $loader->load('services.yaml');
     }
 }

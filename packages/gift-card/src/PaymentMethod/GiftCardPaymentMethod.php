@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Siemendev\Checkout\GiftCard\PaymentMethod;
 
@@ -18,7 +20,7 @@ class GiftCardPaymentMethod extends AbstractPaymentMethod implements GiftCardPay
 {
     private GiftCardRepositoryInterface $repository;
 
-    /** @var array<GiftCardCheckerInterface> $checkers */
+    /** @var array<GiftCardCheckerInterface> */
     private array $checkers = [];
 
     public function setRepository(GiftCardRepositoryInterface $repository): static
@@ -28,7 +30,9 @@ class GiftCardPaymentMethod extends AbstractPaymentMethod implements GiftCardPay
         return $this;
     }
 
-    /** @param array<GiftCardCheckerInterface> $checkers */
+    /**
+     * @param array<GiftCardCheckerInterface> $checkers
+     */
     public function setCheckers(array $checkers): static
     {
         $this->checkers = $checkers;
@@ -58,11 +62,7 @@ class GiftCardPaymentMethod extends AbstractPaymentMethod implements GiftCardPay
     public function capture(PaymentInterface $payment, QuotedCheckoutDataInterface $data, int $amount): void
     {
         if (!$payment instanceof GiftCardPaymentInterface) {
-            throw new PaymentNotCapturableException(sprintf(
-                'The gift card payment method only works with your payment (%s) implementing %s',
-                $payment::class,
-                GiftCardPaymentInterface::class
-            ));
+            throw new PaymentNotCapturableException(sprintf('The gift card payment method only works with your payment (%s) implementing %s', $payment::class, GiftCardPaymentInterface::class));
         }
 
         $this->repository->redeem($payment, $data, $amount);
@@ -71,11 +71,7 @@ class GiftCardPaymentMethod extends AbstractPaymentMethod implements GiftCardPay
     public function rollbackCapture(PaymentInterface $payment, QuotedCheckoutDataInterface $data): void
     {
         if (!$payment instanceof GiftCardPaymentInterface) {
-            throw new PaymentCaptureRollbackException(sprintf(
-                'The gift card payment method only works with your payment (%s) implementing %s',
-                $payment::class,
-                GiftCardPaymentInterface::class
-            ));
+            throw new PaymentCaptureRollbackException(sprintf('The gift card payment method only works with your payment (%s) implementing %s', $payment::class, GiftCardPaymentInterface::class));
         }
 
         $this->repository->rollback($payment, $data);

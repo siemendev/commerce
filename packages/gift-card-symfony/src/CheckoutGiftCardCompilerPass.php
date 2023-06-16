@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Siemendev\Checkout\GiftCard\SymfonyBridge;
 
@@ -25,7 +27,7 @@ class CheckoutGiftCardCompilerPass implements CompilerPassInterface
                 CheckoutGiftCardBundle::SERVICE_GIFT_CARD_PAYMENT_METHOD,
                 CheckoutGiftCardBundle::TAG_GIFT_CARD_CHECKER,
                 'addChecker',
-                GiftCardCheckerInterface::class
+                GiftCardCheckerInterface::class,
             )
         ;
     }

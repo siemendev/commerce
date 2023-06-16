@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Siemendev\Checkout\Payment\Payment\Collection;
 
@@ -9,9 +11,7 @@ use Traversable;
 
 class PaymentCollection implements PaymentCollectionInterface
 {
-    /**
-     * @var array<PaymentInterface>
-     */
+    /** @var array<PaymentInterface> */
     private array $payments = [];
 
     /**
@@ -29,7 +29,7 @@ class PaymentCollection implements PaymentCollectionInterface
     {
         return array_sum(
             array_map(
-                static fn(PaymentInterface $payment) => $payment->getAuthorizedAmount(),
+                static fn (PaymentInterface $payment) => $payment->getAuthorizedAmount(),
                 array_filter(
                     $this->payments,
                     static fn (PaymentInterface $payment) => $payment->isAuthorized() && $payment->getCurrency() === $currency,
@@ -51,7 +51,7 @@ class PaymentCollection implements PaymentCollectionInterface
         $payments = $this->payments;
         usort(
             $payments,
-            static fn(PaymentInterface $a, PaymentInterface $b) => $b->getPriority() - $a->getPriority(),
+            static fn (PaymentInterface $a, PaymentInterface $b) => $b->getPriority() - $a->getPriority(),
         );
 
         return $payments;

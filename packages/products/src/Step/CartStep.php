@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Siemendev\Checkout\Products\Step;
 
@@ -30,7 +32,7 @@ class CartStep implements StepInterface
             throw new LogicException(sprintf('%s needs to implement %s', $data::class, ProductCheckoutDataInterface::class));
         }
 
-        if (count($data->getProducts()) === 0) {
+        if (0 === count($data->getProducts())) {
             throw new EmptyCartValidationException();
         }
 

@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Siemendev\Checkout\Payment\Finalize;
 
@@ -11,7 +13,6 @@ use Siemendev\Checkout\Payment\Method\PaymentCaptureRollbackException;
 use Siemendev\Checkout\Payment\Method\PaymentMethodsProviderInterface;
 use Siemendev\Checkout\Payment\Method\PaymentNotCapturableException;
 use Siemendev\Checkout\Payment\Payment\PaymentInterface;
-use Siemendev\Checkout\Products\Data\QuotedCheckoutDataInterface;
 
 class PaymentCapturingFinalizationHandler implements CheckoutFinalizationHandlerInterface
 {
@@ -33,19 +34,13 @@ class PaymentCapturingFinalizationHandler implements CheckoutFinalizationHandler
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      * @throws PaymentNotCapturableCheckoutNotFinalizableException
      */
     public function finalize(CheckoutDataInterface $data): void
     {
         if (!$data instanceof PaymentCheckoutDataInterface) {
-            throw new InvalidArgumentException(
-                sprintf(
-                    '%s needs to implement %s to finalize the payment.',
-                    $data::class,
-                    PaymentCheckoutDataInterface::class
-                ),
-            );
+            throw new InvalidArgumentException(sprintf('%s needs to implement %s to finalize the payment.', $data::class, PaymentCheckoutDataInterface::class));
         }
 
         $leftTotal = $data->getQuote()->getTotalGross();
@@ -91,13 +86,7 @@ class PaymentCapturingFinalizationHandler implements CheckoutFinalizationHandler
     public function rollback(CheckoutDataInterface $data): void
     {
         if (!$data instanceof PaymentCheckoutDataInterface) {
-            throw new InvalidArgumentException(
-                sprintf(
-                    '%s needs to implement %s to finalize the payment.',
-                    $data::class,
-                    PaymentCheckoutDataInterface::class
-                ),
-            );
+            throw new InvalidArgumentException(sprintf('%s needs to implement %s to finalize the payment.', $data::class, PaymentCheckoutDataInterface::class));
         }
 
         $exceptions = [];

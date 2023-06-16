@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Siemendev\Checkout\Step\Exception;
 
@@ -16,7 +18,7 @@ class MissingCheckoutDataImplementationException extends ValidationException
             'Your checkout data (%s) needs to implement "%s" for step "%s" to work!',
             $checkoutDataInterface,
             $requiredInterface,
-            $stepIdentifier
+            $stepIdentifier,
         ));
     }
 }

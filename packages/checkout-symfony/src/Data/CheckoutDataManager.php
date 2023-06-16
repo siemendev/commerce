@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Siemendev\Checkout\SymfonyBridge\Data;
 
@@ -14,7 +16,7 @@ class CheckoutDataManager
 
     public function __construct(
         private readonly RequestStack $requestStack,
-    ){
+    ) {
     }
 
     public function setDataCreator(CheckoutDataCreatorInterface $checkoutDataCreator): static

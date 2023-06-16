@@ -1,6 +1,9 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Siemendev\Checkout\Payment\SymfonyBridge;
+
 use Siemendev\Checkout\Payment\Method\PaymentMethodInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -15,7 +18,7 @@ class CheckoutPaymentExtension extends Extension
             ->addTag(CheckoutPaymentBundle::TAG_PAYMENT_METHOD)
         ;
 
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../config'));
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../config'));
         $loader->load('services.yaml');
     }
 }

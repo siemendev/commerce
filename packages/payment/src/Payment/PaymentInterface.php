@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Siemendev\Checkout\Payment\Payment;
 
@@ -7,7 +9,9 @@ use Siemendev\Checkout\Payment\Method\PaymentMethodInterface;
 interface PaymentInterface
 {
     public const PRIORITY_LOW = 50;
+
     public const PRIORITY_DEFAULT = 100;
+
     public const PRIORITY_HIGH = 150;
 
     public function getIdentifier(): string;

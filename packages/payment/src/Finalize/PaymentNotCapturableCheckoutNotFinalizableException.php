@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Siemendev\Checkout\Payment\Finalize;
 
@@ -9,7 +11,6 @@ use Siemendev\Checkout\Payment\Method\PaymentNotCapturableException;
 class PaymentNotCapturableCheckoutNotFinalizableException extends CheckoutNotFinalizableException
 {
     /**
-     * @param PaymentNotCapturableException $exception
      * @param array<PaymentCaptureRollbackException> $rollbackExceptions
      */
     public function __construct(PaymentNotCapturableException $exception, private readonly array $rollbackExceptions)

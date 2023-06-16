@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Siemendev\Checkout\Products\SymfonyBridge;
 
@@ -16,7 +18,8 @@ class CheckoutProductsCompilerPass implements CompilerPassInterface
     public function process(ContainerBuilder $container): void
     {
         $container->getDefinition(CheckoutBundle::SERVICE_STEP_MACHINE)->addMethodCall(
-            'addStepVoter', [new Reference(CheckoutProductsBundle::SERVICE_STEP_VOTER)]
+            'addStepVoter',
+            [new Reference(CheckoutProductsBundle::SERVICE_STEP_VOTER)],
         );
 
         (new CompilerPassHelper($container))

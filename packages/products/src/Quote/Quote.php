@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Siemendev\Checkout\Products\Quote;
 
@@ -8,14 +10,10 @@ class Quote implements QuoteInterface
 {
     private string $currency;
 
-    /**
-     * @var array<QuoteItemInterface>
-     */
+    /** @var array<QuoteItemInterface> */
     private array $quoteItems = [];
 
-    /**
-     * @var array<AdditionalCostInterface>
-     */
+    /** @var array<AdditionalCostInterface> */
     private array $additionalCosts = [];
 
     private int $subTotalNet = 0;

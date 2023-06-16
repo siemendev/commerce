@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Siemendev\SymfonyPackageHelper;
 
@@ -23,7 +25,7 @@ class CompilerPassHelper
         string $parentServiceId,
         array $childServiceIds,
         string $methodToCall,
-        ?string $interfaceToImplement = null
+        ?string $interfaceToImplement = null,
     ): self {
         foreach ($childServiceIds as $childServiceId) {
             $this->addChildServiceToParent($parentServiceId, $childServiceId, $methodToCall, $interfaceToImplement);
@@ -40,25 +42,16 @@ class CompilerPassHelper
         string $parentServiceId,
         string $childServiceId,
         string $methodToCall,
-        ?string $interfaceToImplement = null
+        ?string $interfaceToImplement = null,
     ): self {
         $class = $this->container->getDefinition($childServiceId)->getClass();
 
         if (null !== $interfaceToImplement) {
             if (null === $class || !class_exists($class)) {
-                throw new LogicException(sprintf(
-                    'Service "%s" needs to have a valid class name configured to verify it implements interface "%s".',
-                    $childServiceId,
-                    $interfaceToImplement,
-                ));
+                throw new LogicException(sprintf('Service "%s" needs to have a valid class name configured to verify it implements interface "%s".', $childServiceId, $interfaceToImplement));
             }
             if (!is_a($class, $interfaceToImplement, true)) {
-                throw new LogicException(sprintf(
-                    'Service "%s" needs to implements "%s" to be automatically added to service "%s".',
-                    $childServiceId,
-                    $interfaceToImplement,
-                    $parentServiceId,
-                ));
+                throw new LogicException(sprintf('Service "%s" needs to implements "%s" to be automatically added to service "%s".', $childServiceId, $interfaceToImplement, $parentServiceId));
             }
         }
 
@@ -73,7 +66,7 @@ class CompilerPassHelper
         string $parentServiceId,
         string $tag,
         string $methodToCall,
-        ?string $interfaceToImplement = null
+        ?string $interfaceToImplement = null,
     ): self {
         $this->addChildServicesToParent(
             $parentServiceId,

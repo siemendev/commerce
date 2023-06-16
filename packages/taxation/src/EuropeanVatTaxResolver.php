@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Siemendev\Checkout\Taxation;
 
@@ -15,7 +17,7 @@ class EuropeanVatTaxResolver implements EuropeanVatTaxResolverInterface
     public function getProductTaxRate(ProductInterface $product, BillingAddressableCheckoutDataInterface $data): float
     {
         $vatCalculator = new VatCalculator();
-        if ($this->businessCountryCode !== null) {
+        if (null !== $this->businessCountryCode) {
             $vatCalculator->setBusinessCountryCode($this->businessCountryCode);
         }
         $vatCalculator->calculate(
