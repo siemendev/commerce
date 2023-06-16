@@ -1,10 +1,11 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Controller\Checkout;
 
+use App\Commerce\Checkout;
 use App\Controller\AbstractCheckoutController;
-use Siemendev\Checkout\Delivery\Option\Resolver\DeliveryOptionsResolverInterface;
-use Siemendev\Checkout\Payment\Method\PaymentMethodsProviderInterface;
 use Siemendev\Checkout\Payment\Step\PaymentStep;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,23 +13,19 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/checkout/payment', name: 'checkout_payment')]
 class PaymentController extends AbstractCheckoutController
 {
-    public function __invoke(
-        DeliveryOptionsResolverInterface $optionsResolver,
-        PaymentMethodsProviderInterface $paymentMethodProvider
-    ): Response {
-        $this->getQuoteCalculator()->calculate($this->getCheckoutData());
+    public function __invoke(Checkout $checkout): Response
+    {
+        $checkout->recalculate();
 
-        if (!$this->getStepMachine()->isStepAllowed($this->getCheckoutData(), PaymentStep::stepIdentifier())) {
+        if (!$checkout->isStepAllowed(PaymentStep::stepIdentifier())) {
             return $this->redirectToCurrentStep();
         }
 
-        $paymentMethods = $paymentMethodProvider->getEligiblePaymentMethods($this->getCheckoutData());
-
         return $this->render('commerce/steps/payment.html.twig', [
-            'paymentMethods' => $paymentMethods,
-            'openTotal' => $this->getCheckoutData()->getOpenTotal(),
+            'paymentMethods' => $checkout->getEligiblePaymentMethods(),
+            'openTotal' => $checkout->getCheckoutData()->getOpenTotal(),
             'steps' => $this->getStepsData(),
-            'data' => $this->getCheckoutData(),
+            'data' => $checkout->getCheckoutData(),
         ]);
     }
 }

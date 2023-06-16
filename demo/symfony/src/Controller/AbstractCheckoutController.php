@@ -1,57 +1,24 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Commerce\CheckoutData;
-use Siemendev\Checkout\Products\Quote\Calculation\CheckoutQuoteCalculatorInterface;
+use App\Commerce\Checkout;
 use Siemendev\Checkout\Step\StepInterface;
-use Siemendev\Checkout\Step\Machine\StepMachineInterface;
-use Siemendev\Checkout\SymfonyBridge\Data\CheckoutDataManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * FYI this is the worst possible implementation and should not be viewed as a best practice.
  * Please implement a proper service architecture for handling the checkout data in your application.
- * Why is this bad? -> https://en.wikipedia.org/wiki/Composition_over_inheritance
+ * Why is this bad? -> https://en.wikipedia.org/wiki/Composition_over_inheritance.
  */
 abstract class AbstractCheckoutController extends AbstractController
 {
     public function __construct(
-        private readonly StepMachineInterface $stepMachine,
-        private readonly CheckoutQuoteCalculatorInterface $checkoutQuoteCalculator,
-        private readonly CheckoutDataManager $checkoutDataManager,
+        private readonly Checkout $checkout,
     ) {
-    }
-
-    public function getStepMachine(): StepMachineInterface
-    {
-        return $this->stepMachine;
-    }
-
-    public function getQuoteCalculator(): CheckoutQuoteCalculatorInterface
-    {
-        return $this->checkoutQuoteCalculator;
-    }
-
-    public function getCheckoutData(): CheckoutData
-    {
-        /** @var CheckoutData $data */
-        $data = $this->checkoutDataManager->getCheckoutData();
-
-        return $data;
-    }
-
-    public function saveCheckoutData(CheckoutData $checkoutData): CheckoutData
-    {
-        $this->checkoutDataManager->saveCheckoutData($checkoutData);
-
-        return $checkoutData;
-    }
-
-    public function clearCheckoutData(): void
-    {
-        $this->checkoutDataManager->clearCheckoutData();
     }
 
     protected function redirectToCurrentStep(): RedirectResponse
@@ -61,7 +28,7 @@ abstract class AbstractCheckoutController extends AbstractController
 
     protected function getCurrentStepIdentifier(): string
     {
-        return $this->getStepMachine()->getCurrentStep($this->getCheckoutData())::stepIdentifier();
+        return $this->checkout->getCurrentStep()::stepIdentifier();
     }
 
     protected function getCurrentStepUrl(): string
@@ -82,9 +49,9 @@ abstract class AbstractCheckoutController extends AbstractController
         return array_map(
             fn (StepInterface $step): array => [
                 'id' => $step::stepIdentifier(),
-                'url' => $this->getStepMachine()->isStepAllowed($this->getCheckoutData(), $step::stepIdentifier()) ? $this->getStepUrl($step::stepIdentifier()) : null
+                'url' => $this->checkout->isStepAllowed($step::stepIdentifier()) ? $this->getStepUrl($step::stepIdentifier()) : null,
             ],
-            $this->getStepMachine()->getRequiredSteps($this->getCheckoutData())
+            $this->checkout->getRequiredSteps(),
         );
     }
 }

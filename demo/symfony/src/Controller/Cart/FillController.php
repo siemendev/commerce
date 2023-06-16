@@ -1,10 +1,13 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Controller\Cart;
 
+use App\Commerce\Checkout;
 use App\Commerce\Delivery\DhlDeliveryOption;
 use App\Commerce\Payment\CreditCardPayment;
-use App\Commerce\Product;
+use App\Commerce\CheckoutProduct;
 use App\Commerce\Step\AgeVerificationStep;
 use App\Controller\AbstractCheckoutController;
 use Siemendev\Checkout\Delivery\Step\DeliveryStep;
@@ -17,13 +20,11 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/cart/fill', name: 'cart_fill')]
 class FillController extends AbstractCheckoutController
 {
-    public function __invoke(): Response
+    public function __invoke(Checkout $checkout): Response
     {
-        $data = $this->getCheckoutData();
-
-        $data
-            ->setIdentifier((string) rand(1, PHP_INT_MAX))
-            ->setCurrency('EUR')
+        $checkout
+            ->clear()
+            ->switchCurrency('EUR')
             ->setBillingAddress(
                 (new Address())
                     ->setName('John Doe')
@@ -32,7 +33,7 @@ class FillController extends AbstractCheckoutController
                     ->setCity('Berlin')
                     ->setState('Berlin')
                     ->setCountryCode('DE')
-                    ->setCompany(false)
+                    ->setCompany(false),
             )
             ->setDeliveryAddress(
                 (new Address())
@@ -42,27 +43,26 @@ class FillController extends AbstractCheckoutController
                     ->setCity('Berlin')
                     ->setState('Berlin')
                     ->setCountryCode('DE')
-                    ->setCompany(false)
+                    ->setCompany(false),
             )
             ->setAgeVerified(true)
             ->setDeliveryOption(new DhlDeliveryOption())
-            ->setProducts([
-                (new Product())
+            ->addProduct(
+                (new CheckoutProduct())
                     ->setQuantity(2)
                     ->addRequiredStep(DeliveryStep::stepIdentifier())
                     ->setName('Deliverable Product')
                     ->setIdentifier('test-product-1'),
-                (new Product())
+            )
+            ->addProduct(
+                (new CheckoutProduct())
                     ->setQuantity(1)
                     ->addRequiredStep(AgeVerificationStep::stepIdentifier())
                     ->setName('Digital 18+ Product')
                     ->setIdentifier('test-product-2')
                     ->setVatType(VatTypedItemInterface::VAT_TYPE_LOWER),
-            ])
-        ;
-
-        $data
-            ->getPayments()->set([
+            )
+            ->addPayment(
                 (new CreditCardPayment())
                     ->setIdentifier('credit-card-payment-1')
                     ->setCurrency('EUR')
@@ -73,15 +73,17 @@ class FillController extends AbstractCheckoutController
                     ->setCardExpiryYear(26)
                     ->setCardCsc('837')
                     ->setAuthorized(true),
+            )
+            ->addPayment(
                 (new GiftCardPayment())
                     ->setIdentifier('test-gift-card-1')
                     ->setAuthorizedAmount(1500)
                     ->setCurrency('EUR'),
-            ])
+            )
+            ->recalculate()
+            ->lock()
+            ->save()
         ;
-
-        $this->getQuoteCalculator()->calculate($data);
-        $this->saveCheckoutData($data->lock());
 
         return $this->redirectToCurrentStep();
     }

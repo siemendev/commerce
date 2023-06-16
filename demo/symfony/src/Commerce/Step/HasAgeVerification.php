@@ -1,8 +1,10 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Commerce\Step;
 
-use App\Commerce\CheckoutData;
+use App\Commerce\Data\CheckoutData;
 
 trait HasAgeVerification
 {

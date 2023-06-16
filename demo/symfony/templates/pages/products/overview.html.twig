@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h2>Products</h2>
+    {% if products is not empty %}
+    <table style="width:100%">
+        <tr>
+            <th style="text-align:left">Product</th>
+            <th style="text-align:left">Price</th>
+            <th style="text-align:left"></th>
+        </tr>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>({{ (product.price / 100)|format_currency('EUR') }})</td>
+                <td><a href="{{ path('product_detail', {'id': product.id}) }}">Details</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+{% endblock %}

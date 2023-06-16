@@ -1,9 +1,11 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Controller\Checkout;
 
+use App\Commerce\Checkout;
 use App\Controller\AbstractCheckoutController;
-use Siemendev\Checkout\Delivery\Option\Resolver\DeliveryOptionsResolverInterface;
 use Siemendev\Checkout\Delivery\Step\DeliveryStep;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,25 +14,26 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/checkout/delivery', name: 'checkout_delivery')]
 class DeliveryController extends AbstractCheckoutController
 {
-    public function __invoke(Request $request, DeliveryOptionsResolverInterface $optionsResolver): Response
+    public function __invoke(Request $request, Checkout $checkout): Response
     {
-        $this->getQuoteCalculator()->calculate($this->getCheckoutData());
+        $checkout->recalculate();
 
-        if (!$this->getStepMachine()->isStepAllowed($this->getCheckoutData(), DeliveryStep::stepIdentifier())) {
+        if (!$checkout->isStepAllowed(DeliveryStep::stepIdentifier())) {
             return $this->redirectToCurrentStep();
         }
 
-        $availableOptions = $optionsResolver->getAvailableOptions($this->getCheckoutData());
+        $availableOptions = $checkout->getAvailableDeliveryOptions();
 
         $error = null;
-        if ($request->getMethod() === 'POST') {
+        if ('POST' === $request->getMethod()) {
             $selectedDeliveryOptionIdentifier = $request->request->get('delivery_option');
 
             foreach ($availableOptions as $option) {
                 if ($option->getIdentifier() === $selectedDeliveryOptionIdentifier) {
-                    $this->saveCheckoutData(
-                        $this->getCheckoutData()->setDeliveryOption($option)
-                    );
+                    $checkout
+                        ->setDeliveryOption($option)
+                        ->save()
+                    ;
 
                     return $this->redirectToCurrentStep();
                 }
@@ -41,10 +44,10 @@ class DeliveryController extends AbstractCheckoutController
 
         return $this->render('commerce/steps/delivery.html.twig', [
             'deliveryOptions' => $availableOptions,
-            'selectedDeliveryOption' => $this->getCheckoutData()->getDeliveryOption(),
+            'selectedDeliveryOption' => $checkout->getDeliveryOption(),
             'error' => $error,
             'steps' => $this->getStepsData(),
-            'data' => $this->getCheckoutData(),
+            'data' => $checkout->getCheckoutData(),
         ]);
     }
 }

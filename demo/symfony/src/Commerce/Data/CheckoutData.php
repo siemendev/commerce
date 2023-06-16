@@ -1,28 +1,22 @@
-<?php declare(strict_types=1);
+<?php
 
-namespace App\Commerce;
+declare(strict_types=1);
+
+namespace App\Commerce\Data;
 
 use App\Commerce\Step\HasAgeVerification;
-use App\Commerce\Step\AgeVerifiableCheckoutDataInterface;
-use Siemendev\Checkout\Data\GenericCheckoutData;
-use Siemendev\Checkout\Delivery\Data\DeliverableCheckoutDataInterface;
+use Siemendev\Checkout\Data\AbstractCheckoutData;
 use Siemendev\Checkout\Delivery\Data\IsDeliverable;
 use Siemendev\Checkout\Payment\Data\ContainsPayments;
-use Siemendev\Checkout\Payment\Data\PaymentCheckoutDataInterface;
 use Siemendev\Checkout\Payment\Payment\PaymentInterface;
 use Siemendev\Checkout\Products\Data\ContainsProducts;
 use Siemendev\Checkout\Products\Data\ContainsQuote;
-use Siemendev\Checkout\Products\Data\ProductCheckoutDataInterface;
-use Siemendev\Checkout\Products\Data\QuotedCheckoutDataInterface;
 use Siemendev\Checkout\Products\Product\ProductInterface;
+use Siemendev\Checkout\Step\Address\Billing\BillingAddressableCheckoutData;
 
-class CheckoutData extends GenericCheckoutData implements
-    DeliverableCheckoutDataInterface,
-    ProductCheckoutDataInterface,
-    QuotedCheckoutDataInterface,
-    PaymentCheckoutDataInterface,
-    AgeVerifiableCheckoutDataInterface
+class CheckoutData extends AbstractCheckoutData implements CheckoutDataInterface
 {
+    use BillingAddressableCheckoutData;
     use IsDeliverable;
     use HasAgeVerification;
     use ContainsProducts;
@@ -52,7 +46,7 @@ class CheckoutData extends GenericCheckoutData implements
             . implode('-', array_map(static fn (ProductInterface $product) => $product->getIdentifier(), $this->getProducts()))
             . implode('-', array_map(static fn (PaymentInterface $payment) => $payment->getIdentifier() . $payment->getCurrency() . $payment->getAuthorizedAmount() . $payment->getCapturedAmount(), iterator_to_array($this->getPayments())))
             . $this->isAgeVerified()
-            . $this->getDeliveryOption()?->getIdentifier()
+            . $this->getDeliveryOption()?->getIdentifier(),
         );
     }
 }

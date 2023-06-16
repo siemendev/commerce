@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Commerce;
 
@@ -6,7 +8,7 @@ use Siemendev\Checkout\Products\Product\ProductInterface;
 use Siemendev\Checkout\Taxation\VatTyped;
 use Siemendev\Checkout\Taxation\VatTypedItemInterface;
 
-class Product implements ProductInterface, VatTypedItemInterface
+class CheckoutProduct implements ProductInterface, VatTypedItemInterface
 {
     use VatTyped;
 

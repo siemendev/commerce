@@ -1,7 +1,10 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Controller\Checkout;
 
+use App\Commerce\Checkout;
 use App\Commerce\Step\AgeVerificationStep;
 use App\Controller\AbstractCheckoutController;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,26 +14,27 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/checkout/age-verification', name: 'checkout_age_verification')]
 class AgeVerificationController extends AbstractCheckoutController
 {
-    public function __invoke(Request $request): Response
+    public function __invoke(Request $request, Checkout $checkout): Response
     {
-        $this->getQuoteCalculator()->calculate($this->getCheckoutData());
+        $checkout->recalculate();
 
-        if (!$this->getStepMachine()->isStepAllowed($this->getCheckoutData(), AgeVerificationStep::stepIdentifier())) {
+        if (!$checkout->isStepAllowed(AgeVerificationStep::stepIdentifier())) {
             return $this->redirectToCurrentStep();
         }
 
-        if ($request->getMethod() === 'POST') {
-            $this->saveCheckoutData(
-                $this->getCheckoutData()->setAgeVerified($request->request->has('age_verification'))
-            );
+        if ('POST' === $request->getMethod()) {
+            $checkout
+                ->setAgeVerified($request->request->has('age_verification'))
+                ->save()
+            ;
 
             return $this->redirectToCurrentStep();
         }
 
         return $this->render('commerce/steps/age_verification.html.twig', [
-            'verified' => $this->getCheckoutData()->isAgeVerified(),
+            'verified' => $checkout->isAgeVerified(),
             'steps' => $this->getStepsData(),
-            'data' => $this->getCheckoutData(),
+            'data' => $checkout->getCheckoutData(),
         ]);
     }
 }

@@ -1,7 +1,10 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Controller\Payment;
 
+use App\Commerce\Checkout;
 use App\Commerce\Payment\CreditCardPayment;
 use App\Controller\AbstractCheckoutController;
 use Exception;
@@ -15,9 +18,9 @@ class CreditCardPaymentController extends AbstractCheckoutController
     /**
      * @throws Exception
      */
-    public function __invoke(Request $request): Response
+    public function __invoke(Request $request, Checkout $checkout): Response
     {
-        $data = $this->getCheckoutData();
+        $data = $checkout->getCheckoutData();
 
         $payment = (new CreditCardPayment())
             ->setCapturedAmount($data->getOpenTotal())
@@ -37,9 +40,9 @@ class CreditCardPaymentController extends AbstractCheckoutController
             ->setIdentifier($externalPaymentId)
             ->setAuthorized(true)
         ;
-        $data
+        $checkout
             ->lock() // don't forget to lock the data as soon as you add payments!
-            ->getPayments()->add($payment)
+            ->addPayment($payment)
         ;
 
         return $this->redirectToCurrentStep();

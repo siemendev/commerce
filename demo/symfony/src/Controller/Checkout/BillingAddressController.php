@@ -1,7 +1,10 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Controller\Checkout;
 
+use App\Commerce\Checkout;
 use App\Controller\AbstractCheckoutController;
 use Siemendev\Checkout\Delivery\Step\DeliveryAddressStep;
 use Siemendev\Checkout\Step\Address\Address;
@@ -15,47 +18,45 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/checkout/address/billing', name: 'checkout_billing_address')]
 class BillingAddressController extends AbstractCheckoutController
 {
-    public function __invoke(Request $request): Response
+    public function __invoke(Request $request, Checkout $checkout): Response
     {
-        $this->getQuoteCalculator()->calculate($this->getCheckoutData());
+        $checkout->recalculate();
 
-        if (!$this->getStepMachine()->isStepAllowed($this->getCheckoutData(), BillingAddressStep::stepIdentifier())) {
+        if (!$checkout->isStepAllowed(BillingAddressStep::stepIdentifier())) {
             return $this->redirectToCurrentStep();
         }
 
-        $address = $this->getCheckoutData()->getBillingAddress();
-        if (!$address) {
-            $this->getCheckoutData()->setBillingAddress($address = new Address());
-        }
         /** @var Address $address */
-
-        if ($name = $request->request->get('name')) {
-            $address->setName($name);
-        }
-        if ($addressLine1 = $request->request->get('address_line1')) {
-            $address->setAddressLine1($addressLine1);
-        }
-        if ($addressLine2 = $request->request->get('address_line2')) {
-            $address->setAddressLine2($addressLine2);
-        }
-        if ($postalCode = $request->request->get('postal_code')) {
-            $address->setPostalCode($postalCode);
-        }
-        if ($city = $request->request->get('city')) {
-            $address->setCity($city);
-        }
-        if ($state = $request->request->get('state')) {
-            $address->setState($state);
-        }
-        if ($country = $request->request->get('country')) {
-            $address->setCountryCode($country);
-        }
-
-        if ($request->request->get('useForDelivery') && $address->isValid()) {
-            $this->getCheckoutData()->setDeliveryAddress($address);
-        }
+        $address = $checkout->getCheckoutData()->getBillingAddress() ?? new Address();
 
         if ('POST' === $request->getMethod()) {
+            if ($name = $request->request->get('name')) {
+                $address->setName($name);
+            }
+            if ($addressLine1 = $request->request->get('address_line1')) {
+                $address->setAddressLine1($addressLine1);
+            }
+            if ($addressLine2 = $request->request->get('address_line2')) {
+                $address->setAddressLine2($addressLine2);
+            }
+            if ($postalCode = $request->request->get('postal_code')) {
+                $address->setPostalCode($postalCode);
+            }
+            if ($city = $request->request->get('city')) {
+                $address->setCity($city);
+            }
+            if ($state = $request->request->get('state')) {
+                $address->setState($state);
+            }
+            if ($country = $request->request->get('country')) {
+                $address->setCountryCode($country);
+            }
+
+            $checkout->setBillingAddress($address);
+            if ($request->request->get('useForDelivery') && $address->isValid()) {
+                $checkout->setDeliveryAddress($address);
+            }
+
             try {
                 $address->validate();
 
@@ -66,12 +67,11 @@ class BillingAddressController extends AbstractCheckoutController
         }
 
         return $this->render('commerce/steps/billing_address.html.twig', [
-            'delivery_needed' => in_array(DeliveryAddressStep::stepIdentifier(), array_map(fn (StepInterface $step) => $step::stepIdentifier(), $this->getStepMachine()->getRequiredSteps($this->getCheckoutData()))),
+            'delivery_needed' => in_array(DeliveryAddressStep::stepIdentifier(), array_map(fn (StepInterface $step) => $step::stepIdentifier(), $checkout->getRequiredSteps())),
             'message' => $message ?? null,
             'address' => $address,
-            'session' => $this->getCheckoutData(),
             'steps' => $this->getStepsData(),
-            'data' => $this->getCheckoutData(),
+            'data' => $checkout->getCheckoutData(),
         ]);
     }
 }

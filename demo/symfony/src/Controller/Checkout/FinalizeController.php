@@ -1,10 +1,12 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Controller\Checkout;
 
+use App\Commerce\Checkout;
 use App\Controller\AbstractCheckoutController;
 use Siemendev\Checkout\Finalize\CheckoutFinalizationExceptionWrapper;
-use Siemendev\Checkout\Finalize\CheckoutFinalizerInterface;
 use Siemendev\Checkout\Finalize\CheckoutNotFinalizableException;
 use Siemendev\Checkout\Finalize\UnknownFinalizationStepException;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,17 +21,16 @@ class FinalizeController extends AbstractCheckoutController
      * @throws UnknownFinalizationStepException
      * @throws Throwable
      */
-    public function __invoke(Request $request, CheckoutFinalizerInterface $checkoutFinalizer): Response
+    public function __invoke(Request $request, Checkout $checkout): Response
     {
-        $checkoutData = $this->getCheckoutData();
-        $this->getQuoteCalculator()->calculate($checkoutData);
+        $checkout->recalculate();
 
-        if (!$this->getStepMachine()->isValid($checkoutData)) {
+        if (!$checkout->isValid()) {
             return $this->redirectToCurrentStep();
         }
 
         try {
-            $checkoutFinalizer->finalize($checkoutData);
+            $checkout->finalize();
         } catch (CheckoutFinalizationExceptionWrapper $e) {
             $this->addFlash('error', $e->getMessage());
             foreach ($e->getRollbackExceptions() as $rollbackException) {
@@ -43,10 +44,10 @@ class FinalizeController extends AbstractCheckoutController
             return $this->redirectToCurrentStep();
         }
 
-        if ($checkoutData->isFinalized()) {
-            $this->clearCheckoutData();
+        if ($checkout->isFinalized()) {
+            $checkout->clear();
         }
 
-        return $this->render('commerce/steps/finalize.html.twig', ['data' => $checkoutData]);
+        return $this->render('commerce/steps/finalize.html.twig', ['data' => $checkout->getCheckoutData()]);
     }
 }
