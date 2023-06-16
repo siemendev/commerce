@@ -5,6 +5,7 @@ return (new PhpCsFixer\Config())
     ->setFinder(
         (new PhpCsFixer\Finder())
             ->in(__DIR__ .'/packages/')
+            ->in(__DIR__ .'/demo/')
             ->notPath('#/vendor/#')
             ->name('*.php')
             ->ignoreDotFiles(true)

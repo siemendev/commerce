@@ -9,13 +9,16 @@ update:
 	cd demo; for DEMO in *; do cd $$DEMO; composer update; cd ..; done
 
 phpstan:
-	@for PACKAGE in packages/*; do make DIR=$$PACKAGE phpstan-package; done
-phpstan-package:
+ifndef DIR
+	@for PACKAGE in packages/*; do make DIR=$$PACKAGE phpstan; done
+else
 	@echo "phpstan: $$DIR"
-	@cd $$DIR; phpstan analyse src --level 9 -a vendor/autoload.php || echo "operation failed, fix it and try it with: \"make DIR=$$DIR phpstan-package\""
+	@phpstan analyse $$DIR/src --level 9 -a $$DIR/vendor/autoload.php -c phpstan.neon || echo "operation failed, fix it and try it with: \"make DIR=$$DIR phpstan-package\""
+endif
 
 cs-fixer:
+ifndef DIR
+	php-cs-fixer fix --path-mode=intersection $$DIR
+else
 	@php-cs-fixer fix
-cs-fixer-package:
-	@echo "cs-fixer: $$DIR"
-	@php-cs-fixer fix --path-mode=intersection $$DIR || echo "operation failed, fix it and try it with: \"make DIR=$$DIR cs-fixer-package\""
+endif
