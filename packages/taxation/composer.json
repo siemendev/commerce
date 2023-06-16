@@ -17,12 +17,17 @@
     "require": {
         "php": ">=8.1",
         "siemendev/checkout": "dev-main",
+        "siemendev/checkout-products": "dev-main",
         "mpociot/vat-calculator": "3.x-dev"
     },
     "repositories": [
         {
             "type": "path",
             "url": "../checkout"
+        },
+        {
+            "type": "path",
+            "url": "../products"
         }
     ]
 }

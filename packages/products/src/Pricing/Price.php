@@ -13,11 +13,11 @@ class Price implements PriceInterface
     ) {
     }
 
-    public function createFromGrossPrice(int $grossPrice, float $vatRate, int $quantity = 1): static
+    public function createFromGrossPrice(int $grossPrice, float $vatRate, int $quantity = 1): self
     {
         $netPrice = (int) round($grossPrice / (100 + $vatRate) * 100);
 
-        return new static(
+        return new self(
             vatRate: $vatRate,
             unitPriceNet: $netPrice,
             unitPriceGross: $grossPrice,
@@ -26,11 +26,11 @@ class Price implements PriceInterface
         );
     }
 
-    public static function createFromNetPrice(int $netPrice, float $vatRate, int $quantity = 1): static
+    public static function createFromNetPrice(int $netPrice, float $vatRate, int $quantity = 1): self
     {
         $grossPrice = (int) round($netPrice + $netPrice / 100 * $vatRate);
 
-        return new static(
+        return new self(
             vatRate: $vatRate,
             unitPriceNet: $netPrice,
             unitPriceGross: $grossPrice,

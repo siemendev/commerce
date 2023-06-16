@@ -3,13 +3,17 @@
 namespace Siemendev\Checkout\Payment\Method;
 
 use Siemendev\Checkout\Data\CheckoutDataInterface;
+use Siemendev\Checkout\Payment\Payment\PaymentInterface;
 
 interface PaymentMethodsProviderInterface
 {
     /**
-     * @return array<string, PaymentMethodInterface> indexed by identifier
+     * @return array<string, PaymentMethodInterface<PaymentInterface>> indexed by identifier
      */
     public function getEligiblePaymentMethods(CheckoutDataInterface $data): array;
 
+    /**
+     * @return PaymentMethodInterface<PaymentInterface>
+     */
     public function getPaymentMethod(string $identifier): PaymentMethodInterface;
 }

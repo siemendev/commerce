@@ -3,10 +3,14 @@
 namespace Siemendev\Checkout\Products\Availability\Exception;
 
 use LogicException;
+use Siemendev\Checkout\Products\Availability\Provider\AvailabilityProviderInterface;
 use Siemendev\Checkout\Products\Product\ProductInterface;
 
 class AvailabilityProviderNotFoundException extends LogicException
 {
+    /**
+     * @param array<AvailabilityProviderInterface> $availableProviders
+     */
     public function __construct(
         public ProductInterface $product,
         public array $availableProviders,

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a51bd2ce3e5843eab4bef5becc95b292",
+    "content-hash": "b27fb6310e399a5e7ae7c98343f8294a",
     "packages": [
         {
             "name": "mpociot/vat-calculator",
@@ -114,6 +114,35 @@
             "transport-options": {
                 "relative": true
             }
+        },
+        {
+            "name": "siemendev/checkout-products",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "../products",
+                "reference": "c8245ecfe58ae58b2cb7ec8ca755f62d99a3bfa8"
+            },
+            "require": {
+                "php": ">=8.1",
+                "siemendev/checkout": "dev-main"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Siemendev\\Checkout\\Products\\": "src/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Patrick Siemen",
+                    "email": "post@patrick-siemen.de"
+                }
+            ],
+            "description": "checkout products implementation",
+            "transport-options": {
+                "relative": true
+            }
         }
     ],
     "packages-dev": [],
@@ -121,6 +150,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "siemendev/checkout": 20,
+        "siemendev/checkout-products": 20,
         "mpociot/vat-calculator": 20
     },
     "prefer-stable": false,

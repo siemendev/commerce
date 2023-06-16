@@ -8,7 +8,10 @@ use IteratorAggregate;
 use Siemendev\Checkout\Payment\Payment\PaymentInterface;
 use Traversable;
 
-
+/**
+ * @extends ArrayAccess<string, PaymentInterface>
+ * @extends IteratorAggregate<string, PaymentInterface>
+ */
 interface PaymentCollectionInterface extends Countable, IteratorAggregate, ArrayAccess
 {
     /**

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7e223921ec02437a259b41fd4f7e3eb7",
+    "content-hash": "be19a6fc6c306ad3b200926e5307ae35",
     "packages": [
         {
             "name": "siemendev/checkout",
@@ -68,6 +68,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "siemendev/checkout": 20,
         "siemendev/checkout-products": 20
     },
     "prefer-stable": false,

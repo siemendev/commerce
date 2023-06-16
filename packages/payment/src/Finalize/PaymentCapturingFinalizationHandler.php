@@ -11,6 +11,7 @@ use Siemendev\Checkout\Payment\Method\PaymentCaptureRollbackException;
 use Siemendev\Checkout\Payment\Method\PaymentMethodsProviderInterface;
 use Siemendev\Checkout\Payment\Method\PaymentNotCapturableException;
 use Siemendev\Checkout\Payment\Payment\PaymentInterface;
+use Siemendev\Checkout\Products\Data\QuotedCheckoutDataInterface;
 
 class PaymentCapturingFinalizationHandler implements CheckoutFinalizationHandlerInterface
 {
@@ -72,17 +73,17 @@ class PaymentCapturingFinalizationHandler implements CheckoutFinalizationHandler
                 ;
                 $leftTotal -= $captureAmount;
                 $capturedPayments[] = $payment;
-            } catch (PaymentNotCapturableException $e) {
+            } catch (PaymentNotCapturableException $paymentException) {
                 $rollbackExceptions = [];
                 foreach ($capturedPayments as $capturedPayment) {
                     try {
                         $this->rollbackPayment($capturedPayment, $data);
-                    } catch (PaymentCaptureRollbackException $e) {
-                        $rollbackExceptions[] = $e;
+                    } catch (PaymentCaptureRollbackException $rollbackException) {
+                        $rollbackExceptions[] = $rollbackException;
                     }
                 }
 
-                throw new PaymentNotCapturableCheckoutNotFinalizableException($e, $rollbackExceptions);
+                throw new PaymentNotCapturableCheckoutNotFinalizableException($paymentException, $rollbackExceptions);
             }
         }
     }
@@ -121,7 +122,7 @@ class PaymentCapturingFinalizationHandler implements CheckoutFinalizationHandler
     /**
      * @throws PaymentCaptureRollbackException
      */
-    private function rollbackPayment(PaymentInterface $payment, CheckoutDataInterface $data): void
+    private function rollbackPayment(PaymentInterface $payment, PaymentCheckoutDataInterface $data): void
     {
         $this->paymentMethodsProvider
             ->getPaymentMethod($payment->getPaymentMethodIdentifier())

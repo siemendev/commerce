@@ -16,6 +16,7 @@
     "minimum-stability": "dev",
     "require": {
         "php": ">=8.1",
+        "siemendev/checkout": "dev-main",
         "siemendev/checkout-products": "dev-main"
     },
     "repositories": [

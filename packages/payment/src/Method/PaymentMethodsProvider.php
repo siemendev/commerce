@@ -5,11 +5,12 @@ namespace Siemendev\Checkout\Payment\Method;
 use LogicException;
 use Siemendev\Checkout\Data\CheckoutDataInterface;
 use Siemendev\Checkout\Payment\Data\PaymentCheckoutDataInterface;
+use Siemendev\Checkout\Payment\Payment\PaymentInterface;
 
 class PaymentMethodsProvider implements PaymentMethodsProviderInterface
 {
     /**
-     * @param array<PaymentMethodInterface> $paymentMethods
+     * @param array<PaymentMethodInterface<PaymentInterface>> $paymentMethods
      */
     public function __construct(
         private array $paymentMethods = [],
@@ -17,13 +18,16 @@ class PaymentMethodsProvider implements PaymentMethodsProviderInterface
     }
 
     /**
-     * @param array<PaymentMethodInterface> $paymentMethods
+     * @param array<PaymentMethodInterface<PaymentInterface>> $paymentMethods
      */
     public function setPaymentMethods(array $paymentMethods): void
     {
         $this->paymentMethods = $paymentMethods;
     }
 
+    /**
+     * @param PaymentMethodInterface<PaymentInterface> $paymentMethod
+     */
     public function addPaymentMethod(PaymentMethodInterface $paymentMethod): static
     {
         $this->paymentMethods[] = $paymentMethod;

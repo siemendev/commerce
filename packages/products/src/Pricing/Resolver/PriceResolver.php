@@ -12,7 +12,7 @@ use Traversable;
 class PriceResolver implements PriceResolverInterface
 {
     /**
-     * @var array<PriceProviderInterface> $providers
+     * @param array<PriceProviderInterface> $providers
      */
     public function __construct(
         private array $providers = [],
@@ -27,7 +27,7 @@ class PriceResolver implements PriceResolverInterface
     }
 
     /**
-     * @var array<PriceProviderInterface> $providers
+     * @param array<PriceProviderInterface> $providers
      */
     public function setProviders(array $providers): static
     {
@@ -44,9 +44,6 @@ class PriceResolver implements PriceResolverInterface
             }
         }
 
-        throw new PriceProviderNotFoundException(
-            $product,
-            $this->providers instanceof Traversable ? iterator_to_array($this->providers) : $this->providers
-        );
+        throw new PriceProviderNotFoundException($product, $this->providers);
     }
 }
