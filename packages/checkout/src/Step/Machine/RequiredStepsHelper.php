@@ -48,10 +48,10 @@ class RequiredStepsHelper
         }
 
         // check if all required checkout data interfaces are implemented
-        foreach ($stepIdentifiers as $step) {
-            foreach ($this->availableSteps[$step]->requiresCheckoutData() as $checkoutDataInterface) {
+        foreach ($stepIdentifiers as $stepIdentifier) {
+            foreach ($this->availableSteps[$stepIdentifier]->requiresCheckoutData() as $checkoutDataInterface) {
                 if (!is_a($data, $checkoutDataInterface)) {
-                    throw new LogicException(sprintf('Step "%s" requires checkout data "%s" to implement "%s".', $step::stepIdentifier(), $data::class, $checkoutDataInterface));
+                    throw new LogicException(sprintf('Step "%s" requires checkout data "%s" to implement "%s".', $stepIdentifier, $data::class, $checkoutDataInterface));
                 }
             }
         }
