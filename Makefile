@@ -8,6 +8,16 @@ update:
 	cd packages; for PACKAGE in *; do cd $$PACKAGE; echo "composer update: $$PACKAGE"; composer update; cd ..; done
 	cd demo; for DEMO in *; do cd $$DEMO; composer update; cd ..; done
 
+clean:
+	rm demo/symfony/var/products/*.xml
+	rm -rf demo/symfony/var/orders/*
+
+fixtures:
+	cd demo/symfony; php bin/console commerce:product:add --id product-1 --no-interaction
+	cd demo/symfony; php bin/console commerce:product:add --id product-2 --no-interaction
+	cd demo/symfony; php bin/console commerce:product:add --id product-3 --no-interaction
+	cd demo/symfony; php bin/console commerce:product:add --id product-4 --no-interaction
+
 phpstan:
 ifndef DIR
 	@for PACKAGE in packages/*; do make DIR=$$PACKAGE phpstan; done
