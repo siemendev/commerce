@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Commerce\GiftCard;
 
@@ -20,14 +22,14 @@ class GiftCardRepository implements GiftCardRepositoryInterface
     {
         $this->objectExporter->export(
             (clone $payment)->setCapturedAmount($amount),
-            sprintf(self::PATH, $data->getIdentifier(), $payment->getIdentifier())
+            sprintf(self::PATH, $data->getIdentifier(), $payment->getIdentifier()),
         );
     }
 
     public function rollback(GiftCardPaymentInterface $payment, CheckoutDataInterface $data): void
     {
         $this->objectExporter->remove(
-            sprintf(self::PATH, $data->getIdentifier(), $payment->getIdentifier())
+            sprintf(self::PATH, $data->getIdentifier(), $payment->getIdentifier()),
         );
     }
 }

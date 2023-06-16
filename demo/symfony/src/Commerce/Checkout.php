@@ -85,7 +85,7 @@ class Checkout
      */
     private function getData(): CheckoutData
     {
-        /** @var CheckoutData $data */
+        /* @var CheckoutData $data */
         return $this->checkoutDataManager->getCheckoutData();
     }
 

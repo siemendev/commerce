@@ -1,12 +1,12 @@
 <?php
 
 return (new PhpCsFixer\Config())
-    ->setUsingCache(false)
     ->setFinder(
         (new PhpCsFixer\Finder())
             ->in(__DIR__ .'/packages/')
             ->in(__DIR__ .'/demo/')
             ->notPath('#/vendor/#')
+            ->notPath('#/var/#')
             ->name('*.php')
             ->ignoreDotFiles(true)
             ->ignoreVCS(true)

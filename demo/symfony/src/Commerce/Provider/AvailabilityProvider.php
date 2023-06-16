@@ -1,7 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Commerce\Provider;
-
 
 use Siemendev\Checkout\Products\Availability\Provider\AvailabilityProviderInterface;
 use Siemendev\Checkout\Products\Product\ProductInterface;

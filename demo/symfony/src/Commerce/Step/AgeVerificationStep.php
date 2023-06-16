@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Commerce\Step;
 
@@ -21,12 +23,7 @@ class AgeVerificationStep implements StepInterface
     public function validate(CheckoutDataInterface $data): void
     {
         if (!$data instanceof AgeVerifiableCheckoutDataInterface) {
-            throw new LogicException(sprintf(
-                '%s requires %s to implement %s',
-                $this::class,
-                $data::class,
-                AgeVerifiableCheckoutDataInterface::class,
-            ));
+            throw new LogicException(sprintf('%s requires %s to implement %s', $this::class, $data::class, AgeVerifiableCheckoutDataInterface::class));
         }
 
         if (!$data->isAgeVerified()) {

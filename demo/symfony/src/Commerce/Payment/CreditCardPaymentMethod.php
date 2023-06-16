@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Commerce\Payment;
 
@@ -42,7 +44,7 @@ class CreditCardPaymentMethod extends AbstractPaymentMethod
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      * @throws Exception
      */
     public function capture(PaymentInterface $payment, QuotedCheckoutDataInterface $data, int $amount): void

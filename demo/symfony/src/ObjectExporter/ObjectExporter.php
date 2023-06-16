@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\ObjectExporter;
 
@@ -36,7 +38,7 @@ class ObjectExporter
                 [
                     'xml_root_node_name' => (new ReflectionClass($object))->getShortName(),
                     'xml_format_output' => true,
-                ]
+                ],
             ),
         );
     }

@@ -1,10 +1,11 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Commerce\Step;
 
 use Siemendev\Checkout\Data\CheckoutDataInterface;
 use Siemendev\Checkout\Products\Availability\Exception\AvailabilityProviderNotFoundException;
-use Siemendev\Checkout\Products\Data\ProductCheckoutDataInterface;
 use Siemendev\Checkout\Products\Step\CartStep as ProductsCartStep;
 use Siemendev\Checkout\Step\StepInterface;
 
@@ -34,7 +35,7 @@ class CartStep implements StepInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      * @throws AvailabilityProviderNotFoundException
      */
     public function validate(CheckoutDataInterface $data): void
