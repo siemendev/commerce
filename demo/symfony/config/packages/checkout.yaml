@@ -1,5 +1,5 @@
 checkout:
-  data_creator: App\Commerce\Data\DataCreator
+  data_creator: App\Commerce\Data\CheckoutDataCreator
   steps:
     - App\Commerce\Step\CartStep
     - checkout.steps.billing_address

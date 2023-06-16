@@ -11,7 +11,7 @@ use Siemendev\Checkout\SymfonyBridge\Data\CheckoutDataCreatorInterface;
 /**
  * @implements CheckoutDataCreatorInterface<CheckoutData>
  */
-class DataCreator implements CheckoutDataCreatorInterface
+class CheckoutDataCreator implements CheckoutDataCreatorInterface
 {
     public function createEmptyCheckoutData(): CheckoutDataInterface
     {
