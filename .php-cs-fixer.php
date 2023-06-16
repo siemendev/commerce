@@ -4,6 +4,8 @@ return (new PhpCsFixer\Config())
     ->setUsingCache(false)
     ->setFinder(
         (new PhpCsFixer\Finder())
+            ->in(__DIR__ .'/packages/')
+            ->notPath('#/vendor/#')
             ->name('*.php')
             ->ignoreDotFiles(true)
             ->ignoreVCS(true)
