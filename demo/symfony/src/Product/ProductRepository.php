@@ -26,6 +26,7 @@ class ProductRepository
 
     /**
      * @return array<Product>
+     * @throws ProductNotFoundException
      */
     public function loadAll(): array
     {
@@ -61,6 +62,9 @@ class ProductRepository
         return $ids;
     }
 
+    /**
+     * @throws ProductNotFoundException
+     */
     public function load(string $id): Product
     {
         $this->ensureProductsDirectory();
@@ -68,13 +72,13 @@ class ProductRepository
         $file = $this->getFilename($id);
 
         if (!file_exists($file)) {
-            throw new RuntimeException('Product not found');
+            throw new ProductNotFoundException($id);
         }
 
         $product = $this->serializer->deserialize(file_get_contents($file), Product::class, 'xml');
 
         if (!$product instanceof Product) {
-            throw new RuntimeException('Product not deserializable');
+            throw new ProductNotFoundException($id);
         }
 
         return $product;
@@ -84,7 +88,17 @@ class ProductRepository
     {
         $this->ensureProductsDirectory();
 
-        file_put_contents($this->getFilename($product->id), $this->serializer->serialize($product, 'xml', ['xml_root_node_name' => 'product']));
+        file_put_contents(
+            $this->getFilename($product->id),
+            $this->serializer->serialize(
+                $product,
+                'xml',
+                [
+                    'xml_root_node_name' => 'product',
+                    'xml_format_output' => true,
+                ]
+            )
+        );
     }
 
     public function delete(string $id): void
