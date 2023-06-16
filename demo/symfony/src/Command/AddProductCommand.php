@@ -34,6 +34,7 @@ class AddProductCommand extends Command
             ->addOption('description', null, InputOption::VALUE_REQUIRED, 'The description of the product')
             ->addOption('price', 'p', InputOption::VALUE_REQUIRED, 'The price of the product')
             ->addOption('vat', null, InputOption::VALUE_REQUIRED, 'The vat type of the product (high, low, or low1)')
+            ->addOption('stock', null, InputOption::VALUE_REQUIRED, 'The stock amount of the product (positive integer)')
         ;
     }
 
@@ -47,6 +48,7 @@ class AddProductCommand extends Command
         $product->name = $input->getOption('name') ?: 'Product ' . $product->id;
         $product->description = $input->getOption('description') ?: 'Product ' . $product->id . ' description';
         $product->vatType = $input->getOption('vat') ?: VatTypedItemInterface::VAT_TYPE_DEFAULT;
+        $product->stock = $input->getOption('stock') ? (int) $input->getOption('stock') : rand(10,100);
 
         $inputPrice = $input->getOption('price');
         if (is_numeric($inputPrice)) {

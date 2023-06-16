@@ -15,4 +15,6 @@ class Product
     public int $price;
 
     public string $vatType;
+
+    public int $stock;
 }

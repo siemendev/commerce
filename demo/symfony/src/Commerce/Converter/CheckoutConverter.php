@@ -4,10 +4,14 @@ declare(strict_types=1);
 
 namespace App\Commerce\Converter;
 
+use App\Commerce\Data\CheckoutData;
 use App\ObjectExporter\ObjectExporter;
+use App\Product\ProductNotFoundException;
+use App\Product\ProductRepository;
 use Siemendev\Checkout\Data\CheckoutDataInterface;
 use Siemendev\Checkout\Finalize\CheckoutFinalizationHandlerInterface;
 use Siemendev\Checkout\Finalize\CheckoutFinalizerInterface;
+use Siemendev\Checkout\Products\Product\ProductInterface;
 
 /**
  * Demo of a checkout persistence handler that saves the checkout data to a file.
@@ -20,6 +24,7 @@ class CheckoutConverter implements CheckoutFinalizationHandlerInterface
 
     public function __construct(
         private readonly ObjectExporter $objectExporter,
+        private readonly ProductRepository $productRepository,
     ) {
     }
 
@@ -28,13 +33,38 @@ class CheckoutConverter implements CheckoutFinalizationHandlerInterface
         return CheckoutFinalizerInterface::FINALIZATION_STEP_CONVERSION;
     }
 
+    /**
+     * @param CheckoutData $data
+     */
     public function finalize(CheckoutDataInterface $data): void
     {
         $this->objectExporter->export($data, sprintf(self::PATH, $data->getIdentifier()));
+
+        foreach ($data->getProducts() as $checkoutProduct) {
+            /** @var ProductInterface $checkoutProduct */
+            try {
+                $product = $this->productRepository->load($checkoutProduct->getIdentifier());
+            } catch (ProductNotFoundException) {
+                continue;
+            }
+            $product->stock -= $checkoutProduct->getQuantity();
+            $this->productRepository->save($product);
+        }
     }
 
     public function rollback(CheckoutDataInterface $data): void
     {
         $this->objectExporter->remove(sprintf(self::PATH, $data->getIdentifier()));
+
+        foreach ($data->getProducts() as $checkoutProduct) {
+            /** @var ProductInterface $checkoutProduct */
+            try {
+                $product = $this->productRepository->load($checkoutProduct->getIdentifier());
+            } catch (ProductNotFoundException) {
+                continue;
+            }
+            $product->stock += $checkoutProduct->getQuantity();
+            $this->productRepository->save($product);
+        }
     }
 }
