@@ -6,8 +6,8 @@ namespace App\Commerce\Converter;
 
 use App\Commerce\Data\CheckoutData;
 use App\ObjectExporter\ObjectExporter;
-use App\Product\ProductNotFoundException;
 use App\Product\ProductRepository;
+use App\Repository\ObjectNotFoundException;
 use Siemendev\Checkout\Data\CheckoutDataInterface;
 use Siemendev\Checkout\Finalize\CheckoutFinalizationHandlerInterface;
 use Siemendev\Checkout\Finalize\CheckoutFinalizerInterface;
@@ -44,7 +44,7 @@ class CheckoutConverter implements CheckoutFinalizationHandlerInterface
             /** @var ProductInterface $checkoutProduct */
             try {
                 $product = $this->productRepository->load($checkoutProduct->getIdentifier());
-            } catch (ProductNotFoundException) {
+            } catch (ObjectNotFoundException) {
                 continue;
             }
             $product->stock -= $checkoutProduct->getQuantity();
@@ -60,7 +60,7 @@ class CheckoutConverter implements CheckoutFinalizationHandlerInterface
             /** @var ProductInterface $checkoutProduct */
             try {
                 $product = $this->productRepository->load($checkoutProduct->getIdentifier());
-            } catch (ProductNotFoundException) {
+            } catch (ObjectNotFoundException) {
                 continue;
             }
             $product->stock += $checkoutProduct->getQuantity();
