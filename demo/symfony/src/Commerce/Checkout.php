@@ -11,6 +11,7 @@ use Siemendev\Checkout\Delivery\Option\Resolver\DeliveryOptionsResolverInterface
 use Siemendev\Checkout\Finalize\CheckoutFinalizationExceptionWrapper;
 use Siemendev\Checkout\Finalize\CheckoutFinalizerInterface;
 use Siemendev\Checkout\Finalize\UnknownFinalizationStepException;
+use Siemendev\Checkout\Payment\Method\PaymentCaptureRollbackException;
 use Siemendev\Checkout\Payment\Method\PaymentMethodInterface;
 use Siemendev\Checkout\Payment\Method\PaymentMethodsProviderInterface;
 use Siemendev\Checkout\Payment\Payment\PaymentInterface;
@@ -191,10 +192,18 @@ class Checkout
         return $this->paymentMethodProvider->getEligiblePaymentMethods($this->getData());
     }
 
+    /**
+     * @throws PaymentCaptureRollbackException
+     */
     public function removePayment(string $paymentIdentifier): void
     {
-        $this->getData()->getPayments()->remove(
-            $this->getData()->getPayments()->get($paymentIdentifier),
-        );
+        $payment = $this->getData()->getPayments()->get($paymentIdentifier);
+        $paymentMethod = $this->paymentMethodProvider->getPaymentMethod($payment->getPaymentMethodIdentifier());
+
+        if ($payment->isCaptured()) {
+            $paymentMethod->rollbackCapture($payment, $this->getData());
+        }
+
+        $this->getData()->getPayments()->remove($payment);
     }
 }
