@@ -44,7 +44,7 @@ class FinalizeController extends AbstractCheckoutController
             return $this->redirectToCurrentStep();
         }
 
-        if ($checkout->isFinalized()) {
+        if ($checkout->getCheckoutData()->isFinalized()) {
             $checkout->clear();
         }
 

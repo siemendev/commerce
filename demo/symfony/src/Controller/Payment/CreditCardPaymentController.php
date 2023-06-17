@@ -23,8 +23,8 @@ class CreditCardPaymentController extends AbstractCheckoutController
         $data = $checkout->getCheckoutData();
 
         $payment = (new CreditCardPayment())
-            ->setCapturedAmount($data->getOpenTotal())
-            ->setCurrency($data->getCurrency())
+            ->setCapturedAmount($checkout->getCheckoutData()->getOpenTotal())
+            ->setCurrency($checkout->getCheckoutData()->getCurrency())
             ->setCardNumber($request->request->get('card_number'))
             ->setCardHolder($request->request->get('card_holder'))
             ->setCardExpiryMonth((int) $request->request->get('card_expire_month'))

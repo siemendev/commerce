@@ -44,7 +44,7 @@ class DeliveryController extends AbstractCheckoutController
 
         return $this->render('commerce/steps/delivery.html.twig', [
             'deliveryOptions' => $availableOptions,
-            'selectedDeliveryOption' => $checkout->getDeliveryOption(),
+            'selectedDeliveryOption' => $checkout->getCheckoutData()->getDeliveryOption(),
             'error' => $error,
             'steps' => $this->getStepsData(),
             'data' => $checkout->getCheckoutData(),

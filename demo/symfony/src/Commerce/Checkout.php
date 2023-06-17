@@ -80,9 +80,6 @@ class Checkout
         return $this;
     }
 
-    /**
-     * @internal This method should only be used in private scope. Use getCheckoutData() to get (immutable) data.
-     */
     private function getData(): CheckoutData
     {
         /* @var CheckoutData $data */
@@ -113,11 +110,6 @@ class Checkout
         $this->getData()->setAgeVerified($ageVerification);
 
         return $this;
-    }
-
-    public function isAgeVerified(): bool
-    {
-        return $this->getData()->isAgeVerified();
     }
 
     public function addPayment(PaymentInterface $payment): self
@@ -176,11 +168,6 @@ class Checkout
         return $this->stepMachine->isValid($this->getData());
     }
 
-    public function isFinalized(): bool
-    {
-        return $this->getData()->isFinalized();
-    }
-
     /**
      * @return array<DeliveryOptionInterface>
      */
@@ -194,11 +181,6 @@ class Checkout
         $this->getData()->setDeliveryOption($deliveryOption);
 
         return $this;
-    }
-
-    public function getDeliveryOption(): ?DeliveryOptionInterface
-    {
-        return $this->getData()->getDeliveryOption();
     }
 
     /**
