@@ -28,11 +28,19 @@ class CheckoutDataImmutable extends AbstractCheckoutDataImmutable implements Che
 
     private string $hash;
 
+    private string $identifier;
+
+    public function getIdentifier(): string
+    {
+        return $this->identifier;
+    }
+
     public static function createFromCheckoutData(CheckoutData $mutableData): self
     {
         $data = new self();
 
         $data->hash = $mutableData->getHash();
+        $data->identifier = $mutableData->getIdentifier();
 
         $data->currency = $mutableData->getCurrency();
         $data->finalized = $mutableData->isFinalized();
