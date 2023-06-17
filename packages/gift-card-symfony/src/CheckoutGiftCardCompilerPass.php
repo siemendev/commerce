@@ -6,7 +6,7 @@ namespace Siemendev\Checkout\GiftCard\SymfonyBridge;
 
 use LogicException;
 use Siemendev\Checkout\GiftCard\Checker\GiftCardCheckerInterface;
-use Siemendev\Checkout\GiftCard\Capture\GiftCardCapturingManagerInterface;
+use Siemendev\Checkout\GiftCard\Payment\GiftCardPaymentManagerInterface;
 use Siemendev\SymfonyPackageHelper\CompilerPassHelper;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -17,16 +17,16 @@ class CheckoutGiftCardCompilerPass implements CompilerPassInterface
     {
         $config = $container->getParameter(CheckoutGiftCardBundle::PARAMETER_CONFIG);
 
-        if (!is_array($config) || !$config['capturing_manager'] || !$container->has($config['capturing_manager'])) {
-            throw new LogicException('No capturing manager configured for gift card payment method. Please configure the capturing manager in the config as "checkout_gift_card.capturing_manager = *service-id*".');
+        if (!is_array($config) || !$config['payment_manager'] || !$container->has($config['payment_manager'])) {
+            throw new LogicException('No payment manager configured for gift card payment method. Please configure the payment manager in the config as "checkout_gift_card.payment_manager = *service-id*".');
         }
 
         (new CompilerPassHelper($container))
             ->addChildServiceToParent(
                 CheckoutGiftCardBundle::SERVICE_GIFT_CARD_PAYMENT_METHOD,
-                $config['capturing_manager'],
-                'setCapturingManager',
-                GiftCardCapturingManagerInterface::class,
+                $config['payment_manager'],
+                'setPaymentManager',
+                GiftCardPaymentManagerInterface::class,
             )
             ->addTaggedServicesToParent(
                 CheckoutGiftCardBundle::SERVICE_GIFT_CARD_PAYMENT_METHOD,

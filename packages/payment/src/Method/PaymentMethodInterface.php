@@ -43,4 +43,14 @@ interface PaymentMethodInterface
      * @throws PaymentCaptureRollbackException
      */
     public function rollbackCapture(PaymentInterface $payment, QuotedCheckoutDataInterface $data): void;
+
+    /**
+     * Payment authorization roll-back
+     * Sometimes we need to roll back the authorization of a payment (e.g. when the customer wants to change payment
+     * method after the payment has already been authorized). This method is called to roll back the authorization.
+     *
+     * @param T $payment
+     * @throws PaymentAuthorizationRollbackException
+     */
+    public function rollbackAuthorization(PaymentInterface $payment, QuotedCheckoutDataInterface $data): void;
 }

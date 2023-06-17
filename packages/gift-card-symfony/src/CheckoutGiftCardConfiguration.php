@@ -14,7 +14,7 @@ class CheckoutGiftCardConfiguration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder('checkout_gift_card');
         if ($treeBuilder->getRootNode() instanceof ArrayNodeDefinition) {
-            $treeBuilder->getRootNode()->children()->scalarNode('capturing_manager');
+            $treeBuilder->getRootNode()->children()->scalarNode('payment_manager');
         }
 
         return $treeBuilder;

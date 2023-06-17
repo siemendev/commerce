@@ -9,11 +9,11 @@ use App\ObjectExporter\ObjectExporter;
 use App\Repository\ObjectNotFoundException;
 use Siemendev\Checkout\Data\CheckoutDataInterface;
 use Siemendev\Checkout\GiftCard\Payment\GiftCardPaymentInterface;
-use Siemendev\Checkout\GiftCard\Capture\GiftCardCapturingManagerInterface;
+use Siemendev\Checkout\GiftCard\Payment\GiftCardPaymentManagerInterface;
 use Siemendev\Checkout\Payment\Method\PaymentCaptureRollbackException;
 use Siemendev\Checkout\Payment\Method\PaymentNotCapturableException;
 
-class GiftCardCapturingManager implements GiftCardCapturingManagerInterface
+class GiftCardPaymentManager implements GiftCardPaymentManagerInterface
 {
     private const PATH = 'orders/%s/payments/%s.xml';
 
@@ -44,7 +44,7 @@ class GiftCardCapturingManager implements GiftCardCapturingManagerInterface
         );
     }
 
-    public function rollback(GiftCardPaymentInterface $payment, CheckoutDataInterface $data): void
+    public function rollbackRedeem(GiftCardPaymentInterface $payment, CheckoutDataInterface $data): void
     {
         try {
             $giftCard = $this->giftCardRepository->load($payment->getGiftCardCode());
@@ -57,5 +57,10 @@ class GiftCardCapturingManager implements GiftCardCapturingManagerInterface
         $this->objectExporter->remove(
             sprintf(self::PATH, $data->getIdentifier(), $payment->getIdentifier()),
         );
+    }
+
+    public function rollbackReservation(GiftCardPaymentInterface $payment, CheckoutDataInterface $data): void
+    {
+        // do nothing because we do not reserve gift card balance
     }
 }

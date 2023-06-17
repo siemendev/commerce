@@ -11,6 +11,7 @@ use Siemendev\Checkout\Delivery\Option\Resolver\DeliveryOptionsResolverInterface
 use Siemendev\Checkout\Finalize\CheckoutFinalizationExceptionWrapper;
 use Siemendev\Checkout\Finalize\CheckoutFinalizerInterface;
 use Siemendev\Checkout\Finalize\UnknownFinalizationStepException;
+use Siemendev\Checkout\Payment\Method\PaymentAuthorizationRollbackException;
 use Siemendev\Checkout\Payment\Method\PaymentCaptureRollbackException;
 use Siemendev\Checkout\Payment\Method\PaymentMethodInterface;
 use Siemendev\Checkout\Payment\Method\PaymentMethodsProviderInterface;
@@ -193,7 +194,11 @@ class Checkout
     }
 
     /**
+     * Removes a payment from the checkout.
+     * Attention: If an exception is thrown, the payment is not removed (no rollback => no money back).
+     *
      * @throws PaymentCaptureRollbackException
+     * @throws PaymentAuthorizationRollbackException
      */
     public function removePayment(string $paymentIdentifier): void
     {
@@ -202,6 +207,9 @@ class Checkout
 
         if ($payment->isCaptured()) {
             $paymentMethod->rollbackCapture($payment, $this->getData());
+        }
+        if ($payment->isAuthorized()) {
+            $paymentMethod->rollbackAuthorization($payment, $this->getData());
         }
 
         $this->getData()->getPayments()->remove($payment);

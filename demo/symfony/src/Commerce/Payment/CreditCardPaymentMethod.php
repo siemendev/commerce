@@ -7,6 +7,7 @@ namespace App\Commerce\Payment;
 use App\ObjectExporter\ObjectExporter;
 use Exception;
 use Siemendev\Checkout\Payment\Method\AbstractPaymentMethod;
+use Siemendev\Checkout\Payment\Method\PaymentAuthorizationRollbackException;
 use Siemendev\Checkout\Payment\Method\PaymentCaptureRollbackException;
 use Siemendev\Checkout\Payment\Method\PaymentMethodInterface;
 use Siemendev\Checkout\Payment\Method\PaymentMethodNotEligibleException;
@@ -67,9 +68,20 @@ class CreditCardPaymentMethod extends AbstractPaymentMethod
 
         // to test our implementation, we invite the chaos monkey to simulate a failure occasionally:
         if (random_int(0, 100) < self::CHAOS_MONKEY_FAILURE_RATE) {
-            throw new PaymentCaptureRollbackException('Credit card payment could not be rolled back. The chaos monkey strikes again!');
+            throw new PaymentCaptureRollbackException('Credit card payment capture could not be rolled back. The chaos monkey strikes again!');
         }
 
         $this->objectExporter->remove(sprintf('orders/%s/payments/%s.xml', $data->getIdentifier(), $payment->getIdentifier()));
+    }
+
+    public function rollbackAuthorization(PaymentInterface $payment, QuotedCheckoutDataInterface $data): void
+    {
+        // Call the api of your payment gateway here to roll back the authorized payment.
+        // Throw a PaymentAuthorizationRollbackException if the payment authorization could not be rolled back.
+
+        // to test our implementation, we invite the chaos monkey to simulate a failure occasionally:
+        if (random_int(0, 100) < self::CHAOS_MONKEY_FAILURE_RATE) {
+            throw new PaymentAuthorizationRollbackException('Credit card payment authorization could not be rolled back. The chaos monkey strikes again!');
+        }
     }
 }
