@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Repository;
 
@@ -104,8 +106,8 @@ abstract class AbstractRepository
                 [
                     'xml_root_node_name' => strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', (new ReflectionClass($this::getClass()))->getShortName())),
                     'xml_format_output' => true,
-                ]
-            )
+                ],
+            ),
         );
     }
 

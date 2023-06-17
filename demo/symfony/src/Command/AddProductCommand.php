@@ -48,7 +48,7 @@ class AddProductCommand extends Command
         $product->name = $input->getOption('name') ?: 'Product ' . $product->id;
         $product->description = $input->getOption('description') ?: 'Product ' . $product->id . ' description';
         $product->vatType = $input->getOption('vat') ?: VatTypedItemInterface::VAT_TYPE_DEFAULT;
-        $product->stock = $input->getOption('stock') ? (int) $input->getOption('stock') : rand(10,100);
+        $product->stock = $input->getOption('stock') ? (int) $input->getOption('stock') : rand(10, 100);
 
         $inputPrice = $input->getOption('price');
         if (is_numeric($inputPrice)) {
@@ -56,7 +56,7 @@ class AddProductCommand extends Command
         } else {
             // looks complicated, but it's just a random price between 500 and 10000 in steps of 500 that gets
             // either 1, 2, 5 or 10 (randomly selected) subtracted to look like a more realistic price
-            $product->price = rand(1, 20) * 500 - [1,2,5,10][rand(0, 3)];
+            $product->price = rand(1, 20) * 500 - [1, 2, 5, 10][rand(0, 3)];
         }
 
         $state = 'added';

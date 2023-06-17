@@ -41,7 +41,7 @@ class CheckoutConverter implements CheckoutFinalizationHandlerInterface
         $this->objectExporter->export($data, sprintf(self::PATH, $data->getIdentifier()));
 
         foreach ($data->getProducts() as $checkoutProduct) {
-            /** @var ProductInterface $checkoutProduct */
+            /* @var ProductInterface $checkoutProduct */
             try {
                 $product = $this->productRepository->load($checkoutProduct->getIdentifier());
             } catch (ObjectNotFoundException) {
@@ -57,7 +57,7 @@ class CheckoutConverter implements CheckoutFinalizationHandlerInterface
         $this->objectExporter->remove(sprintf(self::PATH, $data->getIdentifier()));
 
         foreach ($data->getProducts() as $checkoutProduct) {
-            /** @var ProductInterface $checkoutProduct */
+            /* @var ProductInterface $checkoutProduct */
             try {
                 $product = $this->productRepository->load($checkoutProduct->getIdentifier());
             } catch (ObjectNotFoundException) {

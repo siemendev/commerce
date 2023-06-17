@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Controller\Payment;
 
@@ -58,7 +60,7 @@ class GiftCardPaymentController extends AbstractCheckoutController
                     ->setGiftCardCode($code)
                     ->setAuthorizedAmount($giftCard->balance)
                     ->setAuthorized(true)
-                    ->setCurrency($giftCard->currency)
+                    ->setCurrency($giftCard->currency),
             )
             // when you add a payment that needs re-authorization, you should lock the data here with $checkout->lock()
             // we do not lock the data, since the gift card needs no re-authorization on a changed cart or pricing
