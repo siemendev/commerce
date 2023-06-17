@@ -6,18 +6,24 @@ namespace Siemendev\Checkout\GiftCard\Repository;
 
 use Siemendev\Checkout\Data\CheckoutDataInterface;
 use Siemendev\Checkout\GiftCard\Payment\GiftCardPaymentInterface;
+use Siemendev\Checkout\Payment\Method\PaymentCaptureRollbackException;
+use Siemendev\Checkout\Payment\Method\PaymentNotCapturableException;
 
 interface GiftCardRepositoryInterface
 {
     /**
      * Redeem gift card
      * Redeems a gift card payment (e.g. decrease gift card value in database or via an api).
+     *
+     * @throws PaymentNotCapturableException
      */
     public function redeem(GiftCardPaymentInterface $payment, CheckoutDataInterface $data, int $amount): void;
 
     /**
      * Roll back gift card payment
      * Rolls back a gift card payment (e.g. reset gift card value in database or via an api).
+     *
+     * @throws PaymentCaptureRollbackException
      */
     public function rollback(GiftCardPaymentInterface $payment, CheckoutDataInterface $data): void;
 }
