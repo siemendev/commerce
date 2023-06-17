@@ -1,0 +1,6 @@
+<h3>Add gift card</h3>
+<form method="post" action="{{ path('checkout.payment.gift-card') }}" style="max-width:500px;width:100%">
+    <label for="gift-card-code">Enter your gift card code:</label>
+    <input type="tel" id="gift-card-code" name="gift-card-code" inputmode="numeric" pattern="[0-9\s]+" style="width:100%">
+    <button type="submit">Add gift card</button>
+</form>

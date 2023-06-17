@@ -9,6 +9,20 @@ use Siemendev\Checkout\Payment\Payment\AbstractPayment;
 
 class GiftCardPayment extends AbstractPayment implements GiftCardPaymentInterface
 {
+    private string $giftCardCode;
+
+    public function getGiftCardCode(): string
+    {
+        return $this->giftCardCode;
+    }
+
+    public function setGiftCardCode(string $giftCardCode): self
+    {
+        $this->giftCardCode = $giftCardCode;
+
+        return $this;
+    }
+
     public function getPaymentMethodIdentifier(): string
     {
         return GiftCardPaymentMethodInterface::IDENTIFIER;

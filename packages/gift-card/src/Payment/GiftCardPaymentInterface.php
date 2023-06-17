@@ -8,4 +8,5 @@ use Siemendev\Checkout\Payment\Payment\PaymentInterface;
 
 interface GiftCardPaymentInterface extends PaymentInterface
 {
+    public function getGiftCardCode(): string;
 }
