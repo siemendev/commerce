@@ -12,6 +12,7 @@ class CheckoutDataManager
 {
     public const SESSION_KEY = 'checkout_data';
 
+    /** @var CheckoutDataCreatorInterface<CheckoutDataInterface> */
     private CheckoutDataCreatorInterface $checkoutDataCreator;
 
     public function __construct(
@@ -19,6 +20,9 @@ class CheckoutDataManager
     ) {
     }
 
+    /**
+     * @param CheckoutDataCreatorInterface<CheckoutDataInterface> $checkoutDataCreator
+     */
     public function setDataCreator(CheckoutDataCreatorInterface $checkoutDataCreator): static
     {
         $this->checkoutDataCreator = $checkoutDataCreator;
