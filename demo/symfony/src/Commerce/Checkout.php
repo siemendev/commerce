@@ -190,4 +190,11 @@ class Checkout
     {
         return $this->paymentMethodProvider->getEligiblePaymentMethods($this->getData());
     }
+
+    public function removePayment(string $paymentIdentifier): void
+    {
+        $this->getData()->getPayments()->remove(
+            $this->getData()->getPayments()->get($paymentIdentifier),
+        );
+    }
 }

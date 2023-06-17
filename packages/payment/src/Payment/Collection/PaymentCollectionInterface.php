@@ -6,6 +6,7 @@ namespace Siemendev\Checkout\Payment\Payment\Collection;
 
 use ArrayAccess;
 use Countable;
+use InvalidArgumentException;
 use IteratorAggregate;
 use Siemendev\Checkout\Payment\Payment\PaymentInterface;
 use Traversable;
@@ -29,6 +30,11 @@ interface PaymentCollectionInterface extends Countable, IteratorAggregate, Array
      * @param array<PaymentInterface> $payments
      */
     public function set(array $payments): static;
+
+    /**
+     * @throws InvalidArgumentException
+     */
+    public function get(string $identifier): PaymentInterface;
 
     public function remove(PaymentInterface $payment): static;
 

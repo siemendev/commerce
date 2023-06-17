@@ -5,6 +5,7 @@
             <th style="border-bottom: 1px solid black">Payment method</th>
             <th style="border-bottom: 1px solid black" title="Some payment methods capture the payment directly instead of just authorizing it.">Captured</th>
             <th style="border-bottom: 1px solid black">Authorized</th>
+            <th style="border-bottom: 1px solid black"></th>
         </tr>
         {% set payments = data.payments.authorizedPayments %}
         {% for payment in payments %}
@@ -12,11 +13,17 @@
                 <td>{{ payment.paymentMethodIdentifier }}</td>
                 <td>{% if payment.captured %}{{ payment.capturedAmount }}{% else %}not yet{% endif %}</td>
                 <td>{{ (payment.authorizedAmount / 100)|format_currency(payment.currency) }}</td>
+                <td>
+                    {% if not payment.captured %}
+                        <a href="{{ path('checkout.payment.remove', { 'payment_identifier': payment.identifier }) }}">Remove</a>
+                    {% endif %}
+                </td>
             </tr>
         {% endfor %}
         <tr>
             <td style="border-top: 3px double black; font-weight: bold" colspan="2">Total:</td>
             <td style="border-top: 3px double black; font-weight: bold">{{ (data.payments.getAuthorizedTotal(data.currency) / 100)|format_currency(data.currency) }}</td>
+            <td style="border-top: 3px double black"></td>
         </tr>
     </table>
 {% else %}

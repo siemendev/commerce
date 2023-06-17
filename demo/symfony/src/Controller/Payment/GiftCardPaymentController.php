@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace App\Controller\Payment;
 
 use App\Commerce\Checkout;
-use App\Controller\AbstractCheckoutController;
 use App\GiftCard\GiftCardRepository;
 use App\Repository\ObjectNotFoundException;
 use Siemendev\Checkout\GiftCard\Payment\GiftCardPayment;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/payment/gift-card', name: 'checkout.payment.gift-card')]
-class GiftCardPaymentController extends AbstractCheckoutController
+class GiftCardPaymentController extends AbstractController
 {
     private const PAYMENT_IDENTIFIER_FORMAT = 'gift-card_%s';
 
@@ -67,6 +67,6 @@ class GiftCardPaymentController extends AbstractCheckoutController
             ->save()
         ;
 
-        return $this->redirectToCurrentStep();
+        return $this->redirectToRoute('checkout_payment');
     }
 }

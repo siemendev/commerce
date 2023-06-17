@@ -10,4 +10,9 @@
             {% include 'commerce/payment/' ~ paymentMethod.identifier ~ '.html.twig' with { 'openTotal': openTotal } only %}
         {% endfor %}
     {% endif %}
+    {% if openTotal <= 0 %}
+        <p style="margin-top:15px">
+            <a href="{{ path('checkout_summary') }}">Continue</a>
+        </p>
+    {% endif %}
 {% endblock %}

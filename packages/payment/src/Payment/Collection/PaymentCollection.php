@@ -77,6 +77,15 @@ class PaymentCollection implements PaymentCollectionInterface
         return $this;
     }
 
+    public function get(string $identifier): PaymentInterface
+    {
+        if (!isset($this->payments[$identifier])) {
+            throw new InvalidArgumentException('Payment with identifier "' . $identifier . '" not found.');
+        }
+
+        return $this->payments[$identifier];
+    }
+
     public function set(array $payments): static
     {
         $this->payments = [];
