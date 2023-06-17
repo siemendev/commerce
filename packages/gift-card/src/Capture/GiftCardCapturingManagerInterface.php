@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Siemendev\Checkout\GiftCard\Repository;
+namespace Siemendev\Checkout\GiftCard\Capture;
 
 use Siemendev\Checkout\Data\CheckoutDataInterface;
 use Siemendev\Checkout\GiftCard\Payment\GiftCardPaymentInterface;
 use Siemendev\Checkout\Payment\Method\PaymentCaptureRollbackException;
 use Siemendev\Checkout\Payment\Method\PaymentNotCapturableException;
 
-interface GiftCardRepositoryInterface
+interface GiftCardCapturingManagerInterface
 {
     /**
      * Redeem gift card

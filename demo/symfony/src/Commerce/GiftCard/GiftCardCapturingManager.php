@@ -4,20 +4,21 @@ declare(strict_types=1);
 
 namespace App\Commerce\GiftCard;
 
+use App\GiftCard\GiftCardRepository;
 use App\ObjectExporter\ObjectExporter;
 use App\Repository\ObjectNotFoundException;
 use Siemendev\Checkout\Data\CheckoutDataInterface;
 use Siemendev\Checkout\GiftCard\Payment\GiftCardPaymentInterface;
-use Siemendev\Checkout\GiftCard\Repository\GiftCardRepositoryInterface;
+use Siemendev\Checkout\GiftCard\Capture\GiftCardCapturingManagerInterface;
 use Siemendev\Checkout\Payment\Method\PaymentCaptureRollbackException;
 use Siemendev\Checkout\Payment\Method\PaymentNotCapturableException;
 
-class GiftCardRepository implements GiftCardRepositoryInterface
+class GiftCardCapturingManager implements GiftCardCapturingManagerInterface
 {
     private const PATH = 'orders/%s/payments/%s.xml';
 
     public function __construct(
-        private readonly \App\GiftCard\GiftCardRepository $giftCardRepository,
+        private readonly GiftCardRepository $giftCardRepository,
         private readonly ObjectExporter $objectExporter,
     ) {
     }

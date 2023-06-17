@@ -6,7 +6,7 @@ namespace Siemendev\Checkout\GiftCard\PaymentMethod;
 
 use Siemendev\Checkout\GiftCard\Checker\GiftCardCheckerInterface;
 use Siemendev\Checkout\GiftCard\Payment\GiftCardPaymentInterface;
-use Siemendev\Checkout\GiftCard\Repository\GiftCardRepositoryInterface;
+use Siemendev\Checkout\GiftCard\Capture\GiftCardCapturingManagerInterface;
 use Siemendev\Checkout\Payment\Method\AbstractPaymentMethod;
 use Siemendev\Checkout\Payment\Method\PaymentCaptureRollbackException;
 use Siemendev\Checkout\Payment\Method\PaymentNotCapturableException;
@@ -18,14 +18,14 @@ use Siemendev\Checkout\Products\Data\QuotedCheckoutDataInterface;
  */
 class GiftCardPaymentMethod extends AbstractPaymentMethod implements GiftCardPaymentMethodInterface
 {
-    private GiftCardRepositoryInterface $repository;
+    private GiftCardCapturingManagerInterface $capturingManager;
 
     /** @var array<GiftCardCheckerInterface> */
     private array $checkers = [];
 
-    public function setRepository(GiftCardRepositoryInterface $repository): static
+    public function setCapturingManager(GiftCardCapturingManagerInterface $capturingManager): static
     {
-        $this->repository = $repository;
+        $this->capturingManager = $capturingManager;
 
         return $this;
     }
@@ -65,7 +65,7 @@ class GiftCardPaymentMethod extends AbstractPaymentMethod implements GiftCardPay
             throw new PaymentNotCapturableException(sprintf('The gift card payment method only works with your payment (%s) implementing %s', $payment::class, GiftCardPaymentInterface::class));
         }
 
-        $this->repository->redeem($payment, $data, $amount);
+        $this->capturingManager->redeem($payment, $data, $amount);
     }
 
     public function rollbackCapture(PaymentInterface $payment, QuotedCheckoutDataInterface $data): void
@@ -74,6 +74,6 @@ class GiftCardPaymentMethod extends AbstractPaymentMethod implements GiftCardPay
             throw new PaymentCaptureRollbackException(sprintf('The gift card payment method only works with your payment (%s) implementing %s', $payment::class, GiftCardPaymentInterface::class));
         }
 
-        $this->repository->rollback($payment, $data);
+        $this->capturingManager->rollback($payment, $data);
     }
 }

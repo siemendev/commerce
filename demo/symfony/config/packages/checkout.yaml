@@ -14,4 +14,4 @@ checkout_delivery:
     - App\Commerce\Delivery\DhlDeliveryOption
 
 checkout_gift_card:
-  repository: App\Commerce\GiftCard\GiftCardRepository
+  capturing_manager: App\Commerce\GiftCard\GiftCardCapturingManager
