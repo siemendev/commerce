@@ -22,7 +22,7 @@ ifndef DIR
 	@for PACKAGE in packages/*; do make DIR=$$PACKAGE phpstan; done
 else
 	@echo "phpstan: $$DIR"
-	@phpstan analyse $$DIR/src --level 9 -a $$DIR/vendor/autoload.php -c phpstan.neon || echo "operation failed, fix it and try it with: \"make DIR=$$DIR phpstan-package\""
+	@phpstan analyse $$DIR/src --level 9 -a $$DIR/vendor/autoload.php -c phpstan.neon || echo "operation failed, fix it and try it with: \"make DIR=$$DIR phpstan\""
 endif
 
 cs-fixer:
