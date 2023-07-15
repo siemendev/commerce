@@ -1,6 +1,7 @@
 {
     "name": "siemendev/checkout",
     "description": "checkout abstraction",
+    "version": "0.1.0",
     "type": "library",
     "autoload": {
         "psr-4": {

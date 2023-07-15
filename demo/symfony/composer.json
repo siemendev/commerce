@@ -8,11 +8,11 @@
         "ext-iconv": "*",
         "sensio/framework-extra-bundle": "^6.1",
         "siemendev/checkout-delivery-symfony-bridge": "*",
-        "siemendev/checkout-gift-card-symfony-bridge": "dev-main",
+        "siemendev/checkout-gift-card-symfony-bridge": "*",
         "siemendev/checkout-payment-symfony-bridge": "*",
         "siemendev/checkout-products-symfony-bridge": "*",
         "siemendev/checkout-symfony-bridge": "*",
-        "siemendev/checkout-taxation": "dev-main",
+        "siemendev/checkout-taxation": "*",
         "symfony/asset": "6.2.*",
         "symfony/console": "6.2.*",
         "symfony/dotenv": "6.2.*",
@@ -54,7 +54,6 @@
             "App\\Tests\\": "tests/"
         }
     },
-    "minimum-stability": "dev",
     "replace": {
         "symfony/polyfill-ctype": "*",
         "symfony/polyfill-iconv": "*",

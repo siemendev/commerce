@@ -4,15 +4,15 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6689023c31a8ae767cc8fa08cf4d72e6",
+    "content-hash": "7283f87c7ec6ff8488eec1ef3513870f",
     "packages": [
         {
             "name": "siemendev/checkout",
-            "version": "dev-main",
+            "version": "0.1.0",
             "dist": {
                 "type": "path",
                 "url": "../checkout",
-                "reference": "ca3398d34f2d4373210f4bab3d208e090ca08388"
+                "reference": "fea3ce7b9a1a10fa238a0139636f9c77a1912b87"
             },
             "require": {
                 "php": ">=8.1"
@@ -36,16 +36,16 @@
         },
         {
             "name": "siemendev/checkout-payment",
-            "version": "dev-main",
+            "version": "0.1.0",
             "dist": {
                 "type": "path",
                 "url": "../payment",
-                "reference": "400ce8165e82179b5a0935e916dfb0d2c0ba5483"
+                "reference": "7bf7b4d3ba28de4010a7b324fa6865ef33d0436b"
             },
             "require": {
                 "php": ">=8.1",
-                "siemendev/checkout": "dev-main",
-                "siemendev/checkout-products": "dev-main"
+                "siemendev/checkout": "*",
+                "siemendev/checkout-products": "*"
             },
             "type": "library",
             "autoload": {
@@ -66,15 +66,15 @@
         },
         {
             "name": "siemendev/checkout-products",
-            "version": "dev-main",
+            "version": "0.1.0",
             "dist": {
                 "type": "path",
                 "url": "../products",
-                "reference": "c8245ecfe58ae58b2cb7ec8ca755f62d99a3bfa8"
+                "reference": "2a4498d512823060168f55233b7042c986f4c86f"
             },
             "require": {
                 "php": ">=8.1",
-                "siemendev/checkout": "dev-main"
+                "siemendev/checkout": "*"
             },
             "type": "library",
             "autoload": {
@@ -96,10 +96,8 @@
     ],
     "packages-dev": [],
     "aliases": [],
-    "minimum-stability": "dev",
-    "stability-flags": {
-        "siemendev/checkout-payment": 20
-    },
+    "minimum-stability": "stable",
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

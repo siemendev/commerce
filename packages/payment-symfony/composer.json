@@ -1,6 +1,7 @@
 {
     "name": "siemendev/checkout-payment-symfony-bridge",
     "description": "checkout payment symfony bridge",
+    "version": "0.1.0",
     "type": "library",
     "autoload": {
         "psr-4": {
@@ -13,12 +14,11 @@
             "email": "post@patrick-siemen.de"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
         "php": ">=8.1",
-        "siemendev/checkout-payment": "dev-main",
-        "siemendev/checkout-products-symfony-bridge": "dev-main",
-        "siemendev/symfony-package-helper": "dev-main",
+        "siemendev/checkout-payment": "*",
+        "siemendev/checkout-products-symfony-bridge": "*",
+        "siemendev/symfony-package-helper": "*",
         "symfony/framework-bundle": "^5.0|^6.0"
     },
     "repositories": [

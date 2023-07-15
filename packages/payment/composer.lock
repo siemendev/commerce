@@ -4,15 +4,15 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "be19a6fc6c306ad3b200926e5307ae35",
+    "content-hash": "9a9538581f3e8a26133024db356a3ac8",
     "packages": [
         {
             "name": "siemendev/checkout",
-            "version": "dev-main",
+            "version": "0.1.0",
             "dist": {
                 "type": "path",
                 "url": "../checkout",
-                "reference": "ca3398d34f2d4373210f4bab3d208e090ca08388"
+                "reference": "fea3ce7b9a1a10fa238a0139636f9c77a1912b87"
             },
             "require": {
                 "php": ">=8.1"
@@ -36,15 +36,15 @@
         },
         {
             "name": "siemendev/checkout-products",
-            "version": "dev-main",
+            "version": "0.1.0",
             "dist": {
                 "type": "path",
                 "url": "../products",
-                "reference": "c8245ecfe58ae58b2cb7ec8ca755f62d99a3bfa8"
+                "reference": "2a4498d512823060168f55233b7042c986f4c86f"
             },
             "require": {
                 "php": ">=8.1",
-                "siemendev/checkout": "dev-main"
+                "siemendev/checkout": "*"
             },
             "type": "library",
             "autoload": {
@@ -66,11 +66,8 @@
     ],
     "packages-dev": [],
     "aliases": [],
-    "minimum-stability": "dev",
-    "stability-flags": {
-        "siemendev/checkout": 20,
-        "siemendev/checkout-products": 20
-    },
+    "minimum-stability": "stable",
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

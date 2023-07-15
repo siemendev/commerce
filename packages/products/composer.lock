@@ -4,15 +4,15 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f599f75e40c3b6e7634c1a5ab502fea1",
+    "content-hash": "f007c9743811f360aaf1d8082caf719d",
     "packages": [
         {
             "name": "siemendev/checkout",
-            "version": "dev-main",
+            "version": "0.1.0",
             "dist": {
                 "type": "path",
                 "url": "../checkout",
-                "reference": "ca3398d34f2d4373210f4bab3d208e090ca08388"
+                "reference": "fea3ce7b9a1a10fa238a0139636f9c77a1912b87"
             },
             "require": {
                 "php": ">=8.1"
@@ -37,10 +37,8 @@
     ],
     "packages-dev": [],
     "aliases": [],
-    "minimum-stability": "dev",
-    "stability-flags": {
-        "siemendev/checkout": 20
-    },
+    "minimum-stability": "stable",
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

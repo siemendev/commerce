@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b27fb6310e399a5e7ae7c98343f8294a",
+    "content-hash": "a38cf2786ccacf675e29f3d0077dba7b",
     "packages": [
         {
             "name": "mpociot/vat-calculator",
-            "version": "3.x-dev",
+            "version": "3.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/driesvints/vat-calculator.git",
-                "reference": "53a490c4402465ea2297b0c93c06d2458cfd61ed"
+                "reference": "10db0918cd040308590454ecc42433951284749a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/driesvints/vat-calculator/zipball/53a490c4402465ea2297b0c93c06d2458cfd61ed",
-                "reference": "53a490c4402465ea2297b0c93c06d2458cfd61ed",
+                "url": "https://api.github.com/repos/driesvints/vat-calculator/zipball/10db0918cd040308590454ecc42433951284749a",
+                "reference": "10db0918cd040308590454ecc42433951284749a",
                 "shasum": ""
             },
             "require": {
@@ -31,7 +31,6 @@
                 "orchestra/testbench": "^4.0|^5.0|^6.0|^7.0|^8.0",
                 "phpunit/phpunit": "^9.5"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -77,27 +76,23 @@
             ],
             "support": {
                 "issues": "https://github.com/driesvints/vat-calculator/issues",
-                "source": "https://github.com/driesvints/vat-calculator/tree/3.x"
+                "source": "https://github.com/driesvints/vat-calculator/tree/3.4.0"
             },
             "funding": [
                 {
-                    "url": "https://github.com/sponsors/driesvints",
+                    "url": "https://github.com/driesvints",
                     "type": "github"
-                },
-                {
-                    "url": "https://www.paypal.com/paypalme/driesvints",
-                    "type": "paypal"
                 }
             ],
-            "time": "2023-07-06T21:35:50+00:00"
+            "time": "2023-06-09T09:21:38+00:00"
         },
         {
             "name": "siemendev/checkout",
-            "version": "dev-main",
+            "version": "0.1.0",
             "dist": {
                 "type": "path",
                 "url": "../checkout",
-                "reference": "ca3398d34f2d4373210f4bab3d208e090ca08388"
+                "reference": "fea3ce7b9a1a10fa238a0139636f9c77a1912b87"
             },
             "require": {
                 "php": ">=8.1"
@@ -121,15 +116,15 @@
         },
         {
             "name": "siemendev/checkout-products",
-            "version": "dev-main",
+            "version": "0.1.0",
             "dist": {
                 "type": "path",
                 "url": "../products",
-                "reference": "c8245ecfe58ae58b2cb7ec8ca755f62d99a3bfa8"
+                "reference": "2a4498d512823060168f55233b7042c986f4c86f"
             },
             "require": {
                 "php": ">=8.1",
-                "siemendev/checkout": "dev-main"
+                "siemendev/checkout": "*"
             },
             "type": "library",
             "autoload": {
@@ -151,12 +146,8 @@
     ],
     "packages-dev": [],
     "aliases": [],
-    "minimum-stability": "dev",
-    "stability-flags": {
-        "siemendev/checkout": 20,
-        "siemendev/checkout-products": 20,
-        "mpociot/vat-calculator": 20
-    },
+    "minimum-stability": "stable",
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

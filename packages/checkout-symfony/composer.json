@@ -1,6 +1,7 @@
 {
     "name": "siemendev/checkout-symfony-bridge",
     "description": "checkout symfony bridge",
+    "version": "0.1.0",
     "type": "library",
     "autoload": {
         "psr-4": {
@@ -13,11 +14,10 @@
             "email": "post@patrick-siemen.de"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
         "php": ">=8.1",
-        "siemendev/checkout": "dev-main",
-        "siemendev/symfony-package-helper": "dev-main",
+        "siemendev/checkout": "*",
+        "siemendev/symfony-package-helper": "*",
         "symfony/framework-bundle": "^5.0|^6.0"
     },
     "repositories": [

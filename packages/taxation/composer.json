@@ -1,6 +1,7 @@
 {
     "name": "siemendev/checkout-taxation",
     "description": "checkout taxation implementation",
+    "version": "0.1.0",
     "type": "library",
     "autoload": {
         "psr-4": {
@@ -13,12 +14,11 @@
             "email": "post@patrick-siemen.de"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
         "php": ">=8.1",
-        "siemendev/checkout": "dev-main",
-        "siemendev/checkout-products": "dev-main",
-        "mpociot/vat-calculator": "3.x-dev"
+        "siemendev/checkout": "*",
+        "siemendev/checkout-products": "*",
+        "mpociot/vat-calculator": "^3.0"
     },
     "repositories": [
         {

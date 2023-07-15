@@ -1,6 +1,7 @@
 {
     "name": "siemendev/checkout-gift-card-symfony-bridge",
     "description": "checkout gift card symfony bridge",
+    "version": "0.1.0",
     "type": "library",
     "autoload": {
         "psr-4": {
@@ -13,11 +14,10 @@
             "email": "post@patrick-siemen.de"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
         "php": ">=8.1",
-        "siemendev/checkout-gift-card": "dev-main",
-        "siemendev/symfony-package-helper": "dev-main",
+        "siemendev/checkout-gift-card": "*",
+        "siemendev/symfony-package-helper": "*",
         "symfony/framework-bundle": "^5.0|^6.0"
     },
     "repositories": [

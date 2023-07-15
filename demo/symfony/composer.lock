@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ed59c259e81c359efb193cde01a78309",
+    "content-hash": "8685d6788cf2e0bbf442974e59d3df14",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -228,16 +228,16 @@
         },
         {
             "name": "mpociot/vat-calculator",
-            "version": "3.x-dev",
+            "version": "3.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/driesvints/vat-calculator.git",
-                "reference": "53a490c4402465ea2297b0c93c06d2458cfd61ed"
+                "reference": "10db0918cd040308590454ecc42433951284749a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/driesvints/vat-calculator/zipball/53a490c4402465ea2297b0c93c06d2458cfd61ed",
-                "reference": "53a490c4402465ea2297b0c93c06d2458cfd61ed",
+                "url": "https://api.github.com/repos/driesvints/vat-calculator/zipball/10db0918cd040308590454ecc42433951284749a",
+                "reference": "10db0918cd040308590454ecc42433951284749a",
                 "shasum": ""
             },
             "require": {
@@ -251,7 +251,6 @@
                 "orchestra/testbench": "^4.0|^5.0|^6.0|^7.0|^8.0",
                 "phpunit/phpunit": "^9.5"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -297,19 +296,15 @@
             ],
             "support": {
                 "issues": "https://github.com/driesvints/vat-calculator/issues",
-                "source": "https://github.com/driesvints/vat-calculator/tree/3.x"
+                "source": "https://github.com/driesvints/vat-calculator/tree/3.4.0"
             },
             "funding": [
                 {
-                    "url": "https://github.com/sponsors/driesvints",
+                    "url": "https://github.com/driesvints",
                     "type": "github"
-                },
-                {
-                    "url": "https://www.paypal.com/paypalme/driesvints",
-                    "type": "paypal"
                 }
             ],
-            "time": "2023-07-06T21:35:50+00:00"
+            "time": "2023-06-09T09:21:38+00:00"
         },
         {
             "name": "psr/cache",
@@ -649,11 +644,11 @@
         },
         {
             "name": "siemendev/checkout",
-            "version": "dev-main",
+            "version": "0.1.0",
             "dist": {
                 "type": "path",
                 "url": "../../packages/checkout",
-                "reference": "ca3398d34f2d4373210f4bab3d208e090ca08388"
+                "reference": "fea3ce7b9a1a10fa238a0139636f9c77a1912b87"
             },
             "require": {
                 "php": ">=8.1"
@@ -677,15 +672,15 @@
         },
         {
             "name": "siemendev/checkout-delivery",
-            "version": "dev-main",
+            "version": "0.1.0",
             "dist": {
                 "type": "path",
                 "url": "../../packages/delivery",
-                "reference": "a1ac3eb06a7e813c54ec748be67f8d5375a3f03f"
+                "reference": "0a9218854a1abdbba6668e29744810c44eb4a482"
             },
             "require": {
                 "php": ">=8.1",
-                "siemendev/checkout": "dev-main"
+                "siemendev/checkout": "*"
             },
             "suggest": {
                 "siemendev/checkout-payment": "Delivery cost will be automatically added as a additional cost to the checkout"
@@ -709,16 +704,16 @@
         },
         {
             "name": "siemendev/checkout-delivery-symfony-bridge",
-            "version": "dev-main",
+            "version": "0.1.0",
             "dist": {
                 "type": "path",
                 "url": "../../packages/delivery-symfony",
-                "reference": "7d64cdf99d3ef93f54a9ab76d57f168e2fa5005b"
+                "reference": "217299bad5287138a68fe9f2caa9bc28fb564b14"
             },
             "require": {
                 "php": ">=8.1",
-                "siemendev/checkout-delivery": "dev-main",
-                "siemendev/symfony-package-helper": "dev-main",
+                "siemendev/checkout-delivery": "*",
+                "siemendev/symfony-package-helper": "*",
                 "symfony/framework-bundle": "^5.0|^6.0"
             },
             "type": "library",
@@ -740,15 +735,15 @@
         },
         {
             "name": "siemendev/checkout-gift-card",
-            "version": "dev-main",
+            "version": "0.1.0",
             "dist": {
                 "type": "path",
                 "url": "../../packages/gift-card",
-                "reference": "4ea33e771b5491377d42981f19fab5d56cf45211"
+                "reference": "e85812e52894c44cb5ebc223a5f02ea574e341b9"
             },
             "require": {
                 "php": ">=8.1",
-                "siemendev/checkout-payment": "dev-main"
+                "siemendev/checkout-payment": "*"
             },
             "type": "library",
             "autoload": {
@@ -769,16 +764,16 @@
         },
         {
             "name": "siemendev/checkout-gift-card-symfony-bridge",
-            "version": "dev-main",
+            "version": "0.1.0",
             "dist": {
                 "type": "path",
                 "url": "../../packages/gift-card-symfony",
-                "reference": "b833755c6f10d10277853e2dc79f7587954d591a"
+                "reference": "b400e90ebd60dc7daa492362758e79fa9a177220"
             },
             "require": {
                 "php": ">=8.1",
-                "siemendev/checkout-gift-card": "dev-main",
-                "siemendev/symfony-package-helper": "dev-main",
+                "siemendev/checkout-gift-card": "*",
+                "siemendev/symfony-package-helper": "*",
                 "symfony/framework-bundle": "^5.0|^6.0"
             },
             "type": "library",
@@ -800,16 +795,16 @@
         },
         {
             "name": "siemendev/checkout-payment",
-            "version": "dev-main",
+            "version": "0.1.0",
             "dist": {
                 "type": "path",
                 "url": "../../packages/payment",
-                "reference": "400ce8165e82179b5a0935e916dfb0d2c0ba5483"
+                "reference": "7bf7b4d3ba28de4010a7b324fa6865ef33d0436b"
             },
             "require": {
                 "php": ">=8.1",
-                "siemendev/checkout": "dev-main",
-                "siemendev/checkout-products": "dev-main"
+                "siemendev/checkout": "*",
+                "siemendev/checkout-products": "*"
             },
             "type": "library",
             "autoload": {
@@ -830,17 +825,17 @@
         },
         {
             "name": "siemendev/checkout-payment-symfony-bridge",
-            "version": "dev-main",
+            "version": "0.1.0",
             "dist": {
                 "type": "path",
                 "url": "../../packages/payment-symfony",
-                "reference": "fe8edbe66380025a9b547a20a85919bfc8583195"
+                "reference": "56d9a0839088cfede1e45096ca5e6a68d606e28a"
             },
             "require": {
                 "php": ">=8.1",
-                "siemendev/checkout-payment": "dev-main",
-                "siemendev/checkout-products-symfony-bridge": "dev-main",
-                "siemendev/symfony-package-helper": "dev-main",
+                "siemendev/checkout-payment": "*",
+                "siemendev/checkout-products-symfony-bridge": "*",
+                "siemendev/symfony-package-helper": "*",
                 "symfony/framework-bundle": "^5.0|^6.0"
             },
             "type": "library",
@@ -862,15 +857,15 @@
         },
         {
             "name": "siemendev/checkout-products",
-            "version": "dev-main",
+            "version": "0.1.0",
             "dist": {
                 "type": "path",
                 "url": "../../packages/products",
-                "reference": "c8245ecfe58ae58b2cb7ec8ca755f62d99a3bfa8"
+                "reference": "2a4498d512823060168f55233b7042c986f4c86f"
             },
             "require": {
                 "php": ">=8.1",
-                "siemendev/checkout": "dev-main"
+                "siemendev/checkout": "*"
             },
             "type": "library",
             "autoload": {
@@ -891,17 +886,17 @@
         },
         {
             "name": "siemendev/checkout-products-symfony-bridge",
-            "version": "dev-main",
+            "version": "0.1.0",
             "dist": {
                 "type": "path",
                 "url": "../../packages/products-symfony",
-                "reference": "c023857f82346078923ef7401bea932618fe4d7e"
+                "reference": "5455ff7d40e5f32c6df15310ce6108977752b018"
             },
             "require": {
                 "php": ">=8.1",
-                "siemendev/checkout-products": "dev-main",
-                "siemendev/checkout-symfony-bridge": "dev-main",
-                "siemendev/symfony-package-helper": "dev-main",
+                "siemendev/checkout-products": "*",
+                "siemendev/checkout-symfony-bridge": "*",
+                "siemendev/symfony-package-helper": "*",
                 "symfony/framework-bundle": "^5.0|^6.0"
             },
             "type": "library",
@@ -923,16 +918,16 @@
         },
         {
             "name": "siemendev/checkout-symfony-bridge",
-            "version": "dev-main",
+            "version": "0.1.0",
             "dist": {
                 "type": "path",
                 "url": "../../packages/checkout-symfony",
-                "reference": "d1172108561e55ccbc9fd7fdcf261f44dfe83d1a"
+                "reference": "25831ea5b181022f6c8d8b30652124274f3f204e"
             },
             "require": {
                 "php": ">=8.1",
-                "siemendev/checkout": "dev-main",
-                "siemendev/symfony-package-helper": "dev-main",
+                "siemendev/checkout": "*",
+                "siemendev/symfony-package-helper": "*",
                 "symfony/framework-bundle": "^5.0|^6.0"
             },
             "type": "library",
@@ -954,17 +949,17 @@
         },
         {
             "name": "siemendev/checkout-taxation",
-            "version": "dev-main",
+            "version": "0.1.0",
             "dist": {
                 "type": "path",
                 "url": "../../packages/taxation",
-                "reference": "b24740e41932f741e8eabcfd6df25629f188c836"
+                "reference": "c4604166091e5d287e0f2ffb93de0f6400216d1d"
             },
             "require": {
-                "mpociot/vat-calculator": "3.x-dev",
+                "mpociot/vat-calculator": "^3.0",
                 "php": ">=8.1",
-                "siemendev/checkout": "dev-main",
-                "siemendev/checkout-products": "dev-main"
+                "siemendev/checkout": "*",
+                "siemendev/checkout-products": "*"
             },
             "type": "library",
             "autoload": {
@@ -985,11 +980,11 @@
         },
         {
             "name": "siemendev/symfony-package-helper",
-            "version": "dev-main",
+            "version": "0.1.0",
             "dist": {
                 "type": "path",
                 "url": "../../packages/package-helper",
-                "reference": "0f3be1881abbd42ac0dbb88d322ed33cdd7750c5"
+                "reference": "cfb5bd6235f913d96ef06e0bcb859c14327c150e"
             },
             "require": {
                 "php": ">=7.4",
@@ -8364,10 +8359,8 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "stability-flags": {
-        "siemendev/checkout-gift-card-symfony-bridge": 20,
-        "siemendev/checkout-taxation": 20,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
