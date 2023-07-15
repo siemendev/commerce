@@ -66,12 +66,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dependency-injection.git",
-                "reference": "d97f9201503c57e6a101d40f193ab1d55c0be4cd"
+                "reference": "7270e598015162082ecd7bc1d9d15982a83ef159"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/d97f9201503c57e6a101d40f193ab1d55c0be4cd",
-                "reference": "d97f9201503c57e6a101d40f193ab1d55c0be4cd",
+                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/7270e598015162082ecd7bc1d9d15982a83ef159",
+                "reference": "7270e598015162082ecd7bc1d9d15982a83ef159",
                 "shasum": ""
             },
             "require": {
@@ -139,7 +139,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-06-06T10:12:27+00:00"
+            "time": "2023-07-13T12:19:34+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -298,12 +298,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-exporter.git",
-                "reference": "cdd2ba70d26e0bcb1bc8c9f9c0c91920a51010f1"
+                "reference": "6c2a481a42c4ddc1b75b3b49c1e4513c3aa49b97"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-exporter/zipball/cdd2ba70d26e0bcb1bc8c9f9c0c91920a51010f1",
-                "reference": "cdd2ba70d26e0bcb1bc8c9f9c0c91920a51010f1",
+                "url": "https://api.github.com/repos/symfony/var-exporter/zipball/6c2a481a42c4ddc1b75b3b49c1e4513c3aa49b97",
+                "reference": "6c2a481a42c4ddc1b75b3b49c1e4513c3aa49b97",
                 "shasum": ""
             },
             "require": {
@@ -364,7 +364,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-06-04T15:13:11+00:00"
+            "time": "2023-07-05T13:06:06+00:00"
         }
     ],
     "packages-dev": [],

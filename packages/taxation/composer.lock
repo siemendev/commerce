@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/driesvints/vat-calculator.git",
-                "reference": "6052ee77d2cb9603049d84e17caaf06ea5c1eba8"
+                "reference": "53a490c4402465ea2297b0c93c06d2458cfd61ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/driesvints/vat-calculator/zipball/6052ee77d2cb9603049d84e17caaf06ea5c1eba8",
-                "reference": "6052ee77d2cb9603049d84e17caaf06ea5c1eba8",
+                "url": "https://api.github.com/repos/driesvints/vat-calculator/zipball/53a490c4402465ea2297b0c93c06d2458cfd61ed",
+                "reference": "53a490c4402465ea2297b0c93c06d2458cfd61ed",
                 "shasum": ""
             },
             "require": {
@@ -81,11 +81,15 @@
             },
             "funding": [
                 {
-                    "url": "https://github.com/driesvints",
+                    "url": "https://github.com/sponsors/driesvints",
                     "type": "github"
+                },
+                {
+                    "url": "https://www.paypal.com/paypalme/driesvints",
+                    "type": "paypal"
                 }
             ],
-            "time": "2023-06-09T09:22:18+00:00"
+            "time": "2023-07-06T21:35:50+00:00"
         },
         {
             "name": "siemendev/checkout",
