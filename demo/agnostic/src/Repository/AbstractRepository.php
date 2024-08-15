@@ -35,7 +35,6 @@ abstract class AbstractRepository
 
     /**
      * @return array<T>
-     * @throws ObjectNotFoundException
      */
     public function loadAll(): array
     {
@@ -44,7 +43,11 @@ abstract class AbstractRepository
         $objects = [];
 
         foreach ($this->loadAllIds() as $id) {
-            $objects[] = $this->load($id);
+            try {
+                $objects[] = $this->load($id);
+            } catch (ObjectNotFoundException) {
+                // ignore invalid objects
+            }
         }
 
         return $objects;
