@@ -15,7 +15,9 @@ fixtures:
 	cd demo/symfony; php bin/console commerce:product:add --id product-2 --no-interaction
 	cd demo/symfony; php bin/console commerce:product:add --id product-3 --no-interaction
 	cd demo/symfony; php bin/console commerce:product:add --id product-4 --no-interaction
-	cd demo/symfony; php bin/console commerce:giftcards:add --code 12345 --balance 2000 --no-interaction
+	cd demo/symfony; php bin/console commerce:giftcards:add --code 1234 --balance 50 --no-interaction
+	cd demo/symfony; php bin/console commerce:giftcards:add --code 2345 --balance 2000 --no-interaction
+	cd demo/symfony; php bin/console commerce:giftcards:add --code 3456 --balance 5000 --no-interaction
 
 phpstan:
 ifndef DIR
