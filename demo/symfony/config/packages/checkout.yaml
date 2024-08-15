@@ -14,4 +14,4 @@ checkout_delivery:
     - App\Commerce\Delivery\DhlDeliveryOption
 
 checkout_gift_card:
-  payment_manager: App\Commerce\GiftCard\GiftCardCapturingManager
+  payment_manager: App\Commerce\GiftCard\GiftCardPaymentManager
