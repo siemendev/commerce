@@ -13,7 +13,7 @@ class ProductRepository extends AbstractRepository
 {
     public static function getDirectory(): string
     {
-        return __DIR__ . '/../../config/products';
+        return __DIR__ . '/../../data/products';
     }
 
     public static function getClass(): string

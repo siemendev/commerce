@@ -13,7 +13,7 @@ class GiftCardRepository extends AbstractRepository
 {
     public static function getDirectory(): string
     {
-        return __DIR__ . '/../../config/gift-cards';
+        return __DIR__ . '/../../data/gift-cards';
     }
 
     public static function getClass(): string

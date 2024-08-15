@@ -15,7 +15,7 @@ use Siemendev\Checkout\Payment\Method\PaymentNotCapturableException;
 
 class GiftCardPaymentManager implements GiftCardPaymentManagerInterface
 {
-    private const PATH = 'orders/%s/payments/%s.xml';
+    private const PATH = __DIR__ . '/../../../data/orders/%s/payments/%s.xml';
 
     public function __construct(
         private readonly GiftCardRepository $giftCardRepository,

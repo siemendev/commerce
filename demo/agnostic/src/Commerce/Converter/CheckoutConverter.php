@@ -20,7 +20,7 @@ use Siemendev\Checkout\Products\Product\ProductInterface;
  */
 class CheckoutConverter implements CheckoutFinalizationHandlerInterface
 {
-    private const PATH = 'orders/%s/order.xml';
+    private const PATH = __DIR__ . '/../../../data/orders/%s/order.xml';
 
     public function __construct(
         private readonly ObjectExporter $objectExporter,
