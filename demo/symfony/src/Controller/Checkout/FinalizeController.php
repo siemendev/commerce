@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Controller\Checkout;
 
-use App\Commerce\Checkout;
 use App\Controller\AbstractCheckoutController;
+use Demo\Commerce\Checkout;
 use Siemendev\Checkout\Finalize\CheckoutFinalizationExceptionWrapper;
 use Siemendev\Checkout\Finalize\CheckoutNotFinalizableException;
 use Siemendev\Checkout\Finalize\UnknownFinalizationStepException;

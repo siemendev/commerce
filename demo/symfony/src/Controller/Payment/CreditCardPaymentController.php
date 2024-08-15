@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Controller\Payment;
 
-use App\Commerce\Checkout;
-use App\Commerce\Payment\CreditCardPayment;
+use Demo\Commerce\Checkout;
+use Demo\Commerce\Payment\CreditCardPayment;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

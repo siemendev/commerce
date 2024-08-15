@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Controller\Checkout;
 
-use App\Commerce\Checkout;
 use App\Controller\AbstractCheckoutController;
+use Demo\Commerce\Checkout;
 use Siemendev\Checkout\Delivery\Step\DeliveryAddressStep;
 use Siemendev\Checkout\Step\Address\Address;
 use Siemendev\Checkout\Step\Exception\ValidationException;

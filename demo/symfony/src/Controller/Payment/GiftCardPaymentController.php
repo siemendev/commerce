@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Controller\Payment;
 
-use App\Commerce\Checkout;
-use App\GiftCard\GiftCardRepository;
-use App\Repository\ObjectNotFoundException;
+use Demo\Commerce\Checkout;
+use Demo\GiftCard\GiftCardRepository;
+use Demo\Repository\ObjectNotFoundException;
 use Siemendev\Checkout\GiftCard\Payment\GiftCardPayment;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;

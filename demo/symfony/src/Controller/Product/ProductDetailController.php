@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Controller\Product;
 
-use App\Commerce\Checkout;
-use App\Commerce\CheckoutProduct;
 use App\Controller\AbstractCheckoutController;
-use App\Product\ProductRepository;
+use Demo\Commerce\Checkout;
+use Demo\Commerce\CheckoutProduct;
+use Demo\Product\ProductRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;

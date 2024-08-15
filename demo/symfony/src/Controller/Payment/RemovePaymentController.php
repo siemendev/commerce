@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Payment;
 
-use App\Commerce\Checkout;
+use Demo\Commerce\Checkout;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

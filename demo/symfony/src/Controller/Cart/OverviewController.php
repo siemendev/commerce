@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Controller\Cart;
 
-use App\Commerce\Checkout;
-use App\Commerce\Step\CartStep;
 use App\Controller\AbstractCheckoutController;
+use Demo\Commerce\Checkout;
+use Demo\Commerce\Step\CartStep;
 use Siemendev\Checkout\Step\Exception\AssignedValidationException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;

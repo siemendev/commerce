@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Controller\Checkout;
 
-use App\Commerce\Checkout;
-use App\Commerce\Step\AgeVerificationStep;
 use App\Controller\AbstractCheckoutController;
+use Demo\Commerce\Checkout;
+use Demo\Commerce\Step\AgeVerificationStep;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;

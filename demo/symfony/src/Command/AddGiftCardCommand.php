@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Command;
 
-use App\GiftCard\GiftCard;
-use App\GiftCard\GiftCardRepository;
+use Demo\GiftCard\GiftCard;
+use Demo\GiftCard\GiftCardRepository;
+use RuntimeException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use RuntimeException;
 
 class AddGiftCardCommand extends Command
 {

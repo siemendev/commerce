@@ -1,17 +1,17 @@
 checkout:
-  data_creator: App\Commerce\Data\CheckoutDataCreator
+  data_creator: Demo\Commerce\Data\CheckoutDataCreator
   steps:
-    - App\Commerce\Step\CartStep
+    - Demo\Commerce\Step\CartStep
     - checkout.steps.billing_address
     - checkout.steps.delivery_address
-    - App\Commerce\Step\AgeVerificationStep
+    - Demo\Commerce\Step\AgeVerificationStep
     - checkout.steps.delivery
     - checkout.steps.products_payment
     - checkout.steps.summary
 
 checkout_delivery:
   options:
-    - App\Commerce\Delivery\DhlDeliveryOption
+    - Demo\Commerce\Delivery\DhlDeliveryOption
 
 checkout_gift_card:
-  payment_manager: App\Commerce\GiftCard\GiftCardPaymentManager
+  payment_manager: Demo\Commerce\GiftCard\GiftCardPaymentManager

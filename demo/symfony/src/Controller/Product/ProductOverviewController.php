@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Product;
 
-use App\Product\ProductRepository;
+use Demo\Product\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;

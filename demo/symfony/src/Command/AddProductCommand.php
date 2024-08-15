@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\Command;
 
-use App\Product\Product;
-use App\Product\ProductRepository;
+use Demo\Product\Product;
+use Demo\Product\ProductRepository;
+use RuntimeException;
 use Siemendev\Checkout\Taxation\VatTypedItemInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use RuntimeException;
 
 class AddProductCommand extends Command
 {

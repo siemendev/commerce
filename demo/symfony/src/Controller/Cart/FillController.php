@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Controller\Cart;
 
-use App\Commerce\Checkout;
-use App\Commerce\Delivery\DhlDeliveryOption;
-use App\Commerce\Payment\CreditCardPayment;
-use App\Commerce\CheckoutProduct;
-use App\Commerce\Step\AgeVerificationStep;
 use App\Controller\AbstractCheckoutController;
+use Demo\Commerce\Checkout;
+use Demo\Commerce\CheckoutProduct;
+use Demo\Commerce\Delivery\DhlDeliveryOption;
+use Demo\Commerce\Payment\CreditCardPayment;
+use Demo\Commerce\Step\AgeVerificationStep;
 use Siemendev\Checkout\Delivery\Step\DeliveryStep;
 use Siemendev\Checkout\GiftCard\Payment\GiftCardPayment;
 use Siemendev\Checkout\Step\Address\Address;
