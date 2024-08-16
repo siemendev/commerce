@@ -18,8 +18,7 @@ class PaymentCapturingFinalizationHandler implements CheckoutFinalizationHandler
 {
     public function __construct(
         private PaymentMethodsProviderInterface $paymentMethodsProvider,
-    ) {
-    }
+    ) {}
 
     public function setPaymentMethodsProvider(PaymentMethodsProviderInterface $paymentMethodsProvider): static
     {
@@ -34,7 +33,6 @@ class PaymentCapturingFinalizationHandler implements CheckoutFinalizationHandler
     }
 
     /**
-     * {@inheritDoc}
      * @throws PaymentNotCapturableCheckoutNotFinalizableException
      */
     public function finalize(CheckoutDataInterface $data): void

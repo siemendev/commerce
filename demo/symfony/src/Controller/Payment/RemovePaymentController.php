@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use InvalidArgumentException;
 
 #[Route('/payment/remove', name: 'checkout.payment.remove')]
 class RemovePaymentController extends AbstractController
@@ -18,7 +19,7 @@ class RemovePaymentController extends AbstractController
         try {
             // todo properly remove the authorization on the payment
             $checkout->removePayment($request->get('payment_identifier'));
-        } catch (\InvalidArgumentException) {
+        } catch (InvalidArgumentException) {
             $this->addFlash('error', 'Payment not found');
         }
 

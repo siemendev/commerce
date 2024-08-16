@@ -18,8 +18,7 @@ abstract class AbstractCheckoutController extends AbstractController
 {
     public function __construct(
         private readonly Checkout $checkout,
-    ) {
-    }
+    ) {}
 
     protected function redirectToCurrentStep(): RedirectResponse
     {
@@ -47,7 +46,7 @@ abstract class AbstractCheckoutController extends AbstractController
     protected function getStepsData(): array
     {
         return array_map(
-            fn (StepInterface $step): array => [
+            fn(StepInterface $step): array => [
                 'id' => $step::stepIdentifier(),
                 'url' => $this->checkout->isStepAllowed($step::stepIdentifier()) ? $this->getStepUrl($step::stepIdentifier()) : null,
             ],

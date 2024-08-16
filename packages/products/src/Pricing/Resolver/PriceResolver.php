@@ -17,8 +17,7 @@ class PriceResolver implements PriceResolverInterface
      */
     public function __construct(
         private array $providers = [],
-    ) {
-    }
+    ) {}
 
     public function addProvider(PriceProviderInterface $priceProvider): static
     {

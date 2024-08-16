@@ -67,7 +67,7 @@ class BillingAddressController extends AbstractCheckoutController
         }
 
         return $this->render('commerce/steps/billing_address.html.twig', [
-            'delivery_needed' => in_array(DeliveryAddressStep::stepIdentifier(), array_map(fn (StepInterface $step) => $step::stepIdentifier(), $checkout->getRequiredSteps())),
+            'delivery_needed' => in_array(DeliveryAddressStep::stepIdentifier(), array_map(fn(StepInterface $step) => $step::stepIdentifier(), $checkout->getRequiredSteps())),
             'message' => $message ?? null,
             'address' => $address,
             'steps' => $this->getStepsData(),

@@ -17,6 +17,4 @@ interface CheckoutDataInterface extends
     ProductCheckoutDataInterface,
     QuotedCheckoutDataInterface,
     PaymentCheckoutDataInterface,
-    AgeVerifiableCheckoutDataInterface
-{
-}
+    AgeVerifiableCheckoutDataInterface {}

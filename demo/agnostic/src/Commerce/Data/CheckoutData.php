@@ -43,8 +43,8 @@ class CheckoutData extends AbstractCheckoutData implements CheckoutDataInterface
             $this->getCurrency()
             . $this->getBillingAddress()?->getHash()
             . $this->getDeliveryAddress()?->getHash()
-            . implode('-', array_map(static fn (ProductInterface $product) => $product->getIdentifier(), $this->getProducts()))
-            . implode('-', array_map(static fn (PaymentInterface $payment) => $payment->getIdentifier() . $payment->getCurrency() . $payment->getAuthorizedAmount() . $payment->getCapturedAmount(), iterator_to_array($this->getPayments())))
+            . implode('-', array_map(static fn(ProductInterface $product) => $product->getIdentifier(), $this->getProducts()))
+            . implode('-', array_map(static fn(PaymentInterface $payment) => $payment->getIdentifier() . $payment->getCurrency() . $payment->getAuthorizedAmount() . $payment->getCapturedAmount(), iterator_to_array($this->getPayments())))
             . $this->isAgeVerified()
             . $this->getDeliveryOption()?->getIdentifier(),
         );

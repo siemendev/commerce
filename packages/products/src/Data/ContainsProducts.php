@@ -40,7 +40,7 @@ trait ContainsProducts
     {
         $this->products = array_filter(
             $this->products,
-            static fn (ProductInterface $p) => $p !== $product,
+            static fn(ProductInterface $p) => $p !== $product,
         );
 
         return $this;

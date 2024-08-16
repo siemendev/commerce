@@ -75,7 +75,6 @@ abstract class AbstractRepository
     }
 
     /**
-     * @return IdentifiableInterface
      * @throws ObjectNotFoundException
      */
     public function load(string $id): IdentifiableInterface

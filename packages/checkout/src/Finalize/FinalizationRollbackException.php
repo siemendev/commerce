@@ -6,6 +6,4 @@ namespace Siemendev\Checkout\Finalize;
 
 use Exception;
 
-class FinalizationRollbackException extends Exception
-{
-}
+class FinalizationRollbackException extends Exception {}

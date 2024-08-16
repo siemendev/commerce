@@ -6,6 +6,4 @@ namespace Siemendev\Checkout\Delivery\Option;
 
 use Exception;
 
-class DeliveryOptionNotAvailableException extends Exception
-{
-}
+class DeliveryOptionNotAvailableException extends Exception {}

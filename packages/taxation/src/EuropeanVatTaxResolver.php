@@ -10,9 +10,7 @@ use Siemendev\Checkout\Step\Address\Billing\BillingAddressableCheckoutDataInterf
 
 class EuropeanVatTaxResolver implements EuropeanVatTaxResolverInterface
 {
-    public function __construct(private readonly ?string $businessCountryCode = null)
-    {
-    }
+    public function __construct(private readonly ?string $businessCountryCode = null) {}
 
     public function getProductTaxRate(ProductInterface $product, BillingAddressableCheckoutDataInterface $data): float
     {

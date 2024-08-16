@@ -12,8 +12,7 @@ class Price implements PriceInterface
         private readonly int $unitPriceGross,
         private readonly int $totalPriceNet,
         private readonly int $totalPriceGross,
-    ) {
-    }
+    ) {}
 
     public function createFromGrossPrice(int $grossPrice, float $vatRate, int $quantity = 1): self
     {

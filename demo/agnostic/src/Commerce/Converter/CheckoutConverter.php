@@ -25,8 +25,7 @@ class CheckoutConverter implements CheckoutFinalizationHandlerInterface
     public function __construct(
         private readonly ObjectExporter $objectExporter,
         private readonly ProductRepository $productRepository,
-    ) {
-    }
+    ) {}
 
     public function step(): string
     {

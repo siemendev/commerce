@@ -16,12 +16,12 @@ class CartStep implements StepInterface
 {
     private ProductsCartStep $productsCartStep;
 
-//    private SubscriptionsCartStep $subscriptionsCartStep;
+    //private SubscriptionsCartStep $subscriptionsCartStep;
 
     public function __construct(
     ) {
         $this->productsCartStep = new ProductsCartStep();
-//        $this->subscriptionsCartStep = new SubscriptionsCartStep();
+        //$this->subscriptionsCartStep = new SubscriptionsCartStep();
     }
 
     public static function stepIdentifier(): string
@@ -35,21 +35,20 @@ class CartStep implements StepInterface
     }
 
     /**
-     * {@inheritDoc}
      * @throws AvailabilityProviderNotFoundException
      */
     public function validate(CheckoutDataInterface $data): void
     {
         $this->productsCartStep->validate($data);
-//        $this->subscriptionsCartStep->validate($data);
+        //$this->subscriptionsCartStep->validate($data);
     }
 
     public function requiresCheckoutData(): array
     {
-//        return array_merge(
-//            $this->productsCartStep->requiresCheckoutData(),
-//            $this->subscriptionsCartStep->requiresCheckoutData(),
-//        );
+        //return array_merge(
+        //    $this->productsCartStep->requiresCheckoutData(),
+        //    $this->subscriptionsCartStep->requiresCheckoutData(),
+        //);
 
         return $this->productsCartStep->requiresCheckoutData();
     }

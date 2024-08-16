@@ -96,7 +96,7 @@ class RequiredStepsHelper
 
         foreach ($step::requiresSteps() as $requiredStep) {
             if (!isset($this->availableSteps[$requiredStep])) {
-                throw new StepNotFoundException($requiredStep, array_map(static fn (StepInterface $step) => $step::stepIdentifier(), $this->availableSteps));
+                throw new StepNotFoundException($requiredStep, array_map(static fn(StepInterface $step) => $step::stepIdentifier(), $this->availableSteps));
             }
             $stepIdentifiers = $this->getRequiredStepsFromStep($this->availableSteps[$requiredStep], $stepIdentifiers);
         }

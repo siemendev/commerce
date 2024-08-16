@@ -26,8 +26,7 @@ class CreditCardPaymentMethod extends AbstractPaymentMethod
 
     public function __construct(
         private readonly ObjectExporter $objectExporter,
-    ) {
-    }
+    ) {}
 
     public function getIdentifier(): string
     {
@@ -45,7 +44,6 @@ class CreditCardPaymentMethod extends AbstractPaymentMethod
     }
 
     /**
-     * {@inheritDoc}
      * @throws Exception
      */
     public function capture(PaymentInterface $payment, QuotedCheckoutDataInterface $data, int $amount): void

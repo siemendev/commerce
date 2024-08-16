@@ -13,9 +13,7 @@ class AvailabilityResolver implements AvailabilityResolverInterface
     /**
      * @param array<AvailabilityProviderInterface> $providers
      */
-    public function __construct(private array $providers = [])
-    {
-    }
+    public function __construct(private array $providers = []) {}
 
     /**
      * @param array<AvailabilityProviderInterface> $providers

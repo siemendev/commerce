@@ -17,8 +17,7 @@ class QuoteGenerator implements QuoteGeneratorInterface
         private readonly PriceResolverInterface $priceResolver,
         private readonly AvailabilityResolverInterface $availabilityResolver,
         private readonly AdditionalCostsAggregatorInterface $additionalCostsAggregator,
-    ) {
-    }
+    ) {}
 
     public function generate(CheckoutDataInterface $data): Quote
     {

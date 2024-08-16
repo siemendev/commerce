@@ -16,8 +16,7 @@ class PaymentMethodsProvider implements PaymentMethodsProviderInterface
      */
     public function __construct(
         private array $paymentMethods = [],
-    ) {
-    }
+    ) {}
 
     /**
      * @param array<PaymentMethodInterface<PaymentInterface>> $paymentMethods

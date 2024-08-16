@@ -20,8 +20,7 @@ class GiftCardPaymentManager implements GiftCardPaymentManagerInterface
     public function __construct(
         private readonly GiftCardRepository $giftCardRepository,
         private readonly ObjectExporter $objectExporter,
-    ) {
-    }
+    ) {}
 
     public function redeem(GiftCardPaymentInterface $payment, CheckoutDataInterface $data, int $amount): void
     {

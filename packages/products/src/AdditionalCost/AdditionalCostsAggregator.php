@@ -14,8 +14,7 @@ class AdditionalCostsAggregator implements AdditionalCostsAggregatorInterface
      */
     public function __construct(
         private array $providers = [],
-    ) {
-    }
+    ) {}
 
     /**
      * @param array<AdditionalCostProviderInterface> $providers

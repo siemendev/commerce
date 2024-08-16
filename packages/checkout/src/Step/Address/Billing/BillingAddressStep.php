@@ -20,8 +20,6 @@ class BillingAddressStep implements StepInterface
     }
 
     /**
-     * {@inheritDoc}
-     *
      * @param BillingAddressableCheckoutDataInterface $data
      */
     public function validate(CheckoutDataInterface $data): void

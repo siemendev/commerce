@@ -17,12 +17,10 @@ if (interface_exists(AdditionalCostProviderInterface::class)) {
         {
             return $data instanceof DeliverableCheckoutDataInterface
                 && null !== $data->getDeliveryOption()
-                && $data->getDeliveryOption()->getPriceNet($data) > 0
-            ;
+                && $data->getDeliveryOption()->getPriceNet($data) > 0;
         }
 
         /**
-         * {@inheritDoc}
          * @param DeliverableCheckoutDataInterface $data
          */
         public function getAdditionalCosts(CheckoutDataInterface $data, QuoteInterface $quote): array // @phpstan-ignore-line

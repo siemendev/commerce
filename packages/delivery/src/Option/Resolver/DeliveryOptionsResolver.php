@@ -14,8 +14,7 @@ class DeliveryOptionsResolver implements DeliveryOptionsResolverInterface
      */
     public function __construct(
         private array $options = [],
-    ) {
-    }
+    ) {}
 
     /**
      * @param array<DeliveryOptionInterface> $options

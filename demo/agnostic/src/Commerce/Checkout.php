@@ -32,8 +32,7 @@ class Checkout
         private readonly CheckoutFinalizerInterface $checkoutFinalizer,
         private readonly DeliveryOptionsResolverInterface $optionsResolver,
         private readonly PaymentMethodsProviderInterface $paymentMethodProvider,
-    ) {
-    }
+    ) {}
 
     public function save(): self
     {

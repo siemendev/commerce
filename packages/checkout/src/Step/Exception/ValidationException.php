@@ -6,6 +6,4 @@ namespace Siemendev\Checkout\Step\Exception;
 
 use Exception;
 
-class ValidationException extends Exception
-{
-}
+class ValidationException extends Exception {}

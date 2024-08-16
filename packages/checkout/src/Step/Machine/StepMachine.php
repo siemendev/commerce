@@ -22,8 +22,7 @@ class StepMachine implements StepMachineInterface
     public function __construct(
         private array $stepVoters = [],
         private array $availableSteps = [],
-    ) {
-    }
+    ) {}
 
     /**
      * @param array<StepInterface> $availableSteps

@@ -6,6 +6,4 @@ namespace Siemendev\Checkout\Finalize;
 
 use Exception;
 
-class CheckoutNotFinalizableException extends Exception
-{
-}
+class CheckoutNotFinalizableException extends Exception {}

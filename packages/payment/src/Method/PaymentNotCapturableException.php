@@ -6,6 +6,4 @@ namespace Siemendev\Checkout\Payment\Method;
 
 use Exception;
 
-class PaymentNotCapturableException extends Exception
-{
-}
+class PaymentNotCapturableException extends Exception {}

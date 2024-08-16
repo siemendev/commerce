@@ -17,8 +17,7 @@ class CheckoutDataManager
 
     public function __construct(
         private readonly RequestStack $requestStack,
-    ) {
-    }
+    ) {}
 
     /**
      * @param CheckoutDataCreatorInterface<CheckoutDataInterface> $checkoutDataCreator

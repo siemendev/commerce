@@ -6,6 +6,4 @@ namespace Siemendev\Checkout\Payment\Method;
 
 use Exception;
 
-class PaymentCaptureRollbackException extends Exception
-{
-}
+class PaymentCaptureRollbackException extends Exception {}

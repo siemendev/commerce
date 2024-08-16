@@ -13,8 +13,7 @@ class CheckoutQuoteCalculator implements CheckoutQuoteCalculatorInterface
 {
     public function __construct(
         private QuoteGeneratorInterface $quoteGenerator,
-    ) {
-    }
+    ) {}
 
     public function setQuoteGenerator(QuoteGeneratorInterface $generator): void
     {

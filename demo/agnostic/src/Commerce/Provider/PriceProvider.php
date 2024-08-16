@@ -15,8 +15,7 @@ class PriceProvider implements PriceProviderInterface
 {
     public function __construct(
         private readonly EuropeanVatTaxResolverInterface $taxResolver,
-    ) {
-    }
+    ) {}
 
     public function eligible(ProductInterface $product): bool
     {

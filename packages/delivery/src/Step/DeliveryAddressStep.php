@@ -21,7 +21,6 @@ class DeliveryAddressStep implements StepInterface
     }
 
     /**
-     * {@inheritDoc}
      * @param DeliverableCheckoutDataInterface $data
      */
     public function validate(CheckoutDataInterface $data): void
