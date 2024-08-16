@@ -1,6 +1,7 @@
 <?php
 
 return (new PhpCsFixer\Config())
+    ->setCacheFile(__DIR__ . '/cache/phpcsfixer/.result_cache')
     ->setFinder(
         (new PhpCsFixer\Finder())
             ->in(__DIR__ .'/packages/')
