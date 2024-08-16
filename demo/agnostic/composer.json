@@ -1,0 +1,75 @@
+{
+    "type": "project",
+    "license": "proprietary",
+    "prefer-stable": true,
+    "require": {
+        "php": ">=8.1",
+        "siemendev/checkout-delivery-symfony-bridge": "*",
+        "siemendev/checkout-gift-card-symfony-bridge": "*",
+        "siemendev/checkout-payment-symfony-bridge": "*",
+        "siemendev/checkout-products-symfony-bridge": "*",
+        "siemendev/checkout-symfony-bridge": "*",
+        "siemendev/checkout-taxation": "*"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Demo\\": "src/"
+        }
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-latest"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../packages/checkout"
+        },
+        {
+            "type": "path",
+            "url": "../../packages/checkout-symfony"
+        },
+        {
+            "type": "path",
+            "url": "../../packages/delivery"
+        },
+        {
+            "type": "path",
+            "url": "../../packages/delivery-symfony"
+        },
+        {
+            "type": "path",
+            "url": "../../packages/products"
+        },
+        {
+            "type": "path",
+            "url": "../../packages/products-symfony"
+        },
+        {
+            "type": "path",
+            "url": "../../packages/payment"
+        },
+        {
+            "type": "path",
+            "url": "../../packages/payment-symfony"
+        },
+        {
+            "type": "path",
+            "url": "../../packages/gift-card"
+        },
+        {
+            "type": "path",
+            "url": "../../packages/gift-card-symfony"
+        },
+        {
+            "type": "path",
+            "url": "../../packages/taxation"
+        },
+        {
+            "type": "path",
+            "url": "../../packages/package-helper"
+        }
+    ]
+}
