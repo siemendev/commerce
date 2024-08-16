@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace Demo\Commerce\Payment;
 
+use Demo\Commerce\Data\CheckoutData;
 use Exception;
 use Demo\ObjectExporter\ObjectExporter;
 use Siemendev\Checkout\Payment\Method\AbstractPaymentMethod;
 use Siemendev\Checkout\Payment\Method\PaymentAuthorizationRollbackException;
 use Siemendev\Checkout\Payment\Method\PaymentCaptureRollbackException;
-use Siemendev\Checkout\Payment\Method\PaymentMethodInterface;
 use Siemendev\Checkout\Payment\Method\PaymentMethodNotEligibleException;
 use Siemendev\Checkout\Payment\Method\PaymentNotCapturableException;
 use Siemendev\Checkout\Payment\Payment\PaymentInterface;
 use Siemendev\Checkout\Products\Data\QuotedCheckoutDataInterface;
 
 /**
- * @implements PaymentMethodInterface<CreditCardPayment>
+ * @extends AbstractPaymentMethod<CreditCardPayment>
  */
 class CreditCardPaymentMethod extends AbstractPaymentMethod
 {
@@ -44,6 +44,7 @@ class CreditCardPaymentMethod extends AbstractPaymentMethod
     }
 
     /**
+     * @param CheckoutData $data
      * @throws Exception
      */
     public function capture(PaymentInterface $payment, QuotedCheckoutDataInterface $data, int $amount): void
@@ -59,6 +60,9 @@ class CreditCardPaymentMethod extends AbstractPaymentMethod
         $this->objectExporter->export((clone $payment)->setCapturedAmount($amount), sprintf('orders/%s/payments/%s.xml', $data->getIdentifier(), $payment->getIdentifier()));
     }
 
+    /**
+     * @param CheckoutData $data
+     */
     public function rollbackCapture(PaymentInterface $payment, QuotedCheckoutDataInterface $data): void
     {
         // Call the api of your payment gateway here to roll back the captured payment.

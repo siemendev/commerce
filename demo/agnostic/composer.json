@@ -9,7 +9,8 @@
         "siemendev/checkout-payment-symfony-bridge": "*",
         "siemendev/checkout-products-symfony-bridge": "*",
         "siemendev/checkout-symfony-bridge": "*",
-        "siemendev/checkout-taxation": "*"
+        "siemendev/checkout-taxation": "*",
+        "symfony/serializer": "^6.1"
     },
     "config": {
         "sort-packages": true

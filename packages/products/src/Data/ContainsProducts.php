@@ -13,6 +13,7 @@ trait ContainsProducts
 
     /**
      * @see ProductCheckoutDataInterface::getProducts()
+     * @return array<ProductInterface>
      */
     public function getProducts(): array
     {

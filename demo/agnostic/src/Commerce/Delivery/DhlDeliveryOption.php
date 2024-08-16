@@ -29,18 +29,18 @@ class DhlDeliveryOption extends AbstractDeliveryOption
 
     public function checkAvailability(DeliverableCheckoutDataInterface $data): void
     {
-        if (!isset(self::DHL_COSTS[$data->getDeliveryAddress()->getCountryCode()])) {
+        if (!$data->getDeliveryAddress() || !isset(self::DHL_COSTS[$data->getDeliveryAddress()->getCountryCode()])) {
             throw new DeliveryOptionNotAvailableException('DHL is not available for this country.');
         }
     }
 
     public function getPriceNet(DeliverableCheckoutDataInterface $data): int
     {
-        return self::DHL_COSTS[$data->getDeliveryAddress()->getCountryCode()];
+        return self::DHL_COSTS[$data->getDeliveryAddress()?->getCountryCode()] ?? 0;
     }
 
     public function getPriceGross(DeliverableCheckoutDataInterface $data): int
     {
-        return self::DHL_COSTS[$data->getDeliveryAddress()->getCountryCode()];
+        return self::DHL_COSTS[$data->getDeliveryAddress()?->getCountryCode()] ?? 0;
     }
 }

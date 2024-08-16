@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Demo\Commerce\GiftCard;
 
+use Demo\Commerce\Data\CheckoutData;
 use Demo\GiftCard\GiftCardRepository;
 use Demo\ObjectExporter\ObjectExporter;
 use Demo\Repository\ObjectNotFoundException;
@@ -22,6 +23,9 @@ class GiftCardPaymentManager implements GiftCardPaymentManagerInterface
         private readonly ObjectExporter $objectExporter,
     ) {}
 
+    /**
+     * @param CheckoutData $data
+     */
     public function redeem(GiftCardPaymentInterface $payment, CheckoutDataInterface $data, int $amount): void
     {
         try {
@@ -43,6 +47,9 @@ class GiftCardPaymentManager implements GiftCardPaymentManagerInterface
         );
     }
 
+    /**
+     * @param CheckoutData $data
+     */
     public function rollbackRedeem(GiftCardPaymentInterface $payment, CheckoutDataInterface $data): void
     {
         try {

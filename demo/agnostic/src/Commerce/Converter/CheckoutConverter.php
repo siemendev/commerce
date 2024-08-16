@@ -51,6 +51,9 @@ class CheckoutConverter implements CheckoutFinalizationHandlerInterface
         }
     }
 
+    /**
+     * @param CheckoutData $data
+     */
     public function rollback(CheckoutDataInterface $data): void
     {
         $this->objectExporter->remove(sprintf(self::PATH, $data->getIdentifier()));

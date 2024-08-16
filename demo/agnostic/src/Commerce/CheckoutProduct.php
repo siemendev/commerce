@@ -18,6 +18,7 @@ class CheckoutProduct implements ProductInterface, VatTypedItemInterface
 
     private int $quantity = 1;
 
+    /** @var string[] */
     private array $requiredSteps = [];
 
     public function getIdentifier(): string

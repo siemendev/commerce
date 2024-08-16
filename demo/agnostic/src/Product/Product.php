@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Demo\Product;
 
 use Demo\Repository\IdentifiableInterface;
+use Symfony\Component\Serializer\Attribute\Ignore;
 
 class Product implements IdentifiableInterface
 {
@@ -20,6 +21,7 @@ class Product implements IdentifiableInterface
 
     public int $stock;
 
+    #[Ignore]
     public function getIdentifier(): string
     {
         return $this->id;

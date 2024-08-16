@@ -59,7 +59,7 @@ abstract class AbstractRepository
     public function loadAllIds(): array
     {
         $ids = [];
-        foreach (glob(sprintf(self::FILE_GLOB_PATTERN, $this::getDirectory())) as $filename) {
+        foreach (glob(sprintf(self::FILE_GLOB_PATTERN, $this::getDirectory())) ?: [] as $filename) {
             if (!is_file($filename)) {
                 continue;
             }
@@ -75,6 +75,7 @@ abstract class AbstractRepository
     }
 
     /**
+     * @return T
      * @throws ObjectNotFoundException
      */
     public function load(string $id): IdentifiableInterface
@@ -96,6 +97,9 @@ abstract class AbstractRepository
         return $object;
     }
 
+    /**
+     * @param T $object
+     */
     public function save(IdentifiableInterface $object): void
     {
         $this->ensureDirectory();
@@ -106,7 +110,7 @@ abstract class AbstractRepository
                 $object,
                 'xml',
                 [
-                    'xml_root_node_name' => strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', (new ReflectionClass($this::getClass()))->getShortName())),
+                    'xml_root_node_name' => strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', (new ReflectionClass($this::getClass()))->getShortName()) ?? ''),
                     'xml_format_output' => true,
                 ],
             ),

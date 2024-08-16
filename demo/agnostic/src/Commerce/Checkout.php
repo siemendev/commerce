@@ -6,6 +6,8 @@ namespace Demo\Commerce;
 
 use Demo\Commerce\Data\CheckoutData;
 use Demo\Commerce\Data\CheckoutDataImmutable;
+use LogicException;
+use Siemendev\Checkout\Data\CheckoutDataInterface;
 use Siemendev\Checkout\Delivery\Option\DeliveryOptionInterface;
 use Siemendev\Checkout\Delivery\Option\Resolver\DeliveryOptionsResolverInterface;
 use Siemendev\Checkout\Finalize\CheckoutFinalizationExceptionWrapper;
@@ -62,6 +64,7 @@ class Checkout
     public function addProduct(CheckoutProduct $product): self
     {
         foreach ($this->getData()->getProducts() as $existingProduct) {
+            /** @var CheckoutProduct $existingProduct */
             if ($existingProduct->getIdentifier() === $product->getIdentifier()) {
                 $existingProduct->setQuantity($product->getQuantity() + $existingProduct->getQuantity());
 
@@ -81,10 +84,18 @@ class Checkout
         return $this;
     }
 
-    private function getData(): CheckoutData
+    /**
+     * @return CheckoutData
+     */
+    private function getData(): CheckoutDataInterface
     {
-        /* @var CheckoutData $data */
-        return $this->checkoutDataManager->getCheckoutData();
+        $data = $this->checkoutDataManager->getCheckoutData();
+
+        if (!$data instanceof CheckoutData) {
+            throw new LogicException('Invalid checkout data type');
+        }
+
+        return $data;
     }
 
     public function getCheckoutData(): CheckoutDataImmutable
@@ -185,7 +196,7 @@ class Checkout
     }
 
     /**
-     * @return array<PaymentMethodInterface>
+     * @return array<PaymentMethodInterface<PaymentInterface>>
      */
     public function getEligiblePaymentMethods(): array
     {
