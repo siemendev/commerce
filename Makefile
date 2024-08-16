@@ -22,6 +22,7 @@ fixtures:
 phpstan:
 ifndef DIR
 	@for PACKAGE in packages/*; do make DIR=$$PACKAGE phpstan; done
+	@make DIR=demo/agnostic phpstan
 else
 	@echo "phpstan: $$DIR"
 	@phpstan analyse $$DIR/src --level 9 -a $$DIR/vendor/autoload.php -c phpstan.neon || echo "operation failed, fix it and try it with: \"make DIR=$$DIR phpstan\""
