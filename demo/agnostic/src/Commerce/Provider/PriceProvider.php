@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Demo\Commerce\Provider;
 
+use Demo\Commerce\Data\CheckoutData;
 use Siemendev\Checkout\Data\CheckoutDataInterface;
 use Siemendev\Checkout\Products\Pricing\Price;
 use Siemendev\Checkout\Products\Pricing\PriceInterface;
@@ -22,6 +23,9 @@ class PriceProvider implements PriceProviderInterface
         return true;
     }
 
+    /**
+     * @param CheckoutData $data
+     */
     public function getPrice(ProductInterface $product, CheckoutDataInterface $data): PriceInterface
     {
         return Price::createFromNetPrice(
